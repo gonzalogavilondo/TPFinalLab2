@@ -1,0 +1,54 @@
+# Función principal del programa
+ main():
+    while True:
+        printf("Hospital de Niños - Sistema de Gestión")
+        printf("Elija su perfil:")
+        printf("1. Administrador")
+        printf("2. Profesional de Laboratorio")
+        printf("3. Administrativo")
+        printf("4. Salir")
+
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == '1':
+            MenuAdministrador()
+        else if opcion == '2':
+            MenuProfesionalLab()
+        else if opcion == '3':
+            MenuAdministrativo()
+        else if opcion == '4':
+            printf("Saliendo del sistema.")
+            break
+        else:
+            printf("Opción no válida. Intente nuevamente.")
+)
+
+Alta_de_pxi, Modificacio_de_pxi, Baja_de_pxi
+
+ MenuAdministrador():
+    printf("Bienvenido, Administrador.")
+    # Agregar las opciones específicas para el administrador
+    # Por ejemplo:
+    printf("1. Gestionar pacientes") (Alta_de_paciente, Modificacion_de_paciente, Baja_de_paciente)
+    printf("2. Gestionar personal") (Alta_de_empleado, Alta_de_empleado, Baja_de_empleado)
+    printf("3. Gestionar practicas") (Alta_de_practica, Modificacion_de_practica, Baja_de_practica)
+    printf("4. Gestionar practias por ingreso) (Alta_de_pxi, Modificacio_de_pxi, Baja_de_pxi)
+    printf("5. Generar informes")
+    printf("6. Salir")
+
+ MenuProfesionalLab(): Empleadeo(Tecnico lab o Bioquimico)
+    printf("Bienvenido, Profesional de Laboratorio.")
+    # Agregar las opciones específicas para el profesional de laboratorio
+    # Por ejemplo:
+    printf("1. Registrar resultados de análisis") 
+    printf("2. Consultar muestras")
+    printf("3. Salir")
+
+ MenuAdministrativo():
+    printf("Bienvenido, Administrativo.")
+    # Agregar las opciones específicas para el administrativo
+    # Por ejemplo:
+    printf("1. Gestionar pacientes")(Alta_de_paciente, Modificacion_de_paciente, Baja_de_paciente)
+    printf("2. Gestionar citas")(Alta_de_ingreso, Modificación_de_ingreso , Baja_de_ingreso)
+    printf("3. Gestionar practias por ingreso) (Alta_de_pxi, Modificacio_de_pxi, Baja_de_pxi)
+    printf("3. Salir")
