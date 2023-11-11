@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1698608379 source:e:\tpfinallab2\proyectofinal\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1699707779 source:e:\tpfinallab2\proyectofinal\usuarios.c
+	"Usuarios.h"
+
+1699707834 e:\tpfinallab2\proyectofinal\usuarios.h
+	<stdio.h>
+	<stdlib.h>
+	"conio.h"
+	"string.h"
+	"time.h"
+
+1574761518 source:e:\tpfinallab2\proyectofinal\canciones.c
+	"Canciones.h"
+
+1574761518 e:\tpfinallab2\proyectofinal\canciones.h
+	<stdio.h>
+	<stdlib.h>
+	"conio.h"
+	"string.h"
+	"time.h"
+	"Usuarios.h"
+
