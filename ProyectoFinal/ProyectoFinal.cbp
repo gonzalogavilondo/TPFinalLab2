@@ -31,13 +31,28 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="empleadoDeLaboratorio.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="empleadoDeLaboratorio.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="stIngreso.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="stIngreso.h" />
+		<Unit filename="stPaciente.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="stPaciente.h" />
+		<Unit filename="stPractica.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="stPractica.h" />
+		<Unit filename="stPracticaXIngreso.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="stPracticaXIngreso.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
