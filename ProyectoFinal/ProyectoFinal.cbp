@@ -31,13 +31,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="empleadoDeLaboratorio.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="empleadoDeLaboratorio.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="stEmpleado.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="stEmpleado.h" />
 		<Unit filename="stIngreso.c">
 			<Option compilerVar="CC" />
 		</Unit>

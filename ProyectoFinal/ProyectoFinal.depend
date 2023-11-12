@@ -25,3 +25,45 @@
 	"time.h"
 	"Usuarios.h"
 
+1699710845 source:e:\tpfinallab2\proyectofinal\empleadodelaboratorio.c
+	"empleadoDeLaboratorio.h"
+
+1699710095 e:\tpfinallab2\proyectofinal\empleadodelaboratorio.h
+
+1699710887 source:e:\tpfinallab2\proyectofinal\stpaciente.c
+	"stPaciente.h"
+
+1699710059 e:\tpfinallab2\proyectofinal\stpaciente.h
+
+1699710914 source:e:\tpfinallab2\proyectofinal\stpractica.c
+	"stPractica.h"
+
+1699710117 e:\tpfinallab2\proyectofinal\stpractica.h
+
+1699710940 source:e:\tpfinallab2\proyectofinal\stpracticaxingreso.c
+	"stPracticaXIngreso.h"
+
+1699710134 e:\tpfinallab2\proyectofinal\stpracticaxingreso.h
+
+1699796815 source:e:\tpfinallab2\proyectofinal\stempleado.c
+	"stEmpleado.h"
+
+1699796858 e:\tpfinallab2\proyectofinal\stempleado.h
+
+1699797140 source:e:\tpfinallab2\proyectofinal\main.c
+	"stIngreso.h"
+
+1699797944 e:\tpfinallab2\proyectofinal\stingreso.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"conio.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+
+1699797917 source:e:\tpfinallab2\proyectofinal\stingreso.c
+	"stIngreso.h"
+
