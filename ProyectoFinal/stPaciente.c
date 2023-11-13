@@ -1,4 +1,5 @@
 #include "stPaciente.h"
+#include "stIngreso.h"
 
 void menuProvisorioGestionarPacientes(){
     char opcion = 0;

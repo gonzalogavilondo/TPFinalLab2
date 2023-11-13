@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
-#include "stIngreso.h"
+//#include "stIngreso.h"
 
 #define ESC 27
 #define ARCHIVO_PACIENTES "pacientes.dat"
@@ -23,9 +23,7 @@ typedef struct stPaciente {
 
 typedef struct nodoPaciente {
     stPaciente datosPaciente;
-
     struct nodoIngreso *listaIngresos;
-
     struct nodoPaciente *izq;
     struct nodoPaciente *der;
 } nodoPaciente;

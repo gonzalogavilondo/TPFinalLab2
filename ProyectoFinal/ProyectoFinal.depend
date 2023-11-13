@@ -30,10 +30,15 @@
 
 1699710095 e:\tpfinallab2\proyectofinal\empleadodelaboratorio.h
 
-1699710887 source:e:\tpfinallab2\proyectofinal\stpaciente.c
+1699910048 source:e:\tpfinallab2\proyectofinal\stpaciente.c
 	"stPaciente.h"
+	"stIngreso.h"
 
-1699710059 e:\tpfinallab2\proyectofinal\stpaciente.h
+1699910030 e:\tpfinallab2\proyectofinal\stpaciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
 
 1699710914 source:e:\tpfinallab2\proyectofinal\stpractica.c
 	"stPractica.h"
@@ -50,10 +55,14 @@
 
 1699796858 e:\tpfinallab2\proyectofinal\stempleado.h
 
-1699797140 source:e:\tpfinallab2\proyectofinal\main.c
+1699909748 source:e:\tpfinallab2\proyectofinal\main.c
 	"stIngreso.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
 
-1699797944 e:\tpfinallab2\proyectofinal\stingreso.h
+1699909785 e:\tpfinallab2\proyectofinal\stingreso.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -64,7 +73,7 @@
 	"stPracticaXIngreso.h"
 	"stPaciente.h"
 
-1699797917 source:e:\tpfinallab2\proyectofinal\stingreso.c
+1699909785 source:e:\tpfinallab2\proyectofinal\stingreso.c
 	"stIngreso.h"
 
 1699904016 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\main.c
