@@ -7,6 +7,8 @@
 int main()
 {
 
+    // probando la parte de pacientes
+    menuProvisorioGestionarPacientes();
 
     return 0;
 }

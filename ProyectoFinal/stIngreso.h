@@ -31,7 +31,7 @@ void obtenerFechaActual(char fechaActual[10]);
 int obtenerNuevoNumeroIngreso();
 stPractica obtenerPracticaLaboratorio();
 int obtenerNuevoIdPracticaXIngreso();
-void Alta_de_ingreso(nodoIngreso **listaIngresos, stPaciente paciente, stEmpleado profesional);
+void Alta_de_ingreso(nodoIngreso **listaIngresos, struct stPaciente paciente, stEmpleado profesional);
 void Modificacion_de_ingreso(nodoIngreso *listaIngresos, int numeroIngreso, char nuevaFechaIngreso[10], char nuevaFechaRetiro[10], int nuevaMatriculaProfesional);
 void Baja_de_ingreso(nodoIngreso **listaIngresos, int numeroIngreso);
 

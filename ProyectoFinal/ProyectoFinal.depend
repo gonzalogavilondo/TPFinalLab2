@@ -67,3 +67,49 @@
 1699797917 source:e:\tpfinallab2\proyectofinal\stingreso.c
 	"stIngreso.h"
 
+1699904016 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\main.c
+	"stIngreso.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+
+1699904937 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stingreso.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"conio.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+
+1699900127 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stempleado.h
+
+1699900127 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpractica.h
+
+1699900127 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpracticaxingreso.h
+
+1699904835 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpaciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"stIngreso.h"
+
+1699900127 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stempleado.c
+	"stEmpleado.h"
+
+1699904937 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stingreso.c
+	"stIngreso.h"
+
+1699903790 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpaciente.c
+	"stPaciente.h"
+
+1699900127 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpractica.c
+	"stPractica.h"
+
+1699900127 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpracticaxingreso.c
+	"stPracticaXIngreso.h"
+

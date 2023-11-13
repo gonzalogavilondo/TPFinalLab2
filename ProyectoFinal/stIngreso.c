@@ -48,7 +48,7 @@ int obtenerNuevoIdPracticaXIngreso()
 /**
 * Función para dar de alta un ingreso con al menos una práctica de laboratorio
 **/
-void Alta_de_ingreso(nodoIngreso **listaIngresos, stPaciente paciente, stEmpleado profesional)
+void Alta_de_ingreso(nodoIngreso **listaIngresos, struct stPaciente paciente, stEmpleado profesional)
 {
 //    // Verificar existencia del paciente (puede implementarse según tus necesidades)
 //    // ...
