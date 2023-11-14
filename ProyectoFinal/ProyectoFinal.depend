@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1698608379 source:e:\tpfinallab2\proyectofinal\gotoxy.c
+1699923691 source:e:\tpfinallab2\proyectofinal\gotoxy.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
@@ -43,19 +43,28 @@
 1699710914 source:e:\tpfinallab2\proyectofinal\stpractica.c
 	"stPractica.h"
 
-1699710117 e:\tpfinallab2\proyectofinal\stpractica.h
+1699923790 e:\tpfinallab2\proyectofinal\stpractica.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
 
 1699710940 source:e:\tpfinallab2\proyectofinal\stpracticaxingreso.c
 	"stPracticaXIngreso.h"
 
 1699710134 e:\tpfinallab2\proyectofinal\stpracticaxingreso.h
 
-1699796815 source:e:\tpfinallab2\proyectofinal\stempleado.c
+1699923691 source:e:\tpfinallab2\proyectofinal\stempleado.c
 	"stEmpleado.h"
 
-1699796858 e:\tpfinallab2\proyectofinal\stempleado.h
+1699923692 e:\tpfinallab2\proyectofinal\stempleado.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"stEmpleado.h"
 
-1699909748 source:e:\tpfinallab2\proyectofinal\main.c
+1699923691 source:e:\tpfinallab2\proyectofinal\main.c
 	"stIngreso.h"
 	"stEmpleado.h"
 	"stPractica.h"
@@ -177,4 +186,6 @@
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
+
+1699923773 source:e:\tpfinallab2\proyectofinal\menu.c
 

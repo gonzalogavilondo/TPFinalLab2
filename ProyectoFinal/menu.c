@@ -1,9 +1,6 @@
+#include "menu.h"
 
 ///PRINTF MENU PRINCIPAL
-void cabeza(char a[]){
-    imprimirCabecera(a);
-}
-
 void imprimirCabecera(char cabecera[]){
     printf("\t\t%s     \n",cabecera);
     printf("%c", 219);
@@ -12,6 +9,11 @@ void imprimirCabecera(char cabecera[]){
     }
     printf("%c",219);
 }
+
+void cabeza(char a[]){
+    imprimirCabecera(a);
+}
+
 void Rectangulo(){
     system("color F4");
     int lado=15;
