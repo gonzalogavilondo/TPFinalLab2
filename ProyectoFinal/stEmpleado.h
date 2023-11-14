@@ -1,5 +1,13 @@
 #ifndef STEMPLEADO_H_INCLUDED
 #define STEMPLEADO_H_INCLUDED
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <string.h>
+
+#include "stEmpleado.h"
+
+#define arEmpleados "archivoEmpleados.txt"
 
 typedef struct stEmpleado
 {
@@ -11,4 +19,5 @@ typedef struct stEmpleado
     int eliminado;
 } stEmpleado;
 
+stEmpleado altaDeEmpleados ();
 #endif // STEMPLEADO_H_INCLUDED

@@ -122,3 +122,59 @@
 1699900127 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpracticaxingreso.c
 	"stPracticaXIngreso.h"
 
+1699922061 source:c:\users\user\desktop\tpfinallab2-main\proyectofinal\main.c
+	"stIngreso.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+
+1699892088 c:\users\user\desktop\tpfinallab2-main\proyectofinal\stingreso.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"conio.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+
+1699919962 c:\users\user\desktop\tpfinallab2-main\proyectofinal\stempleado.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"stEmpleado.h"
+
+1699892088 c:\users\user\desktop\tpfinallab2-main\proyectofinal\stpractica.h
+
+1699892088 c:\users\user\desktop\tpfinallab2-main\proyectofinal\stpracticaxingreso.h
+
+1699892088 c:\users\user\desktop\tpfinallab2-main\proyectofinal\stpaciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1699892088 source:c:\users\user\desktop\tpfinallab2-main\proyectofinal\stingreso.c
+	"stIngreso.h"
+
+1699892088 source:c:\users\user\desktop\tpfinallab2-main\proyectofinal\stpaciente.c
+	"stPaciente.h"
+	"stIngreso.h"
+
+1699892088 source:c:\users\user\desktop\tpfinallab2-main\proyectofinal\stpractica.c
+	"stPractica.h"
+
+1699892088 source:c:\users\user\desktop\tpfinallab2-main\proyectofinal\stpracticaxingreso.c
+	"stPracticaXIngreso.h"
+
+1699922414 source:c:\users\user\desktop\tpfinallab2-main\proyectofinal\stempleado.c
+	"stEmpleado.h"
+
+1699922299 source:c:\users\user\desktop\tpfinallab2-main\proyectofinal\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+

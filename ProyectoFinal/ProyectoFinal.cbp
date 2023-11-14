@@ -31,9 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="gotoxy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="gotoxy.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="menu.h" />
 		<Unit filename="stEmpleado.c">
 			<Option compilerVar="CC" />
 		</Unit>
