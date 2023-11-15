@@ -6,7 +6,7 @@
 
 int main()
 {
-
+    submenuManejoEmpleados();
     // probando la parte de pacientes
     //menuProvisorioGestionarPacientes();
 

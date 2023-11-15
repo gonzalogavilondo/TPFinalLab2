@@ -189,3 +189,73 @@
 
 1699923773 source:e:\tpfinallab2\proyectofinal\menu.c
 
+1700002249 source:c:\users\user\documents\tpfinallab2\proyectofinal\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1700002249 source:c:\users\user\documents\tpfinallab2\proyectofinal\stingreso.c
+	"stIngreso.h"
+
+1700002249 c:\users\user\documents\tpfinallab2\proyectofinal\stingreso.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"conio.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+
+1700006917 c:\users\user\documents\tpfinallab2\proyectofinal\stempleado.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"stEmpleado.h"
+
+1700002249 c:\users\user\documents\tpfinallab2\proyectofinal\stpractica.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1700002249 c:\users\user\documents\tpfinallab2\proyectofinal\stpracticaxingreso.h
+
+1700002249 c:\users\user\documents\tpfinallab2\proyectofinal\stpaciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1700002249 source:c:\users\user\documents\tpfinallab2\proyectofinal\stpaciente.c
+	"stPaciente.h"
+	"stIngreso.h"
+
+1700002249 source:c:\users\user\documents\tpfinallab2\proyectofinal\stpractica.c
+	"stPractica.h"
+
+1700002249 source:c:\users\user\documents\tpfinallab2\proyectofinal\stpracticaxingreso.c
+	"stPracticaXIngreso.h"
+
+1700002586 source:c:\users\user\documents\tpfinallab2\proyectofinal\main.c
+	"stIngreso.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+
+1700007742 source:c:\users\user\documents\tpfinallab2\proyectofinal\stempleado.c
+	"stEmpleado.h"
+
+1700007546 source:c:\users\user\documents\tpfinallab2\proyectofinal\menu.c
+	"menu.h"
+
+1700002558 c:\users\user\documents\tpfinallab2\proyectofinal\menu.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"stEmpleado.h"
+

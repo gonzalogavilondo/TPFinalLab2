@@ -5,6 +5,10 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
+#include "stEmpleado.h"
+
+void submenuManejoEmpleados();
+void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]);
 
 void cabeza(char a[]);
 void imprimirCabecera(char cabecera[]);

@@ -20,4 +20,7 @@ typedef struct stEmpleado
 } stEmpleado;
 
 stEmpleado altaDeEmpleados ();
+
+stEmpleado traerEmpleadoXDNI(int dni);
+
 #endif // STEMPLEADO_H_INCLUDED
