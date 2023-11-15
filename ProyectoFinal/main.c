@@ -3,6 +3,7 @@
 #include "stPractica.h"
 #include "stPracticaXIngreso.h"
 #include "stPaciente.h"
+#include "menu.h"
 
 int main()
 {
