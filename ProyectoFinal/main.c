@@ -7,9 +7,12 @@
 
 int main()
 {
-    submenuManejoEmpleados();
-    // probando la parte de pacientes
+    //submenuManejoEmpleados();
+
+    // probando la parte de pacientes:
     //menuProvisorioGestionarPacientes();
+    // probando la parte de practicas:
+    menuProvisorioGestionarPracticas();
 
 return 0;
 }
