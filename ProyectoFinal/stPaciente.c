@@ -19,7 +19,7 @@ void menuProvisorioGestionarPacientes(){
         printf("\n\n                                          4. Mostrar arbol de pacientes.");
         printf("\n                                          5. Guardar arbol en un archivo binario.");
         printf("\n                                          6. Cargar datos de los pacientes del archivo en un arbol(si se uso la opcion 1,");
-        printf("\n                                             se sobreescriben los datos, preg si esta bien la forma de liberar el arbol...).");
+        printf("\n                                             se sobreescriben los datos).");
 
         printf("\n\n                                          ESC para finalizar...");
         opcion = getch();

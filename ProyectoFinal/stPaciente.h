@@ -6,12 +6,17 @@
 #include <string.h>
 //#include "stIngreso.h"
 
+
+/// Constantes:
+
 #define ESC 27
 #define ARCHIVO_PACIENTES "pacientes.dat"
+
 
 /// Estructuras:
 
 typedef struct stPaciente {
+
     char apellidoNombre[40];
     int edad;
     int dni;
@@ -23,10 +28,13 @@ typedef struct stPaciente {
 
 typedef struct nodoPaciente {
     stPaciente datosPaciente;
+
     struct nodoIngreso *listaIngresos;
+
     struct nodoPaciente *izq;
     struct nodoPaciente *der;
 } nodoPaciente;
+
 
 /// Prototipados:
 
@@ -57,10 +65,5 @@ void guardaArbolPacientesEnArchivo(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 6:
 void liberarArbolPacientes(nodoPaciente * arbolPacientes);
 nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes);
-
-
-
-
-
 
 #endif // STPACIENTE_H_INCLUDED

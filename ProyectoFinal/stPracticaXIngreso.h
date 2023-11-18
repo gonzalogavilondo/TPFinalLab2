@@ -16,4 +16,6 @@ typedef struct nodoPracticaXIngreso
     struct nodoPracticaXIngreso *siguiente;
 } nodoPracticaXIngreso;
 
+
+
 #endif // STPRACTICAXINGRESO_H_INCLUDED
