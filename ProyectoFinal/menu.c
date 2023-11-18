@@ -1,11 +1,14 @@
 #include "menu.h"
 
+
 ///PRINTF MENU PRINCIPAL
+
 void submenuManejoEmpleados() {
     char control = 's';;
     int opcion;
 
     do {
+        opcion = 0;
         system("cls");
         Rectangulo();
         gotoxy(15, 1);
@@ -17,7 +20,7 @@ void submenuManejoEmpleados() {
         gotoxy(15, 6);
         printf("(2) BAJA\n");
         gotoxy(15, 7);
-        printf("(3) MODIFICACIÓN\n");
+        printf("(3) MODIFICACION\n");
         gotoxy(15, 8);
         printf("(4) CONSULTA\n");
         gotoxy(15, 9);
@@ -32,14 +35,15 @@ void submenuManejoEmpleados() {
         switch (opcion) {
             case 1: menuAltaDeEmpleado("Administrador"); break;
             case 2: menuBajaDeEmpleado("Administrador"); break;
-            // Agregar otros casos según sea necesario
+            case 3: subMenuModificacionDeEmpleado("Administrador"); break;
+            case 4: subMenuConsultaDeEmpleado("Administrador"); break;
 
             case 6:
-                control = 'n';  // Salir del bucle si se selecciona '6' para volver
+                control = 'n';
                 break;
 
             default:
-                printf("Opción no válida. Por favor, reintente.\n");
+                control = 'n';
                 break;
 
         }
@@ -200,10 +204,12 @@ void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
             }
             while (opcion != 'S' && opcion != 'N');
 
-        }
-        }while (opcion == 'S');
 
-    }
+        }else{
+            opcion = 'S';
+        }
+    }while (opcion != 'S');
+}
 void menuBajaDeEmpleado(char tipoEmpleadoEjecuta[]) {
     stEmpleado bajaEmpleado;
     char opcion = 0;
@@ -273,13 +279,468 @@ void menuBajaDeEmpleado(char tipoEmpleadoEjecuta[]) {
                 printf("Ingresó una opción no válida, reintente por favor.\n");
             }
         } while (opcion != 'S' && opcion != 'N');
+        }else{
+            opcion = 'S';
         }
      }while (opcion == 'S');
 
 }
 
+void subMenuModificacionDeEmpleado(char tipoEmpleadoEjecuta[]){
+
+    char control;
+    int opcion;
+    int dniModificar;
+    char op;
+    int numeroPerfil = 0;
+
+    do
+    {
+        system("cls");
+        Rectangulo();
+        gotoxy(1,1);
+        cabeza("MENU MODIFICACION EMPLEADO");
+        gotoxy(2,4);
+        printf("Ingrese el dni del empleado a modificar:           ('0' para volver)");
+        gotoxy(42,4);
+        scanf("%d", &dniModificar);
+        if(dniModificar != 0){
+            if (existeDNIEnEmpleados(dniModificar) == 0){
+            gotoxy(1, 13);
+            printf("El empleado no esta cargado en el sistema!\n");
+            gotoxy(1,17);
+            system("pause");
+            }
+            else
+            {
+                do
+                {
+                    stEmpleado empleadoAux = traerEmpleadoXDNI(dniModificar);
+                    system("cls");
+                    Rectangulo();
+                    gotoxy(1,1);
+                    cabeza("MENU MODIFICACION EMPLEADO");
+                    gotoxy(1,3);
+                    printf("Nombre: %s |DNI: %d |  Usuario:%s", empleadoAux.apellidoYNombre, empleadoAux.dni, empleadoAux.usuario);
+                    gotoxy(1,4);
+                    printf("Contrasenia: %s |Perfil: %s |Eliminado: %d", empleadoAux.contrasenia,empleadoAux.perfil, empleadoAux.eliminado);
+                    gotoxy(15,6);
+                    printf("Que desea Modificar?");
+                    gotoxy(15,7);
+                    printf("(1)APELLIDO Y NOMBRE");
+                    gotoxy(15,8);
+                    printf("(2)DNI");
+                    gotoxy(15,9);
+                    printf("(3)USUARIO");
+                    gotoxy(15,10);
+                    printf("(4)PERFIL");
+                    gotoxy(15,11);
+                    printf("(5)CONTRASENIA");
+                    gotoxy(15,12);
+                    printf("(6)ESTADO");
+                    gotoxy(15,13);
+                    printf("(7)VOLVER");
+                    gotoxy(15,14);
+                    fflush(stdin);
+                    scanf("%d", &opcion);
+                    system("cls");
+
+
+                    char ModificarGenerico[30];
+                    int generico=0;
+                    int modificarDni=0;
+                    system("cls");
+                    Rectangulo();
+                    gotoxy(1,1);
+                    cabeza("MENU MODIFICACION EMPLEADO");
+                    gotoxy(1,3);
+                    printf("Nombre: %s |DNI: %d |  Usuario:%s", empleadoAux.apellidoYNombre, empleadoAux.dni, empleadoAux.usuario);
+                    gotoxy(1,4);
+                    printf("Contrasenia: %s |Perfil: %s |Eliminado: %d", empleadoAux.contrasenia,empleadoAux.perfil, empleadoAux.eliminado);
+
+                    switch(opcion)
+                    {
+                    case 1:
+                        gotoxy(1,6);
+                        printf("Ingrese el nuevo nombre:");
+                        fflush(stdin);
+                        gets(ModificarGenerico);
+
+                        modificarNombreEmpleadoXDNI(ModificarGenerico, dniModificar);
+                        gotoxy(1,15);
+                        printf("Nombre cambiado con exito!");
+                        gotoxy(1,17);
+                        system("pause");
+                        break;
+                    case 2:
+                        gotoxy(1,6);
+                        printf("Ingrese el nuevo DNI:");
+                        fflush(stdin);
+                        gotoxy(22, 6);
+                        scanf("%d", &modificarDni);
+
+                        if (modificarDni != 0)
+                        {
+                            if (existeDNIEnEmpleados(modificarDni) != 0)
+                            {
+                                gotoxy(1, 15);
+                                printf("El DNI ingresado ya esta en el sistema! Intente nuevamente.\n");
+                                gotoxy(1,17);
+                                system("pause");
+                            }
+                            else{
+                                modificarDNIEmpleadoXUsuario(modificarDni,dniModificar);
+                                dniModificar = modificarDni;
+                                gotoxy(1,15);
+                                printf("DNI cambiado con exito!");
+                                gotoxy(1,17);
+                                system("pause");
+
+                            }
+                        }
+                        break;
+                    case 3:
+                        gotoxy(1,6);
+                        printf("El nuevo usuario:");
+                        fflush(stdin);
+                        gotoxy(19, 6);
+                        scanf("%s", &ModificarGenerico);
+
+
+                        if (existeUsuarioEnEmpleados(ModificarGenerico) != 0)
+                        {
+                            gotoxy(1, 15);
+                            printf("El usuario ingresado ya esta en el sistema! Intente nuevamente.\n");
+                            gotoxy(1,17);
+                            system("pause");
+                        }
+                        else
+                        {
+                            modificarUsuarioEmpleadoXDNI(ModificarGenerico,dniModificar);
+                            gotoxy(1,15);
+                            printf("Usuario cambiado con exito!");
+                            gotoxy(1,17);
+                            system("pause");
+
+                        }
+                        break;
+                    case 4:
+                        numeroPerfil = 0;
+                        while (numeroPerfil == 0)
+                        {
+                            int error = 0;
+                            gotoxy(2, 6);
+                            printf("Ingrese el nro del perfil:\n");
+                            gotoxy(2, 7);
+                            printf(" 1 -> Profesional de laboratorio: Tecnico\n");
+                            gotoxy(2, 8);
+                            printf(" 2 -> Profesional de laboratorio: Bioquimico\n");
+
+                            if (strcmp(tipoEmpleadoEjecuta, "Administrador") == 0)
+                            {
+                                gotoxy(2, 9);
+                                printf(" 3 -> Administrativo\n");
+                                gotoxy(2, 10);
+                                printf(" 4 -> Administrador\n");
+                            }
+                            fflush(stdin);
+                            gotoxy(30, 6);
+                            printf("                         ");
+                            gotoxy(30, 6);
+                            scanf("%d", &numeroPerfil);
+
+                            if (strcmp(tipoEmpleadoEjecuta, "Administrativo") == 0)
+                            {
+                                if (numeroPerfil != 1 && numeroPerfil != 2)
+                                {
+                                    gotoxy(2, 15);
+                                    printf("Ingresó un número no válido. Por favor, reintente.");
+                                    error = 1;
+                                    numeroPerfil = 0;
+                                }
+                            }
+
+                            if (strcmp(tipoEmpleadoEjecuta, "Administrador") == 0 && error == 0)
+                            {
+                                if (numeroPerfil != 1 && numeroPerfil != 2 && numeroPerfil != 3 && numeroPerfil != 4)
+                                {
+                                    gotoxy(2, 15);
+                                    printf("Ingreso un numero no valido. Por favor, reintente.");
+                                    numeroPerfil = 0;
+                                }
+                            }
+                        }
+
+                        switch (numeroPerfil)
+                        {
+                        case 1:
+                            strcpy(empleadoAux.perfil, "Tecnico");
+                            break;
+                        case 2:
+                            strcpy(empleadoAux.perfil, "Bioquimico");
+                            break;
+                        case 3:
+                            strcpy(empleadoAux.perfil, "Administrativo");
+                            break;
+                        case 4:
+                            strcpy(empleadoAux.perfil, "Administrador");
+                            break;
+                        default:
+                            numeroPerfil = 0;
+                            break;
+                        }
+
+                        modificarPerfilEmpleadoXDNI(empleadoAux.perfil,dniModificar);
+
+                        gotoxy(1,15);
+                        printf("Perfil cambiado con exito!");
+                        gotoxy(1,17);
+                        system("pause");
+
+                        break;
+                    case 5:
+                        gotoxy(1,6);
+                        printf("Ingrese la nueva contrasenia:");
+                        fflush(stdin);
+                        gets(ModificarGenerico);
+
+                        modificarContraseniaEmpleadoXDNI(ModificarGenerico, dniModificar);
+                        gotoxy(1,15);
+                        printf("Contrasenia cambiada con exito!");
+                        gotoxy(1,17);
+                        system("pause");
+                        break;
+                    case 6:
+                        gotoxy(1,6);
+                        printf("Desea cambiar el estado del empleado? (S/N) \n");
+                        fflush(stdin);
+                        char estado;
+                        gotoxy(45,6);
+                        scanf("%c", &estado);
+                        if(estado == 's' || estado == 'S'){
+                            if (empleadoAux.eliminado == 1){
+                                modificarEstadoEmpleadoXDNI(0, dniModificar);
+                            }else{
+                                modificarEstadoEmpleadoXDNI(1, dniModificar);
+                            }
+                            gotoxy(1,15);
+                            printf("Estado cambiado con exito!");
+                            gotoxy(1,17);
+                            system("pause");
+                        }
+                        break;
+                    case 7:
+
+                        break;
+
+
+                    default:
+                        break;
+
+                    }
+
+
+                }while (opcion != 7);
+
+                do
+                {
+                    gotoxy(2, 15);
+                    printf("Si quiere modificar otro empleado presione 'S' o para salir 'N'.\n");
+                    gotoxy(69, 15);
+                    control = toupper(getch());
+
+                    if (control != 'S' && control != 'N')
+                    {
+                        gotoxy(2, 13);
+                        printf("Ingresó una opción no válida, reintente por favor.\n");
+                    }
+                }
+                while(control == 'S');
+            }
+        }
+    } while(control == 'S');
+}
+void subMenuConsultaDeEmpleado(char tipoEmpleadoEjecuta[]){
+    stEmpleado consultaEmpleado;
+    char opcion = 0;
+    int dniConsulta;
+
+    do {
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("CONSULTA DE EMPLEADO");
+
+        gotoxy(2, 4);
+        printf("Ingrese el DNI del empleado:                    ('0' para volver) ");
+        gotoxy(30, 4);
+        scanf("%d", &dniConsulta);
+
+        if (dniConsulta != 0) {
+            if (existeDNIEnEmpleados(dniConsulta) == 0) {
+                gotoxy(2, 13);
+                printf("El empleado no esta cargado en el sistema!\n");
+            } else {
+                consultaEmpleado = traerEmpleadoXDNI(dniConsulta);
+
+                if (strcmp(tipoEmpleadoEjecuta, "Administrador") != 0) {
+                    if (strcmp(consultaEmpleado.perfil, "Administrador") == 0 || strcmp(consultaEmpleado.perfil, "Administrativo") == 0) {
+                        gotoxy(2, 13);
+                        printf("No tiene permisos para dar de baja a un Administrador o Administrativo!\n");
+                        continue;
+                    }
+                }
+
+                gotoxy(2, 6);
+                printf("Apellido y nombre:..%s", consultaEmpleado.apellidoYNombre);
+                gotoxy(2, 7);
+                printf("DNI:................%d", consultaEmpleado.dni);
+                gotoxy(2, 8);
+                printf("Usuario:............%s", consultaEmpleado.usuario);
+                gotoxy(2, 9);
+                printf("Contrasenia:........%s", consultaEmpleado.contrasenia);
+                gotoxy(2, 10);
+                printf("Perfil:.............%s", consultaEmpleado.perfil);
+                gotoxy(2, 11);
+                printf("Eliminado:..........%d", consultaEmpleado.eliminado);
+            }
+        do {
+            gotoxy(2, 15);
+            printf("Si quiere ver otro empleado presione 'S' o para salir 'N'.\n");
+            gotoxy(69, 15);
+            opcion = toupper(getch());
+
+            if (opcion != 'S' && opcion != 'N') {
+                gotoxy(2, 13);
+                printf("Ingresó una opción no válida, reintente por favor.\n");
+            }
+        } while (opcion != 'S' && opcion != 'N');
+        }else{
+            opcion = 'S';
+        }
+     }while (opcion == 'S');
+
+}
+/*
+void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
+
+    char control;
+    int opcion;
+    char op;
+    int numeroPerfil = 0;
+
+    do
+    {
+        system("cls");
+        Rectangulo();
+        gotoxy(1,1);
+        cabeza("MENU LISTADOS DE EMPLEADO");
+        gotoxy(15,6);
+        printf("Como desea traer la lista de empleados?");
+        gotoxy(15,7);
+        printf("(1)Ordenado por Apellido y nombre");
+        gotoxy(15,8);
+        printf("(2)Ordenado por DNI");
+        gotoxy(15,9);
+        printf("(3)Ordenado por Usuario");
+        gotoxy(15,10);
+        printf("(4)Ordenado por perfil");
+        gotoxy(15,11);
+        printf("(5)Selccionar un perfil");
+        gotoxy(15,12);
+        printf("(6)Seleccionar un estado");
+        gotoxy(15,13);
+        printf("(7)VOLVER");
+        gotoxy(15,14);
+        fflush(stdin);
+        scanf("%d", &opcion);
+        system("cls");
+
+
+        char ModificarGenerico[30];
+        int generico=0;
+        int modificarDni=0;
+        system("cls");
+        Rectangulo();
+        gotoxy(1,1);
+        cabeza("MENU MODIFICACION EMPLEADO");
+        gotoxy(1,3);
+
+        switch(opcion)
+        {
+        case 1:
+            listaEmpleadosXApellidoYNombre();
+            break;
+        case 2:
+            listaEmpleadosXDNI();
+            break;
+        case 3:
+            listaEmpleadosXUsuario();
+            break;
+        case 4:
+            listaEmpleadosXPerfil();
+            break;
+        case 5:
+
+            break;
+        case 6:
+
+            break;
+        case 7:
+
+            break;
+        case 8:
+
+            break;
+
+
+        default:
+            break;
+
+        }
+
+
+    } while (opcion != 8);
+
+    do
+    {
+        gotoxy(2, 15);
+        printf("Si quiere modificar otro empleado presione 'S' o para salir 'N'.\n");
+        gotoxy(69, 15);
+        control = toupper(getch());
+
+        if (control != 'S' && control != 'N')
+        {
+            gotoxy(2, 13);
+            printf("Ingresó una opción no válida, reintente por favor.\n");
+        }
+    }
+    while(control == 'S');
+}
+*/
 
 /// ////////////////////////////////////////////////////////////////////////////////////////////////
+///LOGUEO Empleado
+int inicioDeSesionEmpleado(char usuario[],char contrasenia[]){
+    stEmpleado e;
+    int flag=0;
+    FILE*pArchiEmpleado = fopen(arEmpleados,"rb");
+    if(pArchiEmpleado!=NULL){
+                printf("%s\n",usuario);
+                printf("%s\n",contrasenia);
+                printf("==================\n");
+
+        while(flag==0&&(fread(&e,sizeof(stEmpleado),1,pArchiEmpleado))>0){
+            if(strcmp(e.usuario,usuario)==0&&strcmp(e.contrasenia,contrasenia)==0){
+                printf("%s\n",e.usuario);
+                printf("%s\n",e.contrasenia);
+                flag=1;
+        }
+    }
+    fclose(pArchiEmpleado);
+    }
+return flag;
+}
 ///OTRAS FUNCIONES DE MENU
 void imprimirCabecera(char cabecera[]){
     printf("\t\t%s     \n",cabecera);
@@ -295,7 +756,7 @@ void cabeza(char a[]){
 }
 
 void Rectangulo(){
-    system("color F4");
+    system("color F1");
     int lado=15;
     int base=73;
     int i=0;
@@ -318,3 +779,7 @@ void Rectangulo(){
     printf("%c",219);
 
 }
+
+
+
+

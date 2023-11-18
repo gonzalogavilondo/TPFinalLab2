@@ -272,3 +272,79 @@
 
 1699923691 e:\tpfinallab2\proyectofinal\gotoxy.h
 
+1699922299 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1700343897 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\main.c
+	"stIngreso.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+	"menu.h"
+	<windows.h>
+
+1699892088 c:\users\user\documents\github\tpfinallab2\proyectofinal\stingreso.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"conio.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+
+1700336461 c:\users\user\documents\github\tpfinallab2\proyectofinal\stempleado.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"stEmpleado.h"
+
+1700002127 c:\users\user\documents\github\tpfinallab2\proyectofinal\stpractica.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1699892088 c:\users\user\documents\github\tpfinallab2\proyectofinal\stpracticaxingreso.h
+
+1699892088 c:\users\user\documents\github\tpfinallab2\proyectofinal\stpaciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1700083380 c:\users\user\documents\github\tpfinallab2\proyectofinal\menu.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"gotoxy.h"
+	"stEmpleado.h"
+
+1699922301 c:\users\user\documents\github\tpfinallab2\proyectofinal\gotoxy.h
+
+1700342953 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\menu.c
+	"menu.h"
+
+1700343854 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stempleado.c
+	"stEmpleado.h"
+
+1699892088 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stingreso.c
+	"stIngreso.h"
+
+1699892088 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stpaciente.c
+	"stPaciente.h"
+	"stIngreso.h"
+
+1699892088 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stpractica.c
+	"stPractica.h"
+
+1699892088 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stpracticaxingreso.c
+	"stPracticaXIngreso.h"
+

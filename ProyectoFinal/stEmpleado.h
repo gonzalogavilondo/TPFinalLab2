@@ -25,7 +25,7 @@ int guardarEmpleadoEnArchivo(stEmpleado e);
 stEmpleado traerEmpleadoXDNI(int dni);
 void mostrarEmpleado(stEmpleado e);
 void modificarUsuarioEmpleadoXDNI(char usuarioNuevo[],int dni);
-void modificarDNIEmpleadoXUsuario(int dniNuevo,char usuario[]);
+void modificarDNIEmpleadoXUsuario(int dniNuevo,int dni);
 void modificarNombreEmpleadoXDNI(char nombreNuevo[],int dni);
 stEmpleado altaDeEmpleados ();
 int existeDNIEnEmpleados(int dniEmpleado);

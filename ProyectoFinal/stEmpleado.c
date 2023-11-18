@@ -85,13 +85,13 @@ void modificarUsuarioEmpleadoXDNI(char usuarioNuevo[],int dni){
     }
 }
 ///ANTES DE LLAMAR A ESTA FUNCION VALIDAR SI YA EXISTE EL DNI EN EL ARCHIVO!!!!
-void modificarDNIEmpleadoXUsuario(int dniNuevo,char usuario[]){
+void modificarDNIEmpleadoXUsuario(int dniNuevo,int dni){
     stEmpleado e;
     int modificado = 0;
     FILE*pArchiEmpleado = fopen(arEmpleados,"r+b");
-    if(pArchiEmpleado != NULL){
+   if(pArchiEmpleado != NULL){
         while(modificado == 0 && fread(&e,sizeof(stEmpleado),1,pArchiEmpleado) > 0){
-                if(strcmp(e.usuario,usuario)==0){
+                if(e.dni == dni){
                     fseek(pArchiEmpleado,sizeof(stEmpleado)*(-1),SEEK_CUR);
                     e.dni = dniNuevo;
                     fwrite(&e,sizeof(stEmpleado),1,pArchiEmpleado);
@@ -164,4 +164,46 @@ void modificarEstadoEmpleadoXDNI(int estado,int dni){
     }
     fclose(pArchiEmpleado);
     }
+}
+
+/*
+stEmpleado * pasarArchivoAArreglo(int ** validos){
+    int dim = 1;
+    struct stEmpleado *e = malloc(dim * sizeof(struct stEmpleado));;
+    validos = 0;
+    FILE*pArchiEmpleado = fopen(arEmpleados,"r+b");
+    if(pArchiEmpleado != NULL){
+        while(fread(&e,sizeof(stEmpleado),1,pArchiEmpleado) > 0){
+            if(validos > dim){
+                dim = (stEmpleado*)realloc(e,sizeof(stEmpleado) * 2);
+            }
+            e[validos] = e;
+
+            *validos++;
+    }
+    fclose(pArchiEmpleado);
+    }
+    return e;
+}*/
+int pasarArchivoAListaEmpleados(stEmpleado e[],int dimension,int validos){
+    int i=0;
+    stEmpleado empleadoAux;
+
+    FILE*archiEmpleados=fopen(arEmpleados,"rb");
+    if(archiEmpleados!=NULL){
+        while(fread(&empleadoAux,sizeof(stEmpleado),1,archiEmpleados)>0&&i<dimension){
+            e[i]=empleadoAux;
+            i++;
+        }
+        fclose(archiEmpleados);
+    }
+    return i;
+}
+int compararPorApellidoNombre(const void *a, const void *b) {
+    const struct stEmpleado *empleadoA = (const struct Empleado *)a;
+    const struct stEmpleado *empleadoB = (const struct Empleado *)b;
+    return strcmp(empleadoA->apellidoYNombre, empleadoB->apellidoYNombre);
+}
+void ordenarEmpleadoPorApellidoYNombre(struct stEmpleado *empleados, size_t cantidadEmpleados) {
+    qsort(empleados, cantidadEmpleados, sizeof(struct stEmpleado), compararPorApellidoNombre);
 }
