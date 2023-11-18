@@ -85,13 +85,13 @@ void modificarUsuarioEmpleadoXDNI(char usuarioNuevo[],int dni){
     }
 }
 ///ANTES DE LLAMAR A ESTA FUNCION VALIDAR SI YA EXISTE EL DNI EN EL ARCHIVO!!!!
-void modificarDNIEmpleadoXUsuario(int dniNuevo,char usuario[]){
+void modificarDNIEmpleadoXUsuario(int dniNuevo,int dni){
     stEmpleado e;
     int modificado = 0;
     FILE*pArchiEmpleado = fopen(arEmpleados,"r+b");
     if(pArchiEmpleado != NULL){
         while(modificado == 0 && fread(&e,sizeof(stEmpleado),1,pArchiEmpleado) > 0){
-                if(strcmp(e.usuario,usuario)==0){
+                if(e.dni == dni){
                     fseek(pArchiEmpleado,-((long)sizeof(stEmpleado)),SEEK_CUR);
                     e.dni = dniNuevo;
                     fwrite(&e,sizeof(stEmpleado),1,pArchiEmpleado);
@@ -164,4 +164,26 @@ void modificarEstadoEmpleadoXDNI(int estado,int dni){
     }
     fclose(pArchiEmpleado);
     }
+}
+int pasarArchivoAListaEmpleados(stEmpleado e[],int dimension,int validos){
+    int i=0;
+    stEmpleado empleadoAux;
+
+    FILE*archiEmpleados=fopen(arEmpleados,"rb");
+    if(archiEmpleados!=NULL){
+        while(fread(&empleadoAux,sizeof(stEmpleado),1,archiEmpleados)>0&&i<dimension){
+            e[i]=empleadoAux;
+            i++;
+        }
+        fclose(archiEmpleados);
+    }
+    return i;
+}
+int compararPorApellidoNombre(const void *a, const void *b) {
+    const struct stEmpleado *empleadoA = (const struct Empleado *)a;
+    const struct stEmpleado *empleadoB = (const struct Empleado *)b;
+    return strcmp(empleadoA->apellidoYNombre, empleadoB->apellidoYNombre);
+}
+void ordenarEmpleadoPorApellidoYNombre(struct stEmpleado *empleados, size_t cantidadEmpleados) {
+    qsort(empleados, cantidadEmpleados, sizeof(struct stEmpleado), compararPorApellidoNombre);
 }

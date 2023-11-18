@@ -277,16 +277,15 @@
 	<stdlib.h>
 	<windows.h>
 
-1700343897 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\main.c
+1700344184 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\main.c
 	"stIngreso.h"
 	"stEmpleado.h"
 	"stPractica.h"
 	"stPracticaXIngreso.h"
 	"stPaciente.h"
 	"menu.h"
-	<windows.h>
 
-1699892088 c:\users\user\documents\github\tpfinallab2\proyectofinal\stingreso.h
+1700344099 c:\users\user\documents\github\tpfinallab2\proyectofinal\stingreso.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -304,15 +303,15 @@
 	<string.h>
 	"stEmpleado.h"
 
-1700002127 c:\users\user\documents\github\tpfinallab2\proyectofinal\stpractica.h
+1700344099 c:\users\user\documents\github\tpfinallab2\proyectofinal\stpractica.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
 	<string.h>
 
-1699892088 c:\users\user\documents\github\tpfinallab2\proyectofinal\stpracticaxingreso.h
+1700344099 c:\users\user\documents\github\tpfinallab2\proyectofinal\stpracticaxingreso.h
 
-1699892088 c:\users\user\documents\github\tpfinallab2\proyectofinal\stpaciente.h
+1700344099 c:\users\user\documents\github\tpfinallab2\proyectofinal\stpaciente.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -332,17 +331,17 @@
 1700342953 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\menu.c
 	"menu.h"
 
-1700343854 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stempleado.c
+1700345046 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stempleado.c
 	"stEmpleado.h"
 
-1699892088 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stingreso.c
+1700344099 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stingreso.c
 	"stIngreso.h"
 
-1699892088 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stpaciente.c
+1700344099 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stpaciente.c
 	"stPaciente.h"
 	"stIngreso.h"
 
-1699892088 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stpractica.c
+1700344099 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stpractica.c
 	"stPractica.h"
 
 1699892088 source:c:\users\user\documents\github\tpfinallab2\proyectofinal\stpracticaxingreso.c
