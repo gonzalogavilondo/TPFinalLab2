@@ -7,12 +7,18 @@
 
 int main()
 {
-    //submenuManejoEmpleados();
+//    submenuManejoEmpleados();
+//
+//    probando la parte de pacientes:
+//    menuProvisorioGestionarPacientes();
+//    probando la parte de practicas:
+//    menuProvisorioGestionarPracticas();
 
-    // probando la parte de pacientes:
-    //menuProvisorioGestionarPacientes();
-    // probando la parte de practicas:
-    menuProvisorioGestionarPracticas();
+    ///Pruebo generar un archivo de ingresos
+    generarArchivoBinIngresos("ingresos.dat");
+    nodoIngreso* ingresos = crearListaIngresos("ingresos.dat");
+    mostrarIngreso(ingresos);
 
-return 0;
+
+    return 0;
 }

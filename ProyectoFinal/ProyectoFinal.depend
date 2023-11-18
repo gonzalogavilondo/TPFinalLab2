@@ -52,9 +52,9 @@
 1699710940 source:e:\tpfinallab2\proyectofinal\stpracticaxingreso.c
 	"stPracticaXIngreso.h"
 
-1699710134 e:\tpfinallab2\proyectofinal\stpracticaxingreso.h
+1700314967 e:\tpfinallab2\proyectofinal\stpracticaxingreso.h
 
-1700010490 source:e:\tpfinallab2\proyectofinal\stempleado.c
+1700312403 source:e:\tpfinallab2\proyectofinal\stempleado.c
 	"stEmpleado.h"
 
 1700010953 e:\tpfinallab2\proyectofinal\stempleado.h
@@ -64,7 +64,7 @@
 	<string.h>
 	"stEmpleado.h"
 
-1700312236 source:e:\tpfinallab2\proyectofinal\main.c
+1700317024 source:e:\tpfinallab2\proyectofinal\main.c
 	"stIngreso.h"
 	"stEmpleado.h"
 	"stPractica.h"
@@ -72,7 +72,7 @@
 	"stPaciente.h"
 	"menu.h"
 
-1699909785 e:\tpfinallab2\proyectofinal\stingreso.h
+1700316314 e:\tpfinallab2\proyectofinal\stingreso.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -83,7 +83,7 @@
 	"stPracticaXIngreso.h"
 	"stPaciente.h"
 
-1699909785 source:e:\tpfinallab2\proyectofinal\stingreso.c
+1700317224 source:e:\tpfinallab2\proyectofinal\stingreso.c
 	"stIngreso.h"
 
 1700190743 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\main.c
