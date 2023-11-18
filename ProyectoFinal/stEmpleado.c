@@ -75,7 +75,7 @@ void modificarUsuarioEmpleadoXDNI(char usuarioNuevo[],int dni){
     if(pArchiEmpleado != NULL){
         while(modificado == 0 && fread(&e,sizeof(stEmpleado),1,pArchiEmpleado) > 0){
                 if(e.dni == dni){
-                    fseek(pArchiEmpleado,sizeof(stEmpleado)*(-1),SEEK_CUR);
+                    fseek(pArchiEmpleado,-((long)sizeof(stEmpleado)),SEEK_CUR);
                     strcpy(e.usuario,usuarioNuevo);
                     fwrite(&e,sizeof(stEmpleado),1,pArchiEmpleado);
                     modificado = 1;
@@ -92,7 +92,7 @@ void modificarDNIEmpleadoXUsuario(int dniNuevo,char usuario[]){
     if(pArchiEmpleado != NULL){
         while(modificado == 0 && fread(&e,sizeof(stEmpleado),1,pArchiEmpleado) > 0){
                 if(strcmp(e.usuario,usuario)==0){
-                    fseek(pArchiEmpleado,sizeof(stEmpleado)*(-1),SEEK_CUR);
+                    fseek(pArchiEmpleado,-((long)sizeof(stEmpleado)),SEEK_CUR);
                     e.dni = dniNuevo;
                     fwrite(&e,sizeof(stEmpleado),1,pArchiEmpleado);
                     modificado = 1;
@@ -108,7 +108,7 @@ void modificarNombreEmpleadoXDNI(char nombreNuevo[],int dni){
     if(pArchiEmpleado != NULL){
         while(modificado == 0 && fread(&e,sizeof(stEmpleado),1,pArchiEmpleado) > 0){
                 if(e.dni == dni){
-                    fseek(pArchiEmpleado,sizeof(stEmpleado)*(-1),SEEK_CUR);
+                    fseek(pArchiEmpleado,-((long)sizeof(stEmpleado)),SEEK_CUR);
                     strcpy(e.apellidoYNombre,nombreNuevo);
                     fwrite(&e,sizeof(stEmpleado),1,pArchiEmpleado);
                     modificado = 1;
@@ -124,7 +124,7 @@ void modificarContraseniaEmpleadoXDNI(char contrasenia[],int dni){
     if(pArchiEmpleado != NULL){
         while(modificado == 0 && fread(&e,sizeof(stEmpleado),1,pArchiEmpleado) > 0){
                 if(e.dni == dni){
-                    fseek(pArchiEmpleado,sizeof(stEmpleado)*(-1),SEEK_CUR);
+                    fseek(pArchiEmpleado,-((long)sizeof(stEmpleado)),SEEK_CUR);
                     strcpy(e.contrasenia,contrasenia);
                     fwrite(&e,sizeof(stEmpleado),1,pArchiEmpleado);
                     modificado = 1;
@@ -140,7 +140,7 @@ void modificarPerfilEmpleadoXDNI(char perfil[],int dni){
     if(pArchiEmpleado != NULL){
         while(modificado == 0 && fread(&e,sizeof(stEmpleado),1,pArchiEmpleado) > 0){
                 if(e.dni == dni){
-                    fseek(pArchiEmpleado,sizeof(stEmpleado)*(-1),SEEK_CUR);
+                    fseek(pArchiEmpleado,-((long)sizeof(stEmpleado)),SEEK_CUR);
                     strcpy(e.perfil,perfil);
                     fwrite(&e,sizeof(stEmpleado),1,pArchiEmpleado);
                     modificado = 1;
@@ -156,7 +156,7 @@ void modificarEstadoEmpleadoXDNI(int estado,int dni){
     if(pArchiEmpleado != NULL){
         while(modificado == 0 && fread(&e,sizeof(stEmpleado),1,pArchiEmpleado) > 0){
                 if(e.dni == dni){
-                    fseek(pArchiEmpleado,sizeof(stEmpleado)*(-1),SEEK_CUR);
+                    fseek(pArchiEmpleado,-((long)sizeof(stEmpleado)),SEEK_CUR);
                     e.eliminado = estado;
                     fwrite(&e,sizeof(stEmpleado),1,pArchiEmpleado);
                     modificado = 1;

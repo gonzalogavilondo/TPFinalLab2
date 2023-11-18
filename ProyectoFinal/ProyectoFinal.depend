@@ -30,20 +30,20 @@
 
 1699710095 e:\tpfinallab2\proyectofinal\empleadodelaboratorio.h
 
-1699910048 source:e:\tpfinallab2\proyectofinal\stpaciente.c
+1700312236 source:e:\tpfinallab2\proyectofinal\stpaciente.c
 	"stPaciente.h"
 	"stIngreso.h"
 
-1699910030 e:\tpfinallab2\proyectofinal\stpaciente.h
+1700312236 e:\tpfinallab2\proyectofinal\stpaciente.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
 	<string.h>
 
-1699710914 source:e:\tpfinallab2\proyectofinal\stpractica.c
+1700312236 source:e:\tpfinallab2\proyectofinal\stpractica.c
 	"stPractica.h"
 
-1699923790 e:\tpfinallab2\proyectofinal\stpractica.h
+1700312236 e:\tpfinallab2\proyectofinal\stpractica.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -64,7 +64,7 @@
 	<string.h>
 	"stEmpleado.h"
 
-1700010778 source:e:\tpfinallab2\proyectofinal\main.c
+1700312236 source:e:\tpfinallab2\proyectofinal\main.c
 	"stIngreso.h"
 	"stEmpleado.h"
 	"stPractica.h"
