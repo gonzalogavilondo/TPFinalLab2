@@ -165,7 +165,8 @@ void modificarEstadoEmpleadoXDNI(int estado,int dni){
     fclose(pArchiEmpleado);
     }
 }
-int pasarArchivoAListaEmpleados(stEmpleado e[],int dimension,int validos){
+int pasarArchivoAArregloEmpleados(stEmpleado e[],int dimension,int validos)
+{
     int i=0;
     stEmpleado empleadoAux;
 
@@ -178,6 +179,22 @@ int pasarArchivoAListaEmpleados(stEmpleado e[],int dimension,int validos){
         fclose(archiEmpleados);
     }
     return i;
+}
+
+///LOGUEO
+int inicioDeSesion(char usuario[],char contrasenia[], char tipoMenu[]){
+    stEmpleado e;
+    int flag=0;
+    FILE*pArchiEmpleado = fopen(arEmpleados,"rb");
+    if(pArchiEmpleado!=NULL){
+        while(flag==0&&(fread(&e,sizeof(stEmpleado),1,pArchiEmpleado))>0){
+            if(strcmp(e.usuario,usuario)==0&&strcmp(e.contrasenia,contrasenia)==0&&strcmp(e.perfil,tipoMenu)==0){
+                flag=1;
+        }
+    }
+    fclose(pArchiEmpleado);
+    }
+return flag;
 }
 
 // Ordenar el arreglo

@@ -217,7 +217,6 @@ stPractica obtenerPracticaLaboratorio()
 nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos, nodoPracticaXIngreso *nuevaPracticaXIngreso)
 {
     int dni;
-    char opcion = 0;
     // Verificar existencia del paciente (Buscar en el archivo de pacientes)
     printf("\n Ingrese el DNI del paciente a ingresar: ");
     scanf("%d", &dni);

@@ -608,10 +608,6 @@ void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
         int validos = pasarArchivoAArregloEmpleados(arregloEmpleados, 1000, 0);
         int i;
 
-
-
-
-
         switch(opcion)
         {
         case 1:
