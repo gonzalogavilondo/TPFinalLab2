@@ -1,4 +1,5 @@
 #include "stIngreso.h"
+#include "menu.h"
 
 /***************************
 * FUNCIONES BASICAS DE LISTA
@@ -154,17 +155,29 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista)
 {
     stIngreso registro;
 
-    registro.numeroIngreso = obtenerNuevoNumeroIngreso(); //Numero de ingreso
-    obtenerFechaActual(registro.fechaIngreso);  // Obtener la fecha actual y asignarla a nuevoIngreso->ingreso.fechaIngreso
+    registro.numeroIngreso = obtenerNuevoNumeroIngreso(); // Numero de ingreso
+
+    // Obtener la fecha actual y asignarla a nuevoIngreso->ingreso.fechaIngreso
+    obtenerFechaActual(registro.fechaIngreso);
+
+    // Imprimir y obtener la fecha de retiro
+    gotoxy(15, 5);
     printf("Ingrese la fecha de retiro: ");
     fflush(stdin);
     gets(registro.fechaRetiro);
+
+    // Imprimir y obtener el DNI del paciente
+    gotoxy(15, 7);
     printf("Ingrese el DNI del paciente: ");
     scanf("%d", &registro.dniPaciente);
+
+    // Imprimir y obtener la matrícula profesional
+    gotoxy(15, 9);
     printf("Ingrese la matricula profesional: ");
     scanf("%d", &registro.matriculaProfesional);
+
     registro.eliminado = 0;
-    lista = agregarNodoIngreso(lista, registro); ///Finalmente agrego el pedido a la lista
+    lista = agregarNodoIngreso(lista, registro); // Finalmente agrego el ingreso a la lista
 
     return lista;
 }
@@ -214,29 +227,51 @@ stPractica obtenerPracticaLaboratorio()
 /**
 * Función para dar de alta un ingreso con al menos una práctica de laboratorio
 **/
-nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos, nodoPracticaXIngreso *nuevaPracticaXIngreso)
+nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos)
 {
+    nodoPracticaXIngreso *nuevaPracticaXIngreso = inicListaPracticaXIngresos();
     int dni;
-    // Verificar existencia del paciente (Buscar en el archivo de pacientes)
-    printf("\n Ingrese el DNI del paciente a ingresar: ");
-    scanf("%d", &dni);
-    if(!existePacienteXDNI(dni))
-    {
-        printf("\n El paciente no existe en la base de datos.\n");
-    }
-    else
-    {
-        // Crear un nuevo nodo de ingreso y se agrega a la lista
-        listaIngresos = cargarIngreso(listaIngresos);
+    char opcion = 0;
 
-        // Crear al menos una práctica de laboratorio asociada al ingreso
-        nuevaPracticaXIngreso = altaDePracticaXIngreso(nuevaPracticaXIngreso);
+    do {
+        system("cls");
 
-       // Enlazar la nueva práctica al ingreso
-        listaIngresos->listaPracticasXIngreso = nuevaPracticaXIngreso;
+        // Imprime el rectángulo y la cabeza después de limpiar la pantalla
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Alta de Ingreso");
 
-        printf("Ingreso registrado con éxito.\n");
-    }
+        gotoxy(15, 4);
+        printf("Ingrese el DNI del paciente a ingresar: ");
+        scanf("%d", &dni);
+
+        if (existePacienteXDNI(dni))
+        {
+            gotoxy(15, 6);
+            printf("El paciente no existe en la base de datos.");
+        }
+        else
+        {
+            // Crear un nuevo nodo de ingreso y agregarlo a la lista
+            listaIngresos = cargarIngreso(listaIngresos);
+
+            // Crear al menos una práctica de laboratorio asociada al ingreso
+            nuevaPracticaXIngreso = altaDePracticaXIngreso(nuevaPracticaXIngreso);
+
+            // Enlazar la nueva práctica al ingreso
+            listaIngresos->listaPracticasXIngreso = nuevaPracticaXIngreso;
+
+            Rectangulo();
+            gotoxy(15, 8);
+            printf("Ingreso registrado con exito.");
+        }
+
+        gotoxy(15, 10);
+        printf("Desea ingresar otro paciente? (S/N): ");
+        fflush(stdin);
+        opcion = getch();
+
+    } while (opcion == 's' || opcion == 'S');
 
     return listaIngresos;
 }
@@ -314,90 +349,130 @@ nodoIngreso *modificarDatosIngreso(nodoIngreso *lista)
     nodoIngreso *ingresoExistente = inicListaIngresos();
 
     int nroIngreso, matricula;
-    printf("\n Ingrese el numero de ingreso: ");
-    scanf("%d", &nroIngreso);
+    char opcion;
 
-    ingresoExistente = buscaIngreso(lista, nroIngreso);
-
-    if (ingresoExistente)
-    {
-        char opcion;
-
-        do {
-            system("cls");
-            printf("\n");
-            mostrarUnNodoIngreso(ingresoExistente);
-
-            printf("\n Que dato desea modificar? Ingrese una opcion:");
-            printf("\n\n                1. Fecha de ingreso");
-            printf("\n                2. Fecha de retiro");
-            printf("\n                3. Matricula");
-            opcion = getch();
-            system("cls");
-
-            switch (opcion)
-            {
-                case 49:
-
-                    printf("\n Ingrese la nueva fecha de ingreso: ");
-                    fflush(stdin);
-                    fgets(ingresoExistente->ingreso.fechaIngreso, sizeof(ingresoExistente->ingreso.fechaIngreso), stdin);
-                    break;
-                case 50:
-
-                    printf("\n Ingrese la nueva fecha de retiro: ");
-                    fflush(stdin);
-                    fgets(ingresoExistente->ingreso.fechaRetiro, sizeof(ingresoExistente->ingreso.fechaRetiro), stdin);
-                    break;
-                case 51:
-
-                    printf("\n Ingrese la nueva matricula: ");
-                    scanf("%d", &matricula);
-                    ingresoExistente->ingreso.matriculaProfesional = matricula;
-                    break;
-                default:
-                    // opcion incorrecta, se vuelve a mostrar el menu
-                    break;
-            }
-
-            if (49 <= opcion && opcion <= 51)
-            {
-                system("cls");
-                printf("\n Desea modificar algun otro dato del ingreso? En ese caso presione cualquier tecla, para finalizar presione ESC.");
-                opcion = getch();
-            }
-
-        } while (opcion != ESC);
-
+    do {
         system("cls");
-        printf("\n Se ha modificado el ingreso.");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Modificación de Ingreso");
 
-    }
-    else
-    {
-        printf("\n El numero de ingreso cargado no esta registrado en la base de datos.\n");
-    }
+        gotoxy(15, 4);
+        printf("Ingrese el numero de ingreso: ");
+        scanf("%d", &nroIngreso);
+
+        ingresoExistente = buscaIngreso(lista, nroIngreso);
+
+        if (ingresoExistente)
+        {
+            do {
+                system("cls");
+                printf("\n");
+                mostrarUnNodoIngreso(ingresoExistente);
+
+                gotoxy(15, 8);
+                printf("¿Qué dato desea modificar? Ingrese una opción:");
+                gotoxy(15, 9);
+                printf("1. Fecha de ingreso");
+                gotoxy(15, 10);
+                printf("2. Fecha de retiro");
+                gotoxy(15, 11);
+                printf("3. Matricula");
+                fflush(stdin);
+                opcion = getch();
+                system("cls");
+
+                switch (opcion)
+                {
+                    case 49:
+                        gotoxy(15, 4);
+                        printf("Ingrese la nueva fecha de ingreso: ");
+                        fflush(stdin);
+                        fgets(ingresoExistente->ingreso.fechaIngreso, sizeof(ingresoExistente->ingreso.fechaIngreso), stdin);
+                        break;
+                    case 50:
+                        gotoxy(15, 4);
+                        printf("Ingrese la nueva fecha de retiro: ");
+                        fflush(stdin);
+                        fgets(ingresoExistente->ingreso.fechaRetiro, sizeof(ingresoExistente->ingreso.fechaRetiro), stdin);
+                        break;
+                    case 51:
+                        gotoxy(15, 4);
+                        printf("Ingrese la nueva matricula: ");
+                        scanf("%d", &matricula);
+                        ingresoExistente->ingreso.matriculaProfesional = matricula;
+                        break;
+                    default:
+                        // opción incorrecta, se vuelve a mostrar el menú
+                        break;
+                }
+
+                if (49 <= opcion && opcion <= 51)
+                {
+                    system("cls");
+                    printf("\n Desea modificar algún otro dato del ingreso? En ese caso presione cualquier tecla, para finalizar presione ESC.");
+                    opcion = getch();
+                }
+
+            } while (opcion != ESC);
+
+            system("cls");
+            gotoxy(15, 4);
+            printf("Se ha modificado el ingreso.");
+
+        }
+        else
+        {
+            gotoxy(15, 4);
+            printf("El numero de ingreso cargado no está registrado en la base de datos.");
+        }
+
+        gotoxy(15, 6);
+        printf("¿Desea modificar otro ingreso? (S/N): ");
+        fflush(stdin);
+        opcion = getch();
+
+    } while (opcion == 's' || opcion == 'S');
 
     return lista;
 }
 
-
 void buscaYDaDeBajaIngreso(nodoIngreso *lista)
 {
     int nroIngreso;
-    printf("\n Ingrese el numero de ingreso a dar de baja: ");
-    scanf("%d", &nroIngreso);
+    char opcion;
 
-    nodoIngreso *ingresoExistente = buscaIngreso(lista, nroIngreso);
+    do {
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Baja de Ingreso");
 
-    if (ingresoExistente)
-    {
-        ingresoExistente->ingreso.eliminado = 1;
-        buscaYDaDeBajaPracticaXIngreso(ingresoExistente->listaPracticasXIngreso);
-        printf("\n Se dio de baja al ingreso.");
-    }
-    else
-    {
-        printf("\n El numero de ingreso cargado no esta registrado en la base de datos.\n");
-    }
+        gotoxy(15, 4);
+        printf("Ingrese el numero de ingreso a dar de baja: ");
+        scanf("%d", &nroIngreso);
+
+        nodoIngreso *ingresoExistente = buscaIngreso(lista, nroIngreso);
+
+        if (ingresoExistente)
+        {
+            ingresoExistente->ingreso.eliminado = 1;
+            buscaYDaDeBajaPracticaXIngreso(ingresoExistente->listaPracticasXIngreso);
+            gotoxy(15, 6);
+            printf("Se dio de baja al ingreso.");
+        }
+        else
+        {
+            gotoxy(15, 6);
+            printf("El numero de ingreso cargado no está registrado en la base de datos.");
+        }
+
+        gotoxy(15, 8);
+        printf("¿Desea dar de baja otro ingreso? (S/N): ");
+        fflush(stdin);
+        opcion = getch();
+
+    } while (opcion == 's' || opcion == 'S');
+
+    system("cls");
 }

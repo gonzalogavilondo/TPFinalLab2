@@ -14,14 +14,16 @@ void menuProvisorioGestionarPacientes(){
         printf("\n\n                                          1. Dar de alta a un paciente.");
         printf("\n                                          2. Modificar los datos de un paciente.");
         printf("\n                                          3. Dar de baja un paciente.");
+        printf("\n                                          4. Ver datos de un paciente en particular.");
 
         printf("\n\n\n                                     Para probar \"GESTIONAR PACIENTES\":");
-        printf("\n\n                                          4. Mostrar arbol de pacientes.");
-        printf("\n                                          5. Guardar arbol en un archivo binario.");
-        printf("\n                                          6. Cargar datos de los pacientes del archivo en un arbol(si se uso la opcion 1,");
+        printf("\n\n                                          5. Mostrar arbol de pacientes.");
+        printf("\n                                          6. Guardar arbol en un archivo binario.");
+        printf("\n                                          7. Cargar datos de los pacientes del archivo en un arbol(si se uso la opcion 1,");
         printf("\n                                             se sobreescriben los datos).");
 
         printf("\n\n                                          ESC para finalizar...");
+        fflush(stdin);
         opcion = getch();
         system("cls");
 
@@ -30,8 +32,6 @@ void menuProvisorioGestionarPacientes(){
             case ESC:
                 // finaliza el programa...
                 break;
-
-                     // GESTION PACIENTES:
 
             case 49: // opcion 1: Dar de alta a un paciente.
 
@@ -47,25 +47,34 @@ void menuProvisorioGestionarPacientes(){
                 }
 
                 textoPresioneCualquierTecla();
-
                 break;
+
             case 51: // opcion 3: Dar de baja un paciente.
 
                 if (arbolPacientes) {
-
-                    buscaYDaDeBajaPaciente(arbolPacientes);
-
+                    darDeBajaUnPaciente(arbolPacientes);
                 } else {
                     printf("\n La estructura esta vacia, primera debe cargarla.");
                 }
 
                 textoPresioneCualquierTecla();
-
                 break;
 
-                     // Para probar "GESTIONAR PACIENTES":
+            case 52: // opcion 4: Ver datos de un paciente en particular.
 
-            case 52: // opcion 4: Mostrar arbol de pacientes.
+                if (arbolPacientes) {
+                    buscaPacienteYMuestraDatos(arbolPacientes);
+                } else {
+                    printf("\n La estructura esta vacia, primera debe cargarla.");
+                }
+
+                textoPresioneCualquierTecla();
+                break;
+
+
+    // Para probar "GESTIONAR PACIENTES":
+
+            case 53: // opcion 5: Mostrar arbol de pacientes.
 
                 if (arbolPacientes) {
                     printf("\n Arbol de pacientes, ordenado por dni:\n\n");
@@ -75,24 +84,20 @@ void menuProvisorioGestionarPacientes(){
                 }
 
                 textoPresioneCualquierTecla();
-
                 break;
 
-            case 53: // opcion 5: Guardar arbol en un archivo binario.
+            case 54: // opcion 6: Guardar arbol en un archivo binario.
 
                 if (arbolPacientes) {
-
                     guardaArbolPacientesEnArchivo(arbolPacientes);
-
                 } else {
                     printf("\n La estructura esta vacia, primera debe cargarla.");
                 }
 
                 textoPresioneCualquierTecla();
-
                 break;
 
-            case 54: // opcion 6: Cargar datos de los pacientes del archivo en un arbol(si se uso la opcion 1, se sobreescriben los datos).
+            case 55: // opcion 7: Cargar datos de los pacientes del archivo en un arbol(si se uso la opcion 1, se sobreescriben los datos).
 
                 if (arbolPacientes) {
                     liberarArbolPacientes(arbolPacientes);
@@ -102,7 +107,6 @@ void menuProvisorioGestionarPacientes(){
                 arbolPacientes = archivoToArbolPacientes(arbolPacientes);
 
                 textoPresioneCualquierTecla();
-
                 break;
 
             default:
@@ -117,6 +121,7 @@ void menuProvisorioGestionarPacientes(){
 
 void textoPresioneCualquierTecla(){
     printf("\n\n Presione cualquier tecla para continuar...");
+    fflush(stdin);
     getch();
 }
 
@@ -130,8 +135,9 @@ nodoIngreso * inicListaIngresos(){
     return NULL;
 }
 
-// el arbol tiene que estar ordenado por dni para esta funcion:
-int existeElPaciente(nodoPaciente * arbolPacientes, int dni){ // 0 si no lo encuentra, 1 si encuentra el dni en el arbolPacientes
+// existeElPaciente: el arbol tiene que estar ordenado por dni para esta funcion
+// devuelve 0 si no lo encuentra, 1 si encuentra el dni en el arbolPacientes:
+int existeElPaciente(nodoPaciente * arbolPacientes, int dni){
 
     int result = 0;
 
@@ -190,6 +196,7 @@ nodoPaciente * altaDePacientes(nodoPaciente * arbolPacientes){
     do {
 
         printf("\n Ingrese el DNI del paciente: ");
+        fflush(stdin);
         scanf("%d", &dni);
 
         if (existeElPaciente(arbolPacientes, dni)) {
@@ -201,6 +208,7 @@ nodoPaciente * altaDePacientes(nodoPaciente * arbolPacientes){
             gets(nuevoPaciente.apellidoNombre);
 
             printf("\n Ingrese la edad: ");
+            fflush(stdin);
             scanf("%d", &nuevoPaciente.edad);
 
             printf("\n Ingrese la direccion donde vive: ");
@@ -222,6 +230,7 @@ nodoPaciente * altaDePacientes(nodoPaciente * arbolPacientes){
         }
 
         printf("\n\n Para cargar otro paciente presione cualquier tecla, ESC para finalizar...");
+        fflush(stdin);
         opcion = getch();
         system("cls");
 
@@ -299,8 +308,9 @@ nodoPaciente * eliminarNodoArbolPacientes(nodoPaciente * arbolPacientes, int dni
     return arbolPacientes;
 }
 
-// el arbol tiene que estar ordenado por dni para esta funcion:
-nodoPaciente * buscaPaciente(nodoPaciente * arbolPacientes, int dni){ // NULL si no lo encuentra, el nodo del paciente si lo encuentra
+// buscaPaciente: El arbol tiene que estar ordenado por dni para esta funcion.
+// Devuelve el nodo del paciente si lo encuentra, caso contrario devuelve NULL:
+nodoPaciente * buscaPaciente(nodoPaciente * arbolPacientes, int dni){
 
     nodoPaciente * nodoBuscado = inicArbolPacientes();
 
@@ -327,15 +337,22 @@ void textoDniNoEnBaseDeDatos(){
     printf("\n El dni ingresado no esta registrado en la base de datos.");
 }
 
+nodoPaciente * textoIngreseDNILuegoBuscaPaciente(nodoPaciente * arbolPacientes, int * dni){
+
+    printf("\n Ingrese el dni del paciente: ");
+    fflush(stdin);
+    scanf("%d", dni);
+
+    nodoPaciente * nodoBuscado = buscaPaciente(arbolPacientes, *dni);
+
+    return nodoBuscado;
+}
+
 nodoPaciente * modificarDatosPaciente(nodoPaciente * arbolPacientes){
 
-    nodoPaciente * paciente;
-
     int dni;
-    printf("\n Ingrese el dni del paciente: ");
-    scanf("%d", &dni);
 
-    paciente = buscaPaciente(arbolPacientes, dni);
+    nodoPaciente * paciente = textoIngreseDNILuegoBuscaPaciente(arbolPacientes, &dni);
 
     if (paciente) {
 
@@ -354,6 +371,7 @@ nodoPaciente * modificarDatosPaciente(nodoPaciente * arbolPacientes){
             printf("\n                3. Dni");
             printf("\n                4. Direccion");
             printf("\n                5. Telefono");
+            fflush(stdin);
             opcion = getch();
             system("cls");
 
@@ -367,11 +385,13 @@ nodoPaciente * modificarDatosPaciente(nodoPaciente * arbolPacientes){
                 case 50:
 
                     printf("\n Ingrese la edad: ");
+                    fflush(stdin);
                     scanf("%d", &pacienteAux.edad);
                     break;
                 case 51:
 
                     printf("\n Ingrese el dni: ");
+                    fflush(stdin);
                     scanf("%d", &dni);
 
                     if (existeElPaciente(arbolPacientes, dni) && dni!=paciente->datosPaciente.dni) {
@@ -402,6 +422,7 @@ nodoPaciente * modificarDatosPaciente(nodoPaciente * arbolPacientes){
             if (49 <= opcion && opcion <= 53) {
                 system("cls");
                 printf("\n Desea modificar algun otro dato del cliente? En ese caso presione cualquier tecla, para finalizar presione ESC.");
+                fflush(stdin);
                 opcion = getch();
             }
 
@@ -429,13 +450,11 @@ nodoPaciente * modificarDatosPaciente(nodoPaciente * arbolPacientes){
 
 /// FUNCIONES PARA LA OPCION 3:
 
-void buscaYDaDeBajaPaciente(nodoPaciente * arbolPacientes){
+void darDeBajaUnPaciente(nodoPaciente * arbolPacientes){
 
     int dni;
-    printf("\n Ingrese el dni del paciente a dar de baja: ");
-    scanf("%d", &dni);
 
-    nodoPaciente * paciente = buscaPaciente(arbolPacientes, dni);
+    nodoPaciente * paciente = textoIngreseDNILuegoBuscaPaciente(arbolPacientes, &dni);
 
     if (paciente) {
         paciente->datosPaciente.eliminado = 1;
@@ -448,6 +467,25 @@ void buscaYDaDeBajaPaciente(nodoPaciente * arbolPacientes){
 
 /// FUNCIONES PARA LA OPCION 4:
 
+void buscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes){
+
+    int dni;
+    nodoPaciente * paciente = textoIngreseDNILuegoBuscaPaciente(arbolPacientes, &dni);
+
+    if (paciente) {
+
+        system("cls");
+        printf("\n");
+        muestraUnPaciente(paciente->datosPaciente);
+
+    } else {
+        printf("\n");
+        textoDniNoEnBaseDeDatos();
+    }
+}
+
+/// FUNCIONES PARA LA OPCION 5:
+
 void inorderPacientes(nodoPaciente * arbolPacientes){
     if (arbolPacientes) {
         inorderPacientes(arbolPacientes->izq);
@@ -456,7 +494,7 @@ void inorderPacientes(nodoPaciente * arbolPacientes){
     }
 }
 
-/// FUNCIONES PARA LA OPCION 5:
+/// FUNCIONES PARA LA OPCION 6:
 
 void imprimePacientesInorderEnArchivo(nodoPaciente * arbolPacientes, FILE * archi){
 
@@ -494,7 +532,7 @@ void guardaArbolPacientesEnArchivo(nodoPaciente * arbolPacientes){
 
 }
 
-/// FUNCIONES PARA LA OPCION 6:
+/// FUNCIONES PARA LA OPCION 7:
 
 void liberarArbolPacientes(nodoPaciente * arbolPacientes){
 

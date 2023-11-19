@@ -574,8 +574,8 @@ void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
 
     char control;
     int opcion;
-    char op;
-    int numeroPerfil = 0;
+    //char op;
+    //int numeroPerfil = 0;
 
     do
     {
@@ -733,8 +733,6 @@ void Rectangulo(){
 
 }
 
-
-
 void submenuManejoEmpleados() {
     char control = 's';;
     int opcion;
@@ -786,8 +784,189 @@ void submenuManejoEmpleados() {
     system("cls");
 }
 
+void submenuManejoIngresos(nodoIngreso *listaIngresos)
+{
+    char control = 's';
+    int opcion;
+
+    do
+    {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Manejo de ingresos");
+        gotoxy(15, 4);
+        printf("Que funcion desea ejecutar?\n");
+        gotoxy(15, 5);
+        printf("(1) ALTA\n");
+        gotoxy(15, 6);
+        printf("(2) MODIFICACION\n");
+        gotoxy(15, 7);
+        printf("(3) BAJA\n");
+        gotoxy(15, 8);
+        printf("(4) CONSULTAR LISTADO\n");  // Nueva opción
+        gotoxy(15, 9);
+        printf("(5) VOLVER\n");  // Ajusta las opciones según sea necesario
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        switch (opcion)
+        {
+            case 1:
+                // Realizar alta de ingreso
+                listaIngresos = altaDeIngreso(listaIngresos);
+                break;
+
+            case 2:
+                // Realizar modificación de ingreso
+                listaIngresos = modificarDatosIngreso(listaIngresos);
+                break;
+
+            case 3:
+                // Realizar baja de ingreso
+                buscaYDaDeBajaIngreso(listaIngresos);
+                break;
+
+            case 4:
+                // Mostrar listado de ingresos
+                mostrarIngreso(listaIngresos);
+                system("pause");
+                system("cls");
+                break;
+
+            case 5:
+                control = 'n';
+                break;
+
+            default:
+                control = 'n';
+                break;
+        }
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+}
+
+void submenuManejoPracticasXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos)
+{
+    char control = 's';
+    int opcion;
+
+    do
+    {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Manejo de prácticas por ingreso");
+        gotoxy(15, 4);
+        printf("Que funcion desea ejecutar?\n");
+        gotoxy(15, 5);
+        printf("(1) ALTA\n");
+        gotoxy(15, 6);
+        printf("(2) MODIFICACION\n");
+        gotoxy(15, 7);
+        printf("(3) BAJA\n");
+        gotoxy(15, 8);
+        printf("(4) VOLVER\n");
+        gotoxy(15, 9);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        switch (opcion)
+        {
+            case 1:
+                // Realizar alta de práctica por ingreso
+                listaPracticaXIngresos = altaDePracticaXIngreso(listaPracticaXIngresos);
+                break;
+
+            case 2:
+                // Realizar modificación de práctica por ingreso
+                listaPracticaXIngresos = modificarDatosPracticaXIngreso(listaPracticaXIngresos);
+                break;
+
+            case 3:
+                // Realizar baja de práctica por ingreso
+                buscaYDaDeBajaPracticaXIngreso(listaPracticaXIngresos);
+                break;
+
+            case 4:
+                control = 'n';
+                break;
+
+            default:
+                control = 'n';
+                break;
+        }
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+}
+
+void submenuAdministrativo(nodoIngreso *listaIngresos)
+{
+    char control = 's';
+    int opcion;
+
+    do
+    {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Menu Administrativo");
+        gotoxy(15, 4);
+        printf("Que desea gestionar?\n");
+        gotoxy(15, 5);
+        printf("(1) Gestionar Pacientes\n");
+        gotoxy(15, 6);
+        printf("(2) Gestionar Citas\n");
+        gotoxy(15, 7);
+        printf("(3) Gestionar Practicas por Ingreso\n");
+        gotoxy(15, 8);
+        printf("(4) VOLVER\n");
+        gotoxy(15, 9);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        switch (opcion)
+        {
+            case 1:
+                // Gestionar pacientes
+                break;
+
+            case 2:
+                // Gestionar citas
+                submenuManejoIngresos(listaIngresos);
+                break;
+
+            case 3:
+                // Gestionar prácticas por ingreso
+                submenuManejoPracticasXIngreso(listaIngresos->listaPracticasXIngreso);
+                break;
+
+            case 4:
+                control = 'n';
+                break;
+
+            default:
+                control = 'n';
+                break;
+        }
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+}
+
 ///MENU PRINCIPAL
-void menuPrincipal() {
+void menuPrincipal(nodoPaciente* arbol){
     char control = 's';;
     int opcion;
     char empleadoEjecuta[20];
@@ -815,11 +994,11 @@ void menuPrincipal() {
 
         switch (opcion) {
             case 1: strcpy(empleadoEjecuta, "Tecnico");
-                    menuIngresoUserPrintf(empleadoEjecuta); break;
+                    menuIngresoUserPrintf(empleadoEjecuta, arbol); break;
             case 2: strcpy(empleadoEjecuta, "Administrativo");
-                    menuIngresoUserPrintf(empleadoEjecuta); break;
+                    menuIngresoUserPrintf(empleadoEjecuta, arbol); break;
             case 3: strcpy(empleadoEjecuta, "Administrador");
-                    menuIngresoUserPrintf(empleadoEjecuta); break;
+                    menuIngresoUserPrintf(empleadoEjecuta, arbol); break;
 
             case 4:
                 control = 'n';
@@ -836,7 +1015,7 @@ void menuPrincipal() {
     system("cls");
 }
 ///PRINTF INGRESO (EMPLEADO)
-void menuIngresoUserPrintf(char tipoMenu[]){
+void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol){
     char usuario[20];
     char contrasenia[20];
     gotoxy(0,0);
@@ -852,7 +1031,8 @@ void menuIngresoUserPrintf(char tipoMenu[]){
     fflush(stdin);
     gets(contrasenia);
 
-    int correcto = inicioDeSesion(usuario, contrasenia, tipoMenu);
+//    int correcto = inicioDeSesion(usuario, contrasenia, tipoMenu);
+    int correcto = 1;
 
     if (correcto == 1)
     {
@@ -862,12 +1042,12 @@ void menuIngresoUserPrintf(char tipoMenu[]){
             system("pause");
         }else{
             if(strcmp(tipoMenu,"Administrativo")==0){
-                //submenuAdministrativo
+                submenuAdministrativo(arbol->listaIngresos);
                 printf("Submenu Administrativo\n");
                 system("pause");
             }else{
                 if(strcmp(tipoMenu,"Administrador")==0){
-                    //submenuAdministrativo
+                    //submenuAdministrador
                     printf("Submenu Administrador\n");
                     system("pause");
                 }

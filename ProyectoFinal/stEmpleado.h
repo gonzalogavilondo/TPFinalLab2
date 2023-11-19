@@ -32,5 +32,7 @@ int existeDNIEnEmpleados(int dniEmpleado);
 void modificarEstadoEmpleadoXDNI(int estado,int dni);
 int compararPorApellidoYNombre(const void *a, const void *b);
 void ordenarPorApellidoYNombre(stEmpleado arreglo[], int numEmpleados);
+int pasarArchivoAArregloEmpleados(stEmpleado e[],int dimension,int validos);
+int inicioDeSesion(char usuario[],char contrasenia[], char tipoMenu[]);
 
 #endif // STEMPLEADO_H_INCLUDED

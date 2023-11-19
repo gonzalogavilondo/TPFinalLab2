@@ -40,14 +40,21 @@ nodoPractica * crearNodoPractica(stPractica nuevaPractica);
 int tamanioListaPracticas(nodoPractica * listaPracticas);
 nodoPractica * agregarPracticaPpio(nodoPractica * listaPracticas, nodoPractica * nuevoNodo);
 nodoPractica * agregaNodoPracticaOrdenadoXNombre(nodoPractica * listaPracticas, nodoPractica * nuevoNodo);
-int existePractica(nodoPractica * listaPracticas, char nombrePractica[]);
-nodoPractica * darDeALtaPracticas(nodoPractica * listaPracticas);
-
-///Funcion para el alta de PracticaXIngresos
+nodoPractica * buscaPracticaPorNombre(nodoPractica * listaPracticas, char nombreBusqueda[]);
+nodoPractica * darDeAltaPracticas(nodoPractica * listaPracticas);
+/// FUNCIONES PARA LA OPCION 2 Y 3:
+nodoPractica * buscaPracticaPorNroPractica(nodoPractica * listaPracticas, int numeroPractica);
+void manejaModificarOBajaDePractica(nodoPractica * listaPracticas, int variante);
+/// FUNCIONES PARA LA OPCION 4:
+void mostrarUnNodoPractica(nodoPractica * practica);
+void muestraListaPacientes(nodoPractica * listaPracticas);
+/// FUNCIONES PARA LA OPCION 5:
+void guardaListaPracticasEnArchivo(nodoPractica * listaPracticas);
+/// FUNCIONES PARA LA OPCION 6:
+void liberarListaPracticas(nodoPractica * listaPracticas);
+nodoPractica * archivoToListaPracticas(nodoPractica * listaPracticas);
+/// SE USA EN stPracticaXIngreso.c:
 int existePracticaXnroPractica(int nroPracticaBuscar);
-
-
-
 
 
 #endif // STPRACTICA_H_INCLUDED

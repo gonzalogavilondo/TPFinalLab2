@@ -10,13 +10,17 @@ HANDLE wHnd;
 
 int main()
 {
+    ///Inicializamos el arbol a cargar
+    nodoPaciente * arbolPacientes = inicArbolPacientes();
+
     wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
     SMALL_RECT windowSize = {0, 0, 72, 16};
     SetConsoleWindowInfo(wHnd, 1, &windowSize);
 
-    menuPrincipal();
+    arbolPacientes = archivoToArbolPacientes(arbolPacientes);
+    menuPrincipal(arbolPacientes);
 
-    //submenuManejoEmpleados();
+//    submenuManejoEmpleados();
 //
 //    probando la parte de pacientes:
 //    menuProvisorioGestionarPacientes();
@@ -27,7 +31,6 @@ int main()
 //    generarArchivoBinIngresos(ARCHIVO_INGRESOS);
 //    nodoIngreso* ingresos = crearListaIngresos(ARCHIVO_INGRESOS);
 //    mostrarIngreso(ingresos);
-//dsda
-//adsad
+
     return 0;
 }

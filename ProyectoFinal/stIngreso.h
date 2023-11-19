@@ -9,6 +9,8 @@
 #include "stPractica.h"
 #include "stPracticaXIngreso.h"
 #include "stPaciente.h"
+#include "gotoxy.h"
+
 #define ARCHIVO_INGRESOS "ingresos.dat"
 
 typedef struct stIngreso
@@ -47,7 +49,7 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista);
 void obtenerFechaActual(char fechaActual[11]);
 int obtenerNuevoNumeroIngreso();
 stPractica obtenerPracticaLaboratorio();
-nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos, nodoPracticaXIngreso *nuevaPracticaXIngreso);
+nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos);
 
 ///Modificar datos de ingreso
 nodoIngreso *modificarDatosIngreso(nodoIngreso * ingresos);

@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
+#include "gotoxy.h"
 
 typedef struct stPracticaXIngreso
 {
