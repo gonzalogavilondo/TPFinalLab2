@@ -486,6 +486,7 @@ void buscaYDaDeBajaIngreso(nodoIngreso *lista)
     if (ingresoExistente)
     {
         ingresoExistente->ingreso.eliminado = 1;
+        buscaYDaDeBajaPracticaXIngreso(ingresoExistente->listaPracticasXIngreso);
         printf("\n Se dio de baja al ingreso.");
     }
     else
