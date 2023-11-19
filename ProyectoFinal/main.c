@@ -21,9 +21,9 @@ int main()
 //    menuProvisorioGestionarPracticas();
 
     ///Pruebo generar un archivo de ingresos
-    //generarArchivoBinIngresos("ingresos.dat");
-    //nodoIngreso* ingresos = crearListaIngresos("ingresos.dat");
-    //mostrarIngreso(ingresos);
+//    generarArchivoBinIngresos("ingresos.dat");
+//    nodoIngreso* ingresos = crearListaIngresos("ingresos.dat");
+//    mostrarIngreso(ingresos);
 
 
     return 0;

@@ -177,7 +177,7 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista)
 /**
 * Obtener la fecha actual en formato "dd/mm/aaaa"
 **/
-void obtenerFechaActual(char fechaActual[10])
+void obtenerFechaActual(char fechaActual[11])
 {
     time_t t;
     struct tm *tm_info;
@@ -185,7 +185,8 @@ void obtenerFechaActual(char fechaActual[10])
     time(&t);
     tm_info = localtime(&t);
 
-    strftime(fechaActual, 10, "%d/%m/%Y", tm_info);
+    strftime(fechaActual, 11, "%d/%m/%Y", tm_info);
+    fechaActual[11] = '\0'; // Añadir el terminador nulo manualmente
 }
 
 /**

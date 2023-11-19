@@ -14,8 +14,8 @@
 typedef struct stIngreso
 {
     int numeroIngreso;
-    char fechaIngreso[10]; //Por defecto, la actual
-    char fechaRetiro[10];
+    char fechaIngreso[11]; //Por defecto, la actual
+    char fechaRetiro[11];
     int dniPaciente;
     int matriculaProfesional;
     int eliminado;
@@ -44,7 +44,7 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista);
 /**
     FUNCIONES ESPECIFICAS DEL PROBLEMA
 **/
-void obtenerFechaActual(char fechaActual[10]);
+void obtenerFechaActual(char fechaActual[11]);
 int obtenerNuevoNumeroIngreso();
 stPractica obtenerPracticaLaboratorio();
 nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos, nodoPracticaXIngreso *nuevaPracticaXIngreso);
