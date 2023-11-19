@@ -36,7 +36,7 @@ nodoIngreso* crearNodoIngreso(stIngreso registro);
 nodoIngreso* agregarNodoIngreso(nodoIngreso *lista, stIngreso registro);
 nodoIngreso* buscaUltimoListaIngresos(nodoIngreso *lista);
 nodoIngreso* crearListaIngresos(const char *nombreArchivo);
-void mostrarUnNodo(nodoIngreso *aux);
+void mostrarUnNodoIngreso(nodoIngreso *aux);
 void mostrarIngreso(nodoIngreso *lista);
 nodoIngreso* liberarListaIngresos(nodoIngreso *lista);
 nodoIngreso* cargarIngreso(nodoIngreso *lista);
@@ -48,8 +48,16 @@ void obtenerFechaActual(char fechaActual[11]);
 int obtenerNuevoNumeroIngreso();
 stPractica obtenerPracticaLaboratorio();
 nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos, nodoPracticaXIngreso *nuevaPracticaXIngreso);
-void Modificacion_de_ingreso(nodoIngreso *listaIngresos, int numeroIngreso, char nuevaFechaIngreso[10], char nuevaFechaRetiro[10], int nuevaMatriculaProfesional);
-void Baja_de_ingreso(nodoIngreso **listaIngresos, int numeroIngreso);
+
+///Modificar datos de ingreso
+nodoIngreso *modificarDatosIngreso(nodoIngreso * ingresos);
+nodoIngreso *buscaIngreso(nodoIngreso *listaIngresos, int nroIngreso);
+
+
+///Buscar y dar de baja un ingreso
+void buscaYDaDeBajaIngreso(nodoIngreso *lista);
+
+///Adicionales para la funcionalidad
 void generarArchivoBinIngresos(const char *nombreArchivo);
 int existeIngresoXnroIngreso(int nroIngresoBuscar);
 

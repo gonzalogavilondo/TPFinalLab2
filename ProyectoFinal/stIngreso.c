@@ -98,7 +98,7 @@ nodoIngreso* crearListaIngresos(const char *nombreArchivo)
     La función (mostrarIngreso) que permita recorrer y mostrar la lista. La misma debe ser recursiva
 **/
 
-void mostrarUnNodo(nodoIngreso *aux)
+void mostrarUnNodoIngreso(nodoIngreso *aux)
 {
     if (aux != NULL)
     {
@@ -121,7 +121,7 @@ void mostrarIngreso(nodoIngreso *lista)
 {
     if(lista != NULL)
     {
-        mostrarUnNodo(lista);
+        mostrarUnNodoIngreso(lista);
         mostrarIngreso(lista->siguiente);
     }
 }
@@ -388,4 +388,108 @@ int existeIngresoXnroIngreso(int nroIngresoBuscar)
 
     fclose(archivo);
     return 0; // No se encontró el registro
+}
+
+
+nodoIngreso *buscaIngreso(nodoIngreso *listaIngresos, int nroIngreso)
+{
+    nodoIngreso *seg;
+    seg = listaIngresos;
+    while ( (seg != NULL) && (seg->ingreso.numeroIngreso != nroIngreso) )
+    {
+        seg = seg->siguiente;
+    }
+    return seg;
+}
+
+nodoIngreso *modificarDatosIngreso(nodoIngreso *lista)
+{
+    nodoIngreso *ingresoExistente = inicListaIngresos();
+
+    int nroIngreso, matricula;
+    printf("\n Ingrese el numero de ingreso: ");
+    scanf("%d", &nroIngreso);
+
+    ingresoExistente = buscaIngreso(lista, nroIngreso);
+
+    if (ingresoExistente)
+    {
+        char opcion;
+
+        do {
+            system("cls");
+            printf("\n");
+            mostrarUnNodoIngreso(ingresoExistente);
+
+            printf("\n Que dato desea modificar? Ingrese una opcion:");
+            printf("\n\n                1. Fecha de ingreso");
+            printf("\n                2. Fecha de retiro");
+            printf("\n                3. Matricula");
+            opcion = getch();
+            system("cls");
+
+            switch (opcion)
+            {
+                case 49:
+
+                    printf("\n Ingrese la nueva fecha de ingreso: ");
+                    fflush(stdin);
+                    fgets(ingresoExistente->ingreso.fechaIngreso, sizeof(ingresoExistente->ingreso.fechaIngreso), stdin);
+                    break;
+                case 50:
+
+                    printf("\n Ingrese la nueva fecha de retiro: ");
+                    fflush(stdin);
+                    fgets(ingresoExistente->ingreso.fechaRetiro, sizeof(ingresoExistente->ingreso.fechaRetiro), stdin);
+                    break;
+                case 51:
+
+                    printf("\n Ingrese la nueva matricula: ");
+                    scanf("%d", &matricula);
+                    ingresoExistente->ingreso.matriculaProfesional = matricula;
+                    break;
+                default:
+                    // opcion incorrecta, se vuelve a mostrar el menu
+                    break;
+            }
+
+            if (49 <= opcion && opcion <= 51)
+            {
+                system("cls");
+                printf("\n Desea modificar algun otro dato del ingreso? En ese caso presione cualquier tecla, para finalizar presione ESC.");
+                opcion = getch();
+            }
+
+        } while (opcion != ESC);
+
+        system("cls");
+        printf("\n Se ha modificado el ingreso.");
+
+    }
+    else
+    {
+        printf("\n El numero de ingreso cargado no esta registrado en la base de datos.\n");
+    }
+
+    return lista;
+}
+
+
+void buscaYDaDeBajaIngreso(nodoIngreso *lista)
+{
+    int nroIngreso;
+    printf("\n Ingrese el numero de ingreso a dar de baja: ");
+    scanf("%d", &nroIngreso);
+
+    nodoIngreso *ingresoExistente = buscaIngreso(lista, nroIngreso);
+
+    if (ingresoExistente)
+    {
+        ingresoExistente->ingreso.eliminado = 1;
+        printf("\n Se dio de baja al ingreso.");
+    }
+    else
+    {
+        printf("\n El numero de ingreso cargado no esta registrado en la base de datos.\n");
+    }
 }

@@ -14,5 +14,7 @@ void menuBajaDeEmpleado(char tipoEmpleadoEjecuta[]);
 void cabeza(char a[]);
 void imprimirCabecera(char cabecera[]);
 void Rectangulo();
+void modificarPerfilEmpleadoXDNI(char perfil[],int dni);
+void modificarContraseniaEmpleadoXDNI(char contrasenia[],int dni);
 
 #endif // MENU_H_INCLUDED

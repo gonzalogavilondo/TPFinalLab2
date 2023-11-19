@@ -37,4 +37,11 @@ nodoPracticaXIngreso* cargarPracticaXIngreso(nodoPracticaXIngreso *lista, int nr
 **/
 nodoPracticaXIngreso* altaDePracticaXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos);
 
+///Modificacion de PracticaXIngreso
+nodoPracticaXIngreso *buscaPracticaXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos, int nroPractica);
+nodoPracticaXIngreso *modificarDatosPracticaXIngreso(nodoPracticaXIngreso *lista);
+
+///Dar de baja una practica por ingreso
+void buscaYDaDeBajaPracticaXIngreso(nodoPracticaXIngreso *lista);
+
 #endif // STPRACTICAXINGRESO_H_INCLUDED

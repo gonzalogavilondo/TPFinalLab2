@@ -49,12 +49,12 @@
 	<conio.h>
 	<string.h>
 
-1700406684 source:e:\tpfinallab2\proyectofinal\stpracticaxingreso.c
+1700413094 source:e:\tpfinallab2\proyectofinal\stpracticaxingreso.c
 	"stPracticaXIngreso.h"
 	"stIngreso.h"
 	"stPractica.h"
 
-1700405602 e:\tpfinallab2\proyectofinal\stpracticaxingreso.h
+1700413074 e:\tpfinallab2\proyectofinal\stpracticaxingreso.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -70,7 +70,7 @@
 	<string.h>
 	"stEmpleado.h"
 
-1700408560 source:e:\tpfinallab2\proyectofinal\main.c
+1700409910 source:e:\tpfinallab2\proyectofinal\main.c
 	"stIngreso.h"
 	"stEmpleado.h"
 	"stPractica.h"
@@ -79,7 +79,7 @@
 	"menu.h"
 	<windows.h>
 
-1700407493 e:\tpfinallab2\proyectofinal\stingreso.h
+1700412591 e:\tpfinallab2\proyectofinal\stingreso.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -90,7 +90,7 @@
 	"stPracticaXIngreso.h"
 	"stPaciente.h"
 
-1700408170 source:e:\tpfinallab2\proyectofinal\stingreso.c
+1700412538 source:e:\tpfinallab2\proyectofinal\stingreso.c
 	"stIngreso.h"
 
 1699904016 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\main.c
@@ -195,7 +195,7 @@
 	<stdlib.h>
 	<windows.h>
 
-1700350871 source:e:\tpfinallab2\proyectofinal\menu.c
+1700413338 source:e:\tpfinallab2\proyectofinal\menu.c
 	"menu.h"
 
 1700002249 source:c:\users\user\documents\tpfinallab2\proyectofinal\gotoxy.c
@@ -268,7 +268,7 @@
 	<string.h>
 	"stEmpleado.h"
 
-1700010938 e:\tpfinallab2\proyectofinal\menu.h
+1700413411 e:\tpfinallab2\proyectofinal\menu.h
 	<ctype.h>
 	<stdio.h>
 	<stdlib.h>

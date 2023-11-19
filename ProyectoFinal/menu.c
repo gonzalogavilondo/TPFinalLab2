@@ -1,57 +1,5 @@
 #include "menu.h"
 
-
-///PRINTF MENU PRINCIPAL
-
-void submenuManejoEmpleados() {
-    char control = 's';;
-    int opcion;
-
-    do {
-        opcion = 0;
-        system("cls");
-        Rectangulo();
-        gotoxy(15, 1);
-        cabeza("Manejo de empleados");
-        gotoxy(15, 4);
-        printf("Que funcion desea ejecutar?\n");
-        gotoxy(15, 5);
-        printf("(1) ALTA\n");
-        gotoxy(15, 6);
-        printf("(2) BAJA\n");
-        gotoxy(15, 7);
-        printf("(3) MODIFICACION\n");
-        gotoxy(15, 8);
-        printf("(4) CONSULTA\n");
-        gotoxy(15, 9);
-        printf("(5) LISTADO\n");
-        gotoxy(15, 10);
-        printf("(6) Volver\n");
-        gotoxy(15, 11);
-        fflush(stdin);
-        scanf("%i", &opcion);
-        system("cls");
-
-        switch (opcion) {
-            case 1: menuAltaDeEmpleado("Administrador"); break;
-            case 2: menuBajaDeEmpleado("Administrador"); break;
-            case 3: subMenuModificacionDeEmpleado("Administrador"); break;
-            case 4: subMenuConsultaDeEmpleado("Administrador"); break;
-
-            case 6:
-                control = 'n';
-                break;
-
-            default:
-                control = 'n';
-                break;
-
-        }
-
-    } while (control == 's' || control == 'S');
-
-    system("cls");
-}
 void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
     stEmpleado nuevoEmpleado;
     char opcion = 0;
@@ -291,7 +239,7 @@ void subMenuModificacionDeEmpleado(char tipoEmpleadoEjecuta[]){
     char control;
     int opcion;
     int dniModificar;
-    char op;
+    //char op;
     int numeroPerfil = 0;
 
     do
@@ -347,7 +295,7 @@ void subMenuModificacionDeEmpleado(char tipoEmpleadoEjecuta[]){
 
 
                     char ModificarGenerico[30];
-                    int generico=0;
+                    //int generico=0;
                     int modificarDni=0;
                     system("cls");
                     Rectangulo();
@@ -404,7 +352,7 @@ void subMenuModificacionDeEmpleado(char tipoEmpleadoEjecuta[]){
                         printf("El nuevo usuario:");
                         fflush(stdin);
                         gotoxy(19, 6);
-                        scanf("%s", &ModificarGenerico);
+                        gets(ModificarGenerico);
 
 
                         if (existeUsuarioEnEmpleados(ModificarGenerico) != 0)
@@ -780,6 +728,58 @@ void Rectangulo(){
 
 }
 
+
+///PRINTF MENU PRINCIPAL
+
+void submenuManejoEmpleados() {
+    char control = 's';;
+    int opcion;
+
+    do {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Manejo de empleados");
+        gotoxy(15, 4);
+        printf("Que funcion desea ejecutar?\n");
+        gotoxy(15, 5);
+        printf("(1) ALTA\n");
+        gotoxy(15, 6);
+        printf("(2) BAJA\n");
+        gotoxy(15, 7);
+        printf("(3) MODIFICACION\n");
+        gotoxy(15, 8);
+        printf("(4) CONSULTA\n");
+        gotoxy(15, 9);
+        printf("(5) LISTADO\n");
+        gotoxy(15, 10);
+        printf("(6) Volver\n");
+        gotoxy(15, 11);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        switch (opcion) {
+            case 1: menuAltaDeEmpleado("Administrador"); break;
+            case 2: menuBajaDeEmpleado("Administrador"); break;
+            case 3: subMenuModificacionDeEmpleado("Administrador"); break;
+            case 4: subMenuConsultaDeEmpleado("Administrador"); break;
+
+            case 6:
+                control = 'n';
+                break;
+
+            default:
+                control = 'n';
+                break;
+
+        }
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+}
 
 
 

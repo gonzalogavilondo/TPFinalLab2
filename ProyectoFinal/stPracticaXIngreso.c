@@ -212,3 +212,99 @@ nodoPracticaXIngreso* altaDePracticaXIngreso(nodoPracticaXIngreso *listaPractica
 
     return listaPracticaXIngresos;
 }
+
+nodoPracticaXIngreso *buscaPracticaXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos, int nroPractica)
+{
+    nodoPracticaXIngreso *seg;
+    seg = listaPracticaXIngresos;
+    while ( (seg != NULL) && (seg->practicaXIngreso.nroPractica != nroPractica) )
+    {
+        seg = seg->siguiente;
+    }
+    return seg;
+}
+
+nodoPracticaXIngreso *modificarDatosPracticaXIngreso(nodoPracticaXIngreso *lista)
+{
+    nodoPracticaXIngreso *practicaXingresoExistente = inicListaPracticaXIngresos();
+
+    int nroPractica;
+    printf("\n Ingrese el numero de practica: ");
+    scanf("%d", &nroPractica);
+
+    practicaXingresoExistente = buscaPracticaXIngreso(lista, nroPractica);
+
+    if (practicaXingresoExistente)
+    {
+        char opcion;
+
+        do {
+            system("cls");
+            printf("\n");
+            mostrarUnNodoPracticaXIngreso(practicaXingresoExistente);
+
+            printf("\n Que dato desea modificar? Ingrese una opcion:");
+            printf("\n\n                1. Numero de practica");
+            printf("\n                2. Resultado");
+            opcion = getch();
+            system("cls");
+
+            switch (opcion)
+            {
+                case 49:
+
+                    printf("\n Ingrese el nuevo numero de practica: ");
+                    scanf("%d", &nroPractica);
+                    practicaXingresoExistente->practicaXIngreso.nroPractica = nroPractica;
+                    break;
+                case 50:
+
+                    printf("\n Ingrese un nuevo resultado: ");
+                    fflush(stdin);
+                    fgets(practicaXingresoExistente->practicaXIngreso.resultado, sizeof(practicaXingresoExistente->practicaXIngreso.resultado), stdin);
+                    break;
+                default:
+                    // opcion incorrecta, se vuelve a mostrar el menu
+                    break;
+            }
+
+            if (49 <= opcion && opcion <= 50)
+            {
+                system("cls");
+                printf("\n Desea modificar algun otro dato de la practica por ingreso? En ese caso presione cualquier tecla, para finalizar presione ESC.");
+                opcion = getch();
+            }
+
+        } while (opcion != ESC);
+
+        system("cls");
+        printf("\n Se ha modificado  la practica por ingreso.");
+
+    }
+    else
+    {
+        printf("\n El numero de practica cargado no esta registrado en la base de datos dentro de practica por ingreso.\n");
+    }
+
+    return lista;
+}
+
+
+void buscaYDaDeBajaPracticaXIngreso(nodoPracticaXIngreso *lista)
+{
+    int nroPractica;
+    printf("\n Ingrese el numero de la practica a dar de baja dentro de los ingresos: ");
+    scanf("%d", &nroPractica);
+
+    nodoPracticaXIngreso *practicaXingresoExistente = buscaPracticaXIngreso(lista, nroPractica);
+
+    if (practicaXingresoExistente)
+    {
+        practicaXingresoExistente->practicaXIngreso.eliminado = 1;
+        printf("\n Se dio de baja al ingreso.");
+    }
+    else
+    {
+        printf("\n El numero de ingreso cargado no esta registrado en la base de datos.\n");
+    }
+}
