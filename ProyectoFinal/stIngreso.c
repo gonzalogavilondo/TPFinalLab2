@@ -248,23 +248,6 @@ nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos, nodoPracticaXIngreso *nue
     return listaIngresos;
 }
 
-nodoIngreso *buscarIngreso(nodoIngreso *lista, int nroIngreso)
-{
-    nodoIngreso *seg = lista;
-    nodoIngreso *ingresoEncontrado = NULL;
-    int flag = 0;
-        while(seg!= NULL && flag == 0)
-        {
-            if(seg->ingreso.numeroIngreso == nroIngreso)
-            {
-                ingresoEncontrado = seg;
-                flag = 1;
-            }
-            seg = seg->siguiente;
-        }
-    return ingresoEncontrado;
-}
-
 /**
 * Función para modificar fechas y matrícula del solicitante de un ingreso
 **/
@@ -367,11 +350,12 @@ void generarArchivoBinIngresos(const char *nombreArchivo)
     {
         ingresoNuevo = cargarIngreso(ingresoNuevo);
 
-        fwrite(ingresoNuevo,sizeof(nodoIngreso), 1, archivo);
+        fwrite(&(ingresoNuevo->ingreso), sizeof(stIngreso), 1, archivo); // Escribir solo el contenido del ingreso
 
         printf("Carga otro ingreso (s/n): \n");
         fflush(stdin);
         scanf("%c",&continua);
+        free(ingresoNuevo); // Liberar el nodo después de escribirlo en el archivo
     }
 
     /// Cerrar el archivo
@@ -379,6 +363,7 @@ void generarArchivoBinIngresos(const char *nombreArchivo)
 
     printf("Datos guardados en el archivo '%s'.\n", nombreArchivo);
 }
+
 
 int existeIngresoXnroIngreso(int nroIngresoBuscar)
 {

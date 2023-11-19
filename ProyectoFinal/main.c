@@ -10,10 +10,10 @@ HANDLE wHnd;
 
 int main()
 {
-    wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
-    SMALL_RECT windowSize = {0, 0, 72, 16};
-    SetConsoleWindowInfo(wHnd, 1, &windowSize);
-    submenuManejoEmpleados();
+//    wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
+//    SMALL_RECT windowSize = {0, 0, 72, 16};
+//    SetConsoleWindowInfo(wHnd, 1, &windowSize);
+//    submenuManejoEmpleados();
 //
 //    probando la parte de pacientes:
 //    menuProvisorioGestionarPacientes();
@@ -21,9 +21,9 @@ int main()
 //    menuProvisorioGestionarPracticas();
 
     ///Pruebo generar un archivo de ingresos
-//    generarArchivoBinIngresos("ingresos.dat");
-//    nodoIngreso* ingresos = crearListaIngresos("ingresos.dat");
-//    mostrarIngreso(ingresos);
+    generarArchivoBinIngresos(ARCHIVO_INGRESOS);
+    nodoIngreso* ingresos = crearListaIngresos(ARCHIVO_INGRESOS);
+    mostrarIngreso(ingresos);
 
 
     return 0;
