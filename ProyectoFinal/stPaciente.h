@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
-//#include "stIngreso.h"
 
 
 /// Constantes:
@@ -65,5 +64,9 @@ void guardaArbolPacientesEnArchivo(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 6:
 void liberarArbolPacientes(nodoPaciente * arbolPacientes);
 nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes);
+
+///FUNCION QUE USA INGRESOS
+int existePacienteXDNI(int dniBuscar);
+
 
 #endif // STPACIENTE_H_INCLUDED

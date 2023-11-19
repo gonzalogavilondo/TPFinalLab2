@@ -526,7 +526,31 @@ nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes){
     return arbolPacientes;
 }
 
+// Función para buscar un registro por DNI en el archivo
+int existePacienteXDNI(int dniBuscar)
+{
+    FILE *archivo = fopen(ARCHIVO_PACIENTES, "rb");
 
+    if (archivo == NULL)
+    {
+        perror("Error al abrir el archivo");
+        return 0; // Indicar que no se encontró debido a un error
+    }
+
+    stPaciente pacienteActual;
+
+    while (fread(&pacienteActual, sizeof(stPaciente), 1, archivo) == 1)
+    {
+        if (pacienteActual.dni == dniBuscar)
+        {
+            fclose(archivo);
+            return 1; // Se encontró el registro con el DNI dado
+        }
+    }
+
+    fclose(archivo);
+    return 0; // No se encontró el registro con el DNI dado
+}
 
 
 

@@ -33,7 +33,7 @@ nodoIngreso* crearNodoIngreso(stIngreso registro)
 }
 
 /**
-    La función (agregarNodoIngreso), que reciba la lista, un registro del tipo stIngreso y un empleado para que agregue ese
+    La función (agregarNodoIngreso), que reciba la lista, un registro del tipo stIngreso
     nodo al final de la lista. Retornar la lista.
 **/
 nodoIngreso* agregarNodoIngreso(nodoIngreso *lista, stIngreso registro)
@@ -47,14 +47,14 @@ nodoIngreso* agregarNodoIngreso(nodoIngreso *lista, stIngreso registro)
     }
     else
     {
-        nodoIngreso *ultimo = buscaUltimoLista(lista);
+        nodoIngreso *ultimo = buscaUltimoListaIngresos(lista);
         ultimo->siguiente = nuevo;
     }
 
     return lista;
 }
 
-nodoIngreso* buscaUltimoLista(nodoIngreso *lista)
+nodoIngreso* buscaUltimoListaIngresos(nodoIngreso *lista)
 {
     nodoIngreso *seg = lista;
     if(seg != NULL)
@@ -131,7 +131,7 @@ void mostrarIngreso(nodoIngreso *lista)
     la cabecera no quede en NULL)
 **/
 
-nodoIngreso* liberarLista(nodoIngreso *lista)
+nodoIngreso* liberarListaIngresos(nodoIngreso *lista)
 {
     nodoIngreso *proximo;
     nodoIngreso *seg = lista;
@@ -147,18 +147,15 @@ nodoIngreso* liberarLista(nodoIngreso *lista)
 
 /**
     La función (cargarIngreso), la cual recibirá la lista y solicitará al usuario los datos del pedido para finalmente
-    agregar ese pedido a la lista y retornar la lista. Modularizar de ser conveniente.
+    agregar ese pedido a la lista y retornar la nueva lista con el nuevo ingreso.
 **/
 
 nodoIngreso* cargarIngreso(nodoIngreso *lista)
 {
     stIngreso registro;
 
-    printf("Ingrese el numero de ingreso: ");
-    scanf("%d", &registro.numeroIngreso);
-    printf("Ingrese la fecha de ingreso: ");
-    fflush(stdin);
-    gets(registro.fechaIngreso);
+    registro.numeroIngreso = obtenerNuevoNumeroIngreso(); //Numero de ingreso
+    obtenerFechaActual(registro.fechaIngreso);  // Obtener la fecha actual y asignarla a nuevoIngreso->ingreso.fechaIngreso
     printf("Ingrese la fecha de retiro: ");
     fflush(stdin);
     gets(registro.fechaRetiro);
@@ -166,13 +163,11 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista)
     scanf("%d", &registro.dniPaciente);
     printf("Ingrese la matricula profesional: ");
     scanf("%d", &registro.matriculaProfesional);
-    printf("Ingrese si esta eliminado: "); //Esto va?
-    scanf("%d", &registro.eliminado);
+    registro.eliminado = 0;
     lista = agregarNodoIngreso(lista, registro); ///Finalmente agrego el pedido a la lista
 
     return lista;
 }
-
 
 
 /**************************
@@ -216,51 +211,59 @@ stPractica obtenerPracticaLaboratorio()
 }
 
 /**
-* Obtener un nuevo ID para una práctica asociada a un ingreso (solo como ejemplo)
-**/
-int obtenerNuevoIdPracticaXIngreso()
-{
-    static int contador = 1;
-    return contador++;
-}
-
-/**
 * Función para dar de alta un ingreso con al menos una práctica de laboratorio
 **/
-void Alta_de_ingreso(nodoIngreso **listaIngresos, stIngreso paciente, stEmpleado profesional)
+nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos, nodoPracticaXIngreso *nuevaPracticaXIngreso)
 {
+    int dni;
+    char opcion = 0;
     // Verificar existencia del paciente (Buscar en el archivo de pacientes)
-    // ...
+    do
+    {
+        printf("\n Ingrese el DNI del paciente a ingresar: ");
+        scanf("%d", &dni);
+        if(!existePacienteXDNI(dni))
+        {
+            printf("\n El paciente no existe en la base de datos.\n");
+        }
+        else
+        {
+            // Crear un nuevo nodo de ingreso y se agrega a la lista
+            listaIngresos = cargarIngreso(listaIngresos);
 
-    // Crear un nuevo nodo de ingreso
-    nodoIngreso *nuevoIngreso = crearNodoIngreso(paciente);
-    nuevoIngreso->ingreso.numeroIngreso = obtenerNuevoNumeroIngreso();
+            // Crear al menos una práctica de laboratorio asociada al ingreso
+            nuevaPracticaXIngreso = altaDePracticaXIngreso(nuevaPracticaXIngreso);
 
-    // Obtener la fecha actual y asignarla a nuevoIngreso->ingreso.fechaIngreso
-    obtenerFechaActual(nuevoIngreso->ingreso.fechaIngreso);
+           // Enlazar la nueva práctica al ingreso
+            listaIngresos->listaPracticasXIngreso = nuevaPracticaXIngreso;
 
-    nuevoIngreso->ingreso.fechaRetiro[0] = '\0';  // Inicializar fecha de retiro
-    nuevoIngreso->ingreso.dniPaciente = paciente.dniPaciente;
-    nuevoIngreso->ingreso.matriculaProfesional = profesional.dni;
-    nuevoIngreso->ingreso.eliminado = 0;  // No eliminado
+            printf("Ingreso registrado con éxito.\n");
+        }
+        printf("\n\n Para cargar otro ingreso presione cualquier tecla, ESC para finalizar...");
+        opcion = getch();
+        system("cls");
+    }while (opcion != ESC);
 
-//    // Crear al menos una práctica de laboratorio asociada al ingreso
-//    stPracticaXIngreso *nuevaPracticaXIngreso = (stPracticaXIngreso *)malloc(sizeof(stPracticaXIngreso));
-//    nuevaPracticaXIngreso->nroIngreso = nuevoIngreso->ingreso.numeroIngreso;
-//    nuevaPracticaXIngreso->nroPractica = obtenerPracticaLaboratorio().nroPractica;  // Obtener el número de práctica (solo como ejemplo)
-//    nuevaPracticaXIngreso->eliminado = 0;  // No eliminado
-//    nuevaPracticaXIngreso->resultado[0] = '\0';  // Inicializar resultado
-//    nuevaPracticaXIngreso->siguiente = NULL;
-//
-//    // Enlazar la nueva práctica al ingreso
-//    nuevoIngreso->listaPracticasXIngreso = nuevaPracticaXIngreso;
-//
-//    // Enlazar el nuevo ingreso a la lista de ingresos
-//    nuevoIngreso->siguiente = *listaIngresos;
-//    *listaIngresos = nuevoIngreso;
-
-    printf("Ingreso de laboratorio registrado con éxito.\n");
+    return listaIngresos;
 }
+
+nodoIngreso *buscarIngreso(nodoIngreso *lista, int nroIngreso)
+{
+    nodoIngreso *seg = lista;
+    nodoIngreso *ingresoEncontrado = NULL;
+    int flag = 0;
+        while(seg!= NULL && flag == 0)
+        {
+            if(seg->ingreso.numeroIngreso == nroIngreso)
+            {
+                ingresoEncontrado = seg;
+                flag = 1;
+            }
+            seg = seg->siguiente;
+        }
+    return ingresoEncontrado;
+}
+
 /**
 * Función para modificar fechas y matrícula del solicitante de un ingreso
 **/
@@ -374,4 +377,29 @@ void generarArchivoBinIngresos(const char *nombreArchivo)
     fclose(archivo);
 
     printf("Datos guardados en el archivo '%s'.\n", nombreArchivo);
+}
+
+int existeIngresoXnroIngreso(int nroIngresoBuscar)
+{
+    FILE *archivo = fopen(ARCHIVO_INGRESOS, "rb");
+
+    if (archivo == NULL)
+    {
+        perror("Error al abrir el archivo");
+        return 0; // Indicar que no se encontró debido a un error
+    }
+
+    stIngreso ingresoActual;
+
+    while (fread(&ingresoActual, sizeof(stIngreso), 1, archivo) == 1)
+    {
+        if (ingresoActual.numeroIngreso == nroIngresoBuscar)
+        {
+            fclose(archivo);
+            return 1; // Se encontró el ingreso con el nro de ingreso
+        }
+    }
+
+    fclose(archivo);
+    return 0; // No se encontró el registro
 }

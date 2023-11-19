@@ -185,8 +185,30 @@ nodoPractica * darDeALtaPracticas(nodoPractica * listaPracticas){
     return listaPracticas;
 }
 
+int existePracticaXnroPractica(int nroPracticaBuscar)
+{
+    FILE *archivo = fopen(ARCHIVO_PRACTICAS, "rb");
 
+    if (archivo == NULL)
+    {
+        perror("Error al abrir el archivo");
+        return 0; // Indicar que no se encontró debido a un error
+    }
 
+    stPractica practicaActual;
+
+    while (fread(&practicaActual, sizeof(stPractica), 1, archivo) == 1)
+    {
+        if (practicaActual.nroPractica == nroPracticaBuscar)
+        {
+            fclose(archivo);
+            return 1; // Se encontró la practica con el nro de practica
+        }
+    }
+
+    fclose(archivo);
+    return 0; // No se encontró el registro
+}
 
 
 

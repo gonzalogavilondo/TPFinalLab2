@@ -43,7 +43,8 @@ nodoPractica * agregaNodoPracticaOrdenadoXNombre(nodoPractica * listaPracticas, 
 int existePractica(nodoPractica * listaPracticas, char nombrePractica[]);
 nodoPractica * darDeALtaPracticas(nodoPractica * listaPracticas);
 
-
+///Funcion para el alta de PracticaXIngresos
+int existePracticaXnroPractica(int nroPracticaBuscar);
 
 
 

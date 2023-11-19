@@ -9,8 +9,8 @@
 #include "stPractica.h"
 #include "stPracticaXIngreso.h"
 #include "stPaciente.h"
+#define ARCHIVO_INGRESOS "ingresos.dat"
 
-#define INGRESOS
 typedef struct stIngreso
 {
     int numeroIngreso;
@@ -24,7 +24,7 @@ typedef struct stIngreso
 typedef struct nodoIngreso
 {
     stIngreso ingreso;
-    struct nodoPracticaXIngreso *listaPracticasXIngreso;
+    nodoPracticaXIngreso *listaPracticasXIngreso;
     struct nodoIngreso *siguiente;
 } nodoIngreso;
 
@@ -34,11 +34,11 @@ typedef struct nodoIngreso
 nodoIngreso* inicLista();
 nodoIngreso* crearNodoIngreso(stIngreso registro);
 nodoIngreso* agregarNodoIngreso(nodoIngreso *lista, stIngreso registro);
-nodoIngreso* buscaUltimoLista(nodoIngreso *lista);
+nodoIngreso* buscaUltimoListaIngresos(nodoIngreso *lista);
 nodoIngreso* crearListaIngresos(const char *nombreArchivo);
 void mostrarUnNodo(nodoIngreso *aux);
 void mostrarIngreso(nodoIngreso *lista);
-nodoIngreso* liberarLista(nodoIngreso *lista);
+nodoIngreso* liberarListaIngresos(nodoIngreso *lista);
 nodoIngreso* cargarIngreso(nodoIngreso *lista);
 
 /**
@@ -47,11 +47,11 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista);
 void obtenerFechaActual(char fechaActual[10]);
 int obtenerNuevoNumeroIngreso();
 stPractica obtenerPracticaLaboratorio();
-int obtenerNuevoIdPracticaXIngreso();
-void Alta_de_ingreso(nodoIngreso **listaIngresos, stIngreso paciente, stEmpleado profesional);
+nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos, nodoPracticaXIngreso *nuevaPracticaXIngreso);
 void Modificacion_de_ingreso(nodoIngreso *listaIngresos, int numeroIngreso, char nuevaFechaIngreso[10], char nuevaFechaRetiro[10], int nuevaMatriculaProfesional);
 void Baja_de_ingreso(nodoIngreso **listaIngresos, int numeroIngreso);
 void generarArchivoBinIngresos(const char *nombreArchivo);
+int existeIngresoXnroIngreso(int nroIngresoBuscar);
 
 
 #endif // STINGRESO_H_INCLUDED
