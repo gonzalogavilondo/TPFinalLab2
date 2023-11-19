@@ -53,19 +53,21 @@ nodoPaciente * encontrarMinimoDni(nodoPaciente* arbolPacientes);
 nodoPaciente * eliminarNodoArbolPacientes(nodoPaciente * arbolPacientes, int dniPaciente);
 nodoPaciente * buscaPaciente(nodoPaciente * arbolPacientes, int dni);
 void textoDniNoEnBaseDeDatos();
+nodoPaciente * textoIngreseDNILuegoBuscaPaciente(nodoPaciente * arbolPacientes, int * dni);
 nodoPaciente * modificarDatosPaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 3:
-void buscaYDaDeBajaPaciente(nodoPaciente * arbolPacientes);
+void darDeBajaUnPaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 4:
-void inorderPacientes(nodoPaciente * arbolPacientes);
+void buscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 5:
+void inorderPacientes(nodoPaciente * arbolPacientes);
+/// FUNCIONES PARA LA OPCION 6:
 void imprimePacientesInorderEnArchivo(nodoPaciente * arbolPacientes, FILE * archi);
 void guardaArbolPacientesEnArchivo(nodoPaciente * arbolPacientes);
-/// FUNCIONES PARA LA OPCION 6:
+/// FUNCIONES PARA LA OPCION 7:
 void liberarArbolPacientes(nodoPaciente * arbolPacientes);
 nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes);
-
-///FUNCION QUE USA INGRESOS
+///FUNCION QUE USA INGRESOS:
 int existePacienteXDNI(int dniBuscar);
 
 
