@@ -179,11 +179,15 @@ int pasarArchivoAListaEmpleados(stEmpleado e[],int dimension,int validos){
     }
     return i;
 }
-int compararPorApellidoNombre(const void *a, const void *b) {
-    const struct stEmpleado *empleadoA = (const struct stEmpleado *)a;
-    const struct stEmpleado *empleadoB = (const struct stEmpleado *)b;
+
+// Ordenar el arreglo
+int compararPorApellidoYNombre(const void *a, const void *b) {
+    const stEmpleado *empleadoA = (const stEmpleado*)a;
+    const stEmpleado *empleadoB = (const stEmpleado*)b;
+
     return strcmp(empleadoA->apellidoYNombre, empleadoB->apellidoYNombre);
 }
-void ordenarEmpleadoPorApellidoYNombre(struct stEmpleado *empleados, size_t cantidadEmpleados) {
-    qsort(empleados, cantidadEmpleados, sizeof(struct stEmpleado), compararPorApellidoNombre);
+
+void ordenarPorApellidoYNombre(stEmpleado arreglo[], int numEmpleados) {
+    qsort(arreglo, numEmpleados, sizeof(stEmpleado), compararPorApellidoYNombre);
 }

@@ -154,7 +154,7 @@ void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
 
 
         }else{
-            opcion = 'S';
+            opcion = 'N';
         }
     }while (opcion != 'S');
 }
@@ -228,7 +228,7 @@ void menuBajaDeEmpleado(char tipoEmpleadoEjecuta[]) {
             }
         } while (opcion != 'S' && opcion != 'N');
         }else{
-            opcion = 'S';
+            opcion = 'N';
         }
      }while (opcion == 'S');
 
@@ -564,7 +564,7 @@ void subMenuConsultaDeEmpleado(char tipoEmpleadoEjecuta[]){
             }
         } while (opcion != 'S' && opcion != 'N');
         }else{
-            opcion = 'S';
+            opcion = 'N';
         }
      }while (opcion == 'S');
 
