@@ -569,7 +569,7 @@ void subMenuConsultaDeEmpleado(char tipoEmpleadoEjecuta[]){
      }while (opcion == 'S');
 
 }
-/*
+
 void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
 
     char control;
@@ -588,7 +588,7 @@ void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
         gotoxy(15,7);
         printf("(1)Ordenado por Apellido y nombre");
         gotoxy(15,8);
-        printf("(2)Ordenado por DNI");
+        /*printf("(2)Ordenado por DNI");
         gotoxy(15,9);
         printf("(3)Ordenado por Usuario");
         gotoxy(15,10);
@@ -597,32 +597,42 @@ void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
         printf("(5)Selccionar un perfil");
         gotoxy(15,12);
         printf("(6)Seleccionar un estado");
-        gotoxy(15,13);
-        printf("(7)VOLVER");
-        gotoxy(15,14);
+        gotoxy(15,13);*/
+        printf("(2)VOLVER");
+        gotoxy(15,9);
         fflush(stdin);
         scanf("%d", &opcion);
         system("cls");
 
+        stEmpleado arregloEmpleados[1000];
+        int validos = pasarArchivoAArregloEmpleados(arregloEmpleados, 1000, 0);
+        int i;
 
-        char ModificarGenerico[30];
-        int generico=0;
-        int modificarDni=0;
-        system("cls");
-        Rectangulo();
-        gotoxy(1,1);
-        cabeza("MENU MODIFICACION EMPLEADO");
-        gotoxy(1,3);
+
+
+
 
         switch(opcion)
         {
         case 1:
-            listaEmpleadosXApellidoYNombre();
+            i = 0;
+            gotoxy(1,1);
+            printf("LISTADO POR APELIIDO Y NOMBRE");
+            gotoxy(1,3);
+            ordenarPorApellidoYNombre(arregloEmpleados,validos);
+            while(i < validos)
+            {
+                mostrarEmpleado(arregloEmpleados[i]);
+                i++;
+            }
+
+            system("pause");
+
             break;
         case 2:
-            listaEmpleadosXDNI();
+            opcion = 2;
             break;
-        case 3:
+       /* case 3:
             listaEmpleadosXUsuario();
             break;
         case 4:
@@ -639,7 +649,7 @@ void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
             break;
         case 8:
 
-            break;
+            break;*/
 
 
         default:
@@ -648,7 +658,7 @@ void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
         }
 
 
-    } while (opcion != 8);
+    } while (opcion != 2);
 
     do
     {
@@ -665,7 +675,6 @@ void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
     }
     while(control == 'S');
 }
-*/
 
 /// ////////////////////////////////////////////////////////////////////////////////////////////////
 ///LOGUEO Empleado
@@ -729,7 +738,6 @@ void Rectangulo(){
 }
 
 
-///PRINTF MENU PRINCIPAL
 
 void submenuManejoEmpleados() {
     char control = 's';;
@@ -765,6 +773,7 @@ void submenuManejoEmpleados() {
             case 2: menuBajaDeEmpleado("Administrador"); break;
             case 3: subMenuModificacionDeEmpleado("Administrador"); break;
             case 4: subMenuConsultaDeEmpleado("Administrador"); break;
+            case 5: subMenuListadosDeEmpleado("Administrador"); break;
 
             case 6:
                 control = 'n';
@@ -781,5 +790,97 @@ void submenuManejoEmpleados() {
     system("cls");
 }
 
+///MENU PRINCIPAL
+void menuPrincipal() {
+    char control = 's';;
+    int opcion;
+    char empleadoEjecuta[20];
 
+    do {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Menu principal");
+        gotoxy(15, 4);
+        printf("Como desea ingresar?\n");
+        gotoxy(15, 5);
+        printf("(1) TECNICO DE LABORATORIO\n");
+        gotoxy(15, 6);
+        printf("(2) ADMINISTRATIVO\n");
+        gotoxy(15, 7);
+        printf("(3) ADMINISTRADOR\n");
+        gotoxy(15, 8);
+        printf("(4) SALIR\n");
+        gotoxy(15, 9);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
 
+        switch (opcion) {
+            case 1: strcpy(empleadoEjecuta, "Tecnico");
+                    menuIngresoUserPrintf(empleadoEjecuta); break;
+            case 2: strcpy(empleadoEjecuta, "Administrativo");
+                    menuIngresoUserPrintf(empleadoEjecuta); break;
+            case 3: strcpy(empleadoEjecuta, "Administrador");
+                    menuIngresoUserPrintf(empleadoEjecuta); break;
+
+            case 4:
+                control = 'n';
+                break;
+
+            default:
+                control = 'n';
+                break;
+
+        }
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+}
+///PRINTF INGRESO (EMPLEADO)
+void menuIngresoUserPrintf(char tipoMenu[]){
+    char usuario[20];
+    char contrasenia[20];
+    gotoxy(0,0);
+    printf("Inicio de sesion!");
+    gotoxy(0,2);
+    printf("Usuario:");
+    gotoxy(0,3);
+    printf("Contrasenia:");
+    gotoxy(13,2);
+    fflush(stdin);
+    gets(usuario);
+    gotoxy(13,3);
+    fflush(stdin);
+    gets(contrasenia);
+
+    int correcto = inicioDeSesion(usuario, contrasenia, tipoMenu);
+
+    if (correcto == 1)
+    {
+        if(strcmp(tipoMenu,"Tecnico")==0){
+            //submenuTecnico
+            printf("Submenu Tecnico\n");
+            system("pause");
+        }else{
+            if(strcmp(tipoMenu,"Administrativo")==0){
+                //submenuAdministrativo
+                printf("Submenu Administrativo\n");
+                system("pause");
+            }else{
+                if(strcmp(tipoMenu,"Administrador")==0){
+                    //submenuAdministrativo
+                    printf("Submenu Administrador\n");
+                    system("pause");
+                }
+            }
+        }
+    }else{
+        gotoxy(0,5);
+        printf("Error inicio de sesion\n");
+        gotoxy(0,6);
+        system("pause");
+    }
+}
