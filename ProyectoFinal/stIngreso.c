@@ -219,120 +219,28 @@ nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos, nodoPracticaXIngreso *nue
     int dni;
     char opcion = 0;
     // Verificar existencia del paciente (Buscar en el archivo de pacientes)
-    do
+    printf("\n Ingrese el DNI del paciente a ingresar: ");
+    scanf("%d", &dni);
+    if(!existePacienteXDNI(dni))
     {
-        printf("\n Ingrese el DNI del paciente a ingresar: ");
-        scanf("%d", &dni);
-        if(!existePacienteXDNI(dni))
-        {
-            printf("\n El paciente no existe en la base de datos.\n");
-        }
-        else
-        {
-            // Crear un nuevo nodo de ingreso y se agrega a la lista
-            listaIngresos = cargarIngreso(listaIngresos);
+        printf("\n El paciente no existe en la base de datos.\n");
+    }
+    else
+    {
+        // Crear un nuevo nodo de ingreso y se agrega a la lista
+        listaIngresos = cargarIngreso(listaIngresos);
 
-            // Crear al menos una práctica de laboratorio asociada al ingreso
-            nuevaPracticaXIngreso = altaDePracticaXIngreso(nuevaPracticaXIngreso);
+        // Crear al menos una práctica de laboratorio asociada al ingreso
+        nuevaPracticaXIngreso = altaDePracticaXIngreso(nuevaPracticaXIngreso);
 
-           // Enlazar la nueva práctica al ingreso
-            listaIngresos->listaPracticasXIngreso = nuevaPracticaXIngreso;
+       // Enlazar la nueva práctica al ingreso
+        listaIngresos->listaPracticasXIngreso = nuevaPracticaXIngreso;
 
-            printf("Ingreso registrado con éxito.\n");
-        }
-        printf("\n\n Para cargar otro ingreso presione cualquier tecla, ESC para finalizar...");
-        opcion = getch();
-        system("cls");
-    }while (opcion != ESC);
+        printf("Ingreso registrado con éxito.\n");
+    }
 
     return listaIngresos;
 }
-
-/**
-* Función para modificar fechas y matrícula del solicitante de un ingreso
-**/
-void Modificacion_de_ingreso(nodoIngreso *listaIngresos, int numeroIngreso, char nuevaFechaIngreso[10], char nuevaFechaRetiro[10], int nuevaMatriculaProfesional)
-{
-    nodoIngreso *temp = listaIngresos;
-
-    // Buscar el ingreso por número de ingreso
-    while (temp != NULL && temp->ingreso.numeroIngreso != numeroIngreso)
-    {
-        temp = temp->siguiente;
-    }
-
-    // Verificar si se encontró el ingreso
-    if (temp != NULL)
-    {
-        // Modificar fechas y matrícula
-        strcpy(temp->ingreso.fechaIngreso, nuevaFechaIngreso);
-        strcpy(temp->ingreso.fechaRetiro, nuevaFechaRetiro);
-        temp->ingreso.matriculaProfesional = nuevaMatriculaProfesional;
-
-        printf("Ingreso de laboratorio modificado con éxito.\n");
-    }
-    else
-    {
-        printf("No se encontró el ingreso de laboratorio con el número especificado.\n");
-    }
-}
-
-/**
-* Función para dar de baja un ingreso y sus prácticas asociadas
-**/
-void Baja_de_ingreso(nodoIngreso **listaIngresos, int numeroIngreso)
-{
-    nodoIngreso *tempIngreso = *listaIngresos;
-
-    // Buscar el ingreso por número de ingreso
-    while (tempIngreso != NULL && tempIngreso->ingreso.numeroIngreso != numeroIngreso)
-    {
-        tempIngreso = tempIngreso->siguiente;
-    }
-
-    // Verificar si se encontró el ingreso
-    if (tempIngreso != NULL)
-    {
-        // Dar de baja el ingreso
-        tempIngreso->ingreso.eliminado = 1;  // Marcar como eliminado
-
-        // Recorrer y dar de baja todas las prácticas asociadas
-        nodoPracticaXIngreso *tempPracticaXIngreso = tempIngreso->listaPracticasXIngreso;
-        while (tempPracticaXIngreso != NULL)
-        {
-            tempPracticaXIngreso->practicaXIngreso.eliminado = 1;  // Marcar como eliminada
-            tempPracticaXIngreso = tempPracticaXIngreso->siguiente;
-        }
-
-        printf("Ingreso de laboratorio y sus prácticas asociadas dadas de baja con éxito.\n");
-    }
-    else
-    {
-        printf("No se encontró el ingreso de laboratorio con el número especificado.\n");
-    }
-}
-
-//int existePaciente(int dni)
-//{
-//    FILE * arch = fopen("ingresos.dat", "rb");
-//    stIngresos ingresoPaciente;
-//    nodoIngresos * listaPaciente = inicLista();
-//
-//    if(arch != NULL)
-//    {
-//        while(fread(&ingresoPaciente,sizeof(stIngresos),1,arch)>0) //borrar los datos?
-//        {
-//            if(ingresoPaciente.dni == dni)
-//            {
-//                listaPaciente = agregoFinalListaIngresos(listaPaciente,ingresoPaciente);
-//            }
-//        }
-//    }
-//
-//    fclose(arch);
-//    return listaPaciente;
-//
-//}
 
 void generarArchivoBinIngresos(const char *nombreArchivo)
 {
