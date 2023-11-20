@@ -986,7 +986,7 @@ void submenuElijeOrdenamientoPacientes(nodoPaciente * arbol){
         system("cls");
         Rectangulo();
         gotoxy(15, 1);
-        cabeza("Seleccione una opcion");
+        cabeza("");
         gotoxy(15, 4);
         printf("Seleccione una opcion:\n");
         gotoxy(15, 5);
