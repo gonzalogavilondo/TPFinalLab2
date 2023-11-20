@@ -7,6 +7,8 @@
 #include "gotoxy.h"
 #include "stPaciente.h"
 
+#define ARCHIVO_PRACTICAXINGRESOS "practicaXIngresos.dat"
+
 typedef struct stPracticaXIngreso
 {
     int nroIngreso;
