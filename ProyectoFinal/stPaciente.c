@@ -35,7 +35,7 @@ void menuProvisorioGestionarPacientes(){
 
             case 49: // opcion 1: Dar de alta a un paciente.
 
-                arbolPacientes = altaDePacientes(arbolPacientes);
+                arbolPacientes = altaDePaciente(arbolPacientes);
 
                 break;
             case 50: // opcion 2: Modificar los datos de un paciente.
@@ -188,53 +188,45 @@ nodoPaciente * insertarPaciente(nodoPaciente * arbolPacientes, stPaciente nuevoP
     return arbolPacientes;
 }
 
-nodoPaciente * altaDePacientes(nodoPaciente * arbolPacientes){
-    char opcion = 0;
+nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes){
     int dni;
     stPaciente nuevoPaciente;
 
-    do {
+    printf("\n Ingrese el DNI del paciente: ");
+    fflush(stdin);
+    scanf("%d", &dni);
 
-        printf("\n Ingrese el DNI del paciente: ");
+    if (existeElPaciente(arbolPacientes, dni)) {
+        printf("\n El paciente ya esta registrado en la base de datos. Puede modificar sus datos desde la opcion 2 del menu anterior.");
+    } else {
+
+        printf("\n Ingrese apellido y nombre en formato \"Apellido, Nombre\": ");
         fflush(stdin);
-        scanf("%d", &dni);
+        gets(nuevoPaciente.apellidoNombre);
 
-        if (existeElPaciente(arbolPacientes, dni)) {
-            printf("\n El paciente ya esta registrado en la base de datos. Puede modificar sus datos desde la opcion 2 del menu anterior.");
-        } else {
-
-            printf("\n Ingrese apellido y nombre: ");
-            fflush(stdin);
-            gets(nuevoPaciente.apellidoNombre);
-
-            printf("\n Ingrese la edad: ");
-            fflush(stdin);
-            scanf("%d", &nuevoPaciente.edad);
-
-            printf("\n Ingrese la direccion donde vive: ");
-            fflush(stdin);
-            gets(nuevoPaciente.direccion);
-
-            printf("\n Ingrese el telefono: ");
-            fflush(stdin);
-            gets(nuevoPaciente.telefono);
-
-            nuevoPaciente.eliminado = 0;
-            nuevoPaciente.dni = dni;
-
-            arbolPacientes = insertarPaciente(arbolPacientes, nuevoPaciente);
-
-            system("cls");
-            printf("\n Paciente cargado.");
-
-        }
-
-        printf("\n\n Para cargar otro paciente presione cualquier tecla, ESC para finalizar...");
+        printf("\n Ingrese la edad: ");
         fflush(stdin);
-        opcion = getch();
+        scanf("%d", &nuevoPaciente.edad);
+
+        printf("\n Ingrese la direccion donde vive: ");
+        fflush(stdin);
+        gets(nuevoPaciente.direccion);
+
+        printf("\n Ingrese el telefono: ");
+        fflush(stdin);
+        gets(nuevoPaciente.telefono);
+
+        nuevoPaciente.eliminado = 0;
+        nuevoPaciente.dni = dni;
+
+        arbolPacientes = insertarPaciente(arbolPacientes, nuevoPaciente);
+
         system("cls");
+        printf("\n Paciente cargado.");
 
-    } while (opcion != ESC);
+    }
+
+    textoPresioneCualquierTecla();
 
     return arbolPacientes;
 }
@@ -564,7 +556,9 @@ nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes){
     return arbolPacientes;
 }
 
-// Función para buscar un registro por DNI en el archivo
+///FUNCION QUE LA USA INGRESOS:
+
+// Función para buscar un registro por DNI en el archivo:
 int existePacienteXDNI(int dniBuscar)
 {
     FILE *archivo = fopen(ARCHIVO_PACIENTES, "rb");
@@ -590,7 +584,72 @@ int existePacienteXDNI(int dniBuscar)
     return 0; // No se encontró el registro con el DNI dado
 }
 
+/// NUEVAS:
 
+int cantidadNodosArbolPacientes(nodoPaciente * arbolPacientes){
+
+    int total = 0;
+
+    if (arbolPacientes) {
+        total += cantidadNodosArbolPacientes(arbolPacientes->izq);
+        total += cantidadNodosArbolPacientes(arbolPacientes->der);
+        total++;
+    }
+
+    return total;
+}
+
+void pacienteToArregloOrdenadoXApellidoNombre(stPaciente * arreglo, int validosArre, stPaciente datosPaciente){
+
+    if (validosArre) {
+
+        validosArre--;
+        while(validosArre>=0 && strcmp(datosPaciente.apellidoNombre, arreglo[validosArre].apellidoNombre)<0){
+            arreglo[validosArre+1] = arreglo[validosArre];
+            validosArre--;
+        }
+        arreglo[validosArre+1] = datosPaciente;
+
+    } else {
+        arreglo[0] = datosPaciente;
+    }
+}
+
+void recorreArbolEIngresaEnArregloXApellidoNombre(nodoPaciente * arbolPacientes, stPaciente * arreglo, int * validosArre){
+    if (arbolPacientes) {
+        recorreArbolEIngresaEnArregloXApellidoNombre(arbolPacientes->izq, arreglo, validosArre);
+
+        pacienteToArregloOrdenadoXApellidoNombre(arreglo, *validosArre, arbolPacientes->datosPaciente);
+        *validosArre = *validosArre + 1;
+
+        recorreArbolEIngresaEnArregloXApellidoNombre(arbolPacientes->der, arreglo, validosArre);
+    }
+}
+
+stPaciente * arbolPacientesToArreglo(nodoPaciente * arbolPacientes){
+
+    int validosArre = cantidadNodosArbolPacientes(arbolPacientes);
+    stPaciente * arreglo = (stPaciente *) malloc(validosArre * sizeof(stPaciente));
+    validosArre = 0;
+
+    recorreArbolEIngresaEnArregloXApellidoNombre(arbolPacientes, arreglo, &validosArre);
+
+    return arreglo;
+}
+
+void muestraArregloPacientes(stPaciente arregloPacientes[], int validosArre){
+    for (int i = 0; i<validosArre; i++) {
+        muestraUnPaciente(arregloPacientes[i]);
+    }
+}
+
+void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes){
+
+    stPaciente * arregloPacientes = arbolPacientesToArreglo(arbolPacientes);
+    printf("\n Listado de pacientes, ordenados por apellido:\n\n");
+    muestraArregloPacientes(arregloPacientes, cantidadNodosArbolPacientes(arbolPacientes));
+
+}
 
 
 

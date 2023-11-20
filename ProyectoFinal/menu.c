@@ -742,7 +742,7 @@ void Rectangulo() {
 
 
 void submenuManejoEmpleados() {
-    char control = 's';;
+    char control = 's';
     int opcion;
 
     do {
@@ -973,9 +973,187 @@ void submenuAdministrativo(nodoIngreso *listaIngresos)
     system("cls");
 }
 
+void submenuElijeOrdenamientoPacientes(nodoPaciente * arbol){
+
+    char control = 's';
+    int opcion;
+
+    do {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Seleccione una opcion");
+        gotoxy(15, 4);
+        printf("Seleccione una opcion:\n");
+        gotoxy(15, 5);
+        printf("(1) Pacientes ordenados por dni\n");
+        gotoxy(15, 6);
+        printf("(2) Pacientes ordenados por apellido\n");
+        gotoxy(15, 7);
+        printf("(3) Volver\n");
+        gotoxy(15, 8);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        if (arbol) {
+
+            switch (opcion) {
+                case 1: // Pacientes ordenados por dni
+                    printf("\n Listado de pacientes, ordenados por dni:\n\n");
+                    inorderPacientes(arbol);
+                    break;
+                case 2: // Pacientes ordenados por apellido
+                    imprimePacientesOrdenadosPorApellido(arbol);
+                    break;
+                case 3:
+                    control = 'n';
+                    break;
+
+                default:
+                    control = 'n';
+                    break;
+
+            }
+
+        } else {
+            printf("\n No hay clientes cargados en la base de datos.");
+        }
+
+        textoPresioneCualquierTecla();
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+
+}
+
+void submenuGestionPacientes(nodoPaciente * arbol){
+
+    char control = 's';
+    int opcion;
+
+    do {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Menu gestion de pacientes");
+        gotoxy(15, 4);
+        printf("Que accion desea realizar?\n");
+        gotoxy(15, 5);
+        printf("(1) (aun no implementado) Ver datos de un paciente en particular\n");
+        gotoxy(15, 6);
+        printf("(2) (aun no implementado) Modificar datos de un paciente\n");
+        gotoxy(15, 7);
+        printf("(3) Alta de un paciente\n");
+        gotoxy(15, 8);
+        printf("(4) (aun no implementado) Dar de baja a un paciente\n");
+        gotoxy(15, 9);
+        printf("(5) Ver listado de pacientes\n");
+        gotoxy(15, 10);
+        printf("(6) Volver\n");
+        gotoxy(15, 11);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        switch (opcion) {
+//            case 1: // Ver datos de un paciente en particular
+//
+//                break;
+//            case 2: // Modificar datos de un paciente
+//
+//                break;
+            case 3: // Alta de un paciente
+                arbol = altaDePaciente(arbol);
+                break;
+//            case 4: // Dar de baja a un paciente
+//
+//                break;
+            case 5: // Ver listado de pacientes
+                submenuElijeOrdenamientoPacientes(arbol);
+                break;
+
+            case 6:
+                control = 'n';
+                break;
+
+            default:
+                control = 'n';
+                break;
+
+        }
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+
+}
+
+void submenuAdministrador(nodoPaciente * arbol){
+
+    char control = 's';
+    int opcion;
+
+    do {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Menu Administrador");
+        gotoxy(15, 4);
+        printf("Que desea gestionar?\n");
+        gotoxy(15, 5);
+        printf("(1) Gestionar pacientes\n");
+        gotoxy(15, 6);
+        printf("(2) Gestionar personal\n");
+        gotoxy(15, 7);
+        printf("(3) Gestionar ingresos\n");
+        gotoxy(15, 8);
+        printf("(4) Gestionar practicas\n");
+        gotoxy(15, 9);
+        printf("(5) Gestionar practicas por ingreso\n");
+        gotoxy(15, 10);
+        printf("(6) Volver\n");
+        gotoxy(15, 11);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        switch (opcion) {
+            case 1: //Gestionar pacientes
+                submenuGestionPacientes(arbol);
+                break;
+//            case 2: //Gestionar personal
+//                break;
+//            case 3: //Gestionar ingresos
+//                break;
+//            case 4: //Gestionar practicas
+//                break;
+//            case 5: //Gestionar practicas por ingreso
+//                break;
+
+            case 6:
+                control = 'n';
+                break;
+
+            default:
+                control = 'n';
+                break;
+
+        }
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+
+}
+
 ///MENU PRINCIPAL
 void menuPrincipal(nodoPaciente* arbol){
-    char control = 's';;
+    char control = 's';
     int opcion;
     char empleadoEjecuta[20];
 
@@ -1055,9 +1233,7 @@ void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol){
                 system("pause");
             }else{
                 if(strcmp(tipoMenu,"Administrador")==0){
-                    //submenuAdministrador
-                    printf("Submenu Administrador\n");
-                    system("pause");
+                    submenuAdministrador(arbol);
                 }
             }
         }

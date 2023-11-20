@@ -9,6 +9,7 @@
 #include "stEmpleado.h"
 #include "stIngreso.h"
 #include "stPracticaXIngreso.h"
+#include "stPaciente.h"
 
 void submenuManejoEmpleados();
 void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]);

@@ -46,7 +46,7 @@ struct nodoIngreso * inicListaIngresos();
 int existeElPaciente(nodoPaciente * arbolPacientes, int dni);
 nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente);
 nodoPaciente * insertarPaciente(nodoPaciente * arbolPacientes, stPaciente nuevoPaciente);
-nodoPaciente * altaDePacientes(nodoPaciente * arbolPacientes);
+nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 2:
 void muestraUnPaciente(stPaciente datosPaciente);
 nodoPaciente * encontrarMinimoDni(nodoPaciente* arbolPacientes);
@@ -70,5 +70,12 @@ nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes);
 ///FUNCION QUE USA INGRESOS:
 int existePacienteXDNI(int dniBuscar);
 
+/// NUEVAS:
+int cantidadNodosArbolPacientes(nodoPaciente * arbolPacientes);
+void pacienteToArregloOrdenadoXApellidoNombre(stPaciente * arreglo, int validosArre, stPaciente datosPaciente);
+void recorreArbolEIngresaEnArregloXApellidoNombre(nodoPaciente * arbolPacientes, stPaciente * arreglo, int * validosArre);
+stPaciente * arbolPacientesToArreglo(nodoPaciente * arbolPacientes);
+void muestraArregloPacientes(stPaciente arregloPacientes[], int validosArre);
+void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes);
 
 #endif // STPACIENTE_H_INCLUDED
