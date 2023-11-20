@@ -183,7 +183,7 @@ int existePracticaXIngreso(nodoPracticaXIngreso * listaPracticasXIngreso, int nr
 **/
 void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
 {
-    int nroIngreso, nroPractica, dni,
+    int nroIngreso, nroPractica,
         error = 0;
 
     char opcion = 0;
@@ -209,13 +209,9 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
             if(altaIngreso == 1)
             {
                 nodoPaciente *paciente = inicArbolPacientes();
-                gotoxy(15, 5);
-                printf("Ingrese el DNI del paciente: ");
-                scanf("%d", &dni);
-                gotoxy(15, 6);
-                paciente = buscaPaciente(arbolPacientes, dni);
+                paciente = buscaPaciente(arbolPacientes, arbolPacientes->datosPaciente.dni);
                 system("cls");
-                mostrarListadoGralIngresos(paciente);
+                mostrarListadoIngresosPaciente(paciente);
                 printf("Cargue el numero de ingreso: ");
                 scanf("%d", &nroIngreso);
                 system("cls");

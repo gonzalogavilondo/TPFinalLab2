@@ -40,6 +40,7 @@ nodoIngreso* buscaUltimoListaIngresos(nodoIngreso *lista);
 nodoIngreso* crearListaIngresos(const char *nombreArchivo);
 void mostrarUnNodoIngreso(nodoIngreso *aux);
 void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes);
+void mostrarListadoIngresosPaciente(nodoPaciente *paciente);
 nodoIngreso* liberarListaIngresos(nodoIngreso *lista);
 nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni);
 

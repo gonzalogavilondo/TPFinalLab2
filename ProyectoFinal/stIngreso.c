@@ -103,12 +103,13 @@ void mostrarUnNodoIngreso(nodoIngreso *aux)
 {
     if (aux != NULL)
     {
-        printf("\n\tNumero de ingreso...........: %d\n", aux->ingreso.numeroIngreso);
-        printf("\tFecha de ingreso............: %s\n", aux->ingreso.fechaIngreso);
-        printf("\tFecha de retiro.............: %s\n", aux->ingreso.fechaRetiro);
-        printf("\tMatricula profesional.......: %d\n", aux->ingreso.matriculaProfesional);
-        printf("\tEliminado...................: %d <1:SI/0:NO>\n", aux->ingreso.eliminado);
-        puts("--------");
+        printf("\n*** Detalles del Ingreso ***\n");
+        printf("Numero de ingreso: %d\n", aux->ingreso.numeroIngreso);
+        printf("Fecha de ingreso: %s\n", aux->ingreso.fechaIngreso);
+        printf("Fecha de retiro: %s\n", aux->ingreso.fechaRetiro);
+        printf("Matricula profesional: %d\n", aux->ingreso.matriculaProfesional);
+        printf("Eliminado: %d <1:SI/0:NO>\n", aux->ingreso.eliminado);
+        puts("----------------------------");
     }
     else
     {
@@ -118,25 +119,51 @@ void mostrarUnNodoIngreso(nodoIngreso *aux)
 
 void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes)
 {
-    if(arbolPacientes != NULL)
+    if (arbolPacientes != NULL)
     {
-        printf("\tLISTA DE INGRESOS DEL PACIENTE: \n");
+        printf("\n*** Listado de Ingresos del Paciente ***\n");
         muestraUnPacienteResumido(arbolPacientes->datosPaciente);
         nodoIngreso *seg = arbolPacientes->listaIngresos;
-        if(!seg)
+        if (!seg)
         {
-            printf("\n\n El paciente no tiene ingresos.\n\n");
-            puts("-----------------------------------------------------\n");
+            printf("\nEl paciente no tiene ingresos.\n");
+            puts("--------------------------------------\n");
         }
-        while(seg != NULL)
+        while (seg != NULL)
         {
             mostrarUnNodoIngreso(seg);
             seg = seg->siguiente;
         }
+        printf("\n*** Fin del Listado de Ingresos del Paciente ***\n");
+        puts("----------------------------------------------\n");
         mostrarListadoGralIngresos(arbolPacientes->izq);
         mostrarListadoGralIngresos(arbolPacientes->der);
     }
 }
+
+
+void mostrarListadoIngresosPaciente(nodoPaciente *paciente)
+{
+    if (paciente != NULL)
+    {
+        printf("\n*** Listado de Ingresos del Paciente ***\n");
+        muestraUnPacienteResumido(paciente->datosPaciente);
+        nodoIngreso *seg = paciente->listaIngresos;
+        if (!seg)
+        {
+            printf("\nEl paciente no tiene ingresos.\n");
+            puts("--------------------------------------\n");
+        }
+        while (seg != NULL)
+        {
+            mostrarUnNodoIngreso(seg);
+            seg = seg->siguiente;
+        }
+        printf("\n*** Fin del Listado de Ingresos del Paciente ***\n");
+        puts("----------------------------------------------\n");
+    }
+}
+
 
 /**
     La función (liberarLista), que reciba la lista y hacer lo indicado. La función no debe retornar nada (no importa que

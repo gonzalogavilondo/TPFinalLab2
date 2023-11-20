@@ -819,6 +819,7 @@ void submenuManejoIngresos(nodoPaciente *arbolPaciente)
         printf("(4) CONSULTAR LISTADO\n");  // Nueva opción
         gotoxy(15, 9);
         printf("(5) VOLVER\n");  // Ajusta las opciones según sea necesario
+        gotoxy(15, 10);
         fflush(stdin);
         scanf("%i", &opcion);
         system("cls");
@@ -1232,8 +1233,6 @@ void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol){
         }else{
             if(strcmp(tipoMenu,"Administrativo")==0){
                 submenuAdministrativo(arbol);
-                printf("Submenu Administrativo\n");
-                system("pause");
             }else{
                 if(strcmp(tipoMenu,"Administrador")==0){
                     submenuAdministrador(arbol);
