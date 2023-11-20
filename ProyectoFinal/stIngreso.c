@@ -96,21 +96,19 @@ nodoIngreso* crearListaIngresos(const char *nombreArchivo)
 }
 
 /**
-    La función (mostrarIngreso) que permita recorrer y mostrar la lista. La misma debe ser recursiva
+    La función (mostrarListadoGralIngresos) que permita recorrer y mostrar la lista. La misma debe ser recursiva
 **/
 
 void mostrarUnNodoIngreso(nodoIngreso *aux)
 {
     if (aux != NULL)
     {
-        puts("-----------------------------------------------------\n");
-        printf("Numero de ingreso...........: %d\n", aux->ingreso.numeroIngreso);
-        printf("Fecha de ingreso............: %s\n", aux->ingreso.fechaIngreso);
-        printf("Fecha de retiro.............: %s\n", aux->ingreso.fechaRetiro);
-        printf("DNI del paciente............: %d\n", aux->ingreso.dniPaciente);
-        printf("Matricula profesional.......: %d\n", aux->ingreso.matriculaProfesional);
-        printf("Eliminado...................: %d <1:SI/0:NO>\n", aux->ingreso.eliminado);
-        puts("-----------------------------------------------------\n");
+        printf("\n\tNumero de ingreso...........: %d\n", aux->ingreso.numeroIngreso);
+        printf("\tFecha de ingreso............: %s\n", aux->ingreso.fechaIngreso);
+        printf("\tFecha de retiro.............: %s\n", aux->ingreso.fechaRetiro);
+        printf("\tMatricula profesional.......: %d\n", aux->ingreso.matriculaProfesional);
+        printf("\tEliminado...................: %d <1:SI/0:NO>\n", aux->ingreso.eliminado);
+        puts("--------");
     }
     else
     {
@@ -118,12 +116,25 @@ void mostrarUnNodoIngreso(nodoIngreso *aux)
     }
 }
 
-void mostrarIngreso(nodoIngreso *lista)
+void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes)
 {
-    if(lista != NULL)
+    if(arbolPacientes != NULL)
     {
-        mostrarUnNodoIngreso(lista);
-        mostrarIngreso(lista->siguiente);
+        printf("\tLISTA DE INGRESOS DEL PACIENTE: \n");
+        muestraUnPacienteResumido(arbolPacientes->datosPaciente);
+        nodoIngreso *seg = arbolPacientes->listaIngresos;
+        if(!seg)
+        {
+            printf("\n\n El paciente no tiene ingresos.\n\n");
+            puts("-----------------------------------------------------\n");
+        }
+        while(seg != NULL)
+        {
+            mostrarUnNodoIngreso(seg);
+            seg = seg->siguiente;
+        }
+        mostrarListadoGralIngresos(arbolPacientes->izq);
+        mostrarListadoGralIngresos(arbolPacientes->der);
     }
 }
 
@@ -151,7 +162,7 @@ nodoIngreso* liberarListaIngresos(nodoIngreso *lista)
     agregar ese pedido a la lista y retornar la nueva lista con el nuevo ingreso.
 **/
 
-nodoIngreso* cargarIngreso(nodoIngreso *lista)
+nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni)
 {
     stIngreso registro;
 
@@ -166,13 +177,10 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista)
     fflush(stdin);
     gets(registro.fechaRetiro);
 
-    // Imprimir y obtener el DNI del paciente
-    gotoxy(15, 7);
-    printf("Ingrese el DNI del paciente: ");
-    scanf("%d", &registro.dniPaciente);
+    registro.dniPaciente = dni;
 
     // Imprimir y obtener la matrícula profesional
-    gotoxy(15, 9);
+    gotoxy(15, 6);
     printf("Ingrese la matricula profesional: ");
     scanf("%d", &registro.matriculaProfesional);
 
@@ -227,84 +235,72 @@ stPractica obtenerPracticaLaboratorio()
 /**
 * Función para dar de alta un ingreso con al menos una práctica de laboratorio
 **/
-nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos)
+void altaDeIngreso(nodoPaciente *arbolPacientes)
 {
-    nodoPracticaXIngreso *nuevaPracticaXIngreso = inicListaPracticaXIngresos();
     int dni;
-    char opcion = 0;
 
-    do {
-        system("cls");
 
-        // Imprime el rectángulo y la cabeza después de limpiar la pantalla
+    system("cls");
+
+    // Imprime el rectángulo y la cabeza después de limpiar la pantalla
+    Rectangulo();
+    gotoxy(15, 1);
+    cabeza("Alta de Ingreso");
+
+    gotoxy(15, 4);
+    printf("Ingrese el DNI del paciente a ingresar: ");
+    scanf("%d", &dni);
+
+    arbolPacientes = buscaPaciente(arbolPacientes, dni);
+    if (!arbolPacientes)
+    {
+        gotoxy(15, 6);
+        printf("El paciente no existe en la base de datos.\n");
+        system("pause");
+    }
+    else
+    {
+        // Crear un nuevo nodo de ingreso y agregarlo a la lista
+        arbolPacientes->listaIngresos = cargarIngreso(arbolPacientes->listaIngresos, dni);
+
+        // Crear al menos una práctica de laboratorio asociada al ingreso
+        altaDePracticaXIngreso(arbolPacientes, 1);
+
         Rectangulo();
-        gotoxy(15, 1);
-        cabeza("Alta de Ingreso");
-
-        gotoxy(15, 4);
-        printf("Ingrese el DNI del paciente a ingresar: ");
-        scanf("%d", &dni);
-
-        if (existePacienteXDNI(dni))
-        {
-            gotoxy(15, 6);
-            printf("El paciente no existe en la base de datos.");
-        }
-        else
-        {
-            // Crear un nuevo nodo de ingreso y agregarlo a la lista
-            listaIngresos = cargarIngreso(listaIngresos);
-
-            // Crear al menos una práctica de laboratorio asociada al ingreso
-            nuevaPracticaXIngreso = altaDePracticaXIngreso(nuevaPracticaXIngreso);
-
-            // Enlazar la nueva práctica al ingreso
-            listaIngresos->listaPracticasXIngreso = nuevaPracticaXIngreso;
-
-            Rectangulo();
-            gotoxy(15, 8);
-            printf("Ingreso registrado con exito.");
-        }
-
-        gotoxy(15, 10);
-        printf("Desea ingresar otro paciente? (S/N): ");
-        fflush(stdin);
-        opcion = getch();
-
-    } while (opcion == 's' || opcion == 'S');
-
-    return listaIngresos;
+        gotoxy(15, 8);
+        printf("Ingreso registrado con exito.");
+    }
 }
 
-void generarArchivoBinIngresos(const char *nombreArchivo)
-{
-    FILE *archivo = fopen(nombreArchivo, "wb");
-
-    /// Veo si se pudo abrir el archivo
-    if (archivo == NULL)
-    {
-        perror("Error al abrir el archivo");
-        return;
-    }
-    nodoIngreso *ingresoNuevo = inicLista();
-    char continua = 's';
-    while(continua == 's')
-    {
-        ingresoNuevo = cargarIngreso(ingresoNuevo);
-
-        fwrite(&(ingresoNuevo->ingreso), sizeof(stIngreso), 1, archivo); // Escribir solo el contenido del ingreso
-
-        printf("Carga otro ingreso (s/n): \n");
-        fflush(stdin);
-        scanf("%c",&continua);
-        free(ingresoNuevo); // Liberar el nodo después de escribirlo en el archivo
-    }
-
-    /// Cerrar el archivo
-    fclose(archivo);
-
-    printf("Datos guardados en el archivo '%s'.\n", nombreArchivo);
-}
+//void generarArchivoBinIngresos(const char *nombreArchivo)
+//{
+//    FILE *archivo = fopen(nombreArchivo, "wb");
+//
+//    /// Veo si se pudo abrir el archivo
+//    if (archivo == NULL)
+//    {
+//        perror("Error al abrir el archivo");
+//        return;
+//    }
+//    nodoIngreso *ingresoNuevo = inicLista();
+//    char continua = 's';
+//    while(continua == 's')
+//    {
+//        ingresoNuevo = cargarIngreso(ingresoNuevo);
+//
+//        fwrite(&(ingresoNuevo->ingreso), sizeof(stIngreso), 1, archivo); // Escribir solo el contenido del ingreso
+//
+//        printf("Carga otro ingreso (s/n): \n");
+//        fflush(stdin);
+//        scanf("%c",&continua);
+//        free(ingresoNuevo); // Liberar el nodo después de escribirlo en el archivo
+//    }
+//
+//    /// Cerrar el archivo
+//    fclose(archivo);
+//
+//    printf("Datos guardados en el archivo '%s'.\n", nombreArchivo);
+//}
 
 
 int existeIngresoXnroIngreso(int nroIngresoBuscar)
@@ -344,7 +340,7 @@ nodoIngreso *buscaIngreso(nodoIngreso *listaIngresos, int nroIngreso)
     return seg;
 }
 
-nodoIngreso *modificarDatosIngreso(nodoIngreso *lista)
+void modificarDatosIngreso(nodoPaciente *arbolPaciente)
 {
     nodoIngreso *ingresoExistente = inicListaIngresos();
 
@@ -361,7 +357,7 @@ nodoIngreso *modificarDatosIngreso(nodoIngreso *lista)
         printf("Ingrese el numero de ingreso: ");
         scanf("%d", &nroIngreso);
 
-        ingresoExistente = buscaIngreso(lista, nroIngreso);
+        ingresoExistente = buscaIngreso(arbolPaciente->listaIngresos, nroIngreso);
 
         if (ingresoExistente)
         {
@@ -434,10 +430,9 @@ nodoIngreso *modificarDatosIngreso(nodoIngreso *lista)
 
     } while (opcion == 's' || opcion == 'S');
 
-    return lista;
 }
 
-void buscaYDaDeBajaIngreso(nodoIngreso *lista)
+void buscaYDaDeBajaIngreso(nodoPaciente *arbolPaciente)
 {
     int nroIngreso;
     char opcion;
@@ -452,7 +447,7 @@ void buscaYDaDeBajaIngreso(nodoIngreso *lista)
         printf("Ingrese el numero de ingreso a dar de baja: ");
         scanf("%d", &nroIngreso);
 
-        nodoIngreso *ingresoExistente = buscaIngreso(lista, nroIngreso);
+        nodoIngreso *ingresoExistente = buscaIngreso(arbolPaciente->listaIngresos, nroIngreso);
 
         if (ingresoExistente)
         {

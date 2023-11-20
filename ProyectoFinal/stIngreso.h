@@ -39,9 +39,9 @@ nodoIngreso* agregarNodoIngreso(nodoIngreso *lista, stIngreso registro);
 nodoIngreso* buscaUltimoListaIngresos(nodoIngreso *lista);
 nodoIngreso* crearListaIngresos(const char *nombreArchivo);
 void mostrarUnNodoIngreso(nodoIngreso *aux);
-void mostrarIngreso(nodoIngreso *lista);
+void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes);
 nodoIngreso* liberarListaIngresos(nodoIngreso *lista);
-nodoIngreso* cargarIngreso(nodoIngreso *lista);
+nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni);
 
 /**
     FUNCIONES ESPECIFICAS DEL PROBLEMA
@@ -49,15 +49,14 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista);
 void obtenerFechaActual(char fechaActual[11]);
 int obtenerNuevoNumeroIngreso();
 stPractica obtenerPracticaLaboratorio();
-nodoIngreso* altaDeIngreso(nodoIngreso *listaIngresos);
+void altaDeIngreso(nodoPaciente *arbolPacientes);
 
 ///Modificar datos de ingreso
-nodoIngreso *modificarDatosIngreso(nodoIngreso * ingresos);
+void modificarDatosIngreso(nodoPaciente * arbolPacientes);
 nodoIngreso *buscaIngreso(nodoIngreso *listaIngresos, int nroIngreso);
 
-
 ///Buscar y dar de baja un ingreso
-void buscaYDaDeBajaIngreso(nodoIngreso *lista);
+void buscaYDaDeBajaIngreso(nodoPaciente *arbolPacientes);
 
 ///Adicionales para la funcionalidad
 void generarArchivoBinIngresos(const char *nombreArchivo);

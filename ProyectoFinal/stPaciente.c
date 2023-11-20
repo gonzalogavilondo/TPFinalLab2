@@ -233,6 +233,14 @@ nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes){
 
 /// FUNCIONES PARA LA OPCION 2:
 
+void muestraUnPacienteResumido(stPaciente datosPaciente){
+
+    printf(" Apellido y nombre: %s", datosPaciente.apellidoNombre);
+    printf("\n Dni: %d", datosPaciente.dni);
+    printf("\n Telefono: %s", datosPaciente.telefono);
+
+}
+
 void muestraUnPaciente(stPaciente datosPaciente){
 
     printf(" Apellido y nombre: %s", datosPaciente.apellidoNombre);

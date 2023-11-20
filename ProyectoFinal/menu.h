@@ -19,9 +19,9 @@ void imprimirCabecera(char cabecera[]);
 void Rectangulo();
 void modificarPerfilEmpleadoXDNI(char perfil[],int dni);
 void modificarContraseniaEmpleadoXDNI(char contrasenia[],int dni);
-void submenuManejoIngresos(nodoIngreso *listaIngresos);
-void submenuManejoPracticasXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos);
-void submenuAdministrativo(nodoIngreso *listaIngresos);
+void submenuManejoIngresos(nodoPaciente *arbolPaciente);
+void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes);
+void submenuAdministrativo(nodoPaciente * arbolPacientes);
 void menuPrincipal(nodoPaciente* arbol);
 void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol);
 

@@ -151,6 +151,7 @@ nodoPracticaXIngreso* cargarPracticaXIngreso(nodoPracticaXIngreso *lista, int nr
 
     registro.nroIngreso = nroIngreso;
     registro.nroPractica = nroPractica;
+    gotoxy(15,7);
     printf("Ingrese el resultado obtenido: ");
     fflush(stdin);
     gets(registro.resultado);
@@ -180,9 +181,11 @@ int existePracticaXIngreso(nodoPracticaXIngreso * listaPracticasXIngreso, int nr
 /**
 * Función para dar de alta un ingreso con al menos una práctica de laboratorio
 **/
-nodoPracticaXIngreso* altaDePracticaXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos)
+void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
 {
-    int nroIngreso, nroPractica;
+    int nroIngreso, nroPractica, dni,
+        error = 0;
+
     char opcion = 0;
 
     do
@@ -193,29 +196,49 @@ nodoPracticaXIngreso* altaDePracticaXIngreso(nodoPracticaXIngreso *listaPractica
         cabeza("Alta de Practica por Ingreso");
 
         gotoxy(15, 4);
-        printf("Cargue el numero de ingreso: ");
-        scanf("%d", &nroIngreso);
-        gotoxy(15, 6);
         printf("Cargue el numero de practica: ");
         scanf("%d", &nroPractica);
 
-        if (!existeIngresoXnroIngreso(nroIngreso))
-        {
-            gotoxy(15, 8);
-            printf("No existe el ingreso con ese numero en la base de datos.");
-        }
-        else if (!existePracticaXnroPractica(nroPractica))
+        if (!existePracticaXnroPractica(nroPractica))
         {
             gotoxy(15, 8);
             printf("No existe la practica con ese numero en la base de datos.");
         }
         else
         {
-            // Crear un nuevo nodo de práctica por ingreso y agregarlo a la lista
-            listaPracticaXIngresos = cargarPracticaXIngreso(listaPracticaXIngresos, nroIngreso, nroPractica);
+            if(altaIngreso == 1)
+            {
+                nodoPaciente *paciente = inicArbolPacientes();
+                gotoxy(15, 5);
+                printf("Ingrese el DNI del paciente: ");
+                scanf("%d", &dni);
+                gotoxy(15, 6);
+                paciente = buscaPaciente(arbolPacientes, dni);
+                system("cls");
+                mostrarListadoGralIngresos(paciente);
+                printf("Cargue el numero de ingreso: ");
+                scanf("%d", &nroIngreso);
+                system("cls");
+                Rectangulo();
+                gotoxy(15, 1);
+                cabeza("Alta de Practica por Ingreso");
+                if (!existeIngresoXnroIngreso(nroIngreso))
+                {
+                    gotoxy(15, 8);
+                    printf("No existe el ingreso con ese numero en la base de datos.");
+                    error = 1;
+                }
+            }
+            if(error == 0)
+            {
+                nodoPracticaXIngreso *practicasXIngreso = inicListaPracticaXIngresos();
+                arbolPacientes->listaIngresos->listaPracticasXIngreso = practicasXIngreso;
+                // Crear un nuevo nodo de práctica por ingreso y agregarlo a la lista
+                arbolPacientes->listaIngresos->listaPracticasXIngreso = cargarPracticaXIngreso(arbolPacientes->listaIngresos->listaPracticasXIngreso, nroIngreso, nroPractica);
 
-            gotoxy(15, 8);
-            printf("Practica por ingreso registrada con éxito.");
+                gotoxy(15, 8);
+                printf("Practica por ingreso registrada con éxito.");
+            }
         }
 
         gotoxy(15, 10);
@@ -225,8 +248,6 @@ nodoPracticaXIngreso* altaDePracticaXIngreso(nodoPracticaXIngreso *listaPractica
         system("cls");
 
     } while (opcion == 's' || opcion == 'S');
-
-    return listaPracticaXIngresos;
 }
 
 nodoPracticaXIngreso *buscaPracticaXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos, int nroPractica)

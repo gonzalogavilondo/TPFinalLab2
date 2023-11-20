@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <string.h>
 #include "gotoxy.h"
+#include "stPaciente.h"
 
 typedef struct stPracticaXIngreso
 {
@@ -36,7 +37,7 @@ nodoPracticaXIngreso* cargarPracticaXIngreso(nodoPracticaXIngreso *lista, int nr
 /**
     FUNCIONES DEL PROBLEMA EN SI
 **/
-nodoPracticaXIngreso* altaDePracticaXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos);
+void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso);
 
 ///Modificacion de PracticaXIngreso
 nodoPracticaXIngreso *buscaPracticaXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos, int nroPractica);

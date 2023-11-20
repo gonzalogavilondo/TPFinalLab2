@@ -48,6 +48,7 @@ nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente);
 nodoPaciente * insertarPaciente(nodoPaciente * arbolPacientes, stPaciente nuevoPaciente);
 nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 2:
+void muestraUnPacienteResumido(stPaciente datosPaciente);
 void muestraUnPaciente(stPaciente datosPaciente);
 nodoPaciente * encontrarMinimoDni(nodoPaciente* arbolPacientes);
 nodoPaciente * eliminarNodoArbolPacientes(nodoPaciente * arbolPacientes, int dniPaciente);

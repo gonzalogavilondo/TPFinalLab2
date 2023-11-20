@@ -741,6 +741,9 @@ void Rectangulo() {
 }
 
 
+
+
+
 void submenuManejoEmpleados() {
     char control = 's';
     int opcion;
@@ -792,7 +795,7 @@ void submenuManejoEmpleados() {
     system("cls");
 }
 
-void submenuManejoIngresos(nodoIngreso *listaIngresos)
+void submenuManejoIngresos(nodoPaciente *arbolPaciente)
 {
     char control = 's';
     int opcion;
@@ -824,22 +827,22 @@ void submenuManejoIngresos(nodoIngreso *listaIngresos)
         {
             case 1:
                 // Realizar alta de ingreso
-                listaIngresos = altaDeIngreso(listaIngresos);
+                altaDeIngreso(arbolPaciente);
                 break;
 
             case 2:
                 // Realizar modificación de ingreso
-                listaIngresos = modificarDatosIngreso(listaIngresos);
+                modificarDatosIngreso(arbolPaciente);
                 break;
 
             case 3:
                 // Realizar baja de ingreso
-                buscaYDaDeBajaIngreso(listaIngresos);
+                buscaYDaDeBajaIngreso(arbolPaciente);
                 break;
 
             case 4:
                 // Mostrar listado de ingresos
-                mostrarIngreso(listaIngresos);
+                mostrarListadoGralIngresos(arbolPaciente);
                 system("pause");
                 system("cls");
                 break;
@@ -858,7 +861,7 @@ void submenuManejoIngresos(nodoIngreso *listaIngresos)
     system("cls");
 }
 
-void submenuManejoPracticasXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos)
+void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
 {
     char control = 's';
     int opcion;
@@ -889,17 +892,17 @@ void submenuManejoPracticasXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos
         {
             case 1:
                 // Realizar alta de práctica por ingreso
-                listaPracticaXIngresos = altaDePracticaXIngreso(listaPracticaXIngresos);
+                altaDePracticaXIngreso(arbolPacientes, 0);
                 break;
 
             case 2:
                 // Realizar modificación de práctica por ingreso
-                listaPracticaXIngresos = modificarDatosPracticaXIngreso(listaPracticaXIngresos);
+                //listaPracticaXIngresos = modificarDatosPracticaXIngreso(listaPracticaXIngresos);
                 break;
 
             case 3:
                 // Realizar baja de práctica por ingreso
-                buscaYDaDeBajaPracticaXIngreso(listaPracticaXIngresos);
+                //buscaYDaDeBajaPracticaXIngreso(listaPracticaXIngresos);
                 break;
 
             case 4:
@@ -916,7 +919,7 @@ void submenuManejoPracticasXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos
     system("cls");
 }
 
-void submenuAdministrativo(nodoIngreso *listaIngresos)
+void submenuAdministrativo(nodoPaciente * arbolPacientes)
 {
     char control = 's';
     int opcion;
@@ -951,12 +954,12 @@ void submenuAdministrativo(nodoIngreso *listaIngresos)
 
             case 2:
                 // Gestionar citas
-                submenuManejoIngresos(listaIngresos);
+                submenuManejoIngresos(arbolPacientes);
                 break;
 
             case 3:
                 // Gestionar prácticas por ingreso
-                submenuManejoPracticasXIngreso(listaIngresos->listaPracticasXIngreso);
+                //submenuManejoPracticasXIngreso(listaIngresos->listaPracticasXIngreso);
                 break;
 
             case 4:
@@ -1228,7 +1231,7 @@ void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol){
             system("pause");
         }else{
             if(strcmp(tipoMenu,"Administrativo")==0){
-                submenuAdministrativo(arbol->listaIngresos);
+                submenuAdministrativo(arbol);
                 printf("Submenu Administrativo\n");
                 system("pause");
             }else{
