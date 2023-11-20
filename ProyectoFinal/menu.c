@@ -873,7 +873,7 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
         system("cls");
         Rectangulo();
         gotoxy(15, 1);
-        cabeza("Manejo de prácticas por ingreso");
+        cabeza("Manejo de practicas por ingreso");
         gotoxy(15, 4);
         printf("Que funcion desea ejecutar?\n");
         gotoxy(15, 5);
@@ -883,8 +883,10 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
         gotoxy(15, 7);
         printf("(3) BAJA\n");
         gotoxy(15, 8);
-        printf("(4) VOLVER\n");
+        printf("(4) CONSULTAR LISTADO\n");
         gotoxy(15, 9);
+        printf("(5) VOLVER\n");
+        gotoxy(15, 10);
         fflush(stdin);
         scanf("%i", &opcion);
         system("cls");
@@ -905,8 +907,11 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
                 // Realizar baja de práctica por ingreso
                 //buscaYDaDeBajaPracticaXIngreso(listaPracticaXIngresos);
                 break;
-
             case 4:
+//                mostrarPracticaXIngreso(arbolPacientes);
+            break;
+
+            case 5:
                 control = 'n';
                 break;
 
@@ -960,7 +965,7 @@ void submenuAdministrativo(nodoPaciente * arbolPacientes)
 
             case 3:
                 // Gestionar prácticas por ingreso
-                //submenuManejoPracticasXIngreso(listaIngresos->listaPracticasXIngreso);
+                submenuManejoPracticasXIngreso(arbolPacientes);
                 break;
 
             case 4:
@@ -1201,9 +1206,8 @@ void menuPrincipal(nodoPaciente* arbol){
         }
 
     } while (control == 's' || control == 'S');
-
-    system("cls");
 }
+
 ///PRINTF INGRESO (EMPLEADO)
 void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol){
     char usuario[20];

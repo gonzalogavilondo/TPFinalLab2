@@ -367,24 +367,31 @@ nodoIngreso *buscaIngreso(nodoIngreso *listaIngresos, int nroIngreso)
     return seg;
 }
 
-void modificarDatosIngreso(nodoPaciente *arbolPaciente)
+void modificarDatosIngreso(nodoPaciente *arbolPacientes)
 {
     nodoIngreso *ingresoExistente = inicListaIngresos();
 
-    int nroIngreso, matricula;
+    int nroIngreso, matricula, dni;
     char opcion;
 
     do {
         system("cls");
         Rectangulo();
         gotoxy(15, 1);
-        cabeza("Modificación de Ingreso");
+        cabeza("Modificacion de Ingreso");
+        gotoxy(15, 3);
+        printf("Ingrese el numero de DNI del paciente a modificar: ");
+        scanf("%d", &dni);
 
-        gotoxy(15, 4);
+        nodoPaciente *paciente = inicArbolPacientes();
+        paciente = buscaPaciente(arbolPacientes, dni);
+        system("cls");
+        mostrarListadoIngresosPaciente(paciente);
+
         printf("Ingrese el numero de ingreso: ");
         scanf("%d", &nroIngreso);
 
-        ingresoExistente = buscaIngreso(arbolPaciente->listaIngresos, nroIngreso);
+        ingresoExistente = buscaIngreso(paciente->listaIngresos, nroIngreso);
 
         if (ingresoExistente)
         {
@@ -393,14 +400,16 @@ void modificarDatosIngreso(nodoPaciente *arbolPaciente)
                 printf("\n");
                 mostrarUnNodoIngreso(ingresoExistente);
 
-                gotoxy(15, 8);
-                printf("¿Qué dato desea modificar? Ingrese una opción:");
-                gotoxy(15, 9);
-                printf("1. Fecha de ingreso");
+                //gotoxy(15, 9);
+                printf("Que dato desea modificar?\n\n");
                 gotoxy(15, 10);
-                printf("2. Fecha de retiro");
+                printf("1. Fecha de ingreso");
                 gotoxy(15, 11);
+                printf("2. Fecha de retiro");
+                gotoxy(15, 12);
                 printf("3. Matricula");
+                gotoxy(15, 14);
+                printf("Ingrese una opcion: ");
                 fflush(stdin);
                 opcion = getch();
                 system("cls");
@@ -433,7 +442,7 @@ void modificarDatosIngreso(nodoPaciente *arbolPaciente)
                 if (49 <= opcion && opcion <= 51)
                 {
                     system("cls");
-                    printf("\n Desea modificar algún otro dato del ingreso? En ese caso presione cualquier tecla, para finalizar presione ESC.");
+                    printf("\n Desea modificar algun otro dato del ingreso? En ese caso presione cualquier tecla, para finalizar presione ESC.");
                     opcion = getch();
                 }
 
@@ -446,12 +455,16 @@ void modificarDatosIngreso(nodoPaciente *arbolPaciente)
         }
         else
         {
-            gotoxy(15, 4);
-            printf("El numero de ingreso cargado no está registrado en la base de datos.");
+            system("cls");
+            Rectangulo();
+            gotoxy(15, 6);
+            printf("El numero de ingreso cargado no esta registrado en la base de datos.\n");
+            system("pause");
         }
-
+        system("cls");
+        Rectangulo();
         gotoxy(15, 6);
-        printf("¿Desea modificar otro ingreso? (S/N): ");
+        printf("Desea modificar otro ingreso? (S/N): ");
         fflush(stdin);
         opcion = getch();
 
@@ -459,9 +472,9 @@ void modificarDatosIngreso(nodoPaciente *arbolPaciente)
 
 }
 
-void buscaYDaDeBajaIngreso(nodoPaciente *arbolPaciente)
+void buscaYDaDeBajaIngreso(nodoPaciente *arbolPacientes)
 {
-    int nroIngreso;
+    int nroIngreso, dni;
     char opcion;
 
     do {
@@ -470,11 +483,19 @@ void buscaYDaDeBajaIngreso(nodoPaciente *arbolPaciente)
         gotoxy(15, 1);
         cabeza("Baja de Ingreso");
 
-        gotoxy(15, 4);
+        gotoxy(5, 4);
+        printf("Ingrese el numero de DNI del paciente a modificar: ");
+        scanf("%d", &dni);
+
+        nodoPaciente *paciente = inicArbolPacientes();
+        paciente = buscaPaciente(arbolPacientes, dni);
+        system("cls");
+        mostrarListadoIngresosPaciente(paciente);
+
         printf("Ingrese el numero de ingreso a dar de baja: ");
         scanf("%d", &nroIngreso);
 
-        nodoIngreso *ingresoExistente = buscaIngreso(arbolPaciente->listaIngresos, nroIngreso);
+        nodoIngreso *ingresoExistente = buscaIngreso(paciente->listaIngresos, nroIngreso);
 
         if (ingresoExistente)
         {
@@ -485,12 +506,16 @@ void buscaYDaDeBajaIngreso(nodoPaciente *arbolPaciente)
         }
         else
         {
+            system("cls");
+            Rectangulo();
             gotoxy(15, 6);
-            printf("El numero de ingreso cargado no está registrado en la base de datos.");
+            printf("El numero de ingreso cargado no esta registrado en la base de datos.\n");
+            system("pause");
         }
-
+        system("cls");
+        Rectangulo();
         gotoxy(15, 8);
-        printf("¿Desea dar de baja otro ingreso? (S/N): ");
+        printf("Desea dar de baja otro ingreso? (S/N): ");
         fflush(stdin);
         opcion = getch();
 
