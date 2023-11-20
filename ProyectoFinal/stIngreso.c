@@ -4,7 +4,7 @@
 /***************************
 * FUNCIONES BASICAS DE LISTA
 ***************************/
-nodoIngreso* inicLista()
+nodoIngreso* inicListaIngresos()
 {
     return NULL;
 }
@@ -75,7 +75,7 @@ nodoIngreso* buscaUltimoListaIngresos(nodoIngreso *lista)
 
 nodoIngreso* crearListaIngresos(const char *nombreArchivo)
 {
-    nodoIngreso *lista = inicLista();
+    nodoIngreso *lista = inicListaIngresos();
     stIngreso ingresoNuevo; //Registro donde voy a guardar lo levantado
     FILE *archivo = fopen(nombreArchivo, "rb");
 
@@ -309,7 +309,7 @@ void altaDeIngreso(nodoPaciente *arbolPacientes)
 //        perror("Error al abrir el archivo");
 //        return;
 //    }
-//    nodoIngreso *ingresoNuevo = inicLista();
+//    nodoIngreso *ingresoNuevo = inicListaIngresos();
 //    char continua = 's';
 //    while(continua == 's')
 //    {

@@ -33,7 +33,7 @@ typedef struct nodoIngreso
 /**
     FUNCIONES BASICAS DE LISTAS
 **/
-nodoIngreso* inicLista();
+nodoIngreso* inicListaIngresos();
 nodoIngreso* crearNodoIngreso(stIngreso registro);
 nodoIngreso* agregarNodoIngreso(nodoIngreso *lista, stIngreso registro);
 nodoIngreso* buscaUltimoListaIngresos(nodoIngreso *lista);

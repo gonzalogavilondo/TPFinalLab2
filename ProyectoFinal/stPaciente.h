@@ -42,7 +42,6 @@ void menuProvisorioGestionarPacientes();
 void textoPresioneCualquierTecla();
 /// FUNCIONES PARA LA OPCION 1:
 nodoPaciente * inicArbolPacientes();
-struct nodoIngreso * inicListaIngresos();
 int existeElPaciente(nodoPaciente * arbolPacientes, int dni);
 nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente);
 nodoPaciente * insertarPaciente(nodoPaciente * arbolPacientes, stPaciente nuevoPaciente);

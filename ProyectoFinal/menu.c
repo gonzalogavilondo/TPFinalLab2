@@ -977,7 +977,7 @@ void submenuAdministrativo(nodoPaciente * arbolPacientes)
     system("cls");
 }
 
-void submenuElijeOrdenamientoPacientes(nodoPaciente * arbol){
+void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes){
 
     char control = 's';
     int opcion;
@@ -1001,15 +1001,15 @@ void submenuElijeOrdenamientoPacientes(nodoPaciente * arbol){
         scanf("%i", &opcion);
         system("cls");
 
-        if (arbol) {
+        if (arbolPacientes) {
 
             switch (opcion) {
                 case 1: // Pacientes ordenados por dni
                     printf("\n Listado de pacientes, ordenados por dni:\n\n");
-                    inorderPacientes(arbol);
+                    inorderPacientes(arbolPacientes);
                     break;
                 case 2: // Pacientes ordenados por apellido
-                    imprimePacientesOrdenadosPorApellido(arbol);
+                    imprimePacientesOrdenadosPorApellido(arbolPacientes);
                     break;
                 case 3:
                     control = 'n';
@@ -1033,7 +1033,7 @@ void submenuElijeOrdenamientoPacientes(nodoPaciente * arbol){
 
 }
 
-void submenuGestionPacientes(nodoPaciente * arbol){
+void submenuGestionPacientes(nodoPaciente * arbolPacientes){
 
     char control = 's';
     int opcion;
@@ -1071,13 +1071,13 @@ void submenuGestionPacientes(nodoPaciente * arbol){
 //
 //                break;
             case 3: // Alta de un paciente
-                arbol = altaDePaciente(arbol);
+                arbolPacientes = altaDePaciente(arbolPacientes);
                 break;
 //            case 4: // Dar de baja a un paciente
 //
 //                break;
             case 5: // Ver listado de pacientes
-                submenuElijeOrdenamientoPacientes(arbol);
+                submenuElijeOrdenamientoPacientes(arbolPacientes);
                 break;
 
             case 6:
@@ -1096,7 +1096,7 @@ void submenuGestionPacientes(nodoPaciente * arbol){
 
 }
 
-void submenuAdministrador(nodoPaciente * arbol){
+void submenuAdministrador(nodoPaciente * arbolPacientes){
 
     char control = 's';
     int opcion;
@@ -1128,7 +1128,7 @@ void submenuAdministrador(nodoPaciente * arbol){
 
         switch (opcion) {
             case 1: //Gestionar pacientes
-                submenuGestionPacientes(arbol);
+                submenuGestionPacientes(arbolPacientes);
                 break;
 //            case 2: //Gestionar personal
 //                break;

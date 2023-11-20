@@ -131,10 +131,6 @@ nodoPaciente * inicArbolPacientes(){
     return NULL;
 }
 
-nodoIngreso * inicListaIngresos(){
-    return NULL;
-}
-
 // existeElPaciente: el arbol tiene que estar ordenado por dni para esta funcion
 // devuelve 0 si no lo encuentra, 1 si encuentra el dni en el arbolPacientes:
 int existeElPaciente(nodoPaciente * arbolPacientes, int dni){
