@@ -22,6 +22,9 @@ void modificarContraseniaEmpleadoXDNI(char contrasenia[],int dni);
 void submenuManejoIngresos(nodoPaciente *arbolPaciente);
 void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes);
 void submenuAdministrativo(nodoPaciente * arbolPacientes);
+void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes);
+void submenuGestionPacientes(nodoPaciente * arbolPacientes);
+void submenuAdministrador(nodoPaciente * arbolPacientes);
 void menuPrincipal(nodoPaciente* arbol);
 void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol);
 
