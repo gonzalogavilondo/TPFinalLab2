@@ -62,8 +62,8 @@ nodoPaciente * modificarDatosPaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 3:
 void darDeBajaUnPaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 4:
-//nodoPaciente * textoIngreseDNILuegoBuscaPaciente2(nodoPaciente * arbolPacientes);
-//nodoPaciente * textoIngreseDNILuegoBuscaPaciente(nodoPaciente * arbolPacientes, int * dni);
+nodoPaciente * textoIngreseDNILuegoBuscaPaciente2(nodoPaciente * arbolPacientes);
+nodoPaciente * textoIngreseDNILuegoBuscaPaciente(nodoPaciente * arbolPacientes, int * dni);
 void buscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 5:
 void inorderPacientes(nodoPaciente * arbolPacientes);

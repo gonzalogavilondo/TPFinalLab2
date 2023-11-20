@@ -1,5 +1,6 @@
 #include "stPaciente.h"
 #include "stIngreso.h"
+#include "menu.h"
 
 void menuProvisorioGestionarPacientes(){
     char opcion = 0;
@@ -115,6 +116,175 @@ void menuProvisorioGestionarPacientes(){
         }
 
     } while (opcion != ESC);
+}
+
+/// MENUS DE GESTION DE CLIENTES:
+
+//if (arbolPacientes) {
+//    buscaPacienteYMuestraDatos(arbolPacientes);
+//} else {
+//    printf("\n La estructura esta vacia, primera debe cargarla.");
+//}
+//
+//textoPresioneCualquierTecla();
+
+//void submenuBuscarYVerUnPaciente(nodoPaciente * arbolPacientes){
+//
+//    int opcion;
+//
+//        opcion = 0;
+//        system("cls");
+//        Rectangulo();
+//        gotoxy(15, 4);
+//        printf("Seleccione una opcion:\n");
+//        gotoxy(15, 5);
+//        printf("(1) Pacientes ordenados por dni\n");
+//        gotoxy(15, 6);
+//        printf("(2) Pacientes ordenados por apellido\n");
+//        gotoxy(15, 7);
+//        printf("(3) Volver\n");
+//        gotoxy(15, 8);
+//        fflush(stdin);
+//        scanf("%i", &opcion);
+//        system("cls");
+//
+//        if (arbolPacientes) {
+//
+//            switch (opcion) {
+//                case 1: // Pacientes ordenados por dni
+//                    printf("\n Listado de pacientes, ordenados por dni:\n\n");
+//                    inorderPacientes(arbolPacientes);
+//                    break;
+//                case 2: // Pacientes ordenados por apellido
+//                    imprimePacientesOrdenadosPorApellido(arbolPacientes);
+//                    break;
+//
+//                default:
+//                    // se selecciono una opcion no valida o la 3 'Volver'
+//                    break;
+//            }
+//
+//        } else {
+//            printf("\n No hay clientes cargados en la base de datos.");
+//        }
+//
+//        if (opcion == 1 || opcion == 2 || !arbolPacientes) {
+//            textoPresioneCualquierTecla();
+//        }
+//
+//    system("cls");
+//
+//}
+
+void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes){
+
+    int opcion;
+
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 4);
+        printf("Seleccione una opcion:\n");
+        gotoxy(15, 5);
+        printf("(1) Pacientes ordenados por dni\n");
+        gotoxy(15, 6);
+        printf("(2) Pacientes ordenados por apellido\n");
+        gotoxy(15, 7);
+        printf("(3) Volver\n");
+        gotoxy(15, 8);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        if (arbolPacientes) {
+
+            switch (opcion) {
+                case 1: // Pacientes ordenados por dni
+                    printf("\n Listado de pacientes, ordenados por dni:\n\n");
+                    inorderPacientes(arbolPacientes);
+                    break;
+                case 2: // Pacientes ordenados por apellido
+                    imprimePacientesOrdenadosPorApellido(arbolPacientes);
+                    break;
+
+                default:
+                    // se selecciono una opcion no valida o la 3 'Volver'
+                    break;
+            }
+
+        } else {
+            printf("\n No hay clientes cargados en la base de datos.");
+        }
+
+        if (opcion == 1 || opcion == 2 || !arbolPacientes) {
+            textoPresioneCualquierTecla();
+        }
+
+    system("cls");
+
+}
+
+void submenuGestionPacientes(nodoPaciente * arbolPacientes){
+
+    char control = 's';
+    int opcion;
+
+    do {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Menu gestion de pacientes");
+        gotoxy(15, 4);
+        printf("Que accion desea realizar?\n");
+        gotoxy(15, 5);
+        printf("(1) (aun no implementado) Ver datos de un paciente en particular\n");
+        gotoxy(15, 6);
+        printf("(2) (aun no implementado) Modificar datos de un paciente\n");
+        gotoxy(15, 7);
+        printf("(3) Alta de un paciente\n");
+        gotoxy(15, 8);
+        printf("(4) (aun no implementado) Dar de baja a un paciente\n");
+        gotoxy(15, 9);
+        printf("(5) Ver listado de pacientes\n");
+        gotoxy(15, 10);
+        printf("(6) Volver\n");
+        gotoxy(15, 11);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        switch (opcion) {
+//            case 1: // Ver datos de un paciente en particular
+//                submenuBuscarYVerUnPaciente(arbolPacientes);
+//                break;
+//            case 2: // Modificar datos de un paciente
+//
+//                break;
+            case 3: // Alta de un paciente
+                arbolPacientes = altaDePaciente(arbolPacientes);
+                break;
+//            case 4: // Dar de baja a un paciente
+//
+//                break;
+            case 5: // Ver listado de pacientes
+                submenuElijeOrdenamientoPacientes(arbolPacientes);
+                break;
+
+            case 6:
+                control = 'n';
+                break;
+
+            default:
+                control = 'n';
+                break;
+
+        }
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+
 }
 
 /// Se usa en varias partes:
@@ -464,6 +634,65 @@ void darDeBajaUnPaciente(nodoPaciente * arbolPacientes){
 }
 
 /// FUNCIONES PARA LA OPCION 4:
+
+//nodoPaciente * textoIngreseDNILuegoBuscaPaciente2(nodoPaciente * arbolPacientes){
+//
+//    int opcion;
+//
+//        opcion = 0;
+//        system("cls");
+//        Rectangulo();
+//        gotoxy(15, 4);
+//        printf("Seleccione una opcion:\n");
+//        gotoxy(15, 5);
+//        printf("(1) Pacientes ordenados por dni\n");
+//        gotoxy(15, 6);
+//        printf("(2) Pacientes ordenados por apellido\n");
+//        gotoxy(15, 7);
+//        printf("(3) Volver\n");
+//        gotoxy(15, 8);
+//        fflush(stdin);
+//        scanf("%i", &opcion);
+//        system("cls");
+//
+//        if (arbolPacientes) {
+//
+//            switch (opcion) {
+//                case 1: // Pacientes ordenados por dni
+//                    printf("\n Listado de pacientes, ordenados por dni:\n\n");
+//                    inorderPacientes(arbolPacientes);
+//                    break;
+//                case 2: // Pacientes ordenados por apellido
+//                    imprimePacientesOrdenadosPorApellido(arbolPacientes);
+//                    break;
+//
+//                default:
+//                    // se selecciono una opcion no valida o la 3 'Volver'
+//                    break;
+//            }
+//
+//        } else {
+//            printf("\n No hay clientes cargados en la base de datos.");
+//        }
+//
+//        if (opcion == 1 || opcion == 2 || !arbolPacientes) {
+//            textoPresioneCualquierTecla();
+//        }
+//
+//    system("cls");
+//
+//}
+
+//nodoPaciente * textoIngreseDNILuegoBuscaPaciente(nodoPaciente * arbolPacientes, int * dni){
+//
+//    printf("\n Ingrese el dni del paciente: ");
+//    fflush(stdin);
+//    scanf("%d", dni);
+//
+//    nodoPaciente * nodoBuscado = buscaPaciente(arbolPacientes, *dni);
+//
+//    return nodoBuscado;
+//}
 
 void buscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes){
 
