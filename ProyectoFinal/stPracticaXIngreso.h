@@ -30,7 +30,7 @@ nodoPracticaXIngreso* agregarNodoPracticaXIngreso(nodoPracticaXIngreso *lista, s
 nodoPracticaXIngreso* buscaUltimoLista(nodoPracticaXIngreso *lista);
 nodoPracticaXIngreso* crearListaPracticaXIngreso(const char *nombreArchivo);
 void mostrarUnNodoPracticaXIngreso(nodoPracticaXIngreso *aux);
-void mostrarPracticaXIngreso(nodoPracticaXIngreso *lista);
+void mostrarPracticaXIngreso(nodoPaciente *arbolPacientes);
 nodoPracticaXIngreso* liberarListaPracticaXIngreso(nodoPracticaXIngreso *lista);
 nodoPracticaXIngreso* cargarPracticaXIngreso(nodoPracticaXIngreso *lista, int nroIngreso, int nroPractica);
 
