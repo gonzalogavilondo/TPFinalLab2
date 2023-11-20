@@ -19,19 +19,15 @@ int main()
     SMALL_RECT windowSize = {0, 0, 72, 16};
     SetConsoleWindowInfo(wHnd, 1, &windowSize);
 
-    //arbolPacientes = archivoToArbolPacientes(arbolPacientes);
-    arbolPacientes = abrirArbolInicioPrograma(arbolPacientes);
+    arbolPacientes = archivoToArbolPacientes(arbolPacientes);
+    //arbolPacientes = abrirArbolInicioPrograma(arbolPacientes);
 
     menuPrincipal(arbolPacientes);
 
-    salvarArbolFinPrograma(arbolPacientes);
+    //salvarArbolFinPrograma(arbolPacientes);
 
 //    submenuManejoEmpleados();
-//
-//    probando la parte de pacientes:
-//    menuProvisorioGestionarPacientes();
-//    probando la parte de practicas:
-//    menuProvisorioGestionarPracticas();
+
 
     ///Pruebo generar un archivo de ingresos
 //    generarArchivoBinIngresos(ARCHIVO_INGRESOS);

@@ -100,7 +100,7 @@
 	"stIngreso.h"
 	"menu.h"
 
-1700442162 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\main.c
+1700519763 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\main.c
 	"stIngreso.h"
 	"stEmpleado.h"
 	"stPractica.h"
@@ -109,7 +109,7 @@
 	"menu.h"
 	<windows.h>
 
-1700502953 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stingreso.h
+1700519604 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stingreso.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -134,7 +134,7 @@
 	<conio.h>
 	<string.h>
 
-1700500077 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpracticaxingreso.h
+1700519604 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpracticaxingreso.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -142,7 +142,7 @@
 	"gotoxy.h"
 	"stPaciente.h"
 
-1700510038 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpaciente.h
+1700521484 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpaciente.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -151,7 +151,7 @@
 1700427219 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stempleado.c
 	"stEmpleado.h"
 
-1700508801 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stingreso.c
+1700519604 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stingreso.c
 	"stIngreso.h"
 	"menu.h"
 
@@ -163,7 +163,7 @@
 	"stPractica.h"
 	"stPaciente.h"
 
-1700508801 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpracticaxingreso.c
+1700519604 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpracticaxingreso.c
 	"stPracticaXIngreso.h"
 	"stIngreso.h"
 	"stPractica.h"
@@ -406,7 +406,7 @@
 
 1700185390 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\gotoxy.h
 
-1700509385 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\menu.c
+1700519604 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\menu.c
 	"menu.h"
 
 1700511306 source:c:\users\user\desktop\trabajofinal\tpfinallab2\proyectofinal\gotoxy.c
