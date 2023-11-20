@@ -56,6 +56,7 @@ void muestraUnPaciente(stPaciente datosPaciente);
 nodoPaciente * encontrarMinimoDni(nodoPaciente* arbolPacientes);
 nodoPaciente * eliminarNodoArbolPacientes(nodoPaciente * arbolPacientes, int dniPaciente);
 nodoPaciente * buscaPaciente(nodoPaciente * arbolPacientes, int dni);
+int existeIngresoXnroIngreso(nodoPaciente *arbolPacientes, int nroIngresoBuscar);
 void textoDniNoEnBaseDeDatos();
 nodoPaciente * textoIngreseDNILuegoBuscaPaciente(nodoPaciente * arbolPacientes, int * dni);
 nodoPaciente * modificarDatosPaciente(nodoPaciente * arbolPacientes);

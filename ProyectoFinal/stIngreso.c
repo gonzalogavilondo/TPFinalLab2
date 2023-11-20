@@ -29,6 +29,7 @@ nodoIngreso* crearNodoIngreso(stIngreso registro)
     nuevo->ingreso.matriculaProfesional = registro.matriculaProfesional;
     nuevo->ingreso.eliminado = registro.eliminado;
     nuevo->siguiente = NULL;
+    nuevo->listaPracticasXIngreso = NULL;
 
     return nuevo;
 }
@@ -330,30 +331,30 @@ void altaDeIngreso(nodoPaciente *arbolPacientes)
 //}
 
 
-int existeIngresoXnroIngreso(int nroIngresoBuscar)
-{
-    FILE *archivo = fopen(ARCHIVO_INGRESOS, "rb");
-
-    if (archivo == NULL)
-    {
-        perror("Error al abrir el archivo");
-        return 0; // Indicar que no se encontró debido a un error
-    }
-
-    stIngreso ingresoActual;
-
-    while (fread(&ingresoActual, sizeof(stIngreso), 1, archivo) == 1)
-    {
-        if (ingresoActual.numeroIngreso == nroIngresoBuscar)
-        {
-            fclose(archivo);
-            return 1; // Se encontró el ingreso con el nro de ingreso
-        }
-    }
-
-    fclose(archivo);
-    return 0; // No se encontró el registro
-}
+//int existeIngresoXnroIngreso(int nroIngresoBuscar)
+//{
+//    FILE *archivo = fopen(ARCHIVO_INGRESOS, "rb");
+//
+//    if (archivo == NULL)
+//    {
+//        perror("Error al abrir el archivo");
+//        return 0; // Indicar que no se encontró debido a un error
+//    }
+//
+//    stIngreso ingresoActual;
+//
+//    while (fread(&ingresoActual, sizeof(stIngreso), 1, archivo) == 1)
+//    {
+//        if (ingresoActual.numeroIngreso == nroIngresoBuscar)
+//        {
+//            fclose(archivo);
+//            return 1; // Se encontró el ingreso con el nro de ingreso
+//        }
+//    }
+//
+//    fclose(archivo);
+//    return 0; // No se encontró el registro
+//}
 
 
 nodoIngreso *buscaIngreso(nodoIngreso *listaIngresos, int nroIngreso)

@@ -501,6 +501,37 @@ nodoPaciente * buscaPaciente(nodoPaciente * arbolPacientes, int dni){
     return nodoBuscado;
 }
 
+int existeIngresoXnroIngreso(nodoPaciente *arbolPacientes, int nroIngresoBuscar)
+{
+    if (arbolPacientes == NULL)
+    {
+        return 0; // No existe el número de ingreso en el árbol
+    }
+
+    if (arbolPacientes->listaIngresos != NULL)
+    {
+        nodoIngreso *ingresos = arbolPacientes->listaIngresos;
+        while (ingresos != NULL) {
+            if (nroIngresoBuscar == ingresos->ingreso.numeroIngreso)
+            {
+                return 1; // Se encontró el número de ingreso en la lista
+            }
+            ingresos = ingresos->siguiente;
+        }
+    }
+
+    // Buscar en los subárboles izquierdo y derecho
+    if (nroIngresoBuscar < arbolPacientes->datosPaciente.dni)
+    {
+        return existeIngresoXnroIngreso(arbolPacientes->izq, nroIngresoBuscar);
+    }
+    else
+    {
+        return existeIngresoXnroIngreso(arbolPacientes->der, nroIngresoBuscar);
+    }
+}
+
+
 void textoDniNoEnBaseDeDatos(){
     printf("\n El dni ingresado no esta registrado en la base de datos.");
 }

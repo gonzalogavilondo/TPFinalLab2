@@ -61,7 +61,7 @@ void buscaYDaDeBajaIngreso(nodoPaciente *arbolPacientes);
 
 ///Adicionales para la funcionalidad
 void generarArchivoBinIngresos(const char *nombreArchivo);
-int existeIngresoXnroIngreso(int nroIngresoBuscar);
+//int existeIngresoXnroIngreso(int nroIngresoBuscar);
 
 
 #endif // STINGRESO_H_INCLUDED

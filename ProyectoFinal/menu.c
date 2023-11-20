@@ -908,7 +908,7 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
                 //buscaYDaDeBajaPracticaXIngreso(listaPracticaXIngresos);
                 break;
             case 4:
-//                mostrarPracticaXIngreso(arbolPacientes);
+                mostrarPracticaXIngreso(arbolPacientes);
             break;
 
             case 5:
@@ -957,7 +957,7 @@ void submenuTecnico(nodoPaciente* arbol)
 
             case 2:
                 // consultar muestra
-                mostrarUnaPractica();
+                //mostrarUnaPractica();
                 break;
             case 4:
                 control = 'n';

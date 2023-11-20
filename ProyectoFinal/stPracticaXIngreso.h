@@ -46,4 +46,7 @@ nodoPracticaXIngreso *modificarDatosPracticaXIngreso(nodoPracticaXIngreso *lista
 ///Dar de baja una practica por ingreso
 void buscaYDaDeBajaPracticaXIngreso(nodoPracticaXIngreso *lista);
 
+void registrarResultadoPracticaXIngreso(nodoPaciente *arbol);
+void mostrarUnaPractica(nodoPaciente * arbol);
+
 #endif // STPRACTICAXINGRESO_H_INCLUDED
