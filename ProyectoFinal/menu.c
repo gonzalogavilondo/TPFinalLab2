@@ -87,7 +87,7 @@ void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
                         if (numeroPerfil != 1 && numeroPerfil != 2)
                         {
                             gotoxy(2, 15);
-                            printf("Ingresó un número no válido. Por favor, reintente.");
+                            printf("Ingreso un numero no valido. Por favor, reintente.");
                             error = 1;
                             numeroPerfil = 0;
                         }
@@ -98,7 +98,7 @@ void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
                         if (numeroPerfil != 1 && numeroPerfil != 2 && numeroPerfil != 3 && numeroPerfil != 4)
                         {
                             gotoxy(2, 15);
-                            printf("Ingresó un número no válido. Por favor, reintente.");
+                            printf("Ingreso un numero no valido. Por favor, reintente.");
                             numeroPerfil = 0;
                         }
                     }
@@ -147,7 +147,7 @@ void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
                 if (opcion != 'S' && opcion != 'N')
                 {
                     gotoxy(2, 13);
-                    printf("Ingresó una opción no válida. Por favor, reintente.");
+                    printf("Ingreso una opcion no valida. Por favor, reintente.");
                 }
             }
             while (opcion != 'S' && opcion != 'N');
@@ -224,7 +224,7 @@ void menuBajaDeEmpleado(char tipoEmpleadoEjecuta[]) {
 
             if (opcion != 'S' && opcion != 'N') {
                 gotoxy(2, 13);
-                printf("Ingresó una opción no válida, reintente por favor.\n");
+                printf("Ingreso una opcion no valida, reintente por favor.\n");
             }
         } while (opcion != 'S' && opcion != 'N');
         }else{
@@ -402,7 +402,7 @@ void subMenuModificacionDeEmpleado(char tipoEmpleadoEjecuta[]){
                                 if (numeroPerfil != 1 && numeroPerfil != 2)
                                 {
                                     gotoxy(2, 15);
-                                    printf("Ingresó un número no válido. Por favor, reintente.");
+                                    printf("Ingreso un numero no valido. Por favor, reintente.");
                                     error = 1;
                                     numeroPerfil = 0;
                                 }
@@ -500,7 +500,7 @@ void subMenuModificacionDeEmpleado(char tipoEmpleadoEjecuta[]){
                     if (control != 'S' && control != 'N')
                     {
                         gotoxy(2, 13);
-                        printf("Ingresó una opción no válida, reintente por favor.\n");
+                        printf("Ingreso una opcion no valida, reintente por favor.\n");
                     }
                 }
                 while(control == 'S');
@@ -560,7 +560,7 @@ void subMenuConsultaDeEmpleado(char tipoEmpleadoEjecuta[]){
 
             if (opcion != 'S' && opcion != 'N') {
                 gotoxy(2, 13);
-                printf("Ingresó una opción no válida, reintente por favor.\n");
+                printf("Ingreso una opcion no valida, reintente por favor.\n");
             }
         } while (opcion != 'S' && opcion != 'N');
         }else{
@@ -666,7 +666,7 @@ void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
         if (control != 'S' && control != 'N')
         {
             gotoxy(2, 13);
-            printf("Ingresó una opción no válida, reintente por favor.\n");
+            printf("Ingreso una opcion no valida, reintente por favor.\n");
         }
     }
     while(control == 'S');
@@ -785,7 +785,7 @@ void submenuManejoEmpleados() {
                 break;
 
             default:
-                control = 'n';
+                control = 's';
                 break;
 
         }
@@ -853,7 +853,7 @@ void submenuManejoIngresos(nodoPaciente *arbolPaciente)
                 break;
 
             default:
-                control = 'n';
+                control = 's';
                 break;
         }
 
@@ -916,7 +916,7 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
                 break;
 
             default:
-                control = 'n';
+                control = 's';
                 break;
         }
 
@@ -924,7 +924,54 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
 
     system("cls");
 }
+void submenuTecnico(nodoPaciente* arbol)
+{
+    char control = 's';
+    int opcion;
 
+    do
+    {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Menu Tecnico de laboratorio");
+        gotoxy(15, 4);
+        printf("Que desea realizar?");
+        gotoxy(15, 5);
+        printf("(1) Registrar resultado de analisis");
+        gotoxy(15, 6);
+        printf("(2) Consultar muestra");
+        gotoxy(15, 7);
+        printf("(4) VOLVER\n");
+        gotoxy(15, 8);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        switch (opcion)
+        {
+            case 1:
+                registrarResultadoPracticaXIngreso(arbol);
+                break;
+
+            case 2:
+                // consultar muestra
+                mostrarUnaPractica();
+                break;
+            case 4:
+                control = 'n';
+                break;
+
+            default:
+                control = 's';
+                break;
+        }
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+}
 void submenuAdministrativo(nodoPaciente * arbolPacientes)
 {
     char control = 's';
@@ -944,10 +991,12 @@ void submenuAdministrativo(nodoPaciente * arbolPacientes)
         gotoxy(15, 6);
         printf("(2) Gestionar Citas\n");
         gotoxy(15, 7);
-        printf("(3) Gestionar Practicas por Ingreso\n");
+        printf("(3) Gestionar personal\n");
         gotoxy(15, 8);
-        printf("(4) VOLVER\n");
+        printf("(4) Gestionar Practicas por Ingreso\n");
         gotoxy(15, 9);
+        printf("(5) VOLVER\n");
+        gotoxy(15, 10);
         fflush(stdin);
         scanf("%i", &opcion);
         system("cls");
@@ -964,16 +1013,20 @@ void submenuAdministrativo(nodoPaciente * arbolPacientes)
                 break;
 
             case 3:
+                // Gestionar personal
+                submenuManejoEmpleados("Administrativo");
+                break;
+            case 4:
                 // Gestionar prácticas por ingreso
                 submenuManejoPracticasXIngreso(arbolPacientes);
                 break;
 
-            case 4:
+            case 5:
                 control = 'n';
                 break;
 
             default:
-                control = 'n';
+                control = 's';
                 break;
         }
 
@@ -1016,8 +1069,9 @@ void submenuAdministrador(nodoPaciente * arbolPacientes){
             case 1: //Gestionar pacientes
                 submenuGestionPacientes(arbolPacientes);
                 break;
-//            case 2: //Gestionar personal
-//                break;
+           case 2:
+                subMenuListadosDeEmpleado("Administrador");
+                break;
 //            case 3: //Gestionar ingresos
 //                break;
 //            case 4: //Gestionar practicas
@@ -1030,7 +1084,7 @@ void submenuAdministrador(nodoPaciente * arbolPacientes){
                 break;
 
             default:
-                control = 'n';
+                control = 's';
                 break;
 
         }
@@ -1081,7 +1135,7 @@ void menuPrincipal(nodoPaciente* arbol){
                 break;
 
             default:
-                control = 'n';
+                control = 's';
                 break;
 
         }
@@ -1112,9 +1166,7 @@ void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol){
     if (correcto == 1)
     {
         if(strcmp(tipoMenu,"Tecnico")==0){
-            //submenuTecnico
-            printf("Submenu Tecnico\n");
-            system("pause");
+            submenuTecnico(arbol);
         }else{
             if(strcmp(tipoMenu,"Administrativo")==0){
                 submenuAdministrativo(arbol);
