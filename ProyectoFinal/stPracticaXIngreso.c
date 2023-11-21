@@ -280,6 +280,7 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
                 if (nodoBuscado && !(nodoBuscado->datosPractica.tieneAlMenosUnUso)) {
                     nodoBuscado->datosPractica.tieneAlMenosUnUso = 1;
                 }
+                liberarListaPracticas(listaPracticas);
 
 
 
