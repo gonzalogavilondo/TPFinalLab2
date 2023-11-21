@@ -64,37 +64,18 @@ nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes);
 void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES OPCION 5 DEL MENU 'submenuGestionPacientes':
 void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes);
+void inorderPacientes(nodoPaciente * arbolPacientes);
 int cantidadNodosArbolPacientes(nodoPaciente * arbolPacientes);
 void pacienteToArregloOrdenadoXApellidoNombre(stPaciente * arreglo, int validosArre, stPaciente datosPaciente);
 void recorreArbolEIngresaEnArregloXApellidoNombre(nodoPaciente * arbolPacientes, stPaciente * arreglo, int * validosArre);
 stPaciente * arbolPacientesToArreglo(nodoPaciente * arbolPacientes);
 void muestraArregloPacientes(stPaciente arregloPacientes[], int validosArre);
 void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes);
-
-
-
-
-
-
-
-
-/// FUNCIONES PARA LA OPCION 2: menu viejo, PARA CAMBIAR ----------------------------------------------------
-void textoDniNoEnBaseDeDatos();
-nodoPaciente * textoIngreseDNILuegoBuscaPaciente(nodoPaciente * arbolPacientes, int * dni);
-/// FUNCIONES PARA LA OPCION 5: menu viejo, PARA CAMBIAR ----------------------------------------------------
-void inorderPacientes(nodoPaciente * arbolPacientes);
-/// FUNCIONES PARA LA OPCION 6: menu viejo, PARA CAMBIAR ----------------------------------------------------
+/// FUNCIONES PARA MANEJO DE ARCHIVO PACIENTES:
 void imprimePacientesInorderEnArchivo(nodoPaciente * arbolPacientes, FILE * archi);
 void guardaArbolPacientesEnArchivo(nodoPaciente * arbolPacientes);
-/// FUNCIONES PARA LA OPCION 7: menu viejo, PARA CAMBIAR ----------------------------------------------------
 void liberarArbolPacientes(nodoPaciente * arbolPacientes);
 nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes);
-
-
-
-
-
-
 ///FUNCION QUE LA USA INGRESOS:
 int existePacienteXDNI(int dniBuscar);
 void muestraUnPacienteResumido(stPaciente datosPaciente);

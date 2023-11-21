@@ -12,9 +12,8 @@ void menuProvisorioGestionarPacientes(){
 
         system("cls");
         printf("\n              Menu provisorio para 'Gestionar pacientes':");
-        printf("\n                                          3. Dar de baja un paciente.");
 
-        printf("\n\n\n                                     Para probar \"GESTIONAR PACIENTES\":");
+        printf("\n\n                                     Para probar \"GESTIONAR PACIENTES\":");
         printf("\n\n                                          5. Mostrar arbol de pacientes.");
         printf("\n                                          6. Guardar arbol en un archivo binario.");
         printf("\n                                          7. Cargar datos de los pacientes del archivo en un arbol(si se uso la opcion 1,");
@@ -620,6 +619,14 @@ void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes){
 
 }
 
+void inorderPacientes(nodoPaciente * arbolPacientes){
+    if (arbolPacientes) {
+        inorderPacientes(arbolPacientes->izq);
+        muestraUnPaciente(arbolPacientes->datosPaciente);
+        inorderPacientes(arbolPacientes->der);
+    }
+}
+
 int cantidadNodosArbolPacientes(nodoPaciente * arbolPacientes){
 
     int total = 0;
@@ -685,46 +692,7 @@ void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes){
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-/// FUNCIONES PARA LA OPCION 2: menu viejo, PARA CAMBIAR ----------------------------------------------------
-
-void textoDniNoEnBaseDeDatos(){
-    printf("\n El dni ingresado no esta registrado en la base de datos.");
-}
-
-nodoPaciente * textoIngreseDNILuegoBuscaPaciente(nodoPaciente * arbolPacientes, int * dni){
-
-    printf("\n Ingrese el dni del paciente: ");
-    fflush(stdin);
-    scanf("%d", dni);
-
-    nodoPaciente * nodoBuscado = buscaPaciente(arbolPacientes, *dni);
-
-    return nodoBuscado;
-}
-
-/// FUNCIONES PARA LA OPCION 5: menu viejo, PARA CAMBIAR ----------------------------------------------------
-
-void inorderPacientes(nodoPaciente * arbolPacientes){
-    if (arbolPacientes) {
-        inorderPacientes(arbolPacientes->izq);
-        muestraUnPaciente(arbolPacientes->datosPaciente);
-        inorderPacientes(arbolPacientes->der);
-    }
-}
-
-/// FUNCIONES PARA LA OPCION 6: menu viejo, PARA CAMBIAR ----------------------------------------------------
+/// FUNCIONES PARA MANEJO DE ARCHIVO PACIENTES:
 
 void imprimePacientesInorderEnArchivo(nodoPaciente * arbolPacientes, FILE * archi){
 
@@ -762,8 +730,6 @@ void guardaArbolPacientesEnArchivo(nodoPaciente * arbolPacientes){
 
 }
 
-/// FUNCIONES PARA LA OPCION 7: menu viejo, PARA CAMBIAR ----------------------------------------------------
-
 void liberarArbolPacientes(nodoPaciente * arbolPacientes){
 
     if (arbolPacientes) {
@@ -793,16 +759,6 @@ nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes){
 
     return arbolPacientes;
 }
-
-
-
-
-
-
-
-
-
-
 
 ///FUNCIONES QUE LAS USA INGRESOS:
 
