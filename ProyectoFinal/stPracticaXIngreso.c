@@ -309,14 +309,17 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
 
 
 nodoPracticaXIngreso *buscaPracticaXIngreso(nodoPracticaXIngreso *listaPracticaXIngresos, int nroPractica)
-{
-    nodoPracticaXIngreso *seg;
-    seg = listaPracticaXIngresos;
-    while ( (seg != NULL) && (seg->practicaXIngreso.nroPractica != nroPractica) )
-    {
+ {
+    nodoPracticaXIngreso *seg = listaPracticaXIngresos;
+
+    while (seg != NULL) {
+        if (seg->practicaXIngreso.nroPractica == nroPractica) {
+            return seg;
+        }
         seg = seg->siguiente;
     }
-    return seg;
+
+    return NULL;
 }
 
 nodoPracticaXIngreso *modificarDatosPracticaXIngreso(nodoPracticaXIngreso *lista)

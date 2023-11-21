@@ -66,9 +66,9 @@ void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
                     gotoxy(2, 8);
                     printf("Ingrese el nro del perfil:\n");
                     gotoxy(2, 9);
-                    printf(" 1 -> Profesional de laboratorio: Técnico\n");
+                    printf(" 1 -> Profesional de laboratorio: Tecnico\n");
                     gotoxy(2, 10);
-                    printf(" 2 -> Profesional de laboratorio: Bioquímico\n");
+                    printf(" 2 -> Profesional de laboratorio: Bioquimico\n");
 
                     if (strcmp(tipoEmpleadoEjecuta, "Administrador") == 0)
                     {
@@ -110,7 +110,7 @@ void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
                     strcpy(nuevoEmpleado.perfil, "Técnico");
                     break;
                 case 2:
-                    strcpy(nuevoEmpleado.perfil, "Bioquímico");
+                    strcpy(nuevoEmpleado.perfil, "Bioquimico");
                     break;
                 case 3:
                     strcpy(nuevoEmpleado.perfil, "Administrativo");
@@ -156,7 +156,7 @@ void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
         }else{
             opcion = 'N';
         }
-    }while (opcion != 'S');
+    }while (opcion == 'S');
 }
 void menuBajaDeEmpleado(char tipoEmpleadoEjecuta[]) {
     stEmpleado bajaEmpleado;
@@ -992,6 +992,7 @@ void submenuAdministrativo(nodoPaciente * arbolPacientes)
         {
             case 1:
                 // Gestionar pacientes
+                submenuGestionPacientes(arbolPacientes);
                 break;
 
             case 2:
@@ -1056,16 +1057,18 @@ void submenuAdministrador(nodoPaciente * arbolPacientes){
             case 1: //Gestionar pacientes
                 submenuGestionPacientes(arbolPacientes);
                 break;
-           case 2:
+            case 2:
                 submenuManejoEmpleados("Administrador");
                 break;
-//            case 3: //Gestionar ingresos
-//                break;
-            case 4: //Gestionar practicas
+            case 3: //Gestionar ingresos
+                submenuManejoIngresos(arbolPacientes);
+                break;
+            case 4:
                 submenuGestionPracticas();
                 break;
-//            case 5: //Gestionar practicas por ingreso
-//                break;
+            case 5:
+                submenuManejoPracticasXIngreso(arbolPacientes);
+                break;
 
             case 6:
                 control = 'n';
@@ -1148,8 +1151,8 @@ void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol){
     fflush(stdin);
     gets(contrasenia);
 
-    //int correcto = inicioDeSesion(usuario, contrasenia, tipoMenu);
-    int correcto = 1;
+    int correcto = inicioDeSesion(usuario, contrasenia, tipoMenu);
+
 
     if (correcto == 1)
     {
