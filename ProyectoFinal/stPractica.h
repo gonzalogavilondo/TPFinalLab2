@@ -41,6 +41,8 @@ void liberarListaPracticas(nodoPractica * listaPracticas);
 /// FUNCIONES OPCION 1 DEL MENU 'submenuGestionPracticas':
 void mostrarUnNodoPractica(nodoPractica * practica);
 void muestraListaPracticas(nodoPractica * listaPracticas);
+void mostrarUnNodoPractica2(nodoPractica * practica, int pos);
+void muestraListaPracticas2(nodoPractica * listaPracticas);
 /// FUNCIONES OPCION 2 DEL MENU 'submenuGestionPracticas':
 void manejaVerModificarOBajaDePractica(nodoPractica * listaPracticas, int variante);
 nodoPractica * buscaPracticaPorNombre(nodoPractica * listaPracticas, char nombreBusqueda[]);

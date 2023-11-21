@@ -107,7 +107,7 @@ void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
                 switch (numeroPerfil)
                 {
                 case 1:
-                    strcpy(nuevoEmpleado.perfil, "Técnico");
+                    strcpy(nuevoEmpleado.perfil, "Tecnico");
                     break;
                 case 2:
                     strcpy(nuevoEmpleado.perfil, "Bioquimico");

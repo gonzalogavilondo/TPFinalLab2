@@ -222,13 +222,22 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
     do
     {
         system("cls");
-        Rectangulo();
-        gotoxy(15, 1);
-        cabeza("Alta de Practica por Ingreso");
 
-        gotoxy(15, 4);
-        printf("Cargue el numero de practica: ");
+        /// Leo el archivo de practicas y las cargo en una lista:
+        nodoPractica * listaPracticas = inicListaPracticas();
+        listaPracticas = archivoToListaPracticas(listaPracticas);
+
+        muestraListaPracticas2(listaPracticas);
+
+        gotoxy(0, 0);
+        gotoxy(0, 2);
+        printf("Cargue el numero de");
+        gotoxy(0, 3);
+        printf("practica que desea dar de alta: ");
         scanf("%d", &nroPractica);
+
+        /// chequear si en caso de ingresar un numero de practica que este
+        /// eliminada, avanza o no, no deberia...
 
         if (!existePracticaXnroPractica(nroPractica))
         {
@@ -261,7 +270,9 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
                 system("cls");
                 Rectangulo();
                 gotoxy(5, 4);
-                printf("Ingrese el numero de DNI del paciente a modificar: ");
+                printf("Ingrese el numero de DNI del");
+                gotoxy(5, 5);
+                printf("paciente al que le carga la practica: ");
                 scanf("%d", &dni);
                 arbolPacientes = buscaPaciente(arbolPacientes, dni);
             }

@@ -116,6 +116,36 @@ void muestraListaPracticas(nodoPractica * listaPracticas){
     textoPresioneCualquierTecla();
 }
 
+void mostrarUnNodoPractica2(nodoPractica * practica, int pos){
+
+    if (practica) {
+        gotoxy(35, pos);
+        printf("Nombre practica: %s", practica->datosPractica.nombrePractica);
+        gotoxy(35, pos+1);
+        printf("Numero de practica: %d", practica->datosPractica.nroPractica);
+        gotoxy(35, pos+2);
+        printf(" =====================");
+    } else {
+        gotoxy(35, pos);
+        printf("Nodo no valido.");
+    }
+
+}
+
+void muestraListaPracticas2(nodoPractica * listaPracticas){
+
+    int pos = 3;
+    while (listaPracticas) {
+        // solo muestra las que no esten eliminadas:
+        if (!(listaPracticas->datosPractica.eliminado)) {
+            mostrarUnNodoPractica2(listaPracticas, pos);
+            pos = pos + 4;
+        }
+        listaPracticas = listaPracticas->siguiente;
+    }
+
+}
+
 /// FUNCIONES OPCION 2, 4 Y 5 DEL MENU 'submenuGestionPracticas':
 
 // funcion que maneja el modificar una practica (variante = 1), dar de baja una
