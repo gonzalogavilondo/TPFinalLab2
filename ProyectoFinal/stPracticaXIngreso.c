@@ -268,6 +268,21 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
 
             if (error == 0)
             {
+
+
+                /// Si es la primera vez que se usa la practica, se setea en 1 el campo tieneAlMenosUnUso:
+                // Leo el archivo de practicas y las cargo en una lista:
+                nodoPractica * listaPracticas = inicListaPracticas();
+                listaPracticas = archivoToListaPracticas(listaPracticas);
+                nodoPractica * nodoBuscado;
+                // esta funcion devuelve NULL si no encontro el nodo
+                nodoBuscado = buscaPracticaPorNroPractica(listaPracticas, nroPractica);
+                if (nodoBuscado && !(nodoBuscado->datosPractica.tieneAlMenosUnUso)) {
+                    nodoBuscado->datosPractica.tieneAlMenosUnUso = 1;
+                }
+
+
+
                 // Crear un nuevo nodo de práctica por ingreso y agregarlo a la lista
                 arbolPacientes->listaIngresos->listaPracticasXIngreso = cargarPracticaXIngreso(
                     arbolPacientes->listaIngresos->listaPracticasXIngreso, nroIngreso, nroPractica);

@@ -128,7 +128,7 @@
 	<string.h>
 	"stEmpleado.h"
 
-1700547935 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpractica.h
+1700586039 c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpractica.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -155,17 +155,18 @@
 	"stIngreso.h"
 	"menu.h"
 
-1700581682 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpaciente.c
+1700585075 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpaciente.c
 	"stPaciente.h"
 	"stIngreso.h"
+	"stPracticaXIngreso.h"
 	"menu.h"
 
-1700548642 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpractica.c
+1700586996 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpractica.c
 	"stPractica.h"
 	"stPaciente.h"
 	"menu.h"
 
-1700519604 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpracticaxingreso.c
+1700586891 source:c:\users\usuario\desktop\pablo\escritorio\utn\2do cuatrimestre 2023\laboratorio y programación 2\laboratorio 2\tp final\aca adentro el git clone\tpfinallab2\proyectofinal\stpracticaxingreso.c
 	"stPracticaXIngreso.h"
 	"stIngreso.h"
 	"stPractica.h"

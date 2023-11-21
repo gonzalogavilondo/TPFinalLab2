@@ -212,10 +212,12 @@ void manejaVerModificarOBajaDePractica(nodoPractica * listaPracticas, int varian
 
                     } else if (variante == 2) {
 
-                        /// (falta ver solo si no fue incluida en ningun ingreso)
-
-                        nodoBuscado->datosPractica.eliminado = 1;
-                        printf("\n Se dio de baja a la practica con exito.");
+                        if (nodoBuscado->datosPractica.tieneAlMenosUnUso) {
+                            printf("\n No se puede dar de baja la practica ya que tiene al menos 1 uso.");
+                        } else {
+                            nodoBuscado->datosPractica.eliminado = 1;
+                            printf("\n Se dio de baja a la practica con exito.");
+                        }
 
                     } else if (variante == 3) {
 
@@ -284,6 +286,7 @@ nodoPractica * darDeAltaPracticas(nodoPractica * listaPracticas){
             printf("\n La practica ingresada ya existe en la base de datos.");
         } else {
             nuevaPractica.eliminado = 0;
+            nuevaPractica.tieneAlMenosUnUso = 0;
             nuevaPractica.nroPractica = tamanioListaPracticas(listaPracticas) + 1;
 
             listaPracticas = agregaNodoPracticaOrdenadoXNombre(listaPracticas, crearNodoPractica(nuevaPractica));

@@ -18,6 +18,7 @@ typedef struct stPractica {
 
     int nroPractica;
     char nombrePractica[30];
+    int tieneAlMenosUnUso;
     int eliminado;
 
 } stPractica;
