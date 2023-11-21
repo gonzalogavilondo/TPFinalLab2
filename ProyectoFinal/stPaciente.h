@@ -60,13 +60,8 @@ nodoPaciente * insertarPaciente(nodoPaciente * arbolPacientes, stPaciente nuevoP
 nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente);
 /// FUNCIONES OPCION 3 DEL MENU 'submenuGestionPacientes':
 nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes);
-
-
-
-
-
-
-
+/// FUNCIONES OPCION 4 DEL MENU 'submenuGestionPacientes':
+void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES OPCION 5 DEL MENU 'submenuGestionPacientes':
 void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes);
 int cantidadNodosArbolPacientes(nodoPaciente * arbolPacientes);
@@ -83,23 +78,9 @@ void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes);
 
 
 
-
-
-
-
-
-
-
-
-
 /// FUNCIONES PARA LA OPCION 2: menu viejo, PARA CAMBIAR ----------------------------------------------------
-void muestraUnPacienteResumido(stPaciente datosPaciente);
-int existeIngresoXnroIngreso(nodoPaciente *arbolPacientes, int nroIngresoBuscar);
 void textoDniNoEnBaseDeDatos();
 nodoPaciente * textoIngreseDNILuegoBuscaPaciente(nodoPaciente * arbolPacientes, int * dni);
-nodoPaciente * modificarDatosPaciente(nodoPaciente * arbolPacientes);
-/// FUNCIONES PARA LA OPCION 3: menu viejo, PARA CAMBIAR ----------------------------------------------------
-void darDeBajaUnPaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 5: menu viejo, PARA CAMBIAR ----------------------------------------------------
 void inorderPacientes(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 6: menu viejo, PARA CAMBIAR ----------------------------------------------------
@@ -108,7 +89,16 @@ void guardaArbolPacientesEnArchivo(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 7: menu viejo, PARA CAMBIAR ----------------------------------------------------
 void liberarArbolPacientes(nodoPaciente * arbolPacientes);
 nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes);
+
+
+
+
+
+
 ///FUNCION QUE LA USA INGRESOS:
 int existePacienteXDNI(int dniBuscar);
+void muestraUnPacienteResumido(stPaciente datosPaciente);
+///FUNCIONES QUE LAS USA PRACTICAXINGRESO:
+int existeIngresoXnroIngreso(nodoPaciente *arbolPacientes, int nroIngresoBuscar);
 
 #endif // STPACIENTE_H_INCLUDED
