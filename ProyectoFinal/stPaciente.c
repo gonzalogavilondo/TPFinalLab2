@@ -1,5 +1,6 @@
 #include "stPaciente.h"
 #include "stIngreso.h"
+#include "stPracticaXIngreso.h"
 #include "menu.h"
 
 /// Se usa en varias partes:
@@ -480,19 +481,31 @@ void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes){
 
     if (paciente) {
 
+        /// Es baja del paciente en cascada, es decir, da de baja primero las practicas
+        /// x ingreso asociadas, luego los ingresos y por ultimo da de baja al paciente:
 
-        /// queda pendiente que sea en cascada
-        /// es decir dar de baja primero practicas
-        /// x ingreso, luego los ingresos
+        nodoIngreso * auxListaIngresos = paciente->listaIngresos;
+
+        while (auxListaIngresos) {
+            darDeBajaTodasLasPracticasXIngreso(auxListaIngresos->listaPracticasXIngreso);
+            auxListaIngresos = auxListaIngresos->siguiente;
+        }
+
+        auxListaIngresos = paciente->listaIngresos;
+
+        while (auxListaIngresos) {
+            auxListaIngresos->ingreso.eliminado = 1;
+            auxListaIngresos = auxListaIngresos->siguiente;
+        }
 
         paciente->datosPaciente.eliminado = 1;
         printf("\n Se dio de baja al paciente.");
+        textoPresioneCualquierTecla();
     } else {
         printf("\n");
         textoDniNoEnBaseDeDatos2();
     }
 
-    textoPresioneCualquierTecla();
 }
 
 /// FUNCIONES OPCION 5 DEL MENU 'submenuGestionPacientes':

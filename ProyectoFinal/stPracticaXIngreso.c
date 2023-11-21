@@ -492,3 +492,13 @@ void registrarResultadoPracticaXIngreso(nodoPaciente *arbol)
 
     } while (opcion == 's' || opcion == 'S');
 }
+
+/// SE USA EN stPaciente.c AL DAR DE BAJA A UN PACIENTE EN CASCADA:
+
+void darDeBajaTodasLasPracticasXIngreso(nodoPracticaXIngreso * listaPracticasXIngreso)
+{
+    while (listaPracticasXIngreso) {
+        listaPracticasXIngreso->practicaXIngreso.eliminado = 1;
+        listaPracticasXIngreso = listaPracticasXIngreso->siguiente;
+    }
+}
