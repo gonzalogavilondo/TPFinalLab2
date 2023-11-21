@@ -1048,19 +1048,19 @@ void submenuAdministrador(nodoPaciente * arbolPacientes){
         cabeza("Menu Administrador");
         gotoxy(15, 4);
         printf("Que desea gestionar?\n");
-        gotoxy(15, 5);
-        printf("(1) Gestionar pacientes\n");
         gotoxy(15, 6);
-        printf("(2) Gestionar personal\n");
+        printf("(1) Gestionar pacientes\n");
         gotoxy(15, 7);
-        printf("(3) Gestionar ingresos\n");
+        printf("(2) Gestionar personal\n");
         gotoxy(15, 8);
-        printf("(4) Gestionar practicas\n");
+        printf("(3) Gestionar ingresos\n");
         gotoxy(15, 9);
-        printf("(5) Gestionar practicas por ingreso\n");
+        printf("(4) Gestionar practicas\n");
         gotoxy(15, 10);
-        printf("(6) Volver\n");
+        printf("(5) Gestionar practicas por ingreso\n");
         gotoxy(15, 11);
+        printf("(6) Volver\n");
+        gotoxy(15, 12);
         fflush(stdin);
         scanf("%i", &opcion);
         system("cls");
@@ -1074,8 +1074,9 @@ void submenuAdministrador(nodoPaciente * arbolPacientes){
                 break;
 //            case 3: //Gestionar ingresos
 //                break;
-//            case 4: //Gestionar practicas
-//                break;
+            case 4: //Gestionar practicas
+                submenuGestionPracticas();
+                break;
 //            case 5: //Gestionar practicas por ingreso
 //                break;
 

@@ -33,28 +33,27 @@ typedef struct nodoPractica {
 
 /// Prototipados:
 
-void menuProvisorioGestionarPracticas();
-/// FUNCIONES PARA LA OPCION 1:
+/// MENU PRINCIPAL GESTION DE PRACTICAS:
+void submenuGestionPracticas();
 nodoPractica * inicListaPracticas();
-nodoPractica * crearNodoPractica(stPractica nuevaPractica);
-int tamanioListaPracticas(nodoPractica * listaPracticas);
-nodoPractica * agregarPracticaPpio(nodoPractica * listaPracticas, nodoPractica * nuevoNodo);
-nodoPractica * agregaNodoPracticaOrdenadoXNombre(nodoPractica * listaPracticas, nodoPractica * nuevoNodo);
-nodoPractica * buscaPracticaPorNombre(nodoPractica * listaPracticas, char nombreBusqueda[]);
-nodoPractica * darDeAltaPracticas(nodoPractica * listaPracticas);
-/// FUNCIONES PARA LA OPCION 2 Y 3:
-nodoPractica * buscaPracticaPorNroPractica(nodoPractica * listaPracticas, int numeroPractica);
-void manejaModificarOBajaDePractica(nodoPractica * listaPracticas, int variante);
-/// FUNCIONES PARA LA OPCION 4:
-void mostrarUnNodoPractica(nodoPractica * practica);
-void muestraListaPacientes(nodoPractica * listaPracticas);
-/// FUNCIONES PARA LA OPCION 5:
-void guardaListaPracticasEnArchivo(nodoPractica * listaPracticas);
-/// FUNCIONES PARA LA OPCION 6:
 void liberarListaPracticas(nodoPractica * listaPracticas);
+/// FUNCIONES OPCION 1 DEL MENU 'submenuGestionPracticas':
+void mostrarUnNodoPractica(nodoPractica * practica);
+void muestraListaPracticas(nodoPractica * listaPracticas);
+/// FUNCIONES OPCION 2 DEL MENU 'submenuGestionPracticas':
+void manejaVerModificarOBajaDePractica(nodoPractica * listaPracticas, int variante);
+nodoPractica * buscaPracticaPorNombre(nodoPractica * listaPracticas, char nombreBusqueda[]);
+nodoPractica * buscaPracticaPorNroPractica(nodoPractica * listaPracticas, int numeroPractica);
+/// FUNCIONES OPCION 3 DEL MENU 'submenuGestionPracticas':
+nodoPractica * darDeAltaPracticas(nodoPractica * listaPracticas);
+int tamanioListaPracticas(nodoPractica * listaPracticas);
+nodoPractica * agregaNodoPracticaOrdenadoXNombre(nodoPractica * listaPracticas, nodoPractica * nuevoNodo);
+nodoPractica * agregarPracticaPpio(nodoPractica * listaPracticas, nodoPractica * nuevoNodo);
+nodoPractica * crearNodoPractica(stPractica nuevaPractica);
+/// FUNCIONES PARA MANEJO DE ARCHIVO PRACTICAS:
+void guardaListaPracticasEnArchivo(nodoPractica * listaPracticas);
 nodoPractica * archivoToListaPracticas(nodoPractica * listaPracticas);
 /// SE USA EN stPracticaXIngreso.c:
 int existePracticaXnroPractica(int nroPracticaBuscar);
-
 
 #endif // STPRACTICA_H_INCLUDED

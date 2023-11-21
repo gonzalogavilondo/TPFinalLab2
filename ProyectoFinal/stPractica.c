@@ -1,167 +1,250 @@
 #include "stPractica.h"
 #include "stPaciente.h"
+#include "menu.h"
 
-void menuProvisorioGestionarPracticas(){
-    char opcion = 0;
+/// MENU PRINCIPAL GESTION DE PRACTICAS:
 
-    /// para opciones de GESTIONAR PRACTICAS:
+void submenuGestionPracticas(){
+
+    char control = 's';
+    int opcion;
+
+    /// Leo el archivo de practicas y las cargo en una lista:
     nodoPractica * listaPracticas = inicListaPracticas();
+    listaPracticas = archivoToListaPracticas(listaPracticas);
 
     do {
-
+        opcion = 0;
         system("cls");
-        printf("\n              Menu provisorio para 'Gestionar practicas':");
-        printf("\n\n                                          1. Dar de alta practicas.");
-        printf("\n                                          2. Modificar el nombre de una practica.");
-        printf("\n                                          3. Dar de baja una practica.");
-
-        printf("\n\n\n                                     Para probar \"GESTIONAR PRACTICAS\":");
-        printf("\n\n                                          4. Mostrar lista practicas.");
-        printf("\n                                          5. Guardar lista en un archivo binario.");
-        printf("\n                                          6. Cargar datos de las practicas del archivo en una lista(si se uso la opcion 1,");
-        printf("\n                                             se sobreescriben los datos).");
-
-        printf("\n\n                                          ESC para finalizar...");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("Menu gestion de practicas");
+        gotoxy(15, 4);
+        printf("Que accion desea realizar?\n");
+        gotoxy(15, 6);
+        printf("(1) Ver listado de practicas\n");
+        gotoxy(15, 7);
+        printf("(2) Ver datos de una practica en particular\n");
+        gotoxy(15, 8);
+        printf("(3) Alta de practicas\n");
+        gotoxy(15, 9);
+        printf("(4) Modificar datos de una practica\n");
+        gotoxy(15, 10);
+        printf("(5) Dar de baja una practica\n");
+        gotoxy(15, 11);
+        printf("(6) Volver\n");
+        gotoxy(15, 12);
         fflush(stdin);
-        opcion = getch();
+        scanf("%i", &opcion);
         system("cls");
-
 
         switch (opcion) {
-            case ESC:
-                // finaliza el programa...
+            case 1: // Ver listado de practicas:
+                muestraListaPracticas(listaPracticas);
                 break;
-
-            case 49: // opcion 1: Dar de alta practicas.
-
+            case 2: // Ver datos de una practica en particular:
+                manejaVerModificarOBajaDePractica(listaPracticas, 3);
+                break;
+            case 3: // Alta de practicas:
                 listaPracticas = darDeAltaPracticas(listaPracticas);
                 break;
-
-            case 50: // opcion 2: Modificar el nombre de una practica.
-
-                if (listaPracticas) {
-                    manejaModificarOBajaDePractica(listaPracticas, 1);
-                } else {
-                    printf("\n La estructura esta vacia, primera debe cargarla.");
-                    textoPresioneCualquierTecla();
-                }
+            case 4: // Modificar datos de una practica:
+                manejaVerModificarOBajaDePractica(listaPracticas, 1);
+                break;
+            case 5: //Dar de baja una practica:
+                manejaVerModificarOBajaDePractica(listaPracticas, 2);
                 break;
 
-            case 51: // opcion 3: Dar de baja una practica.
-
-                if (listaPracticas) {
-                    manejaModificarOBajaDePractica(listaPracticas, 2);
-                } else {
-                    printf("\n La estructura esta vacia, primera debe cargarla.");
-                    textoPresioneCualquierTecla();
-                }
-                break;
-
-
-    // Para probar "GESTIONAR PRACTICAS":
-
-            case 52: // opcion 4: Mostrar lista practicas.
-
-                if (listaPracticas) {
-                    printf("\n Lista de practicas, ordenada por nombre:\n\n");
-                    muestraListaPacientes(listaPracticas);
-                } else {
-                    printf("\n La estructura esta vacia, primera debe cargarla.");
-                }
-
-                textoPresioneCualquierTecla();
-                break;
-
-            case 53: // opcion 5: Guardar lista en un archivo binario.
-
-                if (listaPracticas) {
-                    guardaListaPracticasEnArchivo(listaPracticas);
-                } else {
-                    printf("\n La estructura esta vacia, primera debe cargarla.");
-                }
-
-                textoPresioneCualquierTecla();
-                break;
-
-            case 54: // opcion 6: Cargar datos de las practicas del archivo en una lista(si se uso la opcion 1, se sobreescriben los datos).
-
-                if (listaPracticas) {
-                    liberarListaPracticas(listaPracticas);
-                    listaPracticas = inicListaPracticas();
-                }
-
-                listaPracticas = archivoToListaPracticas(listaPracticas);
-
-                textoPresioneCualquierTecla();
+            case 6:
+                control = 'n';
                 break;
 
             default:
-                // opcion incorrecta, se vuelve a mostrar el menu
+                control = 's';
                 break;
         }
 
-    } while (opcion != ESC);
-}
+    } while (control == 's' || control == 'S');
 
-/// FUNCIONES PARA LA OPCION 1:
+    if (listaPracticas) {
+        liberarListaPracticas(listaPracticas);
+        listaPracticas = inicListaPracticas();
+    }
+
+    system("cls");
+
+}
 
 nodoPractica * inicListaPracticas(){
     return NULL;
 }
 
-nodoPractica * crearNodoPractica(stPractica nuevaPractica){
-    nodoPractica * nodoNuevo = (nodoPractica *) malloc(sizeof(nodoPractica));
+void liberarListaPracticas(nodoPractica * listaPracticas){
 
-    nodoNuevo->datosPractica = nuevaPractica;
-    nodoNuevo->siguiente = NULL;
-
-    return nodoNuevo;
-}
-
-int tamanioListaPracticas(nodoPractica * listaPracticas){
-    int tamanio = 0;
+    nodoPractica * nodoALiberar = listaPracticas;
 
     while (listaPracticas) {
-        tamanio++;
+        listaPracticas = listaPracticas->siguiente;
+        free(nodoALiberar);
+        nodoALiberar = listaPracticas;
+    }
+}
+
+/// FUNCIONES OPCION 1 DEL MENU 'submenuGestionPracticas':
+
+void mostrarUnNodoPractica(nodoPractica * practica){
+
+    if (practica) {
+        printf(" Nombre practica: %s", practica->datosPractica.nombrePractica);
+        printf("\n Numero de practica: %d", practica->datosPractica.nroPractica);
+        printf("\n Eliminado: %d", practica->datosPractica.eliminado);
+    } else {
+        printf("\n Nodo no valido.");
+    }
+
+    printf("\n =====================\n");
+}
+
+void muestraListaPracticas(nodoPractica * listaPracticas){
+
+    printf("\n");
+    while (listaPracticas) {
+        mostrarUnNodoPractica(listaPracticas);
         listaPracticas = listaPracticas->siguiente;
     }
 
-    return tamanio;
+    textoPresioneCualquierTecla();
 }
 
-nodoPractica * agregarPracticaPpio(nodoPractica * listaPracticas, nodoPractica * nuevoNodo){
+/// FUNCIONES OPCION 2, 4 Y 5 DEL MENU 'submenuGestionPracticas':
 
-    if(listaPracticas) {
-        nuevoNodo->siguiente = listaPracticas;
-        listaPracticas = nuevoNodo;
-    }else{
-        listaPracticas = nuevoNodo;
-    }
-    return listaPracticas;
+// funcion que maneja el modificar una practica (variante = 1), dar de baja una
+// practica (variante = 2) y ver una practica en particular (variante = 3):
+void manejaVerModificarOBajaDePractica(nodoPractica * listaPracticas, int variante){
 
-}
+    if (listaPracticas) {
 
-nodoPractica * agregaNodoPracticaOrdenadoXNombre(nodoPractica * listaPracticas, nodoPractica * nuevoNodo){
+        int opcion;
+        char auxNombrePractica[30];
+        int numeroPractica;
+        nodoPractica * nodoBuscado = inicListaPracticas();
 
-    nodoPractica * auxiliar = listaPracticas;
-    nodoPractica * seguidora = listaPracticas;
+        do {
 
-    if (listaPracticas == NULL || strcmpi(auxiliar->datosPractica.nombrePractica, nuevoNodo->datosPractica.nombrePractica)>0) {
+            Rectangulo();
+            gotoxy(5, 4);
+            if (variante == 1) {
+                printf("Ingrese una opcion para la busqueda de la practica a modificar:");
+            } else if (variante == 2) {
+                printf("Ingrese una opcion para la busqueda de la practica a dar de baja:");
+            } else if (variante == 3) {
+                printf("Ingrese una opcion para la busqueda de la practica:");
+            }
 
-        listaPracticas = agregarPracticaPpio(listaPracticas, nuevoNodo);
+            gotoxy(15, 6);
+            printf("(1) Buscar por nombre.");
+            gotoxy(15, 7);
+            printf("(2) Buscar por numero de practica.");
+            gotoxy(15, 8);
+            printf("(3) Cancelar.");
+            gotoxy(15, 9);
+            fflush(stdin);
+            scanf("%i", &opcion);
+            system("cls");
+
+            switch (opcion) {
+                case 1:
+
+                    printf("\n Ingrese el nombre de la practica: ");
+                    fflush(stdin);
+                    gets(auxNombrePractica);
+
+                    nodoBuscado = buscaPracticaPorNombre(listaPracticas, auxNombrePractica);
+                    break;
+
+                case 2:
+
+                    printf("\n Ingrese el numero de practica: ");
+                    fflush(stdin);
+                    scanf("%d", &numeroPractica);
+
+                    nodoBuscado = buscaPracticaPorNroPractica(listaPracticas, numeroPractica);
+                    break;
+
+                default:
+                    // si selecciono 'Cancelar' vuelve al menu anterior, si selecciono una
+                    // opcion incorrecta, se vuelve a mostrar el menu
+                    break;
+            }
+
+
+            /// si opcion == 49, es porque se selecciono la opcion 1
+            /// si opcion == 50, es porque se selecciono la opcion 2
+            /// En ambos casos hay que verificar si se encontro la
+            /// practica y, en ese caso, modificarla/darla de baja:
+            if (opcion == 1 || opcion == 2) {
+
+                /// si nodoBuscado != NULL se encontro la practica
+                /// que se quiere modificar/dar de baja:
+                if (nodoBuscado) {
+
+                    if (variante == 1) {
+
+                        system("cls");
+                        printf("\n");
+                        mostrarUnNodoPractica(nodoBuscado);
+
+                        printf("\n Ingrese el nuevo nombre de la practica: ");
+                        fflush(stdin);
+                        gets(auxNombrePractica);
+
+
+
+                        /// Se chequea que el nuevo nombre de la practica no este ya cargado la base de datos. La segunda
+                        /// condicion es para ver si se le esta intentando poner el mismo nombre que ya tiene, en ese caso
+                        /// se permite el cambio:
+                        if (buscaPracticaPorNombre(listaPracticas, auxNombrePractica) && strcmpi(nodoBuscado->datosPractica.nombrePractica, auxNombrePractica) != 0) {
+                            printf("\n La practica ingresada ya esta registrada en la base de datos, no se puede realizar el cambio.");
+                        } else {
+                            strcpy(nodoBuscado->datosPractica.nombrePractica, auxNombrePractica);
+                            printf("\n Se modifico el nombre de la practica con exito.");
+                        }
+
+                    } else if (variante == 2) {
+
+                        /// (falta ver solo si no fue incluida en ningun ingreso)
+
+                        nodoBuscado->datosPractica.eliminado = 1;
+                        printf("\n Se dio de baja a la practica con exito.");
+
+                    } else if (variante == 3) {
+
+                        system("cls");
+                        printf("\n");
+                        mostrarUnNodoPractica(nodoBuscado);
+
+                    }
+
+                } else {
+
+                    if (opcion == 1) {
+                        printf("\n La practica ingresada no esta en la base de datos.");
+                    } else {
+                        printf("\n El numero de practica ingresado no corresponde a una practica presente en la base de datos.");
+                    }
+
+                }
+                textoPresioneCualquierTecla();
+                system("cls");
+            }
+
+        } while (opcion != 1 && opcion != 2 && opcion != 3);
 
     } else {
-
-        while(auxiliar!=NULL && strcmpi(auxiliar->datosPractica.nombrePractica, nuevoNodo->datosPractica.nombrePractica)<0){
-            seguidora = auxiliar;
-            auxiliar = auxiliar->siguiente;
-        }
-        seguidora->siguiente = nuevoNodo;
-        nuevoNodo->siguiente = auxiliar;
-
+        printf("\n No hay practicas cargadas.");
+        textoPresioneCualquierTecla();
+        system("cls");
     }
-
-    return listaPracticas;
 }
 
 // devuelve NULL si no encuentra la practica, el nodo de la practica en caso de encontrarla:
@@ -173,6 +256,18 @@ nodoPractica * buscaPracticaPorNombre(nodoPractica * listaPracticas, char nombre
 
     return listaPracticas;
 }
+
+// devuelve NULL si no encuentra la practica, el nodo de la practica en caso de encontrarla:
+nodoPractica * buscaPracticaPorNroPractica(nodoPractica * listaPracticas, int numeroPractica){
+
+    while (listaPracticas && listaPracticas->datosPractica.nroPractica != numeroPractica) {
+        listaPracticas = listaPracticas->siguiente;
+    }
+
+    return listaPracticas;
+}
+
+/// FUNCIONES OPCION 3 DEL MENU 'submenuGestionPracticas':
 
 nodoPractica * darDeAltaPracticas(nodoPractica * listaPracticas){
 
@@ -206,154 +301,62 @@ nodoPractica * darDeAltaPracticas(nodoPractica * listaPracticas){
     return listaPracticas;
 }
 
-/// FUNCIONES PARA LA OPCION 2 Y 3:
+int tamanioListaPracticas(nodoPractica * listaPracticas){
+    int tamanio = 0;
 
-// devuelve NULL si no encuentra la practica, el nodo de la practica en caso de encontrarla:
-nodoPractica * buscaPracticaPorNroPractica(nodoPractica * listaPracticas, int numeroPractica){
-
-    while (listaPracticas && listaPracticas->datosPractica.nroPractica != numeroPractica) {
+    while (listaPracticas) {
+        tamanio++;
         listaPracticas = listaPracticas->siguiente;
+    }
+
+    return tamanio;
+}
+
+nodoPractica * agregaNodoPracticaOrdenadoXNombre(nodoPractica * listaPracticas, nodoPractica * nuevoNodo){
+
+    nodoPractica * auxiliar = listaPracticas;
+    nodoPractica * seguidora = listaPracticas;
+
+    if (listaPracticas == NULL || strcmpi(auxiliar->datosPractica.nombrePractica, nuevoNodo->datosPractica.nombrePractica)>0) {
+
+        listaPracticas = agregarPracticaPpio(listaPracticas, nuevoNodo);
+
+    } else {
+
+        while(auxiliar!=NULL && strcmpi(auxiliar->datosPractica.nombrePractica, nuevoNodo->datosPractica.nombrePractica)<0){
+            seguidora = auxiliar;
+            auxiliar = auxiliar->siguiente;
+        }
+        seguidora->siguiente = nuevoNodo;
+        nuevoNodo->siguiente = auxiliar;
+
     }
 
     return listaPracticas;
 }
 
-// funcion que maneja el modificar (variante = 1) o dar de baja (variante = 2) una practica:
-void manejaModificarOBajaDePractica(nodoPractica * listaPracticas, int variante){
+nodoPractica * agregarPracticaPpio(nodoPractica * listaPracticas, nodoPractica * nuevoNodo){
 
-    if (listaPracticas) {
-
-        char opcion;
-        char auxNombrePractica[30];
-        int numeroPractica;
-        nodoPractica * nodoBuscado = inicListaPracticas();
-
-        do {
-
-            if (variante == 1) {
-                printf("\n Ingrese una opcion para la busqueda de la practica a modificar:");
-            } else if (variante == 2) {
-                printf("\n Ingrese una opcion para la busqueda de la practica a dar de baja:");
-            }
-
-            printf("\n\n                           1. Buscar por nombre.");
-            printf("\n                           2. Buscar por numero de practica.");
-            printf("\n\n                           ESC para cancelar.");
-            fflush(stdin);
-            opcion = getch();
-            system("cls");
-
-            switch (opcion) {
-                case ESC:
-                    // regresa al menu anterior de gestion de practicas
-                    break;
-
-                case 49:
-
-                    printf("\n Ingrese el nombre de la practica: ");
-                    fflush(stdin);
-                    gets(auxNombrePractica);
-
-                    nodoBuscado = buscaPracticaPorNombre(listaPracticas, auxNombrePractica);
-                    break;
-
-                case 50:
-
-                    printf("\n Ingrese el numero de practica: ");
-                    fflush(stdin);
-                    scanf("%d", &numeroPractica);
-
-                    nodoBuscado = buscaPracticaPorNroPractica(listaPracticas, numeroPractica);
-                    break;
-
-                default:
-                    // opcion incorrecta, se vuelve a mostrar el menu
-                    break;
-            }
-
-
-            /// si opcion == 49, es porque se selecciono la opcion 1
-            /// si opcion == 50, es porque se selecciono la opcion 2
-            /// En ambos casos hay que verificar si se encontro la
-            /// practica y, en ese caso, modificarla/darla de baja:
-            if (opcion == 49 || opcion == 50) {
-
-                /// si nodoBuscado != NULL se encontro la practica
-                /// que se quiere modificar/dar de baja:
-                if (nodoBuscado) {
-
-                    if (variante == 1) {
-
-                        system("cls");
-                        printf("\n");
-                        mostrarUnNodoPractica(nodoBuscado);
-
-                        printf("\n Ingrese el nuevo nombre de la practica: ");
-                        fflush(stdin);
-                        gets(auxNombrePractica);
-
-
-
-                        /// Se chequea que el nuevo nombre de la practica no este ya cargado la base de datos. La segunda
-                        /// condicion es para ver si se le esta intentando poner el mismo nombre que ya tiene, en ese caso
-                        /// se permite el cambio:
-                        if (buscaPracticaPorNombre(listaPracticas, auxNombrePractica) && strcmpi(nodoBuscado->datosPractica.nombrePractica, auxNombrePractica) != 0) {
-                            printf("\n La practica ingresada ya esta registrada en la base de datos, no se puede realizar el cambio.");
-                        } else {
-                            strcpy(nodoBuscado->datosPractica.nombrePractica, auxNombrePractica);
-                            printf("\n Se modifico el nombre de la practica con exito.");
-                        }
-
-                    } else if (variante == 2) {
-
-                        nodoBuscado->datosPractica.eliminado = 1;
-                        printf("\n Se dio de baja a la practica con exito.");
-
-                    }
-
-                } else {
-
-                    if (opcion == 49) {
-                        printf("\n La practica ingresada no esta en la base de datos.");
-                    } else {
-                        printf("\n El numero de practica ingresado no corresponde a una practica presente en la base de datos.");
-                    }
-
-                }
-                textoPresioneCualquierTecla();
-            }
-
-            system("cls");
-
-        } while (opcion != ESC && opcion != 49 && opcion != 50);
-
+    if(listaPracticas) {
+        nuevoNodo->siguiente = listaPracticas;
+        listaPracticas = nuevoNodo;
+    }else{
+        listaPracticas = nuevoNodo;
     }
+    return listaPracticas;
+
 }
 
-/// FUNCIONES PARA LA OPCION 4:
+nodoPractica * crearNodoPractica(stPractica nuevaPractica){
+    nodoPractica * nodoNuevo = (nodoPractica *) malloc(sizeof(nodoPractica));
 
-void mostrarUnNodoPractica(nodoPractica * practica){
+    nodoNuevo->datosPractica = nuevaPractica;
+    nodoNuevo->siguiente = NULL;
 
-    if (practica) {
-        printf(" Nombre practica: %s", practica->datosPractica.nombrePractica);
-        printf("\n Numero de practica: %d", practica->datosPractica.nroPractica);
-        printf("\n Eliminado: %d", practica->datosPractica.eliminado);
-    } else {
-        printf("\n Nodo no valido.");
-    }
-
-    printf("\n =====================\n");
+    return nodoNuevo;
 }
 
-void muestraListaPacientes(nodoPractica * listaPracticas){
-
-    while (listaPracticas) {
-        mostrarUnNodoPractica(listaPracticas);
-        listaPracticas = listaPracticas->siguiente;
-    }
-}
-
-/// FUNCIONES PARA LA OPCION 5:
+/// FUNCIONES PARA MANEJO DE ARCHIVO PRACTICAS:
 
 void guardaListaPracticasEnArchivo(nodoPractica * listaPracticas){
 
@@ -374,19 +377,6 @@ void guardaListaPracticasEnArchivo(nodoPractica * listaPracticas){
     }
 }
 
-/// FUNCIONES PARA LA OPCION 6:
-
-void liberarListaPracticas(nodoPractica * listaPracticas){
-
-    nodoPractica * nodoALiberar = listaPracticas;
-
-    while (listaPracticas) {
-        listaPracticas = listaPracticas->siguiente;
-        free(nodoALiberar);
-        nodoALiberar = listaPracticas;
-    }
-}
-
 nodoPractica * archivoToListaPracticas(nodoPractica * listaPracticas){
 
     FILE *archi = fopen(ARCHIVO_PRACTICAS, "rb");
@@ -399,11 +389,9 @@ nodoPractica * archivoToListaPracticas(nodoPractica * listaPracticas){
             listaPracticas = agregaNodoPracticaOrdenadoXNombre(listaPracticas, crearNodoPractica(practica));
         }
 
-        fclose(archi);
-        printf("\n Se cargo el archivo con exito.");
-
     } else {
         printf("\n Hubo un error al intentar abrir el archivo.");
+        textoPresioneCualquierTecla();
     }
 
     return listaPracticas;
@@ -435,19 +423,3 @@ int existePracticaXnroPractica(int nroPracticaBuscar)
     fclose(archivo);
     return 0; // No se encontró el registro
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

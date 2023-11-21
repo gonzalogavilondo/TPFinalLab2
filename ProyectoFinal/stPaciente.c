@@ -2,80 +2,6 @@
 #include "stIngreso.h"
 #include "menu.h"
 
-void menuProvisorioGestionarPacientes(){
-    char opcion = 0;
-
-    /// para opciones de GESTIONAR PACIENTES:
-    nodoPaciente * arbolPacientes = inicArbolPacientes();
-
-    do {
-
-        system("cls");
-        printf("\n              Menu provisorio para 'Gestionar pacientes':");
-
-        printf("\n\n                                     Para probar \"GESTIONAR PACIENTES\":");
-        printf("\n\n                                          5. Mostrar arbol de pacientes.");
-        printf("\n                                          6. Guardar arbol en un archivo binario.");
-        printf("\n                                          7. Cargar datos de los pacientes del archivo en un arbol(si se uso la opcion 1,");
-        printf("\n                                             se sobreescriben los datos).");
-
-        printf("\n\n                                          ESC para finalizar...");
-        fflush(stdin);
-        opcion = getch();
-        system("cls");
-
-
-        switch (opcion) {
-            case ESC:
-                // finaliza el programa...
-                break;
-
-
-    // Para probar "GESTIONAR PACIENTES":
-
-            case 53: // opcion 5: Mostrar arbol de pacientes.
-
-                if (arbolPacientes) {
-                    printf("\n Arbol de pacientes, ordenado por dni:\n\n");
-                    inorderPacientes(arbolPacientes);
-                } else {
-                    printf("\n La estructura esta vacia, primera debe cargarla.");
-                }
-
-                textoPresioneCualquierTecla();
-                break;
-
-            case 54: // opcion 6: Guardar arbol en un archivo binario.
-
-                if (arbolPacientes) {
-                    guardaArbolPacientesEnArchivo(arbolPacientes);
-                } else {
-                    printf("\n La estructura esta vacia, primera debe cargarla.");
-                }
-
-                textoPresioneCualquierTecla();
-                break;
-
-            case 55: // opcion 7: Cargar datos de los pacientes del archivo en un arbol(si se uso la opcion 1, se sobreescriben los datos).
-
-                if (arbolPacientes) {
-                    liberarArbolPacientes(arbolPacientes);
-                    arbolPacientes = inicArbolPacientes();
-                }
-
-                arbolPacientes = archivoToArbolPacientes(arbolPacientes);
-
-                textoPresioneCualquierTecla();
-                break;
-
-            default:
-                // opcion incorrecta, se vuelve a mostrar el menu
-                break;
-        }
-
-    } while (opcion != ESC);
-}
-
 /// Se usa en varias partes:
 
 void textoPresioneCualquierTecla(){
@@ -828,20 +754,4 @@ int existeIngresoXnroIngreso(nodoPaciente *arbolPacientes, int nroIngresoBuscar)
         return existeIngresoXnroIngreso(arbolPacientes->der, nroIngresoBuscar);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -37,7 +37,6 @@ typedef struct nodoPaciente {
 
 /// Prototipados:
 
-void menuProvisorioGestionarPacientes();
 /// Se usa en varias partes:
 void textoPresioneCualquierTecla();
 void textoPresioneCualquierTecla2();
