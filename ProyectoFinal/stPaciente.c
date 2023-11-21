@@ -38,7 +38,7 @@ void submenuGestionPacientes(nodoPaciente * arbolPacientes){
         gotoxy(15, 7);
         printf("(3) Alta de un paciente\n");
         gotoxy(15, 8);
-        printf("(4) (falta en cascada) Dar de baja a un paciente\n");
+        printf("(4) Dar de baja a un paciente\n");
         gotoxy(15, 9);
         printf("(5) Ver listado de pacientes\n");
         gotoxy(15, 10);

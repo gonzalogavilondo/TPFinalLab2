@@ -656,19 +656,6 @@ void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
 
     } while (opcion != 2);
 
-    do
-    {
-        gotoxy(2, 15);
-        printf("Si quiere modificar otro empleado presione 'S' o para salir 'N'.\n");
-        gotoxy(69, 15);
-        control = toupper(getch());
-
-        if (control != 'S' && control != 'N')
-        {
-            gotoxy(2, 13);
-            printf("Ingreso una opcion no valida, reintente por favor.\n");
-        }
-    }
     while(control == 'S');
 }
 
@@ -943,7 +930,7 @@ void submenuTecnico(nodoPaciente* arbol)
         gotoxy(15, 6);
         printf("(2) Consultar muestra");
         gotoxy(15, 7);
-        printf("(4) VOLVER\n");
+        printf("(3) VOLVER\n");
         gotoxy(15, 8);
         fflush(stdin);
         scanf("%i", &opcion);
@@ -959,7 +946,7 @@ void submenuTecnico(nodoPaciente* arbol)
                 // consultar muestra
                 //mostrarUnaPractica();
                 break;
-            case 4:
+            case 3:
                 control = 'n';
                 break;
 
@@ -1070,7 +1057,7 @@ void submenuAdministrador(nodoPaciente * arbolPacientes){
                 submenuGestionPacientes(arbolPacientes);
                 break;
            case 2:
-                subMenuListadosDeEmpleado("Administrador");
+                submenuManejoEmpleados("Administrador");
                 break;
 //            case 3: //Gestionar ingresos
 //                break;
@@ -1161,7 +1148,7 @@ void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol){
     fflush(stdin);
     gets(contrasenia);
 
-//    int correcto = inicioDeSesion(usuario, contrasenia, tipoMenu);
+    //int correcto = inicioDeSesion(usuario, contrasenia, tipoMenu);
     int correcto = 1;
 
     if (correcto == 1)
