@@ -40,6 +40,7 @@ typedef struct nodoPaciente {
 void menuProvisorioGestionarPacientes();
 /// Se usa en varias partes:
 void textoPresioneCualquierTecla();
+void textoPresioneCualquierTecla2();
 /// MENU PRINCIPAL GESTION DE PACIENTES:
 void submenuGestionPacientes(nodoPaciente * arbolPacientes);
 /// FUNCIONES OPCION 1 DEL MENU 'submenuGestionPacientes':
@@ -49,6 +50,10 @@ nodoPaciente * buscaPaciente(nodoPaciente * arbolPacientes, int dni);
 nodoPaciente * textoIngreseDNILuegoBuscaPaciente2(nodoPaciente * arbolPacientes, int * dni);
 void muestraUnPaciente(stPaciente datosPaciente);
 void textoDniNoEnBaseDeDatos2();
+/// FUNCIONES OPCION 2 DEL MENU 'submenuGestionPacientes':
+void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes);
+void muestraUnPacienteEnRectangulo(stPaciente datosPaciente);
+int existeElPaciente(nodoPaciente * arbolPacientes, int dni);
 
 
 

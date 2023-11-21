@@ -16,7 +16,7 @@ int main()
     nodoPaciente * arbolPacientes = inicArbolPacientes();
 
     wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
-    SMALL_RECT windowSize = {0, 0, 72, 16};
+    SMALL_RECT windowSize = {0, 0, 120, 25};
     SetConsoleWindowInfo(wHnd, 1, &windowSize);
 
     arbolPacientes = archivoToArbolPacientes(arbolPacientes);
@@ -57,7 +57,7 @@ nodoPaciente * abrirArbolInicioPrograma(nodoPaciente * arbol)
 
             while(fread(&ingreso,sizeof(stIngreso), 1, pArchiIngreso) > 0)
             {
-                if(paciente.apellidoNombre == ingreso.dniPaciente)
+                if(paciente.dni == ingreso.dniPaciente)
                 {
                     arbol->listaIngresos = agregarNodoIngreso(arbol->listaIngresos,ingreso);
 
