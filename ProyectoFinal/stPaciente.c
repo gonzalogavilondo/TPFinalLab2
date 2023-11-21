@@ -677,10 +677,10 @@ nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes){
             arbolPacientes = insertarPaciente(arbolPacientes, paciente);
         }
 
-        printf("\n Se cargaron los datos.");
         fclose(archi);
     } else {
-        printf("\n Hubo un problema al intentar abrir el archivo.");
+        printf("\n Hubo un problema al intentar abrir el archivo de pacientes.");
+        getch();
     }
 
     return arbolPacientes;
