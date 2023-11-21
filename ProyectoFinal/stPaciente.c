@@ -429,8 +429,133 @@ int existeElPaciente(nodoPaciente * arbolPacientes, int dni){
     return result;
 }
 
+nodoPaciente * eliminarNodoArbolPacientes(nodoPaciente * arbolPacientes, int dniPaciente){
 
+    if (arbolPacientes == NULL) {
+        return NULL;
+    }
 
+    /// Buscar el nodo que se desea eliminar en el subárbol izquierdo o derecho
+    if (dniPaciente < arbolPacientes->datosPaciente.dni) {
+
+        arbolPacientes->izq = eliminarNodoArbolPacientes(arbolPacientes->izq, dniPaciente);
+
+    } else if (dniPaciente > arbolPacientes->datosPaciente.dni) {
+
+        arbolPacientes->der = eliminarNodoArbolPacientes(arbolPacientes->der, dniPaciente);
+
+    } else {
+
+        /// el nodo a eliminar ha sido encontrado (NO FUE NI MENOR NI MAYOR)
+        /// Caso 1: Nodo sin hijos o un solo hijo (los mas sencillos)
+        if (arbolPacientes->izq == NULL) {
+
+            nodoPaciente * temp = arbolPacientes->der;
+            free(arbolPacientes);
+            return temp;
+
+        } else if (arbolPacientes->der == NULL) {
+
+            nodoPaciente * temp = arbolPacientes->izq;
+            free(arbolPacientes);
+            return temp;
+
+        }
+
+        /// Caso 2: Nodo con dos hijos
+        /// Encontrar el sucesor inmediato (nodo más a la izquierda en el subárbol derecho)
+        nodoPaciente * temp = encontrarMinimoDni(arbolPacientes->der); ///funcion complementaria...
+
+        /// Copiar el dni del sucesor inmediato al nodo actual
+        arbolPacientes->datosPaciente.dni = temp->datosPaciente.dni;
+
+        /// Eliminar el sucesor inmediato
+        arbolPacientes->der = eliminarNodoArbolPacientes(arbolPacientes->der, temp->datosPaciente.dni);
+
+    }
+
+    return arbolPacientes;
+}
+
+nodoPaciente * encontrarMinimoDni(nodoPaciente* arbolPacientes){
+    while (arbolPacientes->izq) {
+        arbolPacientes = arbolPacientes->izq;
+    }
+    return arbolPacientes;
+}
+
+nodoPaciente * insertarPaciente(nodoPaciente * arbolPacientes, stPaciente nuevoPaciente){
+
+    if (!arbolPacientes) {
+        arbolPacientes = crearNodoArbolPaciente(nuevoPaciente);
+    } else {
+
+        if (nuevoPaciente.dni > arbolPacientes->datosPaciente.dni) {
+            arbolPacientes->der = insertarPaciente(arbolPacientes->der, nuevoPaciente);
+        } else {
+            arbolPacientes->izq = insertarPaciente(arbolPacientes->izq, nuevoPaciente);
+        }
+
+    }
+
+    return arbolPacientes;
+}
+
+nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente){
+    nodoPaciente * nodoNuevo = (nodoPaciente *) malloc(sizeof(nodoPaciente));
+
+    nodoNuevo->datosPaciente = datosStPaciente;
+    nodoNuevo->listaIngresos = inicListaIngresos();
+    nodoNuevo->der = NULL;
+    nodoNuevo->izq = NULL;
+
+    return nodoNuevo;
+}
+
+/// FUNCIONES OPCION 3 DEL MENU 'submenuGestionPacientes':
+
+nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes){
+    int dni;
+    stPaciente nuevoPaciente;
+
+    printf("\n Ingrese el DNI del paciente: ");
+    fflush(stdin);
+    scanf("%d", &dni);
+
+    if (existeElPaciente(arbolPacientes, dni)) {
+        printf("\n El paciente ya esta registrado en la base de datos. Puede modificar sus datos desde la opcion 2 del menu anterior.");
+    } else {
+
+        printf("\n Ingrese apellido y nombre en formato \"Apellido, Nombre\": ");
+        fflush(stdin);
+        gets(nuevoPaciente.apellidoNombre);
+
+        printf("\n Ingrese la edad: ");
+        fflush(stdin);
+        scanf("%d", &nuevoPaciente.edad);
+
+        printf("\n Ingrese la direccion donde vive: ");
+        fflush(stdin);
+        gets(nuevoPaciente.direccion);
+
+        printf("\n Ingrese el telefono: ");
+        fflush(stdin);
+        gets(nuevoPaciente.telefono);
+
+        nuevoPaciente.eliminado = 0;
+        nuevoPaciente.dni = dni;
+
+        arbolPacientes = insertarPaciente(arbolPacientes, nuevoPaciente);
+
+        system("cls");
+        printf("\n Paciente cargado.");
+
+    }
+
+    textoPresioneCualquierTecla();
+
+    return arbolPacientes;
+}
 
 
 
@@ -558,78 +683,10 @@ void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes){
 
 
 
-/// FUNCIONES PARA LA OPCION 1: menu viejo, PARA CAMBIAR ----------------------------------------------------
 
-nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente){
-    nodoPaciente * nodoNuevo = (nodoPaciente *) malloc(sizeof(nodoPaciente));
 
-    nodoNuevo->datosPaciente = datosStPaciente;
-    nodoNuevo->listaIngresos = inicListaIngresos();
-    nodoNuevo->der = NULL;
-    nodoNuevo->izq = NULL;
 
-    return nodoNuevo;
-}
 
-nodoPaciente * insertarPaciente(nodoPaciente * arbolPacientes, stPaciente nuevoPaciente){
-
-    if (!arbolPacientes) {
-        arbolPacientes = crearNodoArbolPaciente(nuevoPaciente);
-    } else {
-
-        if (nuevoPaciente.dni > arbolPacientes->datosPaciente.dni) {
-            arbolPacientes->der = insertarPaciente(arbolPacientes->der, nuevoPaciente);
-        } else {
-            arbolPacientes->izq = insertarPaciente(arbolPacientes->izq, nuevoPaciente);
-        }
-
-    }
-
-    return arbolPacientes;
-}
-
-nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes){
-    int dni;
-    stPaciente nuevoPaciente;
-
-    printf("\n Ingrese el DNI del paciente: ");
-    fflush(stdin);
-    scanf("%d", &dni);
-
-    if (existeElPaciente(arbolPacientes, dni)) {
-        printf("\n El paciente ya esta registrado en la base de datos. Puede modificar sus datos desde la opcion 2 del menu anterior.");
-    } else {
-
-        printf("\n Ingrese apellido y nombre en formato \"Apellido, Nombre\": ");
-        fflush(stdin);
-        gets(nuevoPaciente.apellidoNombre);
-
-        printf("\n Ingrese la edad: ");
-        fflush(stdin);
-        scanf("%d", &nuevoPaciente.edad);
-
-        printf("\n Ingrese la direccion donde vive: ");
-        fflush(stdin);
-        gets(nuevoPaciente.direccion);
-
-        printf("\n Ingrese el telefono: ");
-        fflush(stdin);
-        gets(nuevoPaciente.telefono);
-
-        nuevoPaciente.eliminado = 0;
-        nuevoPaciente.dni = dni;
-
-        arbolPacientes = insertarPaciente(arbolPacientes, nuevoPaciente);
-
-        system("cls");
-        printf("\n Paciente cargado.");
-
-    }
-
-    textoPresioneCualquierTecla();
-
-    return arbolPacientes;
-}
 
 /// FUNCIONES PARA LA OPCION 2: menu viejo, PARA CAMBIAR ----------------------------------------------------
 
@@ -643,60 +700,7 @@ void muestraUnPacienteResumido(stPaciente datosPaciente){
 
 }
 
-nodoPaciente * encontrarMinimoDni(nodoPaciente* arbolPacientes){
-    while (arbolPacientes->izq) {
-        arbolPacientes = arbolPacientes->izq;
-    }
-    return arbolPacientes;
-}
 
-nodoPaciente * eliminarNodoArbolPacientes(nodoPaciente * arbolPacientes, int dniPaciente){
-
-    if (arbolPacientes == NULL) {
-        return NULL;
-    }
-
-    /// Buscar el nodo que se desea eliminar en el subárbol izquierdo o derecho
-    if (dniPaciente < arbolPacientes->datosPaciente.dni) {
-
-        arbolPacientes->izq = eliminarNodoArbolPacientes(arbolPacientes->izq, dniPaciente);
-
-    } else if (dniPaciente > arbolPacientes->datosPaciente.dni) {
-
-        arbolPacientes->der = eliminarNodoArbolPacientes(arbolPacientes->der, dniPaciente);
-
-    } else {
-
-        /// el nodo a eliminar ha sido encontrado (NO FUE NI MENOR NI MAYOR)
-        /// Caso 1: Nodo sin hijos o un solo hijo (los mas sencillos)
-        if (arbolPacientes->izq == NULL) {
-
-            nodoPaciente * temp = arbolPacientes->der;
-            free(arbolPacientes);
-            return temp;
-
-        } else if (arbolPacientes->der == NULL) {
-
-            nodoPaciente * temp = arbolPacientes->izq;
-            free(arbolPacientes);
-            return temp;
-
-        }
-
-        /// Caso 2: Nodo con dos hijos
-        /// Encontrar el sucesor inmediato (nodo más a la izquierda en el subárbol derecho)
-        nodoPaciente * temp = encontrarMinimoDni(arbolPacientes->der); ///funcion complementaria...
-
-        /// Copiar el dni del sucesor inmediato al nodo actual
-        arbolPacientes->datosPaciente.dni = temp->datosPaciente.dni;
-
-        /// Eliminar el sucesor inmediato
-        arbolPacientes->der = eliminarNodoArbolPacientes(arbolPacientes->der, temp->datosPaciente.dni);
-
-    }
-
-    return arbolPacientes;
-}
 
 int existeIngresoXnroIngreso(nodoPaciente *arbolPacientes, int nroIngresoBuscar){
     if (arbolPacientes == NULL)

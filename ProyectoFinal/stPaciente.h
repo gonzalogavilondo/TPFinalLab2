@@ -54,6 +54,15 @@ void textoDniNoEnBaseDeDatos2();
 void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes);
 void muestraUnPacienteEnRectangulo(stPaciente datosPaciente);
 int existeElPaciente(nodoPaciente * arbolPacientes, int dni);
+nodoPaciente * eliminarNodoArbolPacientes(nodoPaciente * arbolPacientes, int dniPaciente);
+nodoPaciente * encontrarMinimoDni(nodoPaciente* arbolPacientes);
+nodoPaciente * insertarPaciente(nodoPaciente * arbolPacientes, stPaciente nuevoPaciente);
+nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente);
+/// FUNCIONES OPCION 3 DEL MENU 'submenuGestionPacientes':
+nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes);
+
+
+
 
 
 
@@ -83,15 +92,8 @@ void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes);
 
 
 
-/// FUNCIONES PARA LA OPCION 1: menu viejo, PARA CAMBIAR ----------------------------------------------------
-int existeElPaciente(nodoPaciente * arbolPacientes, int dni);
-nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente);
-nodoPaciente * insertarPaciente(nodoPaciente * arbolPacientes, stPaciente nuevoPaciente);
-nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES PARA LA OPCION 2: menu viejo, PARA CAMBIAR ----------------------------------------------------
 void muestraUnPacienteResumido(stPaciente datosPaciente);
-nodoPaciente * encontrarMinimoDni(nodoPaciente* arbolPacientes);
-nodoPaciente * eliminarNodoArbolPacientes(nodoPaciente * arbolPacientes, int dniPaciente);
 int existeIngresoXnroIngreso(nodoPaciente *arbolPacientes, int nroIngresoBuscar);
 void textoDniNoEnBaseDeDatos();
 nodoPaciente * textoIngreseDNILuegoBuscaPaciente(nodoPaciente * arbolPacientes, int * dni);
