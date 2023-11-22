@@ -749,7 +749,7 @@ int existeIngresoXnroIngreso(nodoPaciente *arbolPacientes, int nroIngresoBuscar)
     {
         nodoIngreso *ingresos = arbolPacientes->listaIngresos;
         while (ingresos != NULL) {
-            if (nroIngresoBuscar == ingresos->ingreso.numeroIngreso)
+            if (nroIngresoBuscar == ingresos->ingreso.numeroIngreso && ingresos->ingreso.eliminado != 1)
             {
                 return 1; // Se encontró el número de ingreso en la lista
             }
@@ -766,5 +766,31 @@ int existeIngresoXnroIngreso(nodoPaciente *arbolPacientes, int nroIngresoBuscar)
     {
         return existeIngresoXnroIngreso(arbolPacientes->der, nroIngresoBuscar);
     }
+}
+
+int existeIngreso(nodoPaciente *arbolPacientes) {
+    if (arbolPacientes == NULL) {
+        return 0; // No existe el número de ingreso en el árbol
+    }
+
+    if (arbolPacientes->listaIngresos != NULL) {
+        nodoIngreso *ingresos = arbolPacientes->listaIngresos;
+        while (ingresos != NULL) {
+            if (ingresos->ingreso.eliminado != 1) {
+                return 1; // Se encontró un numero de ingreso, sino no hay ninguno
+            }
+            ingresos = ingresos->siguiente;
+        }
+    }
+
+    // Buscar en los subárboles izquierdo y derecho
+    if (arbolPacientes->izq) {
+        return existeIngreso(arbolPacientes->izq);
+    }
+    if (arbolPacientes->der) {
+        return existeIngreso(arbolPacientes->der);
+    }
+
+    return 0; // No se encontraron ingresos
 }
 

@@ -136,7 +136,7 @@ void salvarArbolFinPrograma(nodoPaciente * arbol)
 
                     nodoIngreso * segIngresos = paciente->listaIngresos;
 
-                    stIngreso ingreso;
+                    //stIngreso ingreso;
 
                     FILE * pArchiIngresos = fopen(ARCHIVO_INGRESOS, "wb");
 

@@ -19,7 +19,7 @@ void imprimirCabecera(char cabecera[]);
 void Rectangulo();
 void modificarPerfilEmpleadoXDNI(char perfil[],int dni);
 void modificarContraseniaEmpleadoXDNI(char contrasenia[],int dni);
-void submenuManejoIngresos(nodoPaciente *arbolPaciente);
+void submenuManejoIngresos(nodoPaciente *arbolPaciente, int flag);
 void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes);
 void submenuAdministrativo(nodoPaciente * arbolPacientes);
 void submenuAdministrador(nodoPaciente * arbolPacientes);

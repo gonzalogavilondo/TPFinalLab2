@@ -782,7 +782,7 @@ void submenuManejoEmpleados() {
     system("cls");
 }
 
-void submenuManejoIngresos(nodoPaciente *arbolPaciente)
+void submenuManejoIngresos(nodoPaciente *arbolPaciente, int flag)
 {
     char control = 's';
     int opcion;
@@ -830,7 +830,7 @@ void submenuManejoIngresos(nodoPaciente *arbolPaciente)
 
             case 4:
                 // Mostrar listado de ingresos
-                mostrarListadoGralIngresos(arbolPaciente);
+                mostrarListadoGralIngresos(arbolPaciente, flag);
                 system("pause");
                 system("cls");
                 break;
@@ -1000,7 +1000,7 @@ void submenuAdministrativo(nodoPaciente * arbolPacientes)
 
             case 2:
                 // Gestionar citas
-                submenuManejoIngresos(arbolPacientes);
+                submenuManejoIngresos(arbolPacientes, 0);
                 break;
 
             case 3:
@@ -1064,7 +1064,7 @@ void submenuAdministrador(nodoPaciente * arbolPacientes){
                 submenuManejoEmpleados("Administrador");
                 break;
             case 3: //Gestionar ingresos
-                submenuManejoIngresos(arbolPacientes);
+                submenuManejoIngresos(arbolPacientes, 1);
                 break;
             case 4:
                 submenuGestionPracticas();

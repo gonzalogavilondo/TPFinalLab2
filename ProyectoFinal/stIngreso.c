@@ -118,52 +118,77 @@ void mostrarUnNodoIngreso(nodoIngreso *aux)
     }
 }
 
-void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes)
+void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes, int flag)
 {
     if (arbolPacientes != NULL)
     {
         printf("\n*** Listado de Ingresos del Paciente ***\n");
         muestraUnPacienteResumido(arbolPacientes->datosPaciente);
+
         nodoIngreso *seg = arbolPacientes->listaIngresos;
-        if (!seg)
+
+        if (seg == NULL)
         {
             printf("\nEl paciente no tiene ingresos.\n");
             puts("--------------------------------------\n");
         }
-        while (seg != NULL)
+        else
         {
-            mostrarUnNodoIngreso(seg);
-            seg = seg->siguiente;
+            while (seg != NULL)
+            {
+                if ((flag == 0 && seg->ingreso.eliminado == 0) || (flag == 1))
+                {
+                    mostrarUnNodoIngreso(seg);
+                }
+                seg = seg->siguiente;
+            }
         }
+
         printf("\n*** Fin del Listado de Ingresos del Paciente ***\n");
         puts("----------------------------------------------\n");
-        mostrarListadoGralIngresos(arbolPacientes->izq);
-        mostrarListadoGralIngresos(arbolPacientes->der);
+    }
+
+    if (arbolPacientes->izq != NULL)
+    {
+        mostrarListadoGralIngresos(arbolPacientes->izq, flag);
+    }
+
+    if (arbolPacientes->der != NULL)
+    {
+        mostrarListadoGralIngresos(arbolPacientes->der, flag);
     }
 }
+
+
+
 
 
 void mostrarListadoIngresosPaciente(nodoPaciente *paciente)
 {
     if (paciente != NULL)
     {
-        printf("\n*** Listado de Ingresos del Paciente ***\n");
-        muestraUnPacienteResumido(paciente->datosPaciente);
-        nodoIngreso *seg = paciente->listaIngresos;
-        if (!seg)
+        if (paciente->listaIngresos != NULL)
         {
-            printf("\nEl paciente no tiene ingresos.\n");
-            puts("--------------------------------------\n");
+            printf("\n*** Listado de Ingresos del Paciente ***\n");
+            muestraUnPacienteResumido(paciente->datosPaciente);
+            nodoIngreso *seg = paciente->listaIngresos;
+
+            while (seg != NULL)
+            {
+                if (seg->ingreso.eliminado == 0)
+                {
+                    mostrarUnNodoIngreso(seg);
+                }
+
+                seg = seg->siguiente;
+            }
+
+            printf("\n*** Fin del Listado de Ingresos del Paciente ***\n");
+            puts("----------------------------------------------\n");
         }
-        while (seg != NULL)
-        {
-            mostrarUnNodoIngreso(seg);
-            seg = seg->siguiente;
-        }
-        printf("\n*** Fin del Listado de Ingresos del Paciente ***\n");
-        puts("----------------------------------------------\n");
     }
 }
+
 
 
 /**
@@ -190,7 +215,7 @@ nodoIngreso* liberarListaIngresos(nodoIngreso *lista)
     agregar ese pedido a la lista y retornar la nueva lista con el nuevo ingreso.
 **/
 
-nodoIngreso * cantidadNodosListaIngresos(nodoIngreso * lista)
+int cantidadNodosListaIngresos(nodoIngreso * lista)
 {
     int cont = 1;
     while (lista != NULL)

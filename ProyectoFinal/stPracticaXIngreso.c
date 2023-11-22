@@ -252,19 +252,35 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
                 nodoPaciente *paciente = inicArbolPacientes();
                 paciente = buscaPaciente(arbolPacientes, arbolPacientes->datosPaciente.dni);
                 system("cls");
-                mostrarListadoIngresosPaciente(paciente);
-                printf("Cargue el numero de ingreso: ");
-                scanf("%d", &nroIngreso);
+                do
+                {
+                    mostrarListadoIngresosPaciente(paciente);
+                    printf("Cargue el numero de ingreso: ");
+                    scanf("%d", &nroIngreso);
+                    if (!existeIngreso(paciente))
+                    {
+                        gotoxy(15, 8);
+                        printf("No existe ningun ingreso para ese paciente en la base de datos. Primero asignele uno\n");
+                        error = 1;
+                    }
+                    else if (!existeIngresoXnroIngreso(paciente, nroIngreso))
+                    {
+                        system("cls");
+                        Rectangulo();
+                        gotoxy(15, 4);
+                        printf("No existe el ingreso con ese numero en la base de datos.\n");
+                        gotoxy(15, 5);
+                        printf("Intente nuevamente con un ingreso valido.\n\n");
+                        gotoxy(15, 8);
+                        system("pause");
+                        system("cls");
+                    }
+                }while(nroIngreso == paciente->listaIngresos->ingreso.eliminado || error == 1);
+
                 system("cls");
                 Rectangulo();
                 gotoxy(15, 1);
                 cabeza("Alta de Practica por Ingreso");
-                if (!existeIngresoXnroIngreso(paciente, nroIngreso))
-                {
-                    gotoxy(15, 8);
-                    printf("No existe el ingreso con ese numero en la base de datos.\n");
-                    error = 1;
-                }
             }
             else
             {

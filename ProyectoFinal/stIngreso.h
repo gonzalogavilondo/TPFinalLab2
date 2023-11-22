@@ -39,10 +39,10 @@ nodoIngreso* agregarNodoIngreso(nodoIngreso *lista, stIngreso registro);
 nodoIngreso* buscaUltimoListaIngresos(nodoIngreso *lista);
 nodoIngreso* crearListaIngresos(const char *nombreArchivo);
 void mostrarUnNodoIngreso(nodoIngreso *aux);
-void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes);
+void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes, int flag); //Si flag == 1 entonces lo llama el administrador
 void mostrarListadoIngresosPaciente(nodoPaciente *paciente);
 nodoIngreso* liberarListaIngresos(nodoIngreso *lista);
-nodoIngreso * cantidadNodosListaIngresos(nodoIngreso * lista);
+int cantidadNodosListaIngresos(nodoIngreso * lista);
 nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni);
 
 /**

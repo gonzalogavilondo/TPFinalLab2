@@ -80,5 +80,6 @@ int existePacienteXDNI(int dniBuscar);
 void muestraUnPacienteResumido(stPaciente datosPaciente);
 ///FUNCIONES QUE LAS USA PRACTICAXINGRESO:
 int existeIngresoXnroIngreso(nodoPaciente *arbolPacientes, int nroIngresoBuscar);
+int existeIngreso(nodoPaciente *arbolPacientes);
 
 #endif // STPACIENTE_H_INCLUDED
