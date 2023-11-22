@@ -295,9 +295,17 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
 
 
 
-                // Crear un nuevo nodo de práctica por ingreso y agregarlo a la lista
-                arbolPacientes->listaIngresos->listaPracticasXIngreso = cargarPracticaXIngreso(
-                    arbolPacientes->listaIngresos->listaPracticasXIngreso, nroIngreso, nroPractica);
+                if (arbolPacientes->listaIngresos) {
+
+                    // Crear un nuevo nodo de práctica por ingreso y agregarlo a la lista
+                    arbolPacientes->listaIngresos->listaPracticasXIngreso = cargarPracticaXIngreso(
+                        arbolPacientes->listaIngresos->listaPracticasXIngreso, nroIngreso, nroPractica);
+
+                } else { // si el paciente no tiene ningun ingreso cargado, hay que cargar el primero:
+
+                    altaDeIngreso(arbolPacientes);
+
+                }
 
                 gotoxy(15, 9);
                 printf("Practica por ingreso registrada con exito.\n");

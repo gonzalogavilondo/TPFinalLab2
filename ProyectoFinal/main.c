@@ -19,12 +19,12 @@ int main()
     SMALL_RECT windowSize = {0, 0, 120, 25};
     SetConsoleWindowInfo(wHnd, 1, &windowSize);
 
-    arbolPacientes = archivoToArbolPacientes(arbolPacientes);
-    //arbolPacientes = abrirArbolInicioPrograma(arbolPacientes);
+    //arbolPacientes = archivoToArbolPacientes(arbolPacientes);
+    arbolPacientes = abrirArbolInicioPrograma(arbolPacientes);
 
     menuPrincipal(arbolPacientes);
 
-    //salvarArbolFinPrograma(arbolPacientes);
+    salvarArbolFinPrograma(arbolPacientes);
 
 //    submenuManejoEmpleados();
 
@@ -79,10 +79,10 @@ nodoPaciente * abrirArbolInicioPrograma(nodoPaciente * arbol)
             fclose(pArchiIngreso);
         }
 
-        printf("\n Se cargaron los datos.");
         fclose(pArchiPacientes);
     } else {
         printf("\n Hubo un problema al intentar abrir el archivo.");
+        textoPresioneCualquierTecla();
     }
 
     return arbol;
@@ -92,50 +92,102 @@ void salvarArbolFinPrograma(nodoPaciente * arbol)
 {
     stPaciente * arregloPacientes = arbolPacientesToArreglo(arbol);
     int validosArre = cantidadNodosArbolPacientes(arbol);
+
+    printf("flag 1");
+    getch();
     if (arbol)
     {
+    printf("flag 2");
+    getch();
         FILE * pArchiPacientes = fopen(ARCHIVO_PACIENTES, "wb");
         if(pArchiPacientes != NULL)
         {
+        printf("flag 3");
+        getch();
+            nodoPaciente * paciente;
+
             for (int i = 0; i<validosArre; i++)
             {
+            printf("flag 4");
+            getch();
                 fwrite(&arregloPacientes[i],sizeof(stPaciente),1,pArchiPacientes);
 
-                nodoIngreso * segIngresos = arbol->listaIngresos;
+                paciente = buscaPaciente(arbol, arregloPacientes[i].dni);
 
-                stIngreso ingreso;
 
-                FILE * pArchiIngresos = fopen(ARCHIVO_INGRESOS, "wb");
+                printf("flag 5");
+                getch();
+                if (paciente->listaIngresos) {
 
-                if(pArchiIngresos != NULL)
-                {
-                    while(segIngresos != NULL)
+                printf("flag 6");
+                getch();
+                    nodoIngreso * segIngresos = paciente->listaIngresos;
+
+                    stIngreso ingreso;
+
+                    FILE * pArchiIngresos = fopen(ARCHIVO_INGRESOS, "wb");
+
+                    if(pArchiIngresos != NULL)
                     {
-                        if(segIngresos->ingreso.dniPaciente == arregloPacientes[i].dni){
-                        fwrite(&segIngresos->ingreso,sizeof(stIngreso),1,pArchiIngresos);
-
-                        nodoPracticaXIngreso * segPracticasXIngresos = arbol->listaIngresos->listaPracticasXIngreso;
-
-                        stPracticaXIngreso practicasXIngreso;
-
-                        FILE * pArchiPracitaXIngresos = fopen(ARCHIVO_PRACTICAXINGRESOS, "wb");
-
-                        if(pArchiPracitaXIngresos != NULL)
+                        while(segIngresos != NULL)
                         {
-                            while(segPracticasXIngresos != NULL)
-                            {
-                                if(segPracticasXIngresos->practicaXIngreso.nroIngreso == segIngresos->ingreso.numeroIngreso){
-                                    fwrite(&segPracticasXIngresos,sizeof(stPracticaXIngreso),1,pArchiPracitaXIngresos);
+
+                            fwrite(&segIngresos->ingreso,sizeof(stIngreso),1,pArchiIngresos);
+
+                            FILE * pArchiPracitaXIngresos = fopen(ARCHIVO_PRACTICAXINGRESOS, "wb");
+
+                            if (pArchiPracitaXIngresos) {
+
+                                nodoPracticaXIngreso * segPracticaXIngreso = segIngresos->listaPracticasXIngreso;
+
+                                while (segPracticaXIngreso) {
+
+//                                    printf("\n probar poniendo parentesis");
+//                                    getch();
+                                    /// probar poniendo parentesis
+                                    fwrite(&segPracticaXIngreso->practicaXIngreso,sizeof(stPracticaXIngreso),1,pArchiPracitaXIngresos);
+
+                                    segPracticaXIngreso = segPracticaXIngreso->siguiente;
                                 }
+
+                                fclose(pArchiPracitaXIngresos);
                             }
+
+                            segIngresos = segIngresos->siguiente;
+
+
+
+//                            if(segIngresos->ingreso.dniPaciente == arregloPacientes[i].dni){
+//                                fwrite(&segIngresos->ingreso,sizeof(stIngreso),1,pArchiIngresos);
+//
+//                                nodoPracticaXIngreso * segPracticasXIngresos = arbol->listaIngresos->listaPracticasXIngreso;
+//
+//                                stPracticaXIngreso practicasXIngreso;
+//
+//                                FILE * pArchiPracitaXIngresos = fopen(ARCHIVO_PRACTICAXINGRESOS, "wb");
+//
+//                                if(pArchiPracitaXIngresos != NULL){
+//                                    while(segPracticasXIngresos != NULL)
+//                                    {
+//                                        if(segPracticasXIngresos->practicaXIngreso.nroIngreso == segIngresos->ingreso.numeroIngreso){
+//                                            fwrite(&segPracticasXIngresos,sizeof(stPracticaXIngreso),1,pArchiPracitaXIngresos);
+//                                        }
+//
+//                                        segPracticasXIngresos = segPracticasXIngresos->siguiente;
+//                                    }
+//                                    fclose(pArchiPracitaXIngresos);
+//                                }
+//                            }
+//
+//                            segIngresos = segIngresos->siguiente;
                         }
-                        fclose(pArchiPracitaXIngresos);
-                        }
+                        fclose(pArchiIngresos);
                     }
+
                 }
-                fclose(pArchiIngresos);
+
             }
+            fclose(pArchiPacientes);
         }
-        fclose(pArchiPacientes);
     }
 }

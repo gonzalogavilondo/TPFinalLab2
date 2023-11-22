@@ -914,7 +914,8 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
 void submenuTecnico(nodoPaciente* arbol)
 {
     char control = 's';
-    int opcion;
+    int opcion, dni;
+    nodoPaciente * paciente;
 
     do
     {
@@ -945,6 +946,21 @@ void submenuTecnico(nodoPaciente* arbol)
             case 2:
                 // consultar muestra
                 //mostrarUnaPractica();
+//                printf("\n Ingrese el dni del paciente: ");
+//                scanf("%d", dni);
+//
+//                paciente = buscaPaciente(arbol, dni);
+//
+//                system("cls");
+//                if (paciente) {
+//
+//                    mostrarPracticaXIngreso(paciente);
+//
+//                } else {
+//                    printf("\n El dni ingresado no esta en la base de datos.");
+//                    textoPresioneCualquierTecla();
+//                }
+
                 break;
             case 3:
                 control = 'n';
