@@ -93,34 +93,25 @@ void salvarArbolFinPrograma(nodoPaciente * arbol)
     stPaciente * arregloPacientes = arbolPacientesToArreglo(arbol);
     int validosArre = cantidadNodosArbolPacientes(arbol);
 
-    printf("flag 1");
-    getch();
+
     if (arbol)
     {
-    printf("flag 2");
-    getch();
+
         FILE * pArchiPacientes = fopen(ARCHIVO_PACIENTES, "wb");
         if(pArchiPacientes != NULL)
         {
-        printf("flag 3");
-        getch();
+
             nodoPaciente * paciente;
 
             for (int i = 0; i<validosArre; i++)
             {
-            printf("flag 4");
-            getch();
+
                 fwrite(&arregloPacientes[i],sizeof(stPaciente),1,pArchiPacientes);
 
                 paciente = buscaPaciente(arbol, arregloPacientes[i].dni);
 
-
-                printf("flag 5");
-                getch();
                 if (paciente->listaIngresos) {
 
-                printf("flag 6");
-                getch();
                     nodoIngreso * segIngresos = paciente->listaIngresos;
 
                     stIngreso ingreso;
@@ -142,9 +133,6 @@ void salvarArbolFinPrograma(nodoPaciente * arbol)
 
                                 while (segPracticaXIngreso) {
 
-//                                    printf("\n probar poniendo parentesis");
-//                                    getch();
-                                    /// probar poniendo parentesis
                                     fwrite(&segPracticaXIngreso->practicaXIngreso,sizeof(stPracticaXIngreso),1,pArchiPracitaXIngresos);
 
                                     segPracticaXIngreso = segPracticaXIngreso->siguiente;
