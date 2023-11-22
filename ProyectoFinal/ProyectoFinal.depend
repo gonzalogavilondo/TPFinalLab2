@@ -59,7 +59,7 @@
 	"stPractica.h"
 	"menu.h"
 
-1700667433 e:\tpfinallab2\proyectofinal\stpracticaxingreso.h
+1700675597 e:\tpfinallab2\proyectofinal\stpracticaxingreso.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -77,12 +77,13 @@
 	<string.h>
 	"stEmpleado.h"
 
-1700656251 source:e:\tpfinallab2\proyectofinal\main.c
+1700675828 source:e:\tpfinallab2\proyectofinal\main.c
 	"stIngreso.h"
 	"stEmpleado.h"
 	"stPractica.h"
 	"stPracticaXIngreso.h"
 	"stPaciente.h"
+	"persistenciaDatos.h"
 	"menu.h"
 	<windows.h>
 
@@ -775,4 +776,15 @@
 
 1700598984 source:c:\users\user\desktop\trabajofinal\tpfinallab2(5)\tpfinallab2\proyectofinal\menu.c
 	"menu.h"
+
+1700675859 e:\tpfinallab2\proyectofinal\persistenciadatos.h
+	"stIngreso.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+	"menu.h"
+
+1700675780 source:e:\tpfinallab2\proyectofinal\persistenciadatos.c
+	"persistenciaDatos.h"
 
