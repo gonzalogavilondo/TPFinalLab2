@@ -444,13 +444,13 @@ void buscaYDaDeBajaPracticaXIngreso(nodoPracticaXIngreso *lista)
         Rectangulo();
         gotoxy(15, 1);
         cabeza("Baja de Practica por Ingreso");
-
+        mostrarUnNodoPracticaXIngreso(lista);
         gotoxy(15, 4);
         printf("Ingrese el numero de la practica a dar de baja: ");
         scanf("%d", &nroPractica);
-
+        system("cls");
         nodoPracticaXIngreso *practicaXingresoExistente = buscaPracticaXIngreso(lista, nroPractica);
-
+        Rectangulo();
         if (practicaXingresoExistente)
         {
             practicaXingresoExistente->practicaXIngreso.eliminado = 1;

@@ -2,44 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="stPaciente.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
+	<File name="menu.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="22213" topLine="664" />
+			<Cursor1 position="28607" topLine="806" />
 		</Cursor>
 	</File>
-	<File name="gotoxy.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="63" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="stPracticaXIngreso.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5740" topLine="180" />
-		</Cursor>
-	</File>
-	<File name="menu.c" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="34473" topLine="1035" />
-		</Cursor>
-	</File>
-	<File name="stEmpleado.c" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6153" topLine="151" />
-		</Cursor>
-	</File>
-	<File name="stPractica.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="582" topLine="19" />
-		</Cursor>
-	</File>
-	<File name="stEmpleado.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1145" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="stPaciente.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1590" topLine="42" />
+			<Cursor1 position="556" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="gotoxy.c" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -47,14 +17,54 @@
 			<Cursor1 position="823" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="stPractica.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7749" topLine="234" />
+		</Cursor>
+	</File>
+	<File name="stPaciente.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1590" topLine="23" />
+		</Cursor>
+	</File>
+	<File name="stPracticaXIngreso.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="15186" topLine="432" />
+		</Cursor>
+	</File>
+	<File name="stPaciente.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-4" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="22213" topLine="664" />
+		</Cursor>
+	</File>
+	<File name="stIngreso.c" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3606" topLine="112" />
+		</Cursor>
+	</File>
 	<File name="menu.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-2" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="444" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="stPracticaXIngreso.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="gotoxy.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="179" topLine="0" />
+			<Cursor1 position="63" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="stEmpleado.c" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6153" topLine="151" />
+		</Cursor>
+	</File>
+	<File name="stPracticaXIngreso.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1041" topLine="6" />
+		</Cursor>
+	</File>
+	<File name="stPractica.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="582" topLine="6" />
 		</Cursor>
 	</File>
 	<File name="stIngreso.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -62,19 +72,9 @@
 			<Cursor1 position="288" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="main.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
+	<File name="stEmpleado.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3226" topLine="93" />
-		</Cursor>
-	</File>
-	<File name="stPractica.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="-3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7749" topLine="234" />
-		</Cursor>
-	</File>
-	<File name="stIngreso.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5264" topLine="63" />
+			<Cursor1 position="1145" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

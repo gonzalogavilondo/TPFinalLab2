@@ -495,11 +495,12 @@ void buscaYDaDeBajaIngreso(nodoPaciente *arbolPacientes)
 
         printf("Ingrese el numero de ingreso a dar de baja: ");
         scanf("%d", &nroIngreso);
-
         nodoIngreso *ingresoExistente = buscaIngreso(paciente->listaIngresos, nroIngreso);
 
         if (ingresoExistente)
         {
+            system("pause");
+
             ingresoExistente->ingreso.eliminado = 1;
             buscaYDaDeBajaPracticaXIngreso(ingresoExistente->listaPracticasXIngreso);
             gotoxy(15, 6);

@@ -24,7 +24,7 @@ int main()
 
     menuPrincipal(arbolPacientes);
 
-    salvarArbolFinPrograma(arbolPacientes);
+//    salvarArbolFinPrograma(arbolPacientes);
 
 //    submenuManejoEmpleados();
 

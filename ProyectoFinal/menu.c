@@ -572,7 +572,7 @@ void subMenuConsultaDeEmpleado(char tipoEmpleadoEjecuta[]){
 
 void subMenuListadosDeEmpleado(char tipoEmpleadoEjecuta[]){
 
-    char control;
+    char control = '\0';
     int opcion;
     //char op;
     //int numeroPerfil = 0;
@@ -914,8 +914,9 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
 void submenuTecnico(nodoPaciente* arbol)
 {
     char control = 's';
-    int opcion, dni;
-    nodoPaciente * paciente;
+    int opcion;
+    //int dni;
+    //nodoPaciente * paciente;
 
     do
     {
