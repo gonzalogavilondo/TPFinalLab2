@@ -217,7 +217,7 @@ nodoIngreso* liberarListaIngresos(nodoIngreso *lista)
 
 int cantidadNodosListaIngresos(nodoIngreso * lista)
 {
-    int cont = 1;
+    int cont = 0;
     while (lista != NULL)
     {
         lista = lista->siguiente;
@@ -230,7 +230,7 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni)
 {
     stIngreso registro;
 
-    registro.numeroIngreso = cantidadNodosListaIngresos(lista); // Numero de ingreso
+    registro.numeroIngreso = cantidadNodosListaIngresos(lista) + 1; // Numero de ingreso
 
     // Obtener la fecha actual y asignarla a nuevoIngreso->ingreso.fechaIngreso
     obtenerFechaActual(registro.fechaIngreso);
