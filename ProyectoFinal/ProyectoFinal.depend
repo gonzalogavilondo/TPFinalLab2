@@ -53,7 +53,7 @@
 	<conio.h>
 	<string.h>
 
-1700669101 source:e:\tpfinallab2\proyectofinal\stpracticaxingreso.c
+1700694536 source:e:\tpfinallab2\proyectofinal\stpracticaxingreso.c
 	"stPracticaXIngreso.h"
 	"stIngreso.h"
 	"stPractica.h"
@@ -231,7 +231,7 @@
 	<stdlib.h>
 	<windows.h>
 
-1700667143 source:e:\tpfinallab2\proyectofinal\menu.c
+1700690657 source:e:\tpfinallab2\proyectofinal\menu.c
 	"menu.h"
 
 1700002249 source:c:\users\user\documents\tpfinallab2\proyectofinal\gotoxy.c
@@ -785,7 +785,7 @@
 	"stPaciente.h"
 	"menu.h"
 
-1700675780 source:e:\tpfinallab2\proyectofinal\persistenciadatos.c
+1700695663 source:e:\tpfinallab2\proyectofinal\persistenciadatos.c
 	"persistenciaDatos.h"
 
 1700687577 source:c:\users\user\desktop\trabajofinal\tpfinallab2(7)\tpfinallab2\proyectofinal\gotoxy.c
