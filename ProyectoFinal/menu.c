@@ -1140,7 +1140,7 @@ void menuPrincipal(nodoPaciente* arbol){
 ///PRINTF INGRESO (EMPLEADO)
 void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol){
     char usuario[20];
-    char contrasenia[20];
+
     gotoxy(0,0);
     printf("Inicio de sesion!");
     gotoxy(0,2);
@@ -1152,9 +1152,27 @@ void menuIngresoUserPrintf(char tipoMenu[], nodoPaciente* arbol){
     gets(usuario);
     gotoxy(13,3);
     fflush(stdin);
-    gets(contrasenia);
 
-    int correcto = inicioDeSesion(usuario, contrasenia, tipoMenu);
+    char password[20];
+    int i = 0;
+    char ch;
+
+    while (1) {
+        ch = getch();
+        if (ch == '\r' || ch == '\n') {
+            password[i] = '\0';
+            break;
+        } else if (ch == 8 && i > 0) {
+            printf("\b \b");
+            i--;
+        } else if (i < sizeof(password) - 1) {
+            password[i++] = ch;
+            printf("*");
+        }
+    }
+
+
+    int correcto = inicioDeSesion(usuario, password, tipoMenu);
 
 
     if (correcto == 1)
