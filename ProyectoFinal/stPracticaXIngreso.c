@@ -217,7 +217,7 @@ int existePracticaXIngreso(nodoPracticaXIngreso * listaPracticasXIngreso, int nr
 **/
 void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
 {
-    int nroIngreso, nroPractica, dni, error = 0;
+    int nroIngreso, nroPractica, dni, error = 0, ingresoValido = 0;
     char opcion = 0;
 
     do
@@ -247,23 +247,39 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
         }
         else
         {
-            if (altaIngreso == 1)
+            nodoPaciente *paciente = inicArbolPacientes();
+            if (altaIngreso == 1) ///Si altaIngreso == 1, quiere decir que se llamo desde el menu de ingresos, ya tiene el DNI
             {
-                nodoPaciente *paciente = inicArbolPacientes();
                 paciente = buscaPaciente(arbolPacientes, arbolPacientes->datosPaciente.dni);
+            }
+            else ///Sino, es que se llamo del menu de practicaxIngreso y no tiene el dni
+            {
                 system("cls");
-                do
+                Rectangulo();
+                gotoxy(5, 4);
+                printf("Ingrese el numero de DNI del");
+                gotoxy(5, 5);
+                printf("paciente al que le carga la practica: ");
+                scanf("%d", &dni);
+                paciente = buscaPaciente(arbolPacientes, dni);
+            }
+            system("cls");
+            do
+            {
+                mostrarListadoIngresosPaciente(paciente);
+                printf("Cargue el numero de ingreso: ");
+                scanf("%d", &nroIngreso);
+                if (!existeIngreso(paciente))
                 {
-                    mostrarListadoIngresosPaciente(paciente);
-                    printf("Cargue el numero de ingreso: ");
-                    scanf("%d", &nroIngreso);
-                    if (!existeIngreso(paciente))
-                    {
-                        gotoxy(15, 8);
-                        printf("No existe ningun ingreso para ese paciente en la base de datos. Primero asignele uno\n");
-                        error = 1;
-                    }
-                    else if (!existeIngresoXnroIngreso(paciente, nroIngreso))
+                    gotoxy(15, 8);
+                    printf("No existe ningun ingreso para ese paciente en la base de datos. Primero asignele uno\n");
+                    error = 1;
+                    ingresoValido = 1;
+                }
+                else
+                {
+                    ingresoValido = existeIngresoXnroIngreso(paciente, nroIngreso);
+                    if(!ingresoValido)
                     {
                         system("cls");
                         Rectangulo();
@@ -274,30 +290,18 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
                         gotoxy(15, 8);
                         system("pause");
                         system("cls");
-                    }
-                }while(nroIngreso == paciente->listaIngresos->ingreso.eliminado || error == 1);
 
-                system("cls");
-                Rectangulo();
-                gotoxy(15, 1);
-                cabeza("Alta de Practica por Ingreso");
-            }
-            else
-            {
-                system("cls");
-                Rectangulo();
-                gotoxy(5, 4);
-                printf("Ingrese el numero de DNI del");
-                gotoxy(5, 5);
-                printf("paciente al que le carga la practica: ");
-                scanf("%d", &dni);
-                arbolPacientes = buscaPaciente(arbolPacientes, dni);
-            }
+                    }
+                }
+            }while(!ingresoValido);
+
+            system("cls");
+            Rectangulo();
+            gotoxy(15, 1);
+            cabeza("Alta de Practica por Ingreso");
 
             if (error == 0)
             {
-
-
                 /// Si es la primera vez que se usa la practica, se setea en 1 el campo tieneAlMenosUnUso:
                 // Leo el archivo de practicas y las cargo en una lista:
                 nodoPractica * listaPracticas = inicListaPracticas();
@@ -305,23 +309,25 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
                 nodoPractica * nodoBuscado;
                 // esta funcion devuelve NULL si no encontro el nodo
                 nodoBuscado = buscaPracticaPorNroPractica(listaPracticas, nroPractica);
-                if (nodoBuscado && !(nodoBuscado->datosPractica.tieneAlMenosUnUso)) {
+                if (nodoBuscado && !(nodoBuscado->datosPractica.tieneAlMenosUnUso))
+                {
                     nodoBuscado->datosPractica.tieneAlMenosUnUso = 1;
                 }
                 liberarListaPracticas(listaPracticas);
 
 
 
-                if (arbolPacientes->listaIngresos) {
+                if (paciente->listaIngresos)
+                {
 
                     // Crear un nuevo nodo de práctica por ingreso y agregarlo a la lista
-                    arbolPacientes->listaIngresos->listaPracticasXIngreso = cargarPracticaXIngreso(
-                        arbolPacientes->listaIngresos->listaPracticasXIngreso, nroIngreso, nroPractica);
+                    paciente->listaIngresos->listaPracticasXIngreso = cargarPracticaXIngreso(
+                        paciente->listaIngresos->listaPracticasXIngreso, nroIngreso, nroPractica);
 
-                } else { // si el paciente no tiene ningun ingreso cargado, hay que cargar el primero:
-
-                    altaDeIngreso(arbolPacientes);
-
+                }
+                else // si el paciente no tiene ningun ingreso cargado, hay que cargar el primero:
+                {
+                    altaDeIngreso(paciente);
                 }
 
                 gotoxy(15, 9);
