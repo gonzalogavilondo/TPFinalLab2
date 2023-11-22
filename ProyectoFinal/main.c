@@ -24,7 +24,7 @@ int main()
 
     menuPrincipal(arbolPacientes);
 
-//    salvarArbolFinPrograma(arbolPacientes);
+    salvarArbolFinPrograma(arbolPacientes);
 
 //    submenuManejoEmpleados();
 
@@ -53,35 +53,57 @@ nodoPaciente * abrirArbolInicioPrograma(nodoPaciente * arbol)
 
             FILE * pArchiIngreso = fopen(ARCHIVO_INGRESOS, "rb");
 
-            stIngreso ingreso;
+            if (pArchiIngreso) {
 
-            while(fread(&ingreso,sizeof(stIngreso), 1, pArchiIngreso) > 0)
-            {
-                if(paciente.dni == ingreso.dniPaciente)
-                {
-                    arbol->listaIngresos = agregarNodoIngreso(arbol->listaIngresos,ingreso);
+                stIngreso ingreso;
 
-                    FILE * pArchiPracticaXIngreso = fopen(ARCHIVO_PRACTICAXINGRESOS, "rb");
+                while(fread(&ingreso,sizeof(stIngreso), 1, pArchiIngreso) > 0){
 
-                    stPracticaXIngreso practicaXIngreso;
+                    if(paciente.dni == ingreso.dniPaciente){
 
-                    while(fread(&practicaXIngreso, sizeof(stPracticaXIngreso),1,pArchiPracticaXIngreso) > 0)
-                    {
-                        if(arbol->listaIngresos->listaPracticasXIngreso->practicaXIngreso.nroPractica == practicaXIngreso.nroPractica)
-                        {
-                            arbol->listaIngresos->listaPracticasXIngreso = agregarNodoPracticaXIngreso(arbol->listaIngresos->listaPracticasXIngreso, practicaXIngreso);
+                        nodoPaciente * pacienteAux = buscaPaciente(arbol, paciente.dni);
+                        pacienteAux->listaIngresos = agregarNodoIngreso(pacienteAux->listaIngresos, ingreso);
+
+                        FILE * pArchiPracticaXIngreso = fopen(ARCHIVO_PRACTICAXINGRESOS, "rb");
+
+                        if (pArchiPracticaXIngreso) {
+
+                            nodoIngreso * nodoIngresoBuscado = inicListaIngresos();
+                            nodoIngresoBuscado = buscaIngreso(pacienteAux->listaIngresos , ingreso.numeroIngreso);
+
+
+                            stPracticaXIngreso practicaXIngreso;
+
+                            while(fread(&practicaXIngreso, sizeof(stPracticaXIngreso),1,pArchiPracticaXIngreso) > 0){
+
+                                if(nodoIngresoBuscado->ingreso.numeroIngreso == practicaXIngreso.nroIngreso){
+
+                                    nodoIngresoBuscado->listaPracticasXIngreso = agregarNodoPracticaXIngreso(nodoIngresoBuscado->listaPracticasXIngreso, practicaXIngreso);
+                                }
+
+                            }
+                            fclose(pArchiPracticaXIngreso);
+
+                        } else {
+
+                            printf("\n Hubo un problema al intentar abrir el archivo de practicas por ingreso.");
+                            textoPresioneCualquierTecla();
+
                         }
-
                     }
-                    fclose(pArchiPracticaXIngreso);
                 }
+
+                fclose(pArchiIngreso);
+
+            } else {
+                printf("\n Hubo un problema al intentar abrir el archivo de ingresos.");
+                textoPresioneCualquierTecla();
             }
-            fclose(pArchiIngreso);
         }
 
         fclose(pArchiPacientes);
     } else {
-        printf("\n Hubo un problema al intentar abrir el archivo.");
+        printf("\n Hubo un problema al intentar abrir el archivo de pacientes.");
         textoPresioneCualquierTecla();
     }
 

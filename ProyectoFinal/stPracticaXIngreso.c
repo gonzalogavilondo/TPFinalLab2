@@ -139,6 +139,7 @@ void mostrarPracticaXIngreso(nodoPaciente *arbolPacientes)
 
                 printf("\n*** Fin del Listado de Practicas por Ingreso del Paciente ***\n");
                 puts("----------------------------------------------\n");
+                textoPresioneCualquierTecla();
             }
         }
         else

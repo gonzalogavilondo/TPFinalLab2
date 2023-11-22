@@ -42,13 +42,13 @@ void mostrarUnNodoIngreso(nodoIngreso *aux);
 void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes);
 void mostrarListadoIngresosPaciente(nodoPaciente *paciente);
 nodoIngreso* liberarListaIngresos(nodoIngreso *lista);
+nodoIngreso * cantidadNodosListaIngresos(nodoIngreso * lista);
 nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni);
 
 /**
     FUNCIONES ESPECIFICAS DEL PROBLEMA
 **/
 void obtenerFechaActual(char fechaActual[11]);
-int obtenerNuevoNumeroIngreso();
 stPractica obtenerPracticaLaboratorio();
 void altaDeIngreso(nodoPaciente *arbolPacientes);
 

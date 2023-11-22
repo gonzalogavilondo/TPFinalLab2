@@ -190,11 +190,21 @@ nodoIngreso* liberarListaIngresos(nodoIngreso *lista)
     agregar ese pedido a la lista y retornar la nueva lista con el nuevo ingreso.
 **/
 
+nodoIngreso * cantidadNodosListaIngresos(nodoIngreso * lista){
+
+    int cont = 0;
+    while (lista) {
+        cont++;
+        lista = lista->siguiente;
+    }
+    return cont;
+}
+
 nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni)
 {
     stIngreso registro;
 
-    registro.numeroIngreso = obtenerNuevoNumeroIngreso(); // Numero de ingreso
+    registro.numeroIngreso = cantidadNodosListaIngresos(lista); // Numero de ingreso
 
     // Obtener la fecha actual y asignarla a nuevoIngreso->ingreso.fechaIngreso
     obtenerFechaActual(registro.fechaIngreso);
