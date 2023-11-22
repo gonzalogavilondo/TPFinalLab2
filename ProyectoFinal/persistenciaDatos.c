@@ -1,63 +1,45 @@
 #include "persistenciaDatos.h"
 
-nodoPaciente * abrirArbolInicioPrograma(nodoPaciente * arbol)
-{
+nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
+    FILE* pArchiPacientes = fopen(ARCHIVO_PACIENTES, "rb");
 
-    FILE * pArchiPacientes = fopen(ARCHIVO_PACIENTES, "rb");
-
-    if (pArchiPacientes)
-    {
-
+    if (pArchiPacientes) {
         stPaciente paciente;
 
-        while (fread(&paciente, sizeof(stPaciente), 1, pArchiPacientes) > 0)
-        {
+        while (fread(&paciente, sizeof(stPaciente), 1, pArchiPacientes) > 0) {
             arbol = insertarPaciente(arbol, paciente);
 
-            FILE * pArchiIngreso = fopen(ARCHIVO_INGRESOS, "rb");
+            FILE* pArchiIngreso = fopen(ARCHIVO_INGRESOS, "rb");
 
             if (pArchiIngreso) {
-
                 stIngreso ingreso;
 
-                while(fread(&ingreso,sizeof(stIngreso), 1, pArchiIngreso) > 0){
-
-                    if(paciente.dni == ingreso.dniPaciente){
-
-                        nodoPaciente * pacienteAux = buscaPaciente(arbol, paciente.dni);
+                while (fread(&ingreso, sizeof(stIngreso), 1, pArchiIngreso) > 0) {
+                    if (paciente.dni == ingreso.dniPaciente) {
+                        nodoPaciente* pacienteAux = buscaPaciente(arbol, paciente.dni);
                         pacienteAux->listaIngresos = agregarNodoIngreso(pacienteAux->listaIngresos, ingreso);
 
-                        FILE * pArchiPracticaXIngreso = fopen(ARCHIVO_PRACTICAXINGRESOS, "rb");
+                        FILE* pArchiPracticaXIngreso = fopen(ARCHIVO_PRACTICAXINGRESOS, "rb");
 
                         if (pArchiPracticaXIngreso) {
-
-                            nodoIngreso * nodoIngresoBuscado = inicListaIngresos();
-                            nodoIngresoBuscado = buscaIngreso(pacienteAux->listaIngresos , ingreso.numeroIngreso);
-
+                            nodoIngreso* nodoIngresoBuscado = buscaIngreso(pacienteAux->listaIngresos, ingreso.numeroIngreso);
 
                             stPracticaXIngreso practicaXIngreso;
-
-                            while(fread(&practicaXIngreso, sizeof(stPracticaXIngreso),1,pArchiPracticaXIngreso) > 0){
-
-                                if(nodoIngresoBuscado->ingreso.numeroIngreso == practicaXIngreso.nroIngreso){
-
+                            while (fread(&practicaXIngreso, sizeof(stPracticaXIngreso), 1, pArchiPracticaXIngreso) > 0) {
+                                if (nodoIngresoBuscado && nodoIngresoBuscado->ingreso.numeroIngreso == practicaXIngreso.nroIngreso) {
                                     nodoIngresoBuscado->listaPracticasXIngreso = agregarNodoPracticaXIngreso(nodoIngresoBuscado->listaPracticasXIngreso, practicaXIngreso);
                                 }
-
                             }
+
                             fclose(pArchiPracticaXIngreso);
-
                         } else {
-
                             printf("\n Hubo un problema al intentar abrir el archivo de practicas por ingreso.");
                             textoPresioneCualquierTecla();
-
                         }
                     }
                 }
 
                 fclose(pArchiIngreso);
-
             } else {
                 printf("\n Hubo un problema al intentar abrir el archivo de ingresos.");
                 textoPresioneCualquierTecla();
@@ -72,97 +54,53 @@ nodoPaciente * abrirArbolInicioPrograma(nodoPaciente * arbol)
 
     return arbol;
 }
+void salvarArbolFinPrograma(nodoPaciente *arbol) {
+    if (arbol == NULL) {
+        return; // Verificar si el árbol está vacío
+    }
 
-void salvarArbolFinPrograma(nodoPaciente * arbol)
-{
-    stPaciente * arregloPacientes = arbolPacientesToArreglo(arbol);
+    FILE *pArchiPacientes = fopen(ARCHIVO_PACIENTES, "wb");
+    if (pArchiPacientes == NULL) {
+        return; // Manejar el error si no se puede abrir el archivo
+    }
+
+    stPaciente *arregloPacientes = arbolPacientesToArreglo(arbol);
     int validosArre = cantidadNodosArbolPacientes(arbol);
 
+    for (int i = 0; i < validosArre; i++) {
+        fwrite(&arregloPacientes[i], sizeof(stPaciente), 1, pArchiPacientes);
 
-    if (arbol)
-    {
+        nodoPaciente *paciente = buscaPaciente(arbol, arregloPacientes[i].dni);
 
-        FILE * pArchiPacientes = fopen(ARCHIVO_PACIENTES, "wb");
-        if(pArchiPacientes != NULL)
-        {
+        if (paciente && paciente->listaIngresos) {
+            nodoIngreso *segIngresos = paciente->listaIngresos;
 
-            nodoPaciente * paciente;
+            FILE *pArchiIngresos = fopen(ARCHIVO_INGRESOS, "ab"); // Cambio a modo append
 
-            for (int i = 0; i<validosArre; i++)
-            {
+            if (pArchiIngresos != NULL) {
+                while (segIngresos != NULL) {
+                    fwrite(&segIngresos->ingreso, sizeof(stIngreso), 1, pArchiIngresos);
 
-                fwrite(&arregloPacientes[i],sizeof(stPaciente),1,pArchiPacientes);
+                    FILE *pArchiPracticaXIngresos = fopen(ARCHIVO_PRACTICAXINGRESOS, "ab"); // Cambio a modo append
 
-                paciente = buscaPaciente(arbol, arregloPacientes[i].dni);
+                    if (pArchiPracticaXIngresos != NULL) {
+                        nodoPracticaXIngreso *segPracticaXIngreso = segIngresos->listaPracticasXIngreso;
 
-                if (paciente->listaIngresos) {
-
-                    nodoIngreso * segIngresos = paciente->listaIngresos;
-
-                    //stIngreso ingreso;
-
-                    FILE * pArchiIngresos = fopen(ARCHIVO_INGRESOS, "wb");
-
-                    if(pArchiIngresos != NULL)
-                    {
-                        while(segIngresos != NULL)
-                        {
-
-                            fwrite(&segIngresos->ingreso,sizeof(stIngreso),1,pArchiIngresos);
-
-                            FILE * pArchiPracitaXIngresos = fopen(ARCHIVO_PRACTICAXINGRESOS, "wb");
-
-                            if (pArchiPracitaXIngresos) {
-
-                                nodoPracticaXIngreso * segPracticaXIngreso = segIngresos->listaPracticasXIngreso;
-
-                                while (segPracticaXIngreso) {
-
-                                    fwrite(&segPracticaXIngreso->practicaXIngreso,sizeof(stPracticaXIngreso),1,pArchiPracitaXIngresos);
-
-                                    segPracticaXIngreso = segPracticaXIngreso->siguiente;
-                                }
-
-                                fclose(pArchiPracitaXIngresos);
-                            }
-
-                            segIngresos = segIngresos->siguiente;
-
-
-
-//                            if(segIngresos->ingreso.dniPaciente == arregloPacientes[i].dni){
-//                                fwrite(&segIngresos->ingreso,sizeof(stIngreso),1,pArchiIngresos);
-//
-//                                nodoPracticaXIngreso * segPracticasXIngresos = arbol->listaIngresos->listaPracticasXIngreso;
-//
-//                                stPracticaXIngreso practicasXIngreso;
-//
-//                                FILE * pArchiPracitaXIngresos = fopen(ARCHIVO_PRACTICAXINGRESOS, "wb");
-//
-//                                if(pArchiPracitaXIngresos != NULL){
-//                                    while(segPracticasXIngresos != NULL)
-//                                    {
-//                                        if(segPracticasXIngresos->practicaXIngreso.nroIngreso == segIngresos->ingreso.numeroIngreso){
-//                                            fwrite(&segPracticasXIngresos,sizeof(stPracticaXIngreso),1,pArchiPracitaXIngresos);
-//                                        }
-//
-//                                        segPracticasXIngresos = segPracticasXIngresos->siguiente;
-//                                    }
-//                                    fclose(pArchiPracitaXIngresos);
-//                                }
-//                            }
-//
-//                            segIngresos = segIngresos->siguiente;
+                        while (segPracticaXIngreso != NULL) {
+                            fwrite(&segPracticaXIngreso->practicaXIngreso, sizeof(stPracticaXIngreso), 1, pArchiPracticaXIngresos);
+                            segPracticaXIngreso = segPracticaXIngreso->siguiente;
                         }
-                        fclose(pArchiIngresos);
+
+                        fclose(pArchiPracticaXIngresos); // Cerrar el archivo después de escribir
                     }
 
+                    segIngresos = segIngresos->siguiente;
                 }
 
+                fclose(pArchiIngresos); // Cerrar el archivo después de escribir
             }
-            fclose(pArchiPacientes);
         }
     }
+
+    fclose(pArchiPacientes); // Cerrar el archivo al finalizar
 }
-
-
