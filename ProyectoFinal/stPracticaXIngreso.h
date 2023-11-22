@@ -54,4 +54,6 @@ void mostrarUnaPractica(nodoPaciente * arbol);
 /// SE USA EN stPaciente.c AL DAR DE BAJA A UN PACIENTE EN CASCADA:
 void darDeBajaTodasLasPracticasXIngreso(nodoPracticaXIngreso * listaPracticasXIngreso);
 
+void mostrarUnaPracticaXIngreso(nodoPaciente *arbol);
+
 #endif // STPRACTICAXINGRESO_H_INCLUDED
