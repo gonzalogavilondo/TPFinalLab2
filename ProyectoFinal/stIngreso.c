@@ -303,7 +303,6 @@ void altaDeIngreso(nodoPaciente *arbolPacientes)
 {
     int dni;
 
-
     system("cls");
 
     // Imprime el rectángulo y la cabeza después de limpiar la pantalla

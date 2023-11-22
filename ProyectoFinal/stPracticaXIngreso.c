@@ -112,7 +112,7 @@ void mostrarUnNodoPracticaXIngreso(nodoPracticaXIngreso *aux)
     }
 }
 
-void mostrarPracticaXIngreso(nodoPaciente *arbolPacientes)
+void mostrarPracticaXIngreso(nodoPaciente *arbolPacientes, int flag) ///El flag indica si se llama desde el administrador (=1) o administrativo (=0)
 {
     if (arbolPacientes != NULL)
     {
@@ -133,7 +133,10 @@ void mostrarPracticaXIngreso(nodoPaciente *arbolPacientes)
             {
                 while (practicasXIngreso != NULL)
                 {
-                    mostrarUnNodoPracticaXIngreso(practicasXIngreso);
+                    if (flag == 1 || (flag == 0 && practicasXIngreso->practicaXIngreso.eliminado == 0))
+                    {
+                        mostrarUnNodoPracticaXIngreso(practicasXIngreso);
+                    }
                     practicasXIngreso = practicasXIngreso->siguiente;
                 }
 
@@ -150,10 +153,11 @@ void mostrarPracticaXIngreso(nodoPaciente *arbolPacientes)
             system("cls");
         }
 
-        mostrarPracticaXIngreso(arbolPacientes->izq);
-        mostrarPracticaXIngreso(arbolPacientes->der);
+        mostrarPracticaXIngreso(arbolPacientes->izq, flag);
+        mostrarPracticaXIngreso(arbolPacientes->der, flag);
     }
 }
+
 
 /**
     La función (liberarListaPracticaXIngreso), que reciba la lista y hacer lo indicado. La función no debe retornar nada (no importa que

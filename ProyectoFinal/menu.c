@@ -849,7 +849,7 @@ void submenuManejoIngresos(nodoPaciente *arbolPaciente, int flag)
     system("cls");
 }
 
-void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
+void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes, int flag)
 {
     char control = 's';
     int opcion;
@@ -895,7 +895,7 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes)
                 //buscaYDaDeBajaPracticaXIngreso(listaPracticaXIngresos);
                 break;
             case 4:
-                mostrarPracticaXIngreso(arbolPacientes);
+                mostrarPracticaXIngreso(arbolPacientes, flag); //El flag indica si se llama del menu de administrador o administrativo. flag = 1 (Administrador)/flag = 0 (Administrativo)
             break;
 
             case 5:
@@ -1009,7 +1009,7 @@ void submenuAdministrativo(nodoPaciente * arbolPacientes)
                 break;
             case 4:
                 // Gestionar prácticas por ingreso
-                submenuManejoPracticasXIngreso(arbolPacientes);
+                submenuManejoPracticasXIngreso(arbolPacientes, 0);
                 break;
 
             case 5:
@@ -1070,7 +1070,7 @@ void submenuAdministrador(nodoPaciente * arbolPacientes){
                 submenuGestionPracticas();
                 break;
             case 5:
-                submenuManejoPracticasXIngreso(arbolPacientes);
+                submenuManejoPracticasXIngreso(arbolPacientes, 1);
                 break;
 
             case 6:
