@@ -190,12 +190,13 @@ nodoIngreso* liberarListaIngresos(nodoIngreso *lista)
     agregar ese pedido a la lista y retornar la nueva lista con el nuevo ingreso.
 **/
 
-nodoIngreso * cantidadNodosListaIngresos(nodoIngreso * lista){
-
-    int cont = 0;
-    while (lista) {
-        cont++;
+nodoIngreso * cantidadNodosListaIngresos(nodoIngreso * lista)
+{
+    int cont = 1;
+    while (lista != NULL)
+    {
         lista = lista->siguiente;
+        cont++;
     }
     return cont;
 }
