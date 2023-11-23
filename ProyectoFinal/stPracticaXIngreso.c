@@ -533,7 +533,7 @@ void registrarResultadoPracticaXIngreso(nodoPaciente *arbol)
             if(ingreso)
             {
 
-                practicaXingresoExistente = buscaPracticaPorNroPractica(ingreso->listaPracticasXIngreso, nroPractica);
+                practicaXingresoExistente = buscaPracticaXIngreso(ingreso->listaPracticasXIngreso, nroPractica);
 
                 if (practicaXingresoExistente)
                 {
@@ -577,7 +577,7 @@ void registrarResultadoPracticaXIngreso(nodoPaciente *arbol)
                 printf("El numero de ingreso cargado no existe.");
                 getch();
             }
-            system("cls");
+            //system("cls");
             Rectangulo();
             gotoxy(1, 15);
             printf("'S' para registrar otro resultado, cualquier tecla para finalizar");
@@ -608,10 +608,12 @@ void darDeBajaTodasLasPracticasXIngreso(nodoPracticaXIngreso * listaPracticasXIn
 void mostrarUnaPracticaXIngreso(nodoPaciente *arbol)
 {
     nodoPracticaXIngreso *practicaXingresoExistente = inicListaPracticaXIngresos();
+    nodoIngreso *ingreso = NULL;
 
     nodoPaciente * paciente;
 
     int nroPractica;
+    int nroIngreso;
     int nroDNI;
     char opcion = 0;
 
@@ -623,49 +625,66 @@ void mostrarUnaPracticaXIngreso(nodoPaciente *arbol)
         cabeza("Mostrar Practica por Ingreso");
 
         gotoxy(1, 4);
-        printf("Ingrese el numero de practica: ");
-        scanf("%d", &nroPractica);
-        gotoxy(1, 5);
         printf("Ingrese el numero de DNI: ");
         scanf("%d", &nroDNI);
+        gotoxy(1, 5);
+        printf("Ingrese el numero de ingreso: ");
+        scanf("%d", &nroIngreso);
+        gotoxy(1, 6);
+        printf("Ingrese el numero de practica: ");
+        scanf("%d", &nroPractica);
 
         paciente = buscaPaciente(arbol, nroDNI);
 
         if(paciente)
         {
 
-            practicaXingresoExistente = buscaPracticaXIngreso(paciente->listaIngresos->listaPracticasXIngreso, nroPractica);
+            ingreso = buscaIngreso(paciente->listaIngresos, nroIngreso);
 
-            if (practicaXingresoExistente)
+            if(ingreso)
             {
-                do
-                {
-                    gotoxy(1, 6);
-                    printf("Numero de ingreso...........: %d", practicaXingresoExistente->practicaXIngreso.nroIngreso);
-                    gotoxy(1, 7);
-                    printf("Resultado...................: %s", practicaXingresoExistente->practicaXIngreso.resultado);
-                    gotoxy(1, 9);
-                    printf("Eliminado...................: %d <1:SI/0:NO>", practicaXingresoExistente->practicaXIngreso.eliminado);
+                practicaXingresoExistente = buscaPracticaXIngreso(ingreso->listaPracticasXIngreso, nroPractica);
 
-                    gotoxy(1, 10);
-                    printf("Desea ver otra practica por ingreso? (S/N): ");
-                    opcion = getch();
-                    system("cls");
+                if (practicaXingresoExistente)
+                {
+                    do
+                    {
+                        gotoxy(1, 7);
+                        printf("Numero de ingreso...........: %d", practicaXingresoExistente->practicaXIngreso.nroIngreso);
+                        gotoxy(1, 8);
+                        printf("Resultado...................: %s", practicaXingresoExistente->practicaXIngreso.resultado);
+                        gotoxy(1, 9);
+                        printf("Eliminado...................: %d <1:SI/0:NO>", practicaXingresoExistente->practicaXIngreso.eliminado);
+
+                        gotoxy(1, 10);
+                        printf("Desea ver otra practica por ingreso? (S/N): ");
+                        opcion = getch();
+                        system("cls");
+                    }
+                    while (opcion == 's' || opcion == 'S');
                 }
-                while (opcion == 's' || opcion == 'S');
+                else
+                {
+                    gotoxy(1, 13);
+                    printf("El numero de practica cargado no existe");
+                }
+
+                gotoxy(1, 15);
+                printf("Presione S para seguir visualizando, cualquier otra tecla para finalizar");
+                opcion = getch();
+                system("cls");
             }
             else
             {
-                gotoxy(1, 13);
-                printf("El numero de practica cargado no existe");
-            }
 
-            gotoxy(1, 15);
-            printf("Presione S para seguir visualizando, cualquier otra tecla para finalizar");
-            opcion = getch();
-            system("cls");
+                gotoxy(1,15);
+                printf("No existe ingreso con el numero ingresado! Quiere reintentar? (S/N)");
+                opcion = getch();
+
+            }
         }
-        else{
+        else
+        {
 
             gotoxy(1,15);
             printf("No existe paciente con el dni ingresado! Quiere reintentar? (S/N)");
