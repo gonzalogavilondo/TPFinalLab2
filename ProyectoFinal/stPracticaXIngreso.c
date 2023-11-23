@@ -491,6 +491,9 @@ void modificarDatosPracticaXIngreso(nodoPaciente *arbolPacientes)
                 Rectangulo();
                 gotoxy(5, 4);
                 printf("El numero de practica ingresado no esta registrado en el ingreso.");
+                gotoxy(5, 6);
+                system("pause");
+                system("cls");
             }
 
         }
