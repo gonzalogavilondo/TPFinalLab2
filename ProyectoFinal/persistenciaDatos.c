@@ -12,7 +12,6 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
 
     while (fread(&paciente, sizeof(stPaciente), 1, pArchiPacientes) > 0) {
         arbol = insertarPaciente(arbol, paciente);
-        printf("Paciente insertado: DNI %d\n", paciente.dni);
 
         FILE* pArchiIngreso = fopen(ARCHIVO_INGRESOS, "rb");
 
@@ -28,7 +27,6 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
             if (paciente.dni == ingreso.dniPaciente) {
                 nodoPaciente* pacienteAux = buscaPaciente(arbol, paciente.dni);
                 pacienteAux->listaIngresos = agregarNodoIngreso(pacienteAux->listaIngresos, ingreso);
-                printf("Ingreso asociado a paciente: Nro. %d\n", ingreso.numeroIngreso);
 
                 FILE* pArchiPracticaXIngreso = fopen(ARCHIVO_PRACTICAXINGRESOS, "rb");
 
@@ -45,7 +43,6 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
                 while (fread(&practicaXIngreso, sizeof(stPracticaXIngreso), 1, pArchiPracticaXIngreso) > 0) {
                     if (nodoIngresoBuscado && nodoIngresoBuscado->ingreso.numeroIngreso == practicaXIngreso.nroIngreso) {
                         nodoIngresoBuscado->listaPracticasXIngreso = agregarNodoPracticaXIngreso(nodoIngresoBuscado->listaPracticasXIngreso, practicaXIngreso);
-                        printf("Practica por ingreso agregada\n");
                     }
                 }
 

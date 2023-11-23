@@ -119,45 +119,55 @@ void mostrarPracticaXIngreso(nodoPaciente *arbolPacientes, int flag) ///El flag 
         printf("\n*** Listado de Practicas por Ingreso del Paciente ***\n");
         muestraUnPacienteResumido(arbolPacientes->datosPaciente);
 
-        if (arbolPacientes->listaIngresos != NULL)
-        {
-            nodoPracticaXIngreso *practicasXIngreso = arbolPacientes->listaIngresos->listaPracticasXIngreso;
+        nodoIngreso * seguidoraIngresos = arbolPacientes->listaIngresos;
 
-            if (practicasXIngreso == NULL)
+        while (seguidoraIngresos)
+        {
+            nodoPracticaXIngreso *practicasXIngreso = seguidoraIngresos->listaPracticasXIngreso;
+
+            if (practicasXIngreso == NULL && seguidoraIngresos->ingreso.eliminado == 0)
             {
-                printf("\nEl paciente no tiene practicas por ingreso.\n");
+                printf("\nEl paciente no tiene practicas activas en el ingreso N%c%d.\n", 248, seguidoraIngresos->ingreso.numeroIngreso);
                 puts("--------------------------------------\n");
-                system("pause");
             }
             else
             {
+                int todasLasPracticasEnBaja = 1;
                 while (practicasXIngreso != NULL)
                 {
                     if (flag == 1 || (flag == 0 && practicasXIngreso->practicaXIngreso.eliminado == 0))
                     {
                         mostrarUnNodoPracticaXIngreso(practicasXIngreso);
+                        todasLasPracticasEnBaja = 0;
+
                     }
                     practicasXIngreso = practicasXIngreso->siguiente;
                 }
 
-                printf("\n*** Fin del Listado de Practicas por Ingreso del Paciente ***\n");
-                puts("----------------------------------------------\n");
-                textoPresioneCualquierTecla();
+                if (todasLasPracticasEnBaja && seguidoraIngresos->ingreso.eliminado == 0) {
+                    printf("\nEl paciente no tiene practicas activas en el ingreso N%c%d.\n", 248, seguidoraIngresos->ingreso.numeroIngreso);
+                } else if(seguidoraIngresos->ingreso.eliminado == 0) {
+                    printf("\n*** Fin del Listado de Practicas por el Ingreso N%c%d. ***\n", 248, seguidoraIngresos->ingreso.numeroIngreso);
+                    puts("----------------------------------------------\n");
+                }
             }
+
+            seguidoraIngresos = seguidoraIngresos->siguiente;
         }
-        else
+
+        if (arbolPacientes->listaIngresos == NULL)
         {
             printf("\n*** No hay ningun ingreso para el paciente. ***\n");
             puts("----------------------------------------------\n");
-            system("pause");
-            system("cls");
         }
+
+        system("pause");
+        system("cls");
 
         mostrarPracticaXIngreso(arbolPacientes->izq, flag);
         mostrarPracticaXIngreso(arbolPacientes->der, flag);
     }
 }
-
 
 /**
     La función (liberarListaPracticaXIngreso), que reciba la lista y hacer lo indicado. La función no debe retornar nada (no importa que
