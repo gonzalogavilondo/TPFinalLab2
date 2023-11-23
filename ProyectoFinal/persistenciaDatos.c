@@ -11,6 +11,7 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
     stPaciente paciente;
 
     while (fread(&paciente, sizeof(stPaciente), 1, pArchiPacientes) > 0) {
+        // Insertar paciente en el árbol
         arbol = insertarPaciente(arbol, paciente);
 
         FILE* pArchiIngreso = fopen(ARCHIVO_INGRESOS, "rb");
@@ -25,6 +26,7 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
 
         while (fread(&ingreso, sizeof(stIngreso), 1, pArchiIngreso) > 0) {
             if (paciente.dni == ingreso.dniPaciente) {
+                // Insertar ingreso en el paciente
                 nodoPaciente* pacienteAux = buscaPaciente(arbol, paciente.dni);
                 pacienteAux->listaIngresos = agregarNodoIngreso(pacienteAux->listaIngresos, ingreso);
 
@@ -42,6 +44,7 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
                 stPracticaXIngreso practicaXIngreso;
                 while (fread(&practicaXIngreso, sizeof(stPracticaXIngreso), 1, pArchiPracticaXIngreso) > 0) {
                     if (nodoIngresoBuscado && nodoIngresoBuscado->ingreso.numeroIngreso == practicaXIngreso.nroIngreso) {
+                        // Insertar practicaXIngreso en la lista
                         nodoIngresoBuscado->listaPracticasXIngreso = agregarNodoPracticaXIngreso(nodoIngresoBuscado->listaPracticasXIngreso, practicaXIngreso);
                     }
                 }
@@ -56,6 +59,7 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
     fclose(pArchiPacientes);
     return arbol;
 }
+
 
 void salvarArbolFinPrograma(nodoPaciente *arbol) {
     if (arbol == NULL) {
