@@ -56,5 +56,7 @@ void mostrarUnaPractica(nodoPaciente * arbol);
 void darDeBajaTodasLasPracticasXIngreso(nodoPracticaXIngreso * listaPracticasXIngreso);
 
 void mostrarUnaPracticaXIngreso(nodoPaciente *arbol);
+int cantidadPracticasXIngreso(nodoPaciente * arbol);
+
 
 #endif // STPRACTICAXINGRESO_H_INCLUDED

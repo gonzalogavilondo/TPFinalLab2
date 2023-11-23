@@ -107,12 +107,17 @@ void salvarArbolFinPrograma(nodoPaciente *arbol) {
 
                 nodoPracticaXIngreso *segPracticaXIngreso = segIngresos->listaPracticasXIngreso;
 
-                while (segPracticaXIngreso != NULL) {
-                    if (fwrite(&segPracticaXIngreso->practicaXIngreso, sizeof(stPracticaXIngreso), 1, pArchiPracticaXIngresos) != 1) {
-                        // Manejar el error si no se pudo escribir correctamente en ARCHIVO_PRACTICAXINGRESOS
-                        break;
+                while (segPracticaXIngreso != NULL)
+                {
+                    if(segPracticaXIngreso->practicaXIngreso.nroIngreso == segIngresos->ingreso.numeroIngreso)
+                    {
+                        if (fwrite(&segPracticaXIngreso->practicaXIngreso, sizeof(stPracticaXIngreso), 1, pArchiPracticaXIngresos) != 1)
+                        {
+                            // Manejar el error si no se pudo escribir correctamente en ARCHIVO_PRACTICAXINGRESOS
+                            break;
+                        }
+                        segPracticaXIngreso = segPracticaXIngreso->siguiente;
                     }
-                    segPracticaXIngreso = segPracticaXIngreso->siguiente;
                 }
 
                 segIngresos = segIngresos->siguiente;

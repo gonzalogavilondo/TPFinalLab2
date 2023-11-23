@@ -934,7 +934,7 @@
 	<conio.h>
 	<string.h>
 
-1700766819 c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\stpracticaxingreso.h
+1700779544 c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\stpracticaxingreso.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -973,13 +973,13 @@
 1700770609 source:c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\menu.c
 	"menu.h"
 
-1700766819 source:c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\persistenciadatos.c
+1700778336 source:c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\persistenciadatos.c
 	"persistenciaDatos.h"
 
 1700766819 source:c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\stempleado.c
 	"stEmpleado.h"
 
-1700766819 source:c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\stingreso.c
+1700779544 source:c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\stingreso.c
 	"stIngreso.h"
 	"menu.h"
 
@@ -989,12 +989,12 @@
 	"stPracticaXIngreso.h"
 	"menu.h"
 
-1700766819 source:c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\stpractica.c
+1700777779 source:c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\stpractica.c
 	"stPractica.h"
 	"stPaciente.h"
 	"menu.h"
 
-1700771108 source:c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\stpracticaxingreso.c
+1700780332 source:c:\users\user\desktop\trabajofinal\tpfinallab2(8)\tpfinallab2\proyectofinal\stpracticaxingreso.c
 	"stPracticaXIngreso.h"
 	"stIngreso.h"
 	"stPractica.h"

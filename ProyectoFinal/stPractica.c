@@ -293,10 +293,10 @@ nodoPractica * buscaPracticaPorNombre(nodoPractica * listaPracticas, char nombre
 nodoPractica * buscaPracticaPorNroPractica(nodoPractica * listaPracticas, int numeroPractica){
 
     while (listaPracticas && listaPracticas->datosPractica.nroPractica != numeroPractica) {
-        listaPracticas = listaPracticas->siguiente;
+        return listaPracticas;
     }
 
-    return listaPracticas;
+    return NULL;
 }
 
 /// FUNCIONES OPCION 3 DEL MENU 'submenuGestionPracticas':

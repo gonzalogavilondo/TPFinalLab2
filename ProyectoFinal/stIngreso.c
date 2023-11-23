@@ -65,6 +65,7 @@ nodoIngreso* buscaUltimoListaIngresos(nodoIngreso *lista)
         {
             seg = seg->siguiente;
         }
+
     }
     return seg;
 }
@@ -210,7 +211,7 @@ nodoIngreso* liberarListaIngresos(nodoIngreso *lista)
     La función (cargarIngreso), la cual recibirá la lista y solicitará al usuario los datos del pedido para finalmente
     agregar ese pedido a la lista y retornar la nueva lista con el nuevo ingreso.
 **/
-
+/*
 int cantidadNodosListaIngresos(nodoIngreso * lista)
 {
     int cont = 0;
@@ -220,13 +221,34 @@ int cantidadNodosListaIngresos(nodoIngreso * lista)
         cont++;
     }
     return cont;
+}*/
+int cantidadIngresosArchivo()
+{
+    int cant = 0;
+    FILE * archivoIngresos = fopen(ARCHIVO_INGRESOS, "rb");
+
+    if (archivoIngresos) {
+
+        stIngreso ingreso;
+
+        while (fread(&ingreso, sizeof(stIngreso), 1, archivoIngresos)) {
+            cant++;
+        }
+
+        fclose(archivoIngresos);
+
+    } else {
+        cant = -1;
+    }
+
+    return cant;
 }
 
 nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni)
 {
     stIngreso registro;
 
-    registro.numeroIngreso = cantidadNodosListaIngresos(lista) + 1; // Numero de ingreso
+    registro.numeroIngreso = cantidadIngresosArchivo() + 1; // Numero de ingreso EN ARCHIVO
 
     // Obtener la fecha actual y asignarla a nuevoIngreso->ingreso.fechaIngreso
     obtenerFechaActual(registro.fechaIngreso);

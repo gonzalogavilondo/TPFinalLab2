@@ -529,11 +529,11 @@ void registrarResultadoPracticaXIngreso(nodoPaciente *arbol)
         if(paciente)
         {
             ingreso = buscaIngreso(paciente->listaIngresos, nroIngreso);
-            mostrarUnNodoIngreso(ingreso);
+
             if(ingreso)
             {
 
-                practicaXingresoExistente = buscaPracticaPorNroPractica(ingreso, nroPractica);
+                practicaXingresoExistente = buscaPracticaPorNroPractica(ingreso->listaPracticasXIngreso, nroPractica);
 
                 if (practicaXingresoExistente)
                 {
@@ -580,7 +580,7 @@ void registrarResultadoPracticaXIngreso(nodoPaciente *arbol)
             system("cls");
             Rectangulo();
             gotoxy(1, 15);
-            printf("Presione S para modificar otra, cualquier otra tecla para finalizar");
+            printf("'S' para registrar otro resultado, cualquier tecla para finalizar");
             opcion = getch();
             system("cls");
 
@@ -673,4 +673,16 @@ void mostrarUnaPracticaXIngreso(nodoPaciente *arbol)
         }
     }
     while (opcion == 's' || opcion == 'S');
+}
+
+int cantidadPracticasXIngreso(nodoPaciente * arbol){
+    int cant = 0;
+    if (arbol!=NULL){
+        nodoIngreso * segIngresos = arbol->listaIngresos;
+        while(segIngresos != NULL){
+            segIngresos = segIngresos->siguiente;
+            cant ++;
+        }
+    }
+    return cant;
 }
