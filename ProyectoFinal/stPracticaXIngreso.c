@@ -577,7 +577,7 @@ void registrarResultadoPracticaXIngreso(nodoPaciente *arbol)
                 printf("El numero de ingreso cargado no existe.");
                 getch();
             }
-            //system("cls");
+            system("cls");
             Rectangulo();
             gotoxy(1, 15);
             printf("'S' para registrar otro resultado, cualquier tecla para finalizar");

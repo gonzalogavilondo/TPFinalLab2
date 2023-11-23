@@ -30,6 +30,5 @@ int main()
 
     ///Liberamos memoria del arbol.
     liberarArbolPacientes(arbolPacientes);
-
     return 0;
 }

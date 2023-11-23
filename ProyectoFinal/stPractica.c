@@ -32,8 +32,10 @@ void submenuGestionPracticas(){
         gotoxy(15, 10);
         printf("(5) Dar de baja una practica\n");
         gotoxy(15, 11);
-        printf("(6) Volver\n");
+        printf("(6) Buscar practica por inciciales\n");
         gotoxy(15, 12);
+        printf("(7) Volver\n");
+        gotoxy(15, 13);
         fflush(stdin);
         scanf("%i", &opcion);
         system("cls");
@@ -54,8 +56,11 @@ void submenuGestionPracticas(){
             case 5: //Dar de baja una practica:
                 manejaVerModificarOBajaDePractica(listaPracticas, 2);
                 break;
-
             case 6:
+                encontrarPracticasPorCadena();
+                getch();
+                break;
+            case 7:
                 control = 'n';
                 break;
 
@@ -455,4 +460,28 @@ int existePracticaXnroPractica(int nroPracticaBuscar)
 
     fclose(archivo);
     return 0; // No se encontró el registro
+}
+void encontrarPracticasPorCadena() {
+    FILE *archivo;
+    archivo = fopen(ARCHIVO_PRACTICAS, "rb"); // Abre el archivo en modo lectura binaria
+
+    if (archivo == NULL) {
+        printf("No se pudo abrir el archivo.\n");
+        return;
+    }
+
+    char cadenaBuscada[30];
+    printf("Ingrese una cadena para buscar practicas: ");
+    scanf("%29s", cadenaBuscada);
+
+    stPractica practica;
+    size_t longitudCadena = strlen(cadenaBuscada);
+    while (fread(&practica, sizeof(stPractica), 1, archivo) == 1) {
+        if (practica.eliminado == 0 && strncmp(practica.nombrePractica, cadenaBuscada, longitudCadena) == 0) {
+            printf("\n=====================================\n");
+            printf("Numero de Practica: %d\nNombre: %s\n", practica.nroPractica, practica.nombrePractica);
+        }
+    }
+    printf("=====================================\n");
+    fclose(archivo);
 }
