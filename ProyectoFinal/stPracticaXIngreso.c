@@ -329,14 +329,13 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
                 }
                 liberarListaPracticas(listaPracticas);
 
+                nodoIngreso *ingresoElegido = buscaIngreso(paciente->listaIngresos, nroIngreso);
 
-
-                if (paciente->listaIngresos)
+                if (ingresoElegido)
                 {
-
                     // Crear un nuevo nodo de práctica por ingreso y agregarlo a la lista
-                    paciente->listaIngresos->listaPracticasXIngreso = cargarPracticaXIngreso(
-                        paciente->listaIngresos->listaPracticasXIngreso, nroIngreso, nroPractica);
+                    ingresoElegido->listaPracticasXIngreso = cargarPracticaXIngreso(
+                        ingresoElegido->listaPracticasXIngreso, nroIngreso, nroPractica);
 
                 }
                 else // si el paciente no tiene ningun ingreso cargado, hay que cargar el primero:
