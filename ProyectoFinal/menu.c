@@ -866,14 +866,12 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes, int flag)
         gotoxy(15, 5);
         printf("(1) ALTA\n");
         gotoxy(15, 6);
-        printf("(2) MODIFICACION\n");
+        printf("(2) BAJA\n");
         gotoxy(15, 7);
-        printf("(3) BAJA\n");
+        printf("(3) CONSULTAR LISTADO\n");
         gotoxy(15, 8);
-        printf("(4) CONSULTAR LISTADO\n");
+        printf("(4) VOLVER\n");
         gotoxy(15, 9);
-        printf("(5) VOLVER\n");
-        gotoxy(15, 10);
         fflush(stdin);
         scanf("%i", &opcion);
         system("cls");
@@ -886,19 +884,14 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes, int flag)
                 break;
 
             case 2:
-                // Realizar modificación de práctica por ingreso
-                modificarDatosPracticaXIngreso(arbolPacientes);
-                break;
-
-            case 3:
                 // Realizar baja de práctica por ingreso
                 //buscaYDaDeBajaPracticaXIngreso(listaPracticaXIngresos);
                 break;
-            case 4:
+            case 3:
                 mostrarPracticaXIngreso(arbolPacientes, flag); //El flag indica si se llama del menu de administrador o administrativo. flag = 1 (Administrador)/flag = 0 (Administrativo)
             break;
 
-            case 5:
+            case 4:
                 control = 'n';
                 break;
 
