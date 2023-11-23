@@ -41,6 +41,7 @@ nodoIngreso* crearListaIngresos(const char *nombreArchivo);
 void mostrarUnNodoIngreso(nodoIngreso *aux);
 void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes, int flag); //Si flag == 1 entonces lo llama el administrador
 void mostrarListadoIngresosPaciente(nodoPaciente *paciente);
+void mostrarListadoPracticasXIngresosPaciente(nodoPaciente *paciente);
 nodoIngreso* liberarListaIngresos(nodoIngreso *lista);
 int cantidadNodosListaIngresos(nodoIngreso * lista);
 nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni);

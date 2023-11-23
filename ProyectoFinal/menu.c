@@ -887,7 +887,7 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes, int flag)
 
             case 2:
                 // Realizar modificación de práctica por ingreso
-                //listaPracticaXIngresos = modificarDatosPracticaXIngreso(listaPracticaXIngresos);
+                modificarDatosPracticaXIngreso(arbolPacientes);
                 break;
 
             case 3:

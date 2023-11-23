@@ -16,7 +16,7 @@ int main()
     nodoPaciente * arbolPacientes = inicArbolPacientes();
 
     wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
-    SMALL_RECT windowSize = {0, 0, 120, 25};
+    SMALL_RECT windowSize = {0, 0, 160, 40};
     SetConsoleWindowInfo(wHnd, 1, &windowSize);
 
     ///Levantamos todos los datos en el arbol
@@ -27,6 +27,9 @@ int main()
 
     ///Persistencia de datos de la ejecucion del programa
     salvarArbolFinPrograma(arbolPacientes);
+
+    ///Liberamos memoria del arbol.
+    liberarArbolPacientes(arbolPacientes);
 
     return 0;
 }

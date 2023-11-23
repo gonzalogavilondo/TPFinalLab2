@@ -57,59 +57,6 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
     return arbol;
 }
 
-
-
-//void salvarArbolFinPrograma(nodoPaciente *arbol) {
-//    if (arbol == NULL) {
-//        return; // Verificar si el árbol está vacío
-//    }
-//
-//    FILE *pArchiPacientes = fopen(ARCHIVO_PACIENTES, "wb");
-//    if (pArchiPacientes == NULL) {
-//        return; // Manejar el error si no se puede abrir el archivo
-//    }
-//
-//    stPaciente *arregloPacientes = arbolPacientesToArreglo(arbol);
-//    int validosArre = cantidadNodosArbolPacientes(arbol);
-//
-//    for (int i = 0; i < validosArre; i++) {
-//        fwrite(&arregloPacientes[i], sizeof(stPaciente), 1, pArchiPacientes);
-//
-//        nodoPaciente *paciente = buscaPaciente(arbol, arregloPacientes[i].dni);
-//
-//        if (paciente && paciente->listaIngresos) {
-//            nodoIngreso *segIngresos = paciente->listaIngresos;
-//
-//            FILE *pArchiIngresos = fopen(ARCHIVO_INGRESOS, "ab"); // Cambio a modo append
-//
-//            if (pArchiIngresos != NULL) {
-//                while (segIngresos != NULL) {
-//                    fwrite(&segIngresos->ingreso, sizeof(stIngreso), 1, pArchiIngresos);
-//
-//                    FILE *pArchiPracticaXIngresos = fopen(ARCHIVO_PRACTICAXINGRESOS, "ab"); // Cambio a modo append
-//
-//                    if (pArchiPracticaXIngresos != NULL) {
-//                        nodoPracticaXIngreso *segPracticaXIngreso = segIngresos->listaPracticasXIngreso;
-//
-//                        while (segPracticaXIngreso != NULL) {
-//                            fwrite(&segPracticaXIngreso->practicaXIngreso, sizeof(stPracticaXIngreso), 1, pArchiPracticaXIngresos);
-//                            segPracticaXIngreso = segPracticaXIngreso->siguiente;
-//                        }
-//
-//                        fclose(pArchiPracticaXIngresos); // Cerrar el archivo después de escribir
-//                    }
-//
-//                    segIngresos = segIngresos->siguiente;
-//                }
-//
-//                fclose(pArchiIngresos); // Cerrar el archivo después de escribir
-//            }
-//        }
-//    }
-//
-//    fclose(pArchiPacientes); // Cerrar el archivo al finalizar
-//}
-
 void salvarArbolFinPrograma(nodoPaciente *arbol) {
     if (arbol == NULL) {
         return; // Verificar si el árbol está vacío
