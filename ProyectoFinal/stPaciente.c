@@ -633,42 +633,6 @@ void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes){
 
 /// FUNCIONES PARA MANEJO DE ARCHIVO PACIENTES:
 
-void imprimePacientesInorderEnArchivo(nodoPaciente * arbolPacientes, FILE * archi){
-
-    if (arbolPacientes) {
-        imprimePacientesInorderEnArchivo(arbolPacientes->izq, archi);
-
-        stPaciente paciente;
-        strcpy(paciente.apellidoNombre, arbolPacientes->datosPaciente.apellidoNombre);
-        strcpy(paciente.direccion, arbolPacientes->datosPaciente.direccion);
-        strcpy(paciente.telefono, arbolPacientes->datosPaciente.telefono);
-        paciente.dni = arbolPacientes->datosPaciente.dni;
-        paciente.edad = arbolPacientes->datosPaciente.edad;
-        paciente.eliminado = arbolPacientes->datosPaciente.eliminado;
-
-        fwrite(&paciente, sizeof(stPaciente), 1, archi);
-
-        imprimePacientesInorderEnArchivo(arbolPacientes->der, archi);
-    }
-
-}
-
-void guardaArbolPacientesEnArchivo(nodoPaciente * arbolPacientes){
-
-    FILE * archi = fopen(ARCHIVO_PACIENTES, "wb");
-
-    if (archi) {
-
-        imprimePacientesInorderEnArchivo(arbolPacientes, archi);
-
-        printf("\n Se guardaron los datos en el archivo.");
-        fclose(archi);
-    } else {
-        printf("\n Hubo un problema al intentar guardar los datos en un archivo.");
-    }
-
-}
-
 void liberarArbolPacientes(nodoPaciente * arbolPacientes){
 
     if (arbolPacientes) {
@@ -676,27 +640,6 @@ void liberarArbolPacientes(nodoPaciente * arbolPacientes){
         liberarArbolPacientes(arbolPacientes->der);
         free(arbolPacientes);
     }
-}
-
-nodoPaciente * archivoToArbolPacientes(nodoPaciente * arbolPacientes){
-
-    FILE * archi = fopen(ARCHIVO_PACIENTES, "rb");
-
-    if (archi) {
-
-        stPaciente paciente;
-
-        while (fread(&paciente, sizeof(stPaciente), 1, archi) > 0) {
-            arbolPacientes = insertarPaciente(arbolPacientes, paciente);
-        }
-
-        fclose(archi);
-    } else {
-        printf("\n Hubo un problema al intentar abrir el archivo de pacientes.");
-        getch();
-    }
-
-    return arbolPacientes;
 }
 
 ///FUNCIONES QUE LAS USA INGRESOS:
