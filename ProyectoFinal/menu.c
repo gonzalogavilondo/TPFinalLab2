@@ -885,7 +885,7 @@ void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes, int flag)
 
             case 2:
                 // Realizar baja de práctica por ingreso
-                //buscaYDaDeBajaPracticaXIngreso(listaPracticaXIngresos);
+                buscaYDaDeBajaPracticaXIngreso(arbolPacientes, flag);
                 break;
             case 3:
                 mostrarPracticaXIngreso(arbolPacientes, flag); //El flag indica si se llama del menu de administrador o administrativo. flag = 1 (Administrador)/flag = 0 (Administrativo)

@@ -47,7 +47,7 @@ nodoPracticaXIngreso *buscaPracticaXIngreso(nodoPracticaXIngreso *listaPracticaX
 void modificarDatosPracticaXIngreso(nodoPaciente *arbolPacientes);
 
 ///Dar de baja una practica por ingreso
-void buscaYDaDeBajaPracticaXIngreso(nodoPracticaXIngreso *lista);
+void buscaYDaDeBajaPracticaXIngreso(nodoPaciente *arbolPacientes, int flag);
 
 void registrarResultadoPracticaXIngreso(nodoPaciente *arbol);
 void mostrarUnaPractica(nodoPaciente * arbol);

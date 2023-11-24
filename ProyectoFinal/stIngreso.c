@@ -498,7 +498,6 @@ void buscaYDaDeBajaIngreso(nodoPaciente *arbolPacientes)
             system("pause");
 
             ingresoExistente->ingreso.eliminado = 1;
-            buscaYDaDeBajaPracticaXIngreso(ingresoExistente->listaPracticasXIngreso);
             gotoxy(15, 6);
             printf("Se dio de baja al ingreso.");
         }

@@ -457,33 +457,86 @@ void modificarDatosPracticaXIngreso(nodoPaciente *arbolPacientes)
     }while (opcion == 's' || opcion == 'S' );
 }
 */
-void buscaYDaDeBajaPracticaXIngreso(nodoPracticaXIngreso *lista)
+void buscaYDaDeBajaPracticaXIngreso(nodoPaciente *arbolPacientes, int flag)
 {
-    int nroPractica;
-    char opcion = 0;
+    int nroPractica, nroIngreso, dni;
+    char opcion;
 
     do {
         system("cls");
         Rectangulo();
         gotoxy(15, 1);
         cabeza("Baja de Practica por Ingreso");
-        mostrarUnNodoPracticaXIngreso(lista);
-        gotoxy(15, 4);
-        printf("Ingrese el numero de la practica a dar de baja: ");
-        scanf("%d", &nroPractica);
+        gotoxy(5, 4);
+        printf("Ingrese el numero de DNI del paciente a modificar: ");
+        scanf("%d", &dni);
+
+        // Validar que el DNI sea mayor que 0
+        if (dni <= 0) {
+            printf("Error: Ingrese un numero de DNI valido.\n");
+            system("pause");
+            continue;  // Vuelve al inicio del bucle
+        }
+
+        nodoPaciente *paciente = buscaPaciente(arbolPacientes, dni);
+
+        // Validar que el paciente exista
+        if (!paciente) {
+            printf("Error: El paciente con DNI %d no existe en la base de datos.\n", dni);
+            system("pause");
+            continue;  // Vuelve al inicio del bucle
+        }
+
         system("cls");
-        nodoPracticaXIngreso *practicaXingresoExistente = buscaPracticaXIngreso(lista, nroPractica);
-        Rectangulo();
-        if (practicaXingresoExistente)
+        mostrarListadoIngresosPaciente(paciente);
+
+        printf("Ingrese el numero de ingreso donde esta la practica a dar de baja: ");
+        scanf("%d", &nroIngreso);
+
+        // Validar que el número de ingreso sea mayor que 0
+        if (nroIngreso <= 0) {
+            printf("Error: Ingrese un numero de ingreso valido.\n");
+            system("pause");
+            continue;  // Vuelve al inicio del bucle
+        }
+
+        nodoIngreso *ingresoExistente = buscaIngreso(paciente->listaIngresos, nroIngreso);
+        system("cls");
+
+        if (ingresoExistente)
         {
-            practicaXingresoExistente->practicaXIngreso.eliminado = 1;
-            gotoxy(15, 6);
-            printf("Se dio de baja a la practica por ingreso.");
+            mostrarPracticaXIngreso(paciente, flag);
+            printf("Ingrese el numero de la practica a dar de baja: ");
+            scanf("%d", &nroPractica);
+            system("cls");
+
+            // Validar que el número de práctica sea mayor que 0
+            if (nroPractica <= 0) {
+                printf("Error: Ingrese un numero de practica valido.\n");
+                system("pause");
+                continue;  // Vuelve al inicio del bucle
+            }
+
+            nodoPracticaXIngreso *practicaXingresoExistente = buscaPracticaXIngreso(ingresoExistente->listaPracticasXIngreso, nroPractica);
+
+            // Validar que la práctica existe
+            if (practicaXingresoExistente)
+            {
+                Rectangulo();
+                practicaXingresoExistente->practicaXIngreso.eliminado = 1;
+                gotoxy(15, 6);
+                printf("Se dio de baja a la practica por ingreso.");
+            }
+            else
+            {
+                gotoxy(15, 6);
+                printf("El numero de practica cargado no esta registrado en la base de datos de practica por ingreso.");
+            }
         }
         else
         {
             gotoxy(15, 6);
-            printf("El numero de practica cargado no esta registrado en la base de datos de practica por ingreso.");
+            printf("El numero de ingreso cargado no esta registrado en la base de datos.");
         }
 
         gotoxy(15, 8);
@@ -494,6 +547,7 @@ void buscaYDaDeBajaPracticaXIngreso(nodoPracticaXIngreso *lista)
 
     } while (opcion == 's' || opcion == 'S');
 }
+
 
 void registrarResultadoPracticaXIngreso(nodoPaciente *arbol)
 {
