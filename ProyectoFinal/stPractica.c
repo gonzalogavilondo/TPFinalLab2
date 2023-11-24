@@ -57,7 +57,7 @@ void submenuGestionPracticas(){
                 manejaVerModificarOBajaDePractica(listaPracticas, 2);
                 break;
             case 6:
-                encontrarPracticasPorCadena();
+                encontrarPracticasPorCadena(listaPracticas);
                 getch();
                 break;
             case 7:
@@ -462,27 +462,32 @@ int existePracticaXnroPractica(int nroPracticaBuscar)
     fclose(archivo);
     return 0; // No se encontró el registro
 }
-void encontrarPracticasPorCadena() {
-    FILE *archivo;
-    archivo = fopen(ARCHIVO_PRACTICAS, "rb"); // Abre el archivo en modo lectura binaria
 
-    if (archivo == NULL) {
-        printf("No se pudo abrir el archivo.\n");
-        return;
-    }
+void encontrarPracticasPorCadena(nodoPractica * listaPracticas) {
 
     char cadenaBuscada[30];
-    printf("Ingrese una cadena para buscar practicas: ");
+    int todasLasPracticasEnBaja = 1;
+    nodoPractica * seguidoraPracticas = listaPracticas;
+
+    printf(" Ingrese una cadena para buscar practicas: ");
     scanf("%29s", cadenaBuscada);
 
-    stPractica practica;
     size_t longitudCadena = strlen(cadenaBuscada);
-    while (fread(&practica, sizeof(stPractica), 1, archivo) == 1) {
-        if (practica.eliminado == 0 && strncmp(practica.nombrePractica, cadenaBuscada, longitudCadena) == 0) {
+
+
+    while (seguidoraPracticas) {
+        if (seguidoraPracticas->datosPractica.eliminado == 0 && strncmp(seguidoraPracticas->datosPractica.nombrePractica, cadenaBuscada, longitudCadena) == 0) {
+            todasLasPracticasEnBaja = 0;
             printf("\n=====================================\n");
-            printf("Numero de Practica: %d\nNombre: %s\n", practica.nroPractica, practica.nombrePractica);
+            printf(" Numero de Practica: %d\nNombre: %s\n", seguidoraPracticas->datosPractica.nroPractica, seguidoraPracticas->datosPractica.nombrePractica);
         }
+        seguidoraPracticas = seguidoraPracticas->siguiente;
     }
-    printf("=====================================\n");
-    fclose(archivo);
+
+    if (!listaPracticas || todasLasPracticasEnBaja) {
+        printf("\n=====================================\n");
+        printf(" No hay practicas activas que coincidan con la busqueda\n");
+    }
+
+    printf("\n=====================================\n");
 }
