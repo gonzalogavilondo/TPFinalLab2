@@ -19,7 +19,7 @@ void textoPresioneCualquierTecla2(){
 
 /// MENU PRINCIPAL GESTION DE PACIENTES:
 
-void submenuGestionPacientes(nodoPaciente * arbolPacientes){
+void submenuGestionPacientes(nodoPaciente * arbolPacientes, int flag){
 
     char control = 's';
     int opcion;
@@ -51,19 +51,19 @@ void submenuGestionPacientes(nodoPaciente * arbolPacientes){
 
         switch (opcion) {
             case 1: // Ver datos de un paciente en particular
-                submenuBuscaPacienteYMuestraDatos(arbolPacientes);
+                submenuBuscaPacienteYMuestraDatos(arbolPacientes, flag);
                 break;
             case 2: // Modificar datos de un paciente
-                submenuModificarDatosPaciente(arbolPacientes);
+                submenuModificarDatosPaciente(arbolPacientes, flag);
                 break;
             case 3: // Alta de un paciente
                 arbolPacientes = altaDePaciente(arbolPacientes);
                 break;
             case 4: // Dar de baja a un paciente
-                submenuDarDeBajaUnPaciente(arbolPacientes);
+                submenuDarDeBajaUnPaciente(arbolPacientes, flag);
                 break;
             case 5: // Ver listado de pacientes
-                submenuElijeOrdenamientoPacientes(arbolPacientes);
+                submenuElijeOrdenamientoPacientes(arbolPacientes, flag);
                 break;
 
             case 6:
@@ -83,12 +83,12 @@ void submenuGestionPacientes(nodoPaciente * arbolPacientes){
 
 /// FUNCIONES OPCION 1 DEL MENU 'submenuGestionPacientes':
 
-void submenuBuscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes){
+void submenuBuscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes, int flag){
 
     int dni;
     nodoPaciente * paciente = textoIngreseDNILuegoBuscaPaciente2(arbolPacientes, &dni);
 
-    if (paciente) {
+    if ((paciente && flag) || (paciente && (!flag && !(paciente->datosPaciente.eliminado)))) {
 
         printf("\n");
         muestraUnPaciente(paciente->datosPaciente);
@@ -175,12 +175,12 @@ void textoDniNoEnBaseDeDatos2(){
 
 /// FUNCIONES OPCION 2 DEL MENU 'submenuGestionPacientes':
 
-void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes){
+void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag){
 
     int dni;
     nodoPaciente * paciente = textoIngreseDNILuegoBuscaPaciente2(arbolPacientes, &dni);
 
-    if (paciente) {
+    if ((paciente && flag) || (paciente && (!flag && !(paciente->datosPaciente.eliminado)))) {
 
         int seModificoTrue = 0;
         stPaciente pacienteAux;
@@ -474,12 +474,12 @@ nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes){
 
 /// FUNCIONES OPCION 4 DEL MENU 'submenuGestionPacientes':
 
-void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes){
+void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes, int flag){
 
     int dni;
     nodoPaciente * paciente = textoIngreseDNILuegoBuscaPaciente2(arbolPacientes, &dni);
 
-    if (paciente) {
+    if ((paciente && flag) || (paciente && (!flag && !(paciente->datosPaciente.eliminado)))) {
 
         /// Es baja del paciente en cascada, es decir, da de baja primero las practicas
         /// x ingreso asociadas, luego los ingresos y por ultimo da de baja al paciente:
@@ -510,7 +510,7 @@ void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes){
 
 /// FUNCIONES OPCION 5 DEL MENU 'submenuGestionPacientes':
 
-void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes){
+void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes, int flag){
 
     int opcion;
 
@@ -535,10 +535,10 @@ void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes){
         switch (opcion) {
             case 1: // Pacientes ordenados por dni
                 printf("\n Listado de pacientes, ordenados por dni:\n\n");
-                inorderPacientes(arbolPacientes);
+                inorderPacientes(arbolPacientes, flag);
                 break;
             case 2: // Pacientes ordenados por apellido
-                imprimePacientesOrdenadosPorApellido(arbolPacientes);
+                imprimePacientesOrdenadosPorApellido(arbolPacientes, flag);
                 break;
 
             default:
@@ -558,11 +558,15 @@ void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes){
 
 }
 
-void inorderPacientes(nodoPaciente * arbolPacientes){
+void inorderPacientes(nodoPaciente * arbolPacientes, int flag){
     if (arbolPacientes) {
-        inorderPacientes(arbolPacientes->izq);
-        muestraUnPaciente(arbolPacientes->datosPaciente);
-        inorderPacientes(arbolPacientes->der);
+        inorderPacientes(arbolPacientes->izq, flag);
+
+        if (flag || (!flag && !(arbolPacientes->datosPaciente.eliminado))) {
+            muestraUnPaciente(arbolPacientes->datosPaciente);
+        }
+
+        inorderPacientes(arbolPacientes->der, flag);
     }
 }
 
@@ -617,17 +621,19 @@ stPaciente * arbolPacientesToArreglo(nodoPaciente * arbolPacientes){
     return arreglo;
 }
 
-void muestraArregloPacientes(stPaciente arregloPacientes[], int validosArre){
+void muestraArregloPacientes(stPaciente arregloPacientes[], int validosArre, int flag){
     for (int i = 0; i<validosArre; i++) {
-        muestraUnPaciente(arregloPacientes[i]);
+        if (flag || (!flag && !(arregloPacientes[i].eliminado))) {
+            muestraUnPaciente(arregloPacientes[i]);
+        }
     }
 }
 
-void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes){
+void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes, int flag){
 
     stPaciente * arregloPacientes = arbolPacientesToArreglo(arbolPacientes);
     printf("\n Listado de pacientes, ordenados por apellido:\n\n");
-    muestraArregloPacientes(arregloPacientes, cantidadNodosArbolPacientes(arbolPacientes));
+    muestraArregloPacientes(arregloPacientes, cantidadNodosArbolPacientes(arbolPacientes), flag);
 
 }
 

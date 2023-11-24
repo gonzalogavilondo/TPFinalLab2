@@ -1052,7 +1052,7 @@ void submenuAdministrativo(nodoPaciente * arbolPacientes)
         {
             case 1:
                 // Gestionar pacientes
-                submenuGestionPacientes(arbolPacientes);
+                submenuGestionPacientes(arbolPacientes, 0);
                 break;
 
             case 2:
@@ -1115,7 +1115,7 @@ void submenuAdministrador(nodoPaciente * arbolPacientes){
 
         switch (opcion) {
             case 1: //Gestionar pacientes
-                submenuGestionPacientes(arbolPacientes);
+                submenuGestionPacientes(arbolPacientes, 1);
                 break;
             case 2:
                 submenuManejoEmpleados("Administrador");

@@ -41,16 +41,16 @@ typedef struct nodoPaciente {
 void textoPresioneCualquierTecla();
 void textoPresioneCualquierTecla2();
 /// MENU PRINCIPAL GESTION DE PACIENTES:
-void submenuGestionPacientes(nodoPaciente * arbolPacientes);
+void submenuGestionPacientes(nodoPaciente * arbolPacientes, int flag);
 /// FUNCIONES OPCION 1 DEL MENU 'submenuGestionPacientes':
-void submenuBuscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes);
+void submenuBuscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes, int flag);
 nodoPaciente * inicArbolPacientes();
 nodoPaciente * buscaPaciente(nodoPaciente * arbolPacientes, int dni);
 nodoPaciente * textoIngreseDNILuegoBuscaPaciente2(nodoPaciente * arbolPacientes, int * dni);
 void muestraUnPaciente(stPaciente datosPaciente);
 void textoDniNoEnBaseDeDatos2();
 /// FUNCIONES OPCION 2 DEL MENU 'submenuGestionPacientes':
-void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes);
+void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag);
 void muestraUnPacienteEnRectangulo(stPaciente datosPaciente);
 int existeElPaciente(nodoPaciente * arbolPacientes, int dni);
 nodoPaciente * eliminarNodoArbolPacientes(nodoPaciente * arbolPacientes, int dniPaciente);
@@ -60,16 +60,16 @@ nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente);
 /// FUNCIONES OPCION 3 DEL MENU 'submenuGestionPacientes':
 nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES OPCION 4 DEL MENU 'submenuGestionPacientes':
-void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes);
+void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes, int flag);
 /// FUNCIONES OPCION 5 DEL MENU 'submenuGestionPacientes':
-void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes);
-void inorderPacientes(nodoPaciente * arbolPacientes);
+void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes, int flag);
+void inorderPacientes(nodoPaciente * arbolPacientes, int flag);
 int cantidadNodosArbolPacientes(nodoPaciente * arbolPacientes);
 void pacienteToArregloOrdenadoXApellidoNombre(stPaciente * arreglo, int validosArre, stPaciente datosPaciente);
 void recorreArbolEIngresaEnArregloXApellidoNombre(nodoPaciente * arbolPacientes, stPaciente * arreglo, int * validosArre);
 stPaciente * arbolPacientesToArreglo(nodoPaciente * arbolPacientes);
-void muestraArregloPacientes(stPaciente arregloPacientes[], int validosArre);
-void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes);
+void muestraArregloPacientes(stPaciente arregloPacientes[], int validosArre, int flag);
+void imprimePacientesOrdenadosPorApellido(nodoPaciente * arbolPacientes, int flag);
 /// FUNCIONES PARA MANEJO DE ARCHIVO PACIENTES:
 void imprimePacientesInorderEnArchivo(nodoPaciente * arbolPacientes, FILE * archi);
 void guardaArbolPacientesEnArchivo(nodoPaciente * arbolPacientes);
