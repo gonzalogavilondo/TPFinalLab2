@@ -150,18 +150,21 @@ void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes, int flag)
 
         printf("\n*** Fin del Listado de Ingresos del Paciente ***\n");
         puts("----------------------------------------------\n");
-    }
 
-    if (arbolPacientes->izq != NULL)
-    {
-        mostrarListadoGralIngresos(arbolPacientes->izq, flag);
-    }
+        // Verificar si la rama izquierda no es NULL antes de llamar recursivamente
+        if (arbolPacientes->izq != NULL)
+        {
+            mostrarListadoGralIngresos(arbolPacientes->izq, flag);
+        }
 
-    if (arbolPacientes->der != NULL)
-    {
-        mostrarListadoGralIngresos(arbolPacientes->der, flag);
+        // Verificar si la rama derecha no es NULL antes de llamar recursivamente
+        if (arbolPacientes->der != NULL)
+        {
+            mostrarListadoGralIngresos(arbolPacientes->der, flag);
+        }
     }
 }
+
 
 void _mostrarListadoGralIngresosFecha(nodoPaciente *arbolPacientes, int flag, const char *fechaDesde, const char *fechaHasta)
 {
