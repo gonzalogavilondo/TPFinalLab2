@@ -1212,3 +1212,109 @@
 	"stPractica.h"
 	"menu.h"
 
+1700853102 source:c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1700853102 source:c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\main.c
+	"stIngreso.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+	"persistenciaDatos.h"
+	"menu.h"
+	<windows.h>
+
+1700853102 c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\stingreso.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"conio.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+	"gotoxy.h"
+
+1700853102 c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\stempleado.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"stEmpleado.h"
+
+1700853102 c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\stpractica.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1700853102 c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\stpracticaxingreso.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"gotoxy.h"
+	"stPaciente.h"
+
+1700853102 c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\gotoxy.h
+
+1700853102 c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\stpaciente.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1700853102 c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\persistenciadatos.h
+	"stIngreso.h"
+	"stEmpleado.h"
+	"stPractica.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+	"menu.h"
+
+1700853102 c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\menu.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"gotoxy.h"
+	"stEmpleado.h"
+	"stIngreso.h"
+	"stPracticaXIngreso.h"
+	"stPaciente.h"
+
+1700853102 source:c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\menu.c
+	"menu.h"
+
+1700853102 source:c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\persistenciadatos.c
+	"persistenciaDatos.h"
+
+1700853102 source:c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\stempleado.c
+	"stEmpleado.h"
+
+1700853102 source:c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\stingreso.c
+	"stIngreso.h"
+	"menu.h"
+
+1700853102 source:c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\stpaciente.c
+	"stPaciente.h"
+	"stIngreso.h"
+	"stPracticaXIngreso.h"
+	"menu.h"
+
+1700853102 source:c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\stpractica.c
+	"stPractica.h"
+	"stPaciente.h"
+	"menu.h"
+
+1700853523 source:c:\users\user\desktop\trabajofinal\tpfinallab2(10)\tpfinallab2\proyectofinal\stpracticaxingreso.c
+	"stPracticaXIngreso.h"
+	"stIngreso.h"
+	"stPractica.h"
+	"menu.h"
+

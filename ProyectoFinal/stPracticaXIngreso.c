@@ -584,12 +584,13 @@ void registrarResultadoPracticaXIngreso(nodoPaciente *arbol)
             printf("\nIngrese el numero de ingreso: ");
             scanf("%d", &nroIngreso);
             nodoIngreso *ingresoExistente = buscaIngreso(paciente->listaIngresos, nroIngreso);
-            system("pause");
+           // system("pause");
             system("cls");
             if(ingresoExistente)
             {
                 gotoxy(10, 1);
                 cabeza("Registrar resultado en Practica por Ingreso");
+                printf("\n");
                 nodoPracticaXIngreso *seg = ingresoExistente->listaPracticasXIngreso;
                 while(seg != NULL)
                 {
