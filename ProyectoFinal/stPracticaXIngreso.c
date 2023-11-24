@@ -199,11 +199,11 @@ nodoPracticaXIngreso* cargarPracticaXIngreso(nodoPracticaXIngreso *lista, int nr
 
     registro.nroIngreso = nroIngreso;
     registro.nroPractica = nroPractica;
-    gotoxy(15,7);
-    printf("Ingrese el resultado obtenido: ");
-    fflush(stdin);
-    gets(registro.resultado);
-    registro.eliminado = 0;
+//    gotoxy(15,7);
+//    printf("Ingrese el resultado obtenido: ");
+//    fflush(stdin);
+//    gets(registro.resultado);
+    registro.resultado[0] = '\0'; //Inicializo en null
     lista = agregarNodoPracticaXIngreso(lista, registro); ///Finalmente agrego el pedido a la lista
 
     return lista;
@@ -379,84 +379,85 @@ nodoPracticaXIngreso *buscaPracticaXIngreso(nodoPracticaXIngreso *listaPracticaX
 
     return NULL;
 }
-/*
-void modificarDatosPracticaXIngreso(nodoPaciente *arbolPacientes)
-{
-    nodoPracticaXIngreso *practicaXingresoExistente = inicListaPracticaXIngresos();
 
-    nodoPaciente * paciente;
+//void modificarDatosPracticaXIngreso(nodoPaciente *arbolPacientes)
+//{
+//    nodoPracticaXIngreso *practicaXingresoExistente = inicListaPracticaXIngresos();
+//
+//    nodoPaciente * paciente;
+//
+//    int nroPractica;
+//    int nroDNI;
+//    char opcion = 0;
+//
+//    do
+//    {
+//        system("cls");
+//        Rectangulo();
+//        gotoxy(15, 1);
+//        cabeza("Registrar resultado en Practica por Ingreso");
+//
+//        gotoxy(1, 4);
+//        printf("Ingrese el numero de practica: ");
+//        scanf("%d", &nroPractica);
+//        gotoxy(1, 5);
+//        printf("Ingrese el numero de DNI: ");
+//        scanf("%d", &nroDNI);
+//
+//        paciente = buscaPaciente(arbolPacientes, nroDNI);
+//
+//        if(paciente)
+//        {
+//            practicaXingresoExistente = buscaPracticaXIngreso(paciente->listaIngresos->listaPracticasXIngreso, nroPractica);
+//
+//            if (practicaXingresoExistente)
+//            {
+//                do
+//                {
+//                    system("cls");
+//                    Rectangulo();
+//                    gotoxy(15, 1);
+//                    cabeza("Que desea modificar?");
+//
+//
+//                    gotoxy(1, 3);
+//
+//
+//                    gotoxy(1, 6);
+//                    printf("Ingrese un nuevo resultado: ");
+//                    fflush(stdin);
+//                    fgets(practicaXingresoExistente->practicaXIngreso.resultado, sizeof(practicaXingresoExistente->practicaXIngreso.resultado), stdin);
+//
+//                    gotoxy(1, 10);
+//                    printf("Desea cargar registrar otro resultado? (S/N): ");
+//                    opcion = getch();
+//                    system("cls");
+//                }
+//                while (opcion == 's' || opcion == 'S');
+//            }
+//            else
+//            {
+//                gotoxy(1, 13);
+//                printf("El numero de practica cargado no existe.");
+//                getch();
+//            }
+//            system("cls");
+//            Rectangulo();
+//            gotoxy(1, 15);
+//            printf("Presione S para modificar otra, cualquier otra tecla para finalizar");
+//            opcion = getch();
+//            system("cls");
+//
+//        }else{
+//            gotoxy(1,15);
+//            printf("No existe paciente con el dni ingresado! Quiere reintentar? (S/N)");
+//            opcion = getch();
+//        }
+//
+//    }while (opcion == 's' || opcion == 'S' );
+//}
 
-    int nroPractica;
-    int nroDNI;
-    char opcion = 0;
 
-    do
-    {
-        system("cls");
-        Rectangulo();
-        gotoxy(15, 1);
-        cabeza("Registrar resultado en Practica por Ingreso");
-
-        gotoxy(1, 4);
-        printf("Ingrese el numero de practica: ");
-        scanf("%d", &nroPractica);
-        gotoxy(1, 5);
-        printf("Ingrese el numero de DNI: ");
-        scanf("%d", &nroDNI);
-
-        paciente = buscaPaciente(arbol, nroDNI);
-
-        if(paciente)
-        {
-            practicaXingresoExistente = buscaPracticaXIngreso(paciente->listaIngresos->listaPracticasXIngreso, nroPractica);
-
-            if (practicaXingresoExistente)
-            {
-                do
-                {
-                    system("cls");
-                    Rectangulo();
-                    gotoxy(15, 1);
-                    cabeza("Que desea modificar?");
-
-
-                    gotoxy(1, 3);
-
-
-                    gotoxy(1, 6);
-                    printf("Ingrese un nuevo resultado: ");
-                    fflush(stdin);
-                    fgets(practicaXingresoExistente->practicaXIngreso.resultado, sizeof(practicaXingresoExistente->practicaXIngreso.resultado), stdin);
-
-                    gotoxy(1, 10);
-                    printf("Desea cargar registrar otro resultado? (S/N): ");
-                    opcion = getch();
-                    system("cls");
-                }
-                while (opcion == 's' || opcion == 'S');
-            }
-            else
-            {
-                gotoxy(1, 13);
-                printf("El numero de practica cargado no existe.");
-                getch();
-            }
-            system("cls");
-            Rectangulo();
-            gotoxy(1, 15);
-            printf("Presione S para modificar otra, cualquier otra tecla para finalizar");
-            opcion = getch();
-            system("cls");
-
-        }else{
-            gotoxy(1,15);
-            printf("No existe paciente con el dni ingresado! Quiere reintentar? (S/N)");
-            opcion = getch();
-        }
-
-    }while (opcion == 's' || opcion == 'S' );
-}
-*/
 void buscaYDaDeBajaPracticaXIngreso(nodoPaciente *arbolPacientes, int flag)
 {
     int nroPractica, nroIngreso, dni;
@@ -552,9 +553,8 @@ void buscaYDaDeBajaPracticaXIngreso(nodoPaciente *arbolPacientes, int flag)
 void registrarResultadoPracticaXIngreso(nodoPaciente *arbol)
 {
     nodoPracticaXIngreso *practicaXingresoExistente = inicListaPracticaXIngresos();
-    nodoIngreso *ingreso = NULL;
 
-    nodoPaciente * paciente;
+    nodoPaciente * paciente = inicArbolPacientes();
 
     int nroPractica;
     int nroIngreso;
@@ -571,23 +571,32 @@ void registrarResultadoPracticaXIngreso(nodoPaciente *arbol)
         gotoxy(1, 4);
         printf("Ingrese el numero de DNI: ");
         scanf("%d", &nroDNI);
-        gotoxy(1, 5);
-        printf("Ingrese el numero de ingreso: ");
+        system("cls");
+
+        paciente = buscaPaciente(arbol, nroDNI);
+        mostrarListadoIngresosPaciente(paciente);
+        printf("\nIngrese el numero de ingreso: ");
         scanf("%d", &nroIngreso);
-        gotoxy(1, 6);
+        nodoIngreso *ingresoExistente = buscaIngreso(paciente->listaIngresos, nroIngreso);
+        system("pause");
+        system("cls");
+
+        nodoPracticaXIngreso *seg = ingresoExistente->listaPracticasXIngreso;
+        while(seg != NULL)
+        {
+            mostrarUnNodoPracticaXIngreso(seg);
+            seg = seg->siguiente;
+        }
         printf("Ingrese el numero de practica: ");
         scanf("%d", &nroPractica);
 
-        paciente = buscaPaciente(arbol, nroDNI);
-
         if(paciente)
         {
-            ingreso = buscaIngreso(paciente->listaIngresos, nroIngreso);
 
-            if(ingreso)
+            if(ingresoExistente)
             {
 
-                practicaXingresoExistente = buscaPracticaXIngreso(ingreso->listaPracticasXIngreso, nroPractica);
+                practicaXingresoExistente = buscaPracticaXIngreso(ingresoExistente->listaPracticasXIngreso, nroPractica);
 
                 if (practicaXingresoExistente)
                 {

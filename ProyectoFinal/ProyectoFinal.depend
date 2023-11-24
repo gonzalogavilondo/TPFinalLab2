@@ -1076,7 +1076,7 @@
 	"stPracticaXIngreso.h"
 	"stPaciente.h"
 
-1700829404 source:e:\proyectofinal\proyectofinal\menu.c
+1700832849 source:e:\proyectofinal\proyectofinal\menu.c
 	"menu.h"
 
 1700796133 source:e:\proyectofinal\proyectofinal\persistenciadatos.c
@@ -1085,7 +1085,7 @@
 1700783036 source:e:\proyectofinal\proyectofinal\stempleado.c
 	"stEmpleado.h"
 
-1700829382 source:e:\proyectofinal\proyectofinal\stingreso.c
+1700829921 source:e:\proyectofinal\proyectofinal\stingreso.c
 	"stIngreso.h"
 	"menu.h"
 
@@ -1100,7 +1100,7 @@
 	"stPaciente.h"
 	"menu.h"
 
-1700784060 source:e:\proyectofinal\proyectofinal\stpracticaxingreso.c
+1700833545 source:e:\proyectofinal\proyectofinal\stpracticaxingreso.c
 	"stPracticaXIngreso.h"
 	"stIngreso.h"
 	"stPractica.h"
