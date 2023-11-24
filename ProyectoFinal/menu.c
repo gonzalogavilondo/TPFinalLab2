@@ -782,6 +782,72 @@ void submenuManejoEmpleados() {
     system("cls");
 }
 
+
+void subMenuListadoDeIngresos(nodoPaciente *arbolPaciente, int flag)
+{
+    char control = 's';
+    int opcion;
+
+    do
+    {
+        opcion = 0;
+        system("cls");
+        Rectangulo();
+        gotoxy(15, 1);
+        cabeza("LISTADO DE INGRESOS");
+        gotoxy(15, 4);
+        printf("Como desea filtrar?\n");
+        gotoxy(15, 5);
+        printf("(1) LISTADO GENERAL\n");
+        gotoxy(15, 6);
+        printf("(2) POR PACIENTE\n");
+        gotoxy(15, 7);
+        printf("(3) POR FECHA DE INGRESO\n");
+        gotoxy(15, 8);
+        printf("(4) VOLVER\n");  // Nueva opción
+        gotoxy(15, 9);
+        fflush(stdin);
+        scanf("%i", &opcion);
+        system("cls");
+
+        switch (opcion)
+        {
+            case 1:
+                // Mostrado general de ingresos
+                mostrarListadoGralIngresos(arbolPaciente, flag);
+                system("pause");
+                system("cls");
+                break;
+
+            case 2:
+                // Realizar listado por paciente
+                mostrarListadoIngresosXPaciente(arbolPaciente);
+                system("pause");
+                system("cls");
+                break;
+
+            case 3:
+                // Realizar filtrado por fecha "desde/hasta de la fecha de ingreso"
+                mostrarListadoGralIngresosFecha(arbolPaciente, flag);
+                system("pause");
+                system("cls");
+                break;
+
+            case 4:
+                control = 'n';
+                break;
+
+            default:
+                control = 's';
+                break;
+        }
+
+    } while (control == 's' || control == 'S');
+
+    system("cls");
+}
+
+
 void submenuManejoIngresos(nodoPaciente *arbolPaciente, int flag)
 {
     char control = 's';
@@ -830,9 +896,7 @@ void submenuManejoIngresos(nodoPaciente *arbolPaciente, int flag)
 
             case 4:
                 // Mostrar listado de ingresos
-                mostrarListadoGralIngresos(arbolPaciente, flag);
-                system("pause");
-                system("cls");
+                subMenuListadoDeIngresos(arbolPaciente, flag);
                 break;
 
             case 5:

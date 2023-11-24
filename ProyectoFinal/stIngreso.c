@@ -163,6 +163,110 @@ void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes, int flag)
     }
 }
 
+void _mostrarListadoGralIngresosFecha(nodoPaciente *arbolPacientes, int flag, const char *fechaDesde, const char *fechaHasta)
+{
+    if (arbolPacientes != NULL)
+    {
+        printf("\n*** Listado de Ingresos del Paciente ***\n");
+        muestraUnPacienteResumido(arbolPacientes->datosPaciente);
+
+        nodoIngreso *seg = arbolPacientes->listaIngresos;
+
+        if (seg == NULL)
+        {
+            printf("\nEl paciente no tiene ingresos en las fechas selecionadas.\n");
+            puts("--------------------------------------\n");
+        }
+        else
+        {
+            while (seg != NULL)
+            {
+                if ((flag == 0 && seg->ingreso.eliminado == 0) || (flag == 1))
+                {
+                    const char *fechaIngreso = seg->ingreso.fechaIngreso;
+
+                    // Verificar si la fecha de ingreso está en el rango deseado
+                    if (strcmp(fechaIngreso, fechaDesde) >= 0 && strcmp(fechaIngreso, fechaHasta) <= 0)
+                    {
+                        mostrarUnNodoIngreso(seg);
+                    }
+                }
+                seg = seg->siguiente;
+            }
+        }
+
+        printf("\n*** Fin del Listado de Ingresos del Paciente ***\n");
+        puts("----------------------------------------------\n");
+    }
+
+    if (arbolPacientes->izq != NULL)
+    {
+        _mostrarListadoGralIngresosFecha(arbolPacientes->izq, flag, fechaDesde, fechaHasta);
+    }
+
+    if (arbolPacientes->der != NULL)
+    {
+        _mostrarListadoGralIngresosFecha(arbolPacientes->der, flag, fechaDesde, fechaHasta);
+    }
+}
+
+void mostrarListadoGralIngresosFecha(nodoPaciente *arbolPacientes, int flag)
+{
+    char fechaDesde[20], fechaHasta[20];
+
+    printf("Ingrese la fecha desde en formato DD/MM/YYYY: ");
+    scanf("%s", fechaDesde);
+
+    printf("Ingrese la fecha hasta en formato DD/MM/YYYY: ");
+    scanf("%s", fechaHasta);
+
+    // Validar que la fecha desde no sea posterior a la fecha hasta
+    if (strcmp(fechaDesde, fechaHasta) > 0)
+    {
+        printf("\nError: La fecha desde no puede ser posterior a la fecha hasta.\n");
+        return;
+    }
+
+    // Llamar a la función original con las fechas ingresadas
+    _mostrarListadoGralIngresosFecha(arbolPacientes, flag, fechaDesde, fechaHasta);
+}
+
+void mostrarListadoIngresosXPaciente(nodoPaciente *arbolPacientes)
+{
+    int dni;
+
+    printf("Ingrese el DNI del paciente a mostrar el listado: ");
+    scanf("%d", &dni);
+
+    nodoPaciente *paciente = buscaPaciente(arbolPacientes, dni);
+    if (!paciente)
+    {
+        printf("\nEl paciente no existe en la base de datos.\n");
+        system("pause");
+    }
+    else
+    {
+        if (paciente->listaIngresos != NULL)
+        {
+            printf("\n*** Listado de Ingresos del Paciente ***\n");
+            muestraUnPacienteResumido(paciente->datosPaciente);
+            nodoIngreso *seg = paciente->listaIngresos;
+
+            while (seg != NULL)
+            {
+                if (seg->ingreso.eliminado == 0)
+                {
+                    mostrarUnNodoIngreso(seg);
+                }
+
+                seg = seg->siguiente;
+            }
+
+            printf("\n*** Fin del Listado de Ingresos del Paciente ***\n");
+            puts("----------------------------------------------\n");
+        }
+    }
+}
 
 void mostrarListadoIngresosPaciente(nodoPaciente *paciente)
 {

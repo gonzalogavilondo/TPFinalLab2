@@ -20,6 +20,7 @@ void Rectangulo();
 void modificarPerfilEmpleadoXDNI(char perfil[],int dni);
 void modificarContraseniaEmpleadoXDNI(char contrasenia[],int dni);
 void submenuManejoIngresos(nodoPaciente *arbolPaciente, int flag);
+void subMenuListadoDeIngresos(nodoPaciente *arbolPaciente, int flag);
 void submenuManejoPracticasXIngreso(nodoPaciente *arbolPacientes, int flag);
 void submenuAdministrativo(nodoPaciente * arbolPacientes);
 void submenuAdministrador(nodoPaciente * arbolPacientes);

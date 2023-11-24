@@ -40,6 +40,9 @@ nodoIngreso* buscaUltimoListaIngresos(nodoIngreso *lista);
 nodoIngreso* crearListaIngresos(const char *nombreArchivo);
 void mostrarUnNodoIngreso(nodoIngreso *aux);
 void mostrarListadoGralIngresos(nodoPaciente *arbolPacientes, int flag); //Si flag == 1 entonces lo llama el administrador
+void _mostrarListadoGralIngresosFecha(nodoPaciente *arbolPacientes, int flag, const char *fechaDesde, const char *fechaHasta);
+void mostrarListadoGralIngresosFecha(nodoPaciente *arbolPacientes, int flag);
+void mostrarListadoIngresosXPaciente(nodoPaciente *paciente);
 void mostrarListadoIngresosPaciente(nodoPaciente *paciente);
 void mostrarListadoPracticasXIngresosPaciente(nodoPaciente *paciente);
 nodoIngreso* liberarListaIngresos(nodoIngreso *lista);
