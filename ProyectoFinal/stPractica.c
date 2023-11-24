@@ -72,6 +72,7 @@ void submenuGestionPracticas(){
     } while (control == 's' || control == 'S');
 
     if (listaPracticas) {
+        guardaListaPracticasEnArchivo(listaPracticas);
         liberarListaPracticas(listaPracticas);
         listaPracticas = inicListaPracticas();
     }
@@ -408,10 +409,10 @@ void guardaListaPracticasEnArchivo(nodoPractica * listaPracticas){
         }
 
         fclose(archi);
-        printf("\n Se guardaron los datos en el archivo.");
 
     } else {
-        printf("\n Hubo un problema al intentar guardar los datos en un archivo.");
+        printf("\n Hubo un problema al intentar guardar los datos de practicas en un archivo.");
+        textoPresioneCualquierTecla();
     }
 }
 
@@ -428,7 +429,7 @@ nodoPractica * archivoToListaPracticas(nodoPractica * listaPracticas){
         }
 
     } else {
-        printf("\n Hubo un error al intentar abrir el archivo.");
+        printf("\n Hubo un error al intentar abrir el archivo de practicas.");
         textoPresioneCualquierTecla();
     }
 
