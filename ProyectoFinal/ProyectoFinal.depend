@@ -1005,7 +1005,7 @@
 	<stdlib.h>
 	<windows.h>
 
-1700791394 source:e:\proyectofinal\proyectofinal\main.c
+1700796139 source:e:\proyectofinal\proyectofinal\main.c
 	"stIngreso.h"
 	"stEmpleado.h"
 	"stPractica.h"
@@ -1079,7 +1079,7 @@
 1700783615 source:e:\proyectofinal\proyectofinal\menu.c
 	"menu.h"
 
-1700791595 source:e:\proyectofinal\proyectofinal\persistenciadatos.c
+1700796133 source:e:\proyectofinal\proyectofinal\persistenciadatos.c
 	"persistenciaDatos.h"
 
 1700783036 source:e:\proyectofinal\proyectofinal\stempleado.c
@@ -1089,13 +1089,13 @@
 	"stIngreso.h"
 	"menu.h"
 
-1700783036 source:e:\proyectofinal\proyectofinal\stpaciente.c
+1700794307 source:e:\proyectofinal\proyectofinal\stpaciente.c
 	"stPaciente.h"
 	"stIngreso.h"
 	"stPracticaXIngreso.h"
 	"menu.h"
 
-1700783036 source:e:\proyectofinal\proyectofinal\stpractica.c
+1700794307 source:e:\proyectofinal\proyectofinal\stpractica.c
 	"stPractica.h"
 	"stPaciente.h"
 	"menu.h"

@@ -1,6 +1,9 @@
 #include "persistenciaDatos.h"
 
 nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
+    ///Inicializamos el contador
+    cantidadIngresosArchivo();
+
     FILE* pArchiPacientes = fopen(ARCHIVO_PACIENTES, "rb");
 
     if (!pArchiPacientes) {
