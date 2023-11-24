@@ -59,5 +59,5 @@ nodoPractica * archivoToListaPracticas(nodoPractica * listaPracticas);
 /// SE USA EN stPracticaXIngreso.c:
 int existePracticaXnroPractica(int nroPracticaBuscar);
 
-void encontrarPracticasPorCadena();
+void encontrarPracticasPorCadena(nodoPractica * listaPracticas);
 #endif // STPRACTICA_H_INCLUDED
