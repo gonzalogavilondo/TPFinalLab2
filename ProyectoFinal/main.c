@@ -19,6 +19,9 @@ int main()
     SMALL_RECT windowSize = {0, 0, 160, 40};
     SetConsoleWindowInfo(wHnd, 1, &windowSize);
 
+    ///Inicializamos el contador
+    cantidadIngresosArchivo();
+
     ///Levantamos todos los datos en el arbol
     arbolPacientes = abrirArbolInicioPrograma(arbolPacientes);
 

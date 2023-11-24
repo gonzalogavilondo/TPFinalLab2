@@ -1,6 +1,9 @@
 #include "stIngreso.h"
 #include "menu.h"
 
+// Declaración global del contador
+static int contadorIngresos = 0;
+
 /***************************
 * FUNCIONES BASICAS DE LISTA
 ***************************/
@@ -207,39 +210,30 @@ nodoIngreso* liberarListaIngresos(nodoIngreso *lista)
     return seg;
 }
 
-/**
-    La función (cargarIngreso), la cual recibirá la lista y solicitará al usuario los datos del pedido para finalmente
-    agregar ese pedido a la lista y retornar la nueva lista con el nuevo ingreso.
-**/
-/*
-int cantidadNodosListaIngresos(nodoIngreso * lista)
-{
-    int cont = 0;
-    while (lista != NULL)
-    {
-        lista = lista->siguiente;
-        cont++;
-    }
-    return cont;
-}*/
+
 int cantidadIngresosArchivo()
 {
     int cant = 0;
-    FILE * archivoIngresos = fopen(ARCHIVO_INGRESOS, "rb");
+    FILE* archivoIngresos = fopen(ARCHIVO_INGRESOS, "rb");
 
-    if (archivoIngresos) {
-
+    if (archivoIngresos)
+    {
         stIngreso ingreso;
 
-        while (fread(&ingreso, sizeof(stIngreso), 1, archivoIngresos)) {
+        while (fread(&ingreso, sizeof(stIngreso), 1, archivoIngresos))
+        {
             cant++;
         }
 
         fclose(archivoIngresos);
-
-    } else {
+    }
+    else
+    {
         cant = -1;
     }
+
+    // Actualizar el contador de ingresos al inicio del programa
+    contadorIngresos = cant + 1;
 
     return cant;
 }
@@ -248,7 +242,8 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni)
 {
     stIngreso registro;
 
-    registro.numeroIngreso = cantidadIngresosArchivo() + 1; // Numero de ingreso EN ARCHIVO
+
+    registro.numeroIngreso = contadorIngresos; // Numero de ingreso EN ARCHIVO
 
     // Obtener la fecha actual y asignarla a nuevoIngreso->ingreso.fechaIngreso
     obtenerFechaActual(registro.fechaIngreso);
@@ -268,6 +263,9 @@ nodoIngreso* cargarIngreso(nodoIngreso *lista, int dni)
 
     registro.eliminado = 0;
     lista = agregarNodoIngreso(lista, registro); // Finalmente agrego el ingreso a la lista
+
+    // Incrementar el contador después de agregar el ingreso
+    contadorIngresos++;
 
     return lista;
 }
@@ -292,14 +290,14 @@ void obtenerFechaActual(char fechaActual[11])
     fechaActual[11] = '\0'; // Añadir el terminador nulo manualmente
 }
 
+
 /**
-* Obtener un nuevo número de ingreso
-**/
-int obtenerNuevoNumeroIngreso()
-{
-    static int contador = 1;
-    return contador++;
-}
+ * Obtener un nuevo número de ingreso
+ **/
+//int obtenerNuevoNumeroIngreso()
+//{
+//    return contadorIngresos++;
+//}
 
 /**
 * // Obtener una nueva práctica de laboratorio

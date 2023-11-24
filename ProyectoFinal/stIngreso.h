@@ -64,5 +64,6 @@ void buscaYDaDeBajaIngreso(nodoPaciente *arbolPacientes);
 void generarArchivoBinIngresos(const char *nombreArchivo);
 //int existeIngresoXnroIngreso(int nroIngresoBuscar);
 
+int cantidadIngresosArchivo();
 
 #endif // STINGRESO_H_INCLUDED
