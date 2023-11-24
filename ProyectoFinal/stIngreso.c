@@ -442,6 +442,7 @@ void altaDeIngreso(nodoPaciente *arbolPacientes)
     {
         gotoxy(15, 6);
         printf("El paciente no existe en la base de datos.\n");
+        gotoxy(15, 7);
         system("pause");
     }
     else

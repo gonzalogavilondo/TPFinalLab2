@@ -66,6 +66,7 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
 
 void salvarArbolFinPrograma(nodoPaciente *arbol) {
     if (arbol == NULL) {
+        printf("ARBOL VACIO!");
         return; // Verificar si el árbol está vacío
     }
 
