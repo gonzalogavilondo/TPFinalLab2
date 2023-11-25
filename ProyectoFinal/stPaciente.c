@@ -728,6 +728,10 @@ int existeIngreso(nodoPaciente *arbolPacientes) {
             if (ingresos->ingreso.eliminado != 1) {
                 return 1; // Se encontró un numero de ingreso, sino no hay ninguno
             }
+            else
+            {
+                return 0;
+            }
             ingresos = ingresos->siguiente;
         }
     }
