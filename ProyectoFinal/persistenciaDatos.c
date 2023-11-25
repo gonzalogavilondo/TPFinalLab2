@@ -6,125 +6,142 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
 
     FILE* pArchiPacientes = fopen(ARCHIVO_PACIENTES, "rb");
 
-    if (!pArchiPacientes) {
-        perror("Hubo un problema al intentar abrir el archivo de pacientes");
-        return arbol;
-    }
 
-    stPaciente paciente;
+    if (pArchiPacientes) { // Si da false, hubo un problema al intentar abrir el archivo de pacientes, o el mismo no existia.
 
-    while (fread(&paciente, sizeof(stPaciente), 1, pArchiPacientes) > 0) {
-        // Insertar paciente en el árbol
-        arbol = insertarPaciente(arbol, paciente);
+        stPaciente paciente;
 
-        FILE* pArchiIngreso = fopen(ARCHIVO_INGRESOS, "rb");
+        while (fread(&paciente, sizeof(stPaciente), 1, pArchiPacientes) > 0) {
+            // Insertar paciente en el árbol
+            arbol = insertarPaciente(arbol, paciente);
 
-        if (!pArchiIngreso) {
-            perror("Hubo un problema al intentar abrir el archivo de ingresos");
-            fclose(pArchiPacientes);
-            return arbol;
-        }
+            FILE* pArchiIngreso = fopen(ARCHIVO_INGRESOS, "rb");
 
-        stIngreso ingreso;
+            if (pArchiIngreso) { // Si da false, hubo un problema al intentar abrir el archivo de ingresos, o el mismo no existia.
 
-        while (fread(&ingreso, sizeof(stIngreso), 1, pArchiIngreso) > 0) {
-            if (paciente.dni == ingreso.dniPaciente) {
-                // Insertar ingreso en el paciente
-                nodoPaciente* pacienteAux = buscaPaciente(arbol, paciente.dni);
-                pacienteAux->listaIngresos = agregarNodoIngreso(pacienteAux->listaIngresos, ingreso);
+                stIngreso ingreso;
 
-                FILE* pArchiPracticaXIngreso = fopen(ARCHIVO_PRACTICAXINGRESOS, "rb");
+                while (fread(&ingreso, sizeof(stIngreso), 1, pArchiIngreso) > 0) {
+                    if (paciente.dni == ingreso.dniPaciente) {
+                        // Insertar ingreso en el paciente
+                        nodoPaciente* pacienteAux = buscaPaciente(arbol, paciente.dni);
+                        pacienteAux->listaIngresos = agregarNodoIngreso(pacienteAux->listaIngresos, ingreso);
 
-                if (!pArchiPracticaXIngreso) {
-                    perror("Hubo un problema al intentar abrir el archivo de practicas por ingreso");
-                    fclose(pArchiIngreso);
-                    fclose(pArchiPacientes);
-                    return arbol;
-                }
+                        FILE* pArchiPracticaXIngreso = fopen(ARCHIVO_PRACTICAXINGRESOS, "rb");
 
-                nodoIngreso* nodoIngresoBuscado = buscaIngreso(pacienteAux->listaIngresos, ingreso.numeroIngreso);
+                        if (pArchiPracticaXIngreso) { // Si da false, hubo un problema al intentar abrir el archivo de practicas por ingreso, o el mismo no existia.
 
-                stPracticaXIngreso practicaXIngreso;
-                while (fread(&practicaXIngreso, sizeof(stPracticaXIngreso), 1, pArchiPracticaXIngreso) > 0) {
-                    if (nodoIngresoBuscado && nodoIngresoBuscado->ingreso.numeroIngreso == practicaXIngreso.nroIngreso) {
-                        // Insertar practicaXIngreso en la lista
-                        nodoIngresoBuscado->listaPracticasXIngreso = agregarNodoPracticaXIngreso(nodoIngresoBuscado->listaPracticasXIngreso, practicaXIngreso);
+                            nodoIngreso * nodoIngresoBuscado = inicListaIngresos();
+                            nodoIngresoBuscado = buscaIngreso(pacienteAux->listaIngresos, ingreso.numeroIngreso);
+
+                            if (nodoIngresoBuscado) {
+
+                                stPracticaXIngreso practicaXIngreso;
+
+                                while (fread(&practicaXIngreso, sizeof(stPracticaXIngreso), 1, pArchiPracticaXIngreso) > 0) {
+                                    if (nodoIngresoBuscado->ingreso.numeroIngreso == practicaXIngreso.nroIngreso) {
+                                        // Insertar practicaXIngreso en la lista
+                                        nodoIngresoBuscado->listaPracticasXIngreso = agregarNodoPracticaXIngreso(nodoIngresoBuscado->listaPracticasXIngreso, practicaXIngreso);
+                                    }
+                                }
+
+                            }
+                            fclose(pArchiPracticaXIngreso);
+
+                        } else {
+                            printf("\n Hubo un problema al intentar abrir el archivo de practicas por ingreso, o no existia.\n");
+                            getch();
+                        }
+
                     }
                 }
 
-                fclose(pArchiPracticaXIngreso);
+                fclose(pArchiIngreso);
+
+            } else {
+                printf("\nHubo un problema al intentar abrir el archivo de ingresos/no existia\n");
+                getch();
             }
+
         }
 
-        fclose(pArchiIngreso);
+        fclose(pArchiPacientes);
+
+    } else {
+        printf("\nHubo un problema al intentar abrir el archivo de pacientes/no existia\n");
+        getch();
     }
 
-    fclose(pArchiPacientes);
     return arbol;
 }
 
 
 void salvarArbolFinPrograma(nodoPaciente *arbol) {
-    if (arbol == NULL) {
-        printf("ARBOL VACIO!");
-        return; // Verificar si el árbol está vacío
-    }
 
-    FILE *pArchiPacientes = fopen(ARCHIVO_PACIENTES, "wb");
-    FILE *pArchiIngresos = fopen(ARCHIVO_INGRESOS, "wb");
-    FILE *pArchiPracticaXIngresos = fopen(ARCHIVO_PRACTICAXINGRESOS, "wb");
+    if (arbol) {
 
-    if (pArchiPacientes == NULL || pArchiIngresos == NULL || pArchiPracticaXIngresos == NULL) {
-        // Manejar el error si no se pueden abrir los archivos
-        // Cerrar los archivos y devolver o imprimir un mensaje de error
-        if (pArchiPacientes != NULL) {
-            fclose(pArchiPacientes);
-        }
-        if (pArchiIngresos != NULL) {
-            fclose(pArchiIngresos);
-        }
-        if (pArchiPracticaXIngresos != NULL) {
-            fclose(pArchiPracticaXIngresos);
-        }
-        return;
-    }
+        FILE *pArchiPacientes = fopen(ARCHIVO_PACIENTES, "wb");
 
-    stPaciente *arregloPacientes = arbolPacientesToArreglo(arbol);
-    int validosArre = cantidadNodosArbolPacientes(arbol);
+        if (pArchiPacientes) { // Si da false, hubo un problema al intentar abrir/crear el archivo de pacientes.
 
-    for (int i = 0; i < validosArre; i++) {
-        if (fwrite(&arregloPacientes[i], sizeof(stPaciente), 1, pArchiPacientes) != 1) {
-            // Manejar el error si no se pudo escribir correctamente en ARCHIVO_PACIENTES
-            break;
-        }
+            stPaciente *arregloPacientes = arbolPacientesToArreglo(arbol);
+            int validosArre = cantidadNodosArbolPacientes(arbol);
+            nodoPaciente * paciente;
 
-        nodoPaciente *paciente = buscaPaciente(arbol, arregloPacientes[i].dni);
+            for (int i = 0; i < validosArre; i++) {
 
-        if (paciente && paciente->listaIngresos) {
-            nodoIngreso *segIngresos = paciente->listaIngresos;
+                fwrite(&arregloPacientes[i], sizeof(stPaciente), 1, pArchiPacientes);
 
-            while (segIngresos != NULL) {
-                if (fwrite(&segIngresos->ingreso, sizeof(stIngreso), 1, pArchiIngresos) != 1) {
-                    // Manejar el error si no se pudo escribir correctamente en ARCHIVO_INGRESOS
-                    break;
-                }
+                paciente = inicArbolPacientes();
+                paciente = buscaPaciente(arbol, arregloPacientes[i].dni);
 
-                nodoPracticaXIngreso *segPracticaXIngreso = segIngresos->listaPracticasXIngreso;
+                if (paciente && paciente->listaIngresos) {
 
-                while (segPracticaXIngreso != NULL) {
-                    if (fwrite(&segPracticaXIngreso->practicaXIngreso, sizeof(stPracticaXIngreso), 1, pArchiPracticaXIngresos) != 1) {
-                        // Manejar el error si no se pudo escribir correctamente en ARCHIVO_PRACTICAXINGRESOS
-                        break;
+                    FILE * pArchiIngresos = fopen(ARCHIVO_INGRESOS, "wb");
+
+                    if (pArchiIngresos) { // Si da false, hubo un problema al intentar abrir/crear el archivo de ingresos.
+
+                        nodoIngreso *segIngresos = paciente->listaIngresos;
+
+                        while (segIngresos) {
+
+                            fwrite(&segIngresos->ingreso,sizeof(stIngreso),1,pArchiIngresos);
+                            FILE * pArchiPracitaXIngresos = fopen(ARCHIVO_PRACTICAXINGRESOS, "wb");
+
+                            if (pArchiPracitaXIngresos) { // Si da false, hubo un problema al intentar abrir/crear el archivo de practicasXIngreso.
+
+                                nodoPracticaXIngreso *segPracticaXIngreso = segIngresos->listaPracticasXIngreso;
+
+                                while (segPracticaXIngreso) {
+                                    fwrite(&segPracticaXIngreso->practicaXIngreso,sizeof(stPracticaXIngreso),1,pArchiPracitaXIngresos);
+                                    segPracticaXIngreso = segPracticaXIngreso->siguiente;
+                                }
+
+                                fclose(pArchiPracitaXIngresos);
+
+                            } else {
+                                printf("\nHubo un problema al intentar abrir/crear el archivo de pacientes para guardar los datos.\n");
+                                getch();
+                            }
+
+                            segIngresos = segIngresos->siguiente;
+                        }
+
+                        fclose(pArchiIngresos);
+
+                    } else {
+                        printf("\nHubo un problema al intentar abrir/crear el archivo de ingresos para guardar los datos.\n");
+                        getch();
                     }
-                    segPracticaXIngreso = segPracticaXIngreso->siguiente;
                 }
-
-                segIngresos = segIngresos->siguiente;
             }
-        }
-    }
 
-    fclose(pArchiPacientes);
-    fclose(pArchiIngresos);
-    fclose(pArchiPracticaXIngresos);
+        fclose(pArchiPacientes);
+
+        } else {
+            printf("\nHubo un problema al intentar abrir/crear el archivo de pacientes para guardar los datos.\n");
+            getch();
+        }
+
+    }
 }
