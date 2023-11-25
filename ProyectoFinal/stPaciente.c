@@ -433,44 +433,135 @@ nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes){
     int dni;
     stPaciente nuevoPaciente;
 
-    printf("\n Ingrese el DNI del paciente: ");
-    fflush(stdin);
-    scanf("%d", &dni);
+    dni = consultaDniYVerifica();
 
-    if (existeElPaciente(arbolPacientes, dni)) {
-        printf("\n El paciente ya esta registrado en la base de datos. Puede modificar sus datos desde la opcion 2 del menu anterior.");
-    } else {
+    if (dni) {
 
-        printf("\n Ingrese apellido y nombre en formato \"Apellido, Nombre\": ");
-        fflush(stdin);
-        gets(nuevoPaciente.apellidoNombre);
+        if (existeElPaciente(arbolPacientes, dni)) {
+            printf("\n El paciente ya esta registrado en la base de datos. Puede modificar sus datos desde la opcion 2 del menu anterior.");
+        } else {
 
-        printf("\n Ingrese la edad: ");
-        fflush(stdin);
-        scanf("%d", &nuevoPaciente.edad);
+            printf("\n Ingrese apellido y nombre en formato \"Apellido, Nombre\": ");
+            fflush(stdin);
+            gets(nuevoPaciente.apellidoNombre);
 
-        printf("\n Ingrese la direccion donde vive: ");
-        fflush(stdin);
-        gets(nuevoPaciente.direccion);
+            printf("\n Ingrese la edad: ");
+            fflush(stdin);
+            scanf("%d", &nuevoPaciente.edad);
 
-        printf("\n Ingrese el telefono: ");
-        fflush(stdin);
-        gets(nuevoPaciente.telefono);
+            printf("\n Ingrese la direccion donde vive: ");
+            fflush(stdin);
+            gets(nuevoPaciente.direccion);
 
-        nuevoPaciente.eliminado = 0;
-        nuevoPaciente.dni = dni;
+            printf("\n Ingrese el telefono: ");
+            fflush(stdin);
+            gets(nuevoPaciente.telefono);
 
-        arbolPacientes = insertarPaciente(arbolPacientes, nuevoPaciente);
+            nuevoPaciente.eliminado = 0;
+            nuevoPaciente.dni = dni;
 
-        system("cls");
-        printf("\n Paciente cargado.");
+            arbolPacientes = insertarPaciente(arbolPacientes, nuevoPaciente);
+
+            system("cls");
+            printf("\n Paciente cargado.");
+
+        }
+
+        textoPresioneCualquierTecla();
 
     }
 
-    textoPresioneCualquierTecla();
-
     return arbolPacientes;
 }
+
+// 'consultaDniYVerifica' consulta y verifica el DNI. Si éste resulta
+// válido, lo devuelve, caso contrario, devuelve 0:
+int consultaDniYVerifica(){
+
+    char dni[9];
+    int dniValido;
+    int enteroDni;
+    int longitudCadena;
+    char opcion;
+
+    do {
+
+        opcion = 1;
+        dniValido = 1;
+        enteroDni = 0;
+        printf("\n Ingrese el DNI del paciente: ");
+        fflush(stdin);
+        gets(dni);
+
+        // si ingresó un dni de mas de 8 digitos, se pisó el '\0' de la cadena
+        // de caracteres. Ingresa al else de este if, setea dniValido en 0 y repone
+        // el '\0':
+        if (dni[8] == '\0') {
+
+            longitudCadena = strlen(dni);
+
+            // para que sea un DNI válido tiene que ser mayor a 99.999,
+            // entonces la cadena ingresada tiene que tener mas de 5
+            // caracteres, caso contrario ya se que es un DNI no valido:
+            if (longitudCadena > 5) {
+
+                // este for chequea que la cadena de caracteres ingresada tenga solo
+                // dígitos, y no se hayan ingresado letras, caracteres especiales o espacios:
+                for (int i=0; i<longitudCadena; i++) {
+
+                    if ( !isdigit(dni[i]) ) {
+                        dniValido = 0;
+                        enteroDni = 0;
+                        i=10;
+                    }
+                }
+
+                if (dniValido) {
+
+                    // en este punto se que la cadena de caracteres ingresada tiene
+                    // solo números. Este for pasa la cadena de caracteres a un número
+                    // entero:
+                    for (int i=0; i<longitudCadena; i++) {
+
+                        // dni[i]-48 pasa del caracter al numero en int:
+                        enteroDni += ( (int) pow(10, longitudCadena-i-1) ) * (dni[i]-48);
+                    }
+
+                    // a este if no debería llegar con un número mayor/igual a 100.000.000,
+                    // ni menor/igual a 99.999, pero supongo que no esta de mas la validación:
+                    if (enteroDni<=99999 || enteroDni>=100000000) {
+
+                        dniValido = 0;
+                        enteroDni = 0;
+                    }
+                }
+
+            } else {
+                dniValido = 0;
+                enteroDni = 0;
+            }
+
+        } else {
+            dniValido = 0;
+            enteroDni = 0;
+            dni[8] = '\0';
+        }
+
+        // Si el DNI resulta incorrecto, consulto al usuario si quiere seguir o cancelar:
+        if (!dniValido) {
+            printf("\n\n Error, debe ingresar un DNI valido. Asegurese de no\n ingresar espacios, letras o numeros negativos.");
+            printf("\n\n Si el error persiste, comuniquese con el area de TI.\n Presione cualquier tecla para continuar, ESC para cancelar...");
+            fflush(stdin);
+            opcion = getch();
+        }
+
+        system("cls");
+
+    } while (!dniValido && opcion != ESC);
+
+    return enteroDni;
+}
+
 
 /// FUNCIONES OPCION 4 DEL MENU 'submenuGestionPacientes':
 

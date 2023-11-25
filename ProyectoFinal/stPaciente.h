@@ -59,6 +59,7 @@ nodoPaciente * insertarPaciente(nodoPaciente * arbolPacientes, stPaciente nuevoP
 nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente);
 /// FUNCIONES OPCION 3 DEL MENU 'submenuGestionPacientes':
 nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes);
+int consultaDniYVerifica();
 /// FUNCIONES OPCION 4 DEL MENU 'submenuGestionPacientes':
 void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes, int flag);
 /// FUNCIONES OPCION 5 DEL MENU 'submenuGestionPacientes':
