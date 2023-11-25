@@ -22,6 +22,7 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
                 stIngreso ingreso;
 
                 while (fread(&ingreso, sizeof(stIngreso), 1, pArchiIngreso) > 0) {
+
                     if (paciente.dni == ingreso.dniPaciente) {
                         // Insertar ingreso en el paciente
                         nodoPaciente* pacienteAux = buscaPaciente(arbol, paciente.dni);
@@ -46,30 +47,20 @@ nodoPaciente* abrirArbolInicioPrograma(nodoPaciente* arbol) {
                                 }
 
                             }
-                            fclose(pArchiPracticaXIngreso);
 
-                        } else {
-                            printf("\n Hubo un problema al intentar abrir el archivo de practicas por ingreso, o no existia.\n");
-                            getch();
+                            fclose(pArchiPracticaXIngreso);
                         }
 
                     }
+
                 }
 
                 fclose(pArchiIngreso);
-
-            } else {
-                printf("\nHubo un problema al intentar abrir el archivo de ingresos/no existia\n");
-                getch();
             }
 
         }
 
         fclose(pArchiPacientes);
-
-    } else {
-        printf("\nHubo un problema al intentar abrir el archivo de pacientes/no existia\n");
-        getch();
     }
 
     return arbol;
@@ -120,7 +111,8 @@ void salvarArbolFinPrograma(nodoPaciente *arbol) {
                                 fclose(pArchiPracitaXIngresos);
 
                             } else {
-                                printf("\nHubo un problema al intentar abrir/crear el archivo de pacientes para guardar los datos.\n");
+                                printf("\n Hubo un problema al intentar abrir/crear el archivo de practicas por ingreso para guardar los datos.\n");
+                                printf("\n Presione cualquier tecla para continuar...");
                                 getch();
                             }
 
@@ -130,7 +122,8 @@ void salvarArbolFinPrograma(nodoPaciente *arbol) {
                         fclose(pArchiIngresos);
 
                     } else {
-                        printf("\nHubo un problema al intentar abrir/crear el archivo de ingresos para guardar los datos.\n");
+                        printf("\n Hubo un problema al intentar abrir/crear el archivo de ingresos para guardar los datos.\n");
+                        printf("\n Presione cualquier tecla para continuar...");
                         getch();
                     }
                 }
@@ -139,7 +132,8 @@ void salvarArbolFinPrograma(nodoPaciente *arbol) {
         fclose(pArchiPacientes);
 
         } else {
-            printf("\nHubo un problema al intentar abrir/crear el archivo de pacientes para guardar los datos.\n");
+            printf("\n Hubo un problema al intentar abrir/crear el archivo de pacientes para guardar los datos.\n");
+            printf("\n Presione cualquier tecla para continuar...");
             getch();
         }
 
