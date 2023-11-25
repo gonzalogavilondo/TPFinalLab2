@@ -322,8 +322,8 @@ void altaDePracticaXIngreso(nodoPaciente *arbolPacientes, int altaIngreso)
                 // Leo el archivo de practicas y las cargo en una lista:
                 nodoPractica * listaPracticas = inicListaPracticas();
                 listaPracticas = archivoToListaPracticas(listaPracticas);
-                nodoPractica * nodoBuscado;
-                // esta funcion devuelve NULL si no encontro el nodo
+                nodoPractica * nodoBuscado = inicListaPracticas();
+                // habiendo inicializado el nodoBuscado, esta funcion devuelve NULL si no encontro el nodo
                 nodoBuscado = buscaPracticaPorNroPractica(listaPracticas, nroPractica);
                 if (nodoBuscado && !(nodoBuscado->datosPractica.tieneAlMenosUnUso))
                 {
