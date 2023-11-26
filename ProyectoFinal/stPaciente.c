@@ -201,47 +201,44 @@ void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag){
                 scanf("%i", &opcion);
                 system("cls");
 
+                if (1 <= opcion && opcion <= 5 && opcion != 3) {
+                    seModificoTrue = 1;
+                }
+
                 switch (opcion) {
                     case 1:
-                        seModificoTrue = 1;
                         printf("\n Ingrese apellido y nombre: ");
                         fflush(stdin);
                         gets(pacienteAux.apellidoNombre);
                         break;
                     case 2:
-                        seModificoTrue = 1;
                         printf("\n Ingrese la edad: ");
                         fflush(stdin);
                         scanf("%d", &pacienteAux.edad);
                         break;
                     case 3:
-                        printf("\n Ingrese el dni: ");
-                        fflush(stdin);
-                        scanf("%d", &dni);
+//                        printf("\n Ingrese el dni: ");
+//                        fflush(stdin);
+//                        scanf("%d", &dni);
 
-                        if (existeElPaciente(arbolPacientes, dni) && dni!=paciente->datosPaciente.dni) {
+                        dni = consultaDniYVerifica();
 
-    //                        Rectangulo();
-    //                        gotoxy(12,5);
-    //                        printf("Se ha modificado el paciente.");
-    //                        gotoxy(12,7);
-    //                        textoPresioneCualquierTecla2();
-
-                            printf("\n\n El dni ingresado ya esta registrado en la base de datos.");
-                            textoPresioneCualquierTecla();
-                        } else {
-                            seModificoTrue = 1;
-                            pacienteAux.dni = dni;
+                        if (dni) {
+                            if (existeElPaciente(arbolPacientes, dni) && dni!=paciente->datosPaciente.dni) {
+                                printf("\n\n El dni ingresado ya esta registrado en la base de datos.");
+                                textoPresioneCualquierTecla();
+                            } else {
+                                seModificoTrue = 1;
+                                pacienteAux.dni = dni;
+                            }
                         }
                         break;
                     case 4:
-                        seModificoTrue = 1;
                         printf("\n Ingrese la direccion: ");
                         fflush(stdin);
                         gets(pacienteAux.direccion);
                         break;
                     case 5:
-                        seModificoTrue = 1;
                         printf("\n Ingrese el telefono: ");
                         fflush(stdin);
                         gets(pacienteAux.telefono);
