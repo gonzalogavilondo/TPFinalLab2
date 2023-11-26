@@ -61,7 +61,7 @@ nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente);
 nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes);
 int consultaDniYVerifica();
 /// FUNCIONES OPCION 4 DEL MENU 'submenuGestionPacientes':
-void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes, int flag);
+void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes);
 /// FUNCIONES OPCION 5 DEL MENU 'submenuGestionPacientes':
 void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes, int flag);
 void inorderPacientes(nodoPaciente * arbolPacientes, int flag);

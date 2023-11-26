@@ -60,7 +60,7 @@ void submenuGestionPacientes(nodoPaciente * arbolPacientes, int flag){
                 arbolPacientes = altaDePaciente(arbolPacientes);
                 break;
             case 4: // Dar de baja a un paciente
-                submenuDarDeBajaUnPaciente(arbolPacientes, flag);
+                submenuDarDeBajaUnPaciente(arbolPacientes);
                 break;
             case 5: // Ver listado de pacientes
                 submenuElijeOrdenamientoPacientes(arbolPacientes, flag);
@@ -551,7 +551,7 @@ int consultaDniYVerifica(){
 
 /// FUNCIONES OPCION 4 DEL MENU 'submenuGestionPacientes':
 
-void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes, int flag){
+void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes){
 
     int dni = consultaDniYVerifica();
 
@@ -559,28 +559,33 @@ void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes, int flag){
 
         nodoPaciente * paciente = buscaPaciente(arbolPacientes, dni);
 
-        if ((paciente && flag) || (paciente && (!flag && !(paciente->datosPaciente.eliminado)))) {
+        if (paciente) {
 
-            /// Es baja del paciente en cascada, es decir, da de baja primero las practicas
-            /// x ingreso asociadas, luego los ingresos y por ultimo da de baja al paciente:
+            // si el paciente ya estaba dado de baja, se informa al usuario,
+            // sea administrador o administrativo:
+            if ( !(paciente->datosPaciente.eliminado) ) {
 
-            nodoIngreso * auxListaIngresos = paciente->listaIngresos;
+                // Es baja del paciente en cascada, es decir, da de baja primero las practicas
+                // x ingreso asociadas, el ingreso en cuestion en cada iteracion de ingresos y
+                // por ultimo da de baja al paciente:
 
-            while (auxListaIngresos) {
-                darDeBajaTodasLasPracticasXIngreso(auxListaIngresos->listaPracticasXIngreso);
-                auxListaIngresos = auxListaIngresos->siguiente;
+                nodoIngreso * auxListaIngresos = paciente->listaIngresos;
+
+                while (auxListaIngresos) {
+                    darDeBajaTodasLasPracticasXIngreso(auxListaIngresos->listaPracticasXIngreso);
+                    auxListaIngresos->ingreso.eliminado = 1;
+                    auxListaIngresos = auxListaIngresos->siguiente;
+                }
+
+                paciente->datosPaciente.eliminado = 1;
+                printf("\n Se dio de baja al paciente.");
+                textoPresioneCualquierTecla();
+
+            } else {
+                printf("\n El paciente ya habia sido dado de baja con anterioridad.");
+                textoPresioneCualquierTecla();
             }
 
-            auxListaIngresos = paciente->listaIngresos;
-
-            while (auxListaIngresos) {
-                auxListaIngresos->ingreso.eliminado = 1;
-                auxListaIngresos = auxListaIngresos->siguiente;
-            }
-
-            paciente->datosPaciente.eliminado = 1;
-            printf("\n Se dio de baja al paciente.");
-            textoPresioneCualquierTecla();
         } else {
             printf("\n");
             textoDniNoEnBaseDeDatos();
