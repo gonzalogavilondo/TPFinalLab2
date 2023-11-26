@@ -60,7 +60,7 @@ void submenuGestionPacientes(nodoPaciente * arbolPacientes, int flag){
                 arbolPacientes = altaDePaciente(arbolPacientes);
                 break;
             case 4: // Dar de baja a un paciente
-                submenuDarDeBajaUnPaciente(arbolPacientes);
+                submenuDarDeBajaUnPaciente(arbolPacientes, flag);
                 break;
             case 5: // Ver listado de pacientes
                 submenuElijeOrdenamientoPacientes(arbolPacientes, flag);
@@ -181,7 +181,7 @@ void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag){
             do {
                 system("cls");
                 Rectangulo();
-                muestraUnPacienteEnRectangulo(pacienteAux);
+                muestraUnPacienteEnRectangulo(pacienteAux, flag);
 
                 opcion = 0;
                 gotoxy(15, 8);
@@ -293,7 +293,7 @@ void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag){
     }
 }
 
-void muestraUnPacienteEnRectangulo(stPaciente datosPaciente){
+void muestraUnPacienteEnRectangulo(stPaciente datosPaciente, int flag){
 
     gotoxy(1, 1);
     printf("  Apellido y nombre: %s", datosPaciente.apellidoNombre);
@@ -305,8 +305,12 @@ void muestraUnPacienteEnRectangulo(stPaciente datosPaciente){
     printf("  Edad: %d", datosPaciente.edad);
     gotoxy(1, 5);
     printf("  Telefono: %s", datosPaciente.telefono);
-    gotoxy(1, 6);
-    printf("  Eliminado: %d", datosPaciente.eliminado);
+
+    // si es administrador, se muestra el campo 'eliminado':
+    if (flag) {
+        gotoxy(1, 6);
+        printf("  Eliminado: %d", datosPaciente.eliminado);
+    }
 
 }
 
@@ -551,7 +555,7 @@ int consultaDniYVerifica(){
 
 /// FUNCIONES OPCION 4 DEL MENU 'submenuGestionPacientes':
 
-void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes){
+void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes, int flag){
 
     int dni = consultaDniYVerifica();
 
@@ -565,21 +569,46 @@ void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes){
             // sea administrador o administrativo:
             if ( !(paciente->datosPaciente.eliminado) ) {
 
-                // Es baja del paciente en cascada, es decir, da de baja primero las practicas
-                // x ingreso asociadas, el ingreso en cuestion en cada iteracion de ingresos y
-                // por ultimo da de baja al paciente:
+                char opcion;
 
-                nodoIngreso * auxListaIngresos = paciente->listaIngresos;
+                // este do-while es la pantalla de confirmacion en la baja del paciente:
+                do {
 
-                while (auxListaIngresos) {
-                    darDeBajaTodasLasPracticasXIngreso(auxListaIngresos->listaPracticasXIngreso);
-                    auxListaIngresos->ingreso.eliminado = 1;
-                    auxListaIngresos = auxListaIngresos->siguiente;
+                    Rectangulo();
+                    muestraUnPacienteEnRectangulo(paciente->datosPaciente, flag);
+                    gotoxy(15, 8);
+                    printf("Esta seguro que desea dar de baja al paciente?");
+                    gotoxy(15, 9);
+                    printf("Presione S para confirmar, N para cancelar...");
+                    fflush(stdin);
+                    opcion = getch();
+
+                    opcion = toupper(opcion);
+
+                    system("cls");
+
+                } while (opcion != 83 && opcion != 78); // el ASCII en 'opcion' va a llegar con 83 si presionó
+                                                        // 's' o 'S' o con 78 si presiono 'n' o 'N'
+
+                if (opcion == 83) {
+
+                    // Es baja del paciente en cascada, es decir, da de baja primero las practicas
+                    // x ingreso asociadas, el ingreso en cuestion en cada iteracion de ingresos y
+                    // por ultimo da de baja al paciente:
+
+                    nodoIngreso * auxListaIngresos = paciente->listaIngresos;
+
+                    while (auxListaIngresos) {
+                        darDeBajaTodasLasPracticasXIngreso(auxListaIngresos->listaPracticasXIngreso);
+                        auxListaIngresos->ingreso.eliminado = 1;
+                        auxListaIngresos = auxListaIngresos->siguiente;
+                    }
+
+                    paciente->datosPaciente.eliminado = 1;
+                    printf("\n Se dio de baja al paciente.");
+                    textoPresioneCualquierTecla();
+
                 }
-
-                paciente->datosPaciente.eliminado = 1;
-                printf("\n Se dio de baja al paciente.");
-                textoPresioneCualquierTecla();
 
             } else {
                 printf("\n El paciente ya habia sido dado de baja con anterioridad.");

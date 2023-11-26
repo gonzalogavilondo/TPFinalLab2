@@ -51,7 +51,7 @@ void muestraUnPaciente(stPaciente datosPaciente);
 void textoDniNoEnBaseDeDatos();
 /// FUNCIONES OPCION 2 DEL MENU 'submenuGestionPacientes':
 void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag);
-void muestraUnPacienteEnRectangulo(stPaciente datosPaciente);
+void muestraUnPacienteEnRectangulo(stPaciente datosPaciente, int flag);
 int existeElPaciente(nodoPaciente * arbolPacientes, int dni);
 nodoPaciente * eliminarNodoArbolPacientes(nodoPaciente * arbolPacientes, int dniPaciente);
 nodoPaciente * encontrarMinimoDni(nodoPaciente* arbolPacientes);
@@ -61,7 +61,7 @@ nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente);
 nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes);
 int consultaDniYVerifica();
 /// FUNCIONES OPCION 4 DEL MENU 'submenuGestionPacientes':
-void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes);
+void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes, int flag);
 /// FUNCIONES OPCION 5 DEL MENU 'submenuGestionPacientes':
 void submenuElijeOrdenamientoPacientes(nodoPaciente * arbolPacientes, int flag);
 void inorderPacientes(nodoPaciente * arbolPacientes, int flag);
