@@ -47,9 +47,8 @@ void submenuGestionPacientes(nodoPaciente * arbolPacientes, int flag);
 void submenuBuscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes, int flag);
 nodoPaciente * inicArbolPacientes();
 nodoPaciente * buscaPaciente(nodoPaciente * arbolPacientes, int dni);
-nodoPaciente * textoIngreseDNILuegoBuscaPaciente2(nodoPaciente * arbolPacientes, int * dni);
 void muestraUnPaciente(stPaciente datosPaciente);
-void textoDniNoEnBaseDeDatos2();
+void textoDniNoEnBaseDeDatos();
 /// FUNCIONES OPCION 2 DEL MENU 'submenuGestionPacientes':
 void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag);
 void muestraUnPacienteEnRectangulo(stPaciente datosPaciente);

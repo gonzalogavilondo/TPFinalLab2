@@ -85,22 +85,24 @@ void submenuGestionPacientes(nodoPaciente * arbolPacientes, int flag){
 
 void submenuBuscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes, int flag){
 
-    int dni;
-    nodoPaciente * paciente = textoIngreseDNILuegoBuscaPaciente2(arbolPacientes, &dni);
+    int dni = consultaDniYVerifica();
 
-    if ((paciente && flag) || (paciente && (!flag && !(paciente->datosPaciente.eliminado)))) {
+    if (dni) {
 
-        printf("\n");
-        muestraUnPaciente(paciente->datosPaciente);
-        textoPresioneCualquierTecla();
+        nodoPaciente * paciente = buscaPaciente(arbolPacientes, dni);
 
-    } else {
-        printf("\n");
-        textoDniNoEnBaseDeDatos2();
+        if ((paciente && flag) || (paciente && (!flag && !(paciente->datosPaciente.eliminado)))) {
+
+            printf("\n");
+            muestraUnPaciente(paciente->datosPaciente);
+            textoPresioneCualquierTecla();
+
+        } else {
+            printf("\n");
+            textoDniNoEnBaseDeDatos();
+        }
+
     }
-
-    system("cls");
-
 }
 
 nodoPaciente * inicArbolPacientes(){
@@ -132,21 +134,6 @@ nodoPaciente * buscaPaciente(nodoPaciente * arbolPacientes, int dni){
     return nodoBuscado;
 }
 
-nodoPaciente * textoIngreseDNILuegoBuscaPaciente2(nodoPaciente * arbolPacientes, int * dni){
-
-    system("cls");
-    Rectangulo();
-    gotoxy(15, 4);
-    printf("Ingrese el dni del paciente: ");
-    fflush(stdin);
-    scanf("%d", dni);
-    system("cls");
-
-    nodoPaciente * nodoBuscado = buscaPaciente(arbolPacientes, *dni);
-
-    return nodoBuscado;
-}
-
 void muestraUnPaciente(stPaciente datosPaciente){
 
     printf(" Apellido y nombre: %s", datosPaciente.apellidoNombre);
@@ -159,7 +146,7 @@ void muestraUnPaciente(stPaciente datosPaciente){
 
 }
 
-void textoDniNoEnBaseDeDatos2(){
+void textoDniNoEnBaseDeDatos(){
 
     system("cls");
     Rectangulo();
@@ -177,129 +164,133 @@ void textoDniNoEnBaseDeDatos2(){
 
 void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag){
 
-    int dni;
-    nodoPaciente * paciente = textoIngreseDNILuegoBuscaPaciente2(arbolPacientes, &dni);
+    int dni = consultaDniYVerifica();
 
-    if ((paciente && flag) || (paciente && (!flag && !(paciente->datosPaciente.eliminado)))) {
+    if (dni) {
 
-        int seModificoTrue = 0;
-        stPaciente pacienteAux;
-        pacienteAux = paciente->datosPaciente;
-        int opcion;
-        char opcionSalida = 0;
+        nodoPaciente * paciente = buscaPaciente(arbolPacientes, dni);
 
-        do {
-            system("cls");
-            Rectangulo();
-            muestraUnPacienteEnRectangulo(pacienteAux);
+        if ((paciente && flag) || (paciente && (!flag && !(paciente->datosPaciente.eliminado)))) {
 
-            opcion = 0;
-            gotoxy(15, 8);
-            printf("Que dato desea modificar? Ingrese una opcion:\n");
-            gotoxy(15, 9);
-            printf("(1) Apellido y nombre\n");
-            gotoxy(15, 10);
-            printf("(2) Edad\n");
-            gotoxy(15, 11);
-            printf("(3) Dni\n");
-            gotoxy(15, 12);
-            printf("(4) Direccion\n");
-            gotoxy(15, 13);
-            printf("(5) Telefono\n");
-            gotoxy(15, 14);
-            fflush(stdin);
-            scanf("%i", &opcion);
-            system("cls");
+            int seModificoTrue = 0;
+            stPaciente pacienteAux;
+            pacienteAux = paciente->datosPaciente;
+            int opcion;
+            char opcionSalida = 0;
 
-            switch (opcion) {
-                case 1:
-                    seModificoTrue = 1;
-                    printf("\n Ingrese apellido y nombre: ");
-                    fflush(stdin);
-                    gets(pacienteAux.apellidoNombre);
-                    break;
-                case 2:
-                    seModificoTrue = 1;
-                    printf("\n Ingrese la edad: ");
-                    fflush(stdin);
-                    scanf("%d", &pacienteAux.edad);
-                    break;
-                case 3:
-                    printf("\n Ingrese el dni: ");
-                    fflush(stdin);
-                    scanf("%d", &dni);
-
-                    if (existeElPaciente(arbolPacientes, dni) && dni!=paciente->datosPaciente.dni) {
-
-//                        Rectangulo();
-//                        gotoxy(12,5);
-//                        printf("Se ha modificado el paciente.");
-//                        gotoxy(12,7);
-//                        textoPresioneCualquierTecla2();
-
-                        printf("\n\n El dni ingresado ya esta registrado en la base de datos.");
-                        textoPresioneCualquierTecla();
-                    } else {
-                        seModificoTrue = 1;
-                        pacienteAux.dni = dni;
-                    }
-                    break;
-                case 4:
-                    seModificoTrue = 1;
-                    printf("\n Ingrese la direccion: ");
-                    fflush(stdin);
-                    gets(pacienteAux.direccion);
-                    break;
-                case 5:
-                    seModificoTrue = 1;
-                    printf("\n Ingrese el telefono: ");
-                    fflush(stdin);
-                    gets(pacienteAux.telefono);
-                    break;
-
-                default:
-                    // opcion incorrecta, se repite el menu
-                    break;
-            }
-
-            if (1 <= opcion && opcion <= 5) {
+            do {
                 system("cls");
                 Rectangulo();
-                gotoxy(5, 5);
-                printf("Desea modificar algun otro dato del paciente? En ese caso");
-                gotoxy(5, 6);
-                printf("presione cualquier tecla, para finalizar presione ESC.");
+                muestraUnPacienteEnRectangulo(pacienteAux);
+
+                opcion = 0;
+                gotoxy(15, 8);
+                printf("Que dato desea modificar? Ingrese una opcion:\n");
+                gotoxy(15, 9);
+                printf("(1) Apellido y nombre\n");
+                gotoxy(15, 10);
+                printf("(2) Edad\n");
+                gotoxy(15, 11);
+                printf("(3) Dni\n");
+                gotoxy(15, 12);
+                printf("(4) Direccion\n");
+                gotoxy(15, 13);
+                printf("(5) Telefono\n");
+                gotoxy(15, 14);
                 fflush(stdin);
-                opcionSalida = getch();
+                scanf("%i", &opcion);
+                system("cls");
+
+                switch (opcion) {
+                    case 1:
+                        seModificoTrue = 1;
+                        printf("\n Ingrese apellido y nombre: ");
+                        fflush(stdin);
+                        gets(pacienteAux.apellidoNombre);
+                        break;
+                    case 2:
+                        seModificoTrue = 1;
+                        printf("\n Ingrese la edad: ");
+                        fflush(stdin);
+                        scanf("%d", &pacienteAux.edad);
+                        break;
+                    case 3:
+                        printf("\n Ingrese el dni: ");
+                        fflush(stdin);
+                        scanf("%d", &dni);
+
+                        if (existeElPaciente(arbolPacientes, dni) && dni!=paciente->datosPaciente.dni) {
+
+    //                        Rectangulo();
+    //                        gotoxy(12,5);
+    //                        printf("Se ha modificado el paciente.");
+    //                        gotoxy(12,7);
+    //                        textoPresioneCualquierTecla2();
+
+                            printf("\n\n El dni ingresado ya esta registrado en la base de datos.");
+                            textoPresioneCualquierTecla();
+                        } else {
+                            seModificoTrue = 1;
+                            pacienteAux.dni = dni;
+                        }
+                        break;
+                    case 4:
+                        seModificoTrue = 1;
+                        printf("\n Ingrese la direccion: ");
+                        fflush(stdin);
+                        gets(pacienteAux.direccion);
+                        break;
+                    case 5:
+                        seModificoTrue = 1;
+                        printf("\n Ingrese el telefono: ");
+                        fflush(stdin);
+                        gets(pacienteAux.telefono);
+                        break;
+
+                    default:
+                        // opcion incorrecta, se repite el menu
+                        break;
+                }
+
+                if (1 <= opcion && opcion <= 5) {
+                    system("cls");
+                    Rectangulo();
+                    gotoxy(5, 5);
+                    printf("Desea modificar algun otro dato del paciente? En ese caso");
+                    gotoxy(5, 6);
+                    printf("presione cualquier tecla, para finalizar presione ESC.");
+                    fflush(stdin);
+                    opcionSalida = getch();
+                }
+
+            } while (opcionSalida != ESC);
+
+            // si se cambio el dni, elimino el nodo y lo vuelvo a insertar, asi el arbol mantiene el orden por dni
+            if (paciente->datosPaciente.dni != pacienteAux.dni) {
+
+                arbolPacientes = eliminarNodoArbolPacientes(arbolPacientes, paciente->datosPaciente.dni);
+                arbolPacientes = insertarPaciente(arbolPacientes, pacienteAux);
+
+            } else {
+                paciente->datosPaciente = pacienteAux;
             }
 
-        } while (opcionSalida != ESC);
+            if (seModificoTrue) {
 
-        // si se cambio el dni, elimino el nodo y lo vuelvo a insertar, asi el arbol mantiene el orden por dni
-        if (paciente->datosPaciente.dni != pacienteAux.dni) {
+                system("cls");
+                Rectangulo();
+                gotoxy(12,5);
+                printf("Se ha modificado el paciente.");
+                gotoxy(12,7);
+                textoPresioneCualquierTecla2();
 
-            arbolPacientes = eliminarNodoArbolPacientes(arbolPacientes, paciente->datosPaciente.dni);
-            arbolPacientes = insertarPaciente(arbolPacientes, pacienteAux);
+            }
 
         } else {
-            paciente->datosPaciente = pacienteAux;
+            textoDniNoEnBaseDeDatos();
         }
 
-        if (seModificoTrue) {
-
-            system("cls");
-            Rectangulo();
-            gotoxy(12,5);
-            printf("Se ha modificado el paciente.");
-            gotoxy(12,7);
-            textoPresioneCualquierTecla2();
-
-        }
-
-    } else {
-        textoDniNoEnBaseDeDatos2();
     }
-
 }
 
 void muestraUnPacienteEnRectangulo(stPaciente datosPaciente){
@@ -430,16 +421,14 @@ nodoPaciente * crearNodoArbolPaciente(stPaciente datosStPaciente){
 /// FUNCIONES OPCION 3 DEL MENU 'submenuGestionPacientes':
 
 nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes){
-    int dni;
-    stPaciente nuevoPaciente;
-
-    dni = consultaDniYVerifica();
+    int dni = consultaDniYVerifica();
 
     if (dni) {
 
         if (existeElPaciente(arbolPacientes, dni)) {
             printf("\n El paciente ya esta registrado en la base de datos. Puede modificar sus datos desde la opcion 2 del menu anterior.");
         } else {
+            stPaciente nuevoPaciente;
 
             printf("\n Ingrese apellido y nombre en formato \"Apellido, Nombre\": ");
             fflush(stdin);
@@ -464,11 +453,9 @@ nodoPaciente * altaDePaciente(nodoPaciente * arbolPacientes){
 
             system("cls");
             printf("\n Paciente cargado.");
-
         }
 
         textoPresioneCualquierTecla();
-
     }
 
     return arbolPacientes;
@@ -566,8 +553,7 @@ int consultaDniYVerifica(){
 
 void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes, int flag){
 
-    int dni;
-    dni = consultaDniYVerifica();
+    int dni = consultaDniYVerifica();
 
     if (dni) {
 
@@ -597,7 +583,7 @@ void submenuDarDeBajaUnPaciente(nodoPaciente * arbolPacientes, int flag){
             textoPresioneCualquierTecla();
         } else {
             printf("\n");
-            textoDniNoEnBaseDeDatos2();
+            textoDniNoEnBaseDeDatos();
         }
 
     }
