@@ -91,7 +91,7 @@ void submenuBuscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes, int flag){
 
         nodoPaciente * paciente = buscaPaciente(arbolPacientes, dni);
 
-        if ((paciente && flag) || (paciente && (!flag && !(paciente->datosPaciente.eliminado)))) {
+        if (paciente && (flag || (!flag && !(paciente->datosPaciente.eliminado)))) {
 
             printf("\n");
             muestraUnPaciente(paciente->datosPaciente);
@@ -170,7 +170,7 @@ void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag){
 
         nodoPaciente * paciente = buscaPaciente(arbolPacientes, dni);
 
-        if ((paciente && flag) || (paciente && (!flag && !(paciente->datosPaciente.eliminado)))) {
+        if (paciente && (flag || (!flag && !(paciente->datosPaciente.eliminado)))) {
 
             int seModificoTrue = 0;
             stPaciente pacienteAux;
