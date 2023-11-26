@@ -94,7 +94,7 @@ void submenuBuscaPacienteYMuestraDatos(nodoPaciente * arbolPacientes, int flag){
         if (paciente && (flag || (!flag && !(paciente->datosPaciente.eliminado)))) {
 
             printf("\n");
-            muestraUnPaciente(paciente->datosPaciente);
+            muestraUnPaciente(paciente->datosPaciente, flag);
             textoPresioneCualquierTecla();
 
         } else {
@@ -134,14 +134,17 @@ nodoPaciente * buscaPaciente(nodoPaciente * arbolPacientes, int dni){
     return nodoBuscado;
 }
 
-void muestraUnPaciente(stPaciente datosPaciente){
+void muestraUnPaciente(stPaciente datosPaciente, int flag){
 
     printf(" Apellido y nombre: %s", datosPaciente.apellidoNombre);
     printf("\n Direccion: %s", datosPaciente.direccion);
     printf("\n Dni: %d", datosPaciente.dni);
     printf("\n Edad: %d", datosPaciente.edad);
     printf("\n Telefono: %s", datosPaciente.telefono);
-    printf("\n Eliminado: %d", datosPaciente.eliminado);
+    // si se llega con perfil administrador, se muestra el campo eliminado, sino no:
+    if (flag) {
+        printf("\n Eliminado: %d", datosPaciente.eliminado);
+    }
     printf("\n =====================\n");
 
 }
@@ -671,7 +674,7 @@ void inorderPacientes(nodoPaciente * arbolPacientes, int flag){
         inorderPacientes(arbolPacientes->izq, flag);
 
         if (flag || (!flag && !(arbolPacientes->datosPaciente.eliminado))) {
-            muestraUnPaciente(arbolPacientes->datosPaciente);
+            muestraUnPaciente(arbolPacientes->datosPaciente, flag);
         }
 
         inorderPacientes(arbolPacientes->der, flag);
@@ -732,7 +735,7 @@ stPaciente * arbolPacientesToArreglo(nodoPaciente * arbolPacientes){
 void muestraArregloPacientes(stPaciente arregloPacientes[], int validosArre, int flag){
     for (int i = 0; i<validosArre; i++) {
         if (flag || (!flag && !(arregloPacientes[i].eliminado))) {
-            muestraUnPaciente(arregloPacientes[i]);
+            muestraUnPaciente(arregloPacientes[i], flag);
         }
     }
 }
