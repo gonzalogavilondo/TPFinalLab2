@@ -217,10 +217,6 @@ void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag){
                         scanf("%d", &pacienteAux.edad);
                         break;
                     case 3:
-//                        printf("\n Ingrese el dni: ");
-//                        fflush(stdin);
-//                        scanf("%d", &dni);
-
                         dni = consultaDniYVerifica();
 
                         if (dni) {
