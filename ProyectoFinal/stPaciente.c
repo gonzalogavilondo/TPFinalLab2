@@ -11,7 +11,7 @@ void textoPresioneCualquierTecla(){
     getch();
 }
 
-void textoPresioneCualquierTecla2(){
+void textoPresioneCualquierTeclaEnRectangulo(){
     printf("Presione cualquier tecla para continuar...");
     fflush(stdin);
     getch();
@@ -278,7 +278,7 @@ void submenuModificarDatosPaciente(nodoPaciente * arbolPacientes, int flag){
                 gotoxy(12,5);
                 printf("Se ha modificado el paciente.");
                 gotoxy(12,7);
-                textoPresioneCualquierTecla2();
+                textoPresioneCualquierTeclaEnRectangulo();
 
             }
 

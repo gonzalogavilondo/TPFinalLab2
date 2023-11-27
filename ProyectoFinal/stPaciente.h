@@ -40,7 +40,7 @@ typedef struct nodoPaciente {
 
 /// Se usa en varias partes:
 void textoPresioneCualquierTecla();
-void textoPresioneCualquierTecla2();
+void textoPresioneCualquierTeclaEnRectangulo();
 /// MENU PRINCIPAL GESTION DE PACIENTES:
 void submenuGestionPacientes(nodoPaciente * arbolPacientes, int flag);
 /// FUNCIONES OPCION 1 DEL MENU 'submenuGestionPacientes':
