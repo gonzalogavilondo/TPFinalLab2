@@ -182,19 +182,23 @@ int pasarArchivoAArregloEmpleados(stEmpleado e[],int dimension,int validos)
 }
 
 ///LOGUEO
-int inicioDeSesion(char usuario[],char contrasenia[], char tipoMenu[]){
-    stEmpleado e;
-    int flag=0;
-    FILE*pArchiEmpleado = fopen(arEmpleados,"rb");
-    if(pArchiEmpleado!=NULL){
-        while(flag==0&&(fread(&e,sizeof(stEmpleado),1,pArchiEmpleado))>0){
-            if(strcmp(e.usuario,usuario)==0&&strcmp(e.contrasenia,contrasenia)==0&&strcmp(e.perfil,tipoMenu)==0){
-                flag=1;
+int inicioDeSesion(char usuario[], char contrasenia[], char tipoMenu[]){
+    stEmpleado empleado;
+    int encontrado = 0;
+    FILE * pArchiEmpleado = fopen(arEmpleados,"rb");
+
+    if (pArchiEmpleado) {
+
+        while(encontrado == 0 && (fread(&empleado, sizeof(stEmpleado), 1, pArchiEmpleado))>0){
+            if(strcmp(empleado.usuario, usuario)==0 && strcmp(empleado.contrasenia, contrasenia)==0 && strcmp(empleado.perfil, tipoMenu)==0 && empleado.eliminado==0){
+                encontrado = 1;
+            }
         }
+
+        fclose(pArchiEmpleado);
     }
-    fclose(pArchiEmpleado);
-    }
-return flag;
+
+    return encontrado;
 }
 
 // Ordenar el arreglo
