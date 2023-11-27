@@ -6,14 +6,9 @@ void menuAltaDeEmpleado(char tipoEmpleadoEjecuta[]) {
 
     do {
         system("cls");
-        Rectangulo();
-        gotoxy(15, 1);
-        cabeza("ALTA DE EMPLEADO");
 
-        gotoxy(2, 4);
-        printf("Ingrese el DNI del empleado:                    ('0' para volver)");
-        gotoxy(30, 4);
-        scanf("%d", &nuevoEmpleado.dni);
+        nuevoEmpleado.dni = consultaDniYVerifica();
+
         if (nuevoEmpleado.dni != 0)
         {
             if (existeDNIEnEmpleados(nuevoEmpleado.dni) == 1)
