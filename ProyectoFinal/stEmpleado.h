@@ -7,7 +7,7 @@
 
 #include "stEmpleado.h"
 
-#define arEmpleados "archivoEmpleados.txt"
+#define arEmpleados "archivoEmpleados.dat"
 
 typedef struct stEmpleado
 {
