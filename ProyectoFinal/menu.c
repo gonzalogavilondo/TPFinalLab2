@@ -498,10 +498,10 @@ void subMenuModificacionDeEmpleado(char tipoEmpleadoEjecuta[]){
                         printf("Ingreso una opcion no valida, reintente por favor.\n");
                     }
                 }
-                while(control == 'S');
+                while(control != 'S' && control != 'N');
             }
         }
-    } while(control == 'S');
+    } while(control == 'S' && dniModificar!=0);
 }
 void subMenuConsultaDeEmpleado(char tipoEmpleadoEjecuta[]){
     stEmpleado consultaEmpleado;
